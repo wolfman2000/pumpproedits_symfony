@@ -3,4 +3,10 @@ It is called as such because the players can now directly
 contribute to how the website looks, feels, and behaves.
 
 There will be minor configuration required to play around
-with this on your own computers.
+with this on your own computers. Those that have used
+Symfony before will realize that config/databases.yml
+is NOT included. This is done for security reasons.
+If you want to play around with the database, please
+set up your own local copy.
+
+As far as coding standards go, keep it legible.
