@@ -9,4 +9,18 @@ is NOT included. This is done for security reasons.
 If you want to play around with the database, please
 set up your own local copy.
 
-As far as coding standards go, keep it legible.
+The schema will be set up in the near future. Please
+be patient.
+
+As far as coding standards go, keep it legible. Using
+unicode/utf-8 is alright if it's for a decent reason.
+Tabs versus spaces, where braces go, etc, is not something
+I care deeply about.
+
+Try to use git's branching functionality when adding
+new features. The master branch should really only contain
+code that is guaranteed to run.
+
+If there are any questions, feel free to contact me.
+
+-- Jason "Wolfman2000" Felds
