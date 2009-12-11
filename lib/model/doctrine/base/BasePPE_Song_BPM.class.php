@@ -44,10 +44,11 @@ abstract class BasePPE_Song_BPM extends sfDoctrineRecord
              ));
 
 
-        $this->index('beat_index', array(
+        $this->index('bpm_index', array(
              'fields' => 
              array(
-              0 => 'song_id beat',
+              0 => 'song_id',
+              1 => 'beat',
              ),
              'type' => 'unique',
              ));

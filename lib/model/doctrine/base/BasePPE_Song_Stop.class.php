@@ -44,10 +44,11 @@ abstract class BasePPE_Song_Stop extends sfDoctrineRecord
              ));
 
 
-        $this->index('beat_index', array(
+        $this->index('stop_index', array(
              'fields' => 
              array(
-              0 => 'song_id beat',
+              0 => 'song_id',
+              1 => 'beat',
              ),
              'type' => 'unique',
              ));

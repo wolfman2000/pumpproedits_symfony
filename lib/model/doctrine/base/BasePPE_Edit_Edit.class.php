@@ -157,7 +157,10 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         $this->index('author_index', array(
              'fields' => 
              array(
-              0 => 'user_id song_id title is_single',
+              0 => 'user_id',
+              1 => 'song_id',
+              2 => 'title',
+              3 => 'is_single',
              ),
              'type' => 'unique',
              ));

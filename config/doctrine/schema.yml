@@ -14,7 +14,7 @@ PPE_User_User:
   relations:
     PPE_User_Role: { local: role_id, foreign: id, foreignAlias: PPE_User_Users }
   indexes:
-    name_index:
+    user_index:
       fields: [name]
       type: unique
     email_index:
@@ -41,7 +41,7 @@ PPE_Song_Song:
     measures: { type: integer, notnull: true, default: 50 }
     is_problem: { type: boolean, notnull: true, default: 0 }
   indexes:
-    name_index:
+    song_index:
       fields: [name]
       type: unique
     abbr_index:
@@ -57,8 +57,8 @@ PPE_Song_Stop:
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
   indexes:
-    beat_index:
-      fields: [song_id beat]
+    stop_index:
+      fields: [song_id, beat]
       type: unique
   
 PPE_Song_BPM:
@@ -70,8 +70,8 @@ PPE_Song_BPM:
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
   indexes:
-    beat_index:
-      fields: [song_id beat]
+    bpm_index:
+      fields: [song_id, beat]
       type: unique
   
 PPE_Edit_Edit:
@@ -99,7 +99,7 @@ PPE_Edit_Edit:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Edit_Edits } 
   indexes:
     author_index:
-      fields: [user_id song_id title is_single]
+      fields: [user_id, song_id, title, is_single]
       type: unique
   
 PPE_Vote_Vote:
@@ -117,6 +117,6 @@ PPE_Vote_Vote:
     PPE_Edit_Edit: { local: edit_id, foreign: id, foreignAlias: PPE_Vote_Votes }
   indexes:
     single_vote_index:
-      fields: [user_id edit_id rating]
+      fields: [user_id, edit_id, rating]
       type: unique
 

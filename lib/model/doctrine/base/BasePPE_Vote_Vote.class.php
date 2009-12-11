@@ -78,7 +78,9 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
         $this->index('single_vote_index', array(
              'fields' => 
              array(
-              0 => 'user_id edit_id rating',
+              0 => 'user_id',
+              1 => 'edit_id',
+              2 => 'rating',
              ),
              'type' => 'unique',
              ));

@@ -62,7 +62,7 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
              ));
 
 
-        $this->index('name_index', array(
+        $this->index('user_index', array(
              'fields' => 
              array(
               0 => 'name',

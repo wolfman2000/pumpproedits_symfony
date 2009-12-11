@@ -57,7 +57,7 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              ));
 
 
-        $this->index('name_index', array(
+        $this->index('song_index', array(
              'fields' => 
              array(
               0 => 'name',
