@@ -13,8 +13,25 @@ PPE_Song_Song:
   song_012: { name: Blazing, abbr: BLAZE, measures: 64 }
   song_013: { name: Blow My Mind, abbr: BLOWM, measures: 56 }
   song_014: { name: Boogie Land, abbr: BOOGY, measures: 55 }
-  song_015: { name: Another Truth, abbr: ATRTH: measures: 52 }
+  song_015: { name: Another Truth, abbr: ATRTH, measures: 52 }
   song_016: { name: Born to Be Alive, abbr: B2BAL, measures: 55 }
   song_017: { name: Beat of the War 2, abbr: BOTW2, measures: 79 }
   song_018: { name: Beat of the War, abbr: BOTW1, measures: 70 }
-  
+  song_019: { name: Bullfighter's Song, abbr: BULLF, measures: 58 }
+  song_020: { name: Canon-D, abbr: CANON, measures: 67 }
+  song_021: { name: Chicken Wing, abbr: CWING, measures: 80 }
+  song_022: { name: Chimera, abbr: CMERA, measures: 94 }
+  song_023: { name: Chopstix, abbr: CHOPS, measures: 62 }
+  song_024: { name: Chung Hwa Ban Jeom, abbr: CHUNG, measures: 61 }
+  song_025: { name: Clap Your Hands, abbr: CLAPS }
+  song_026: { name: Clockwork Genesis, abbr: CLOCK, measures: 76 }
+  song_027: { name: Come to Me (Banya), abbr: C2MEB, measures: 40 }
+  song_028: { name: Come to Me (Clon), abbr: C2MEC, measures: 53 }
+  song_029: { name: Coming Out, abbr: CMOUT, measures: 58 }
+  song_030: { name: Conga, abbr: CONGA, measures: 54 }
+  song_031: { name: Csikos Post, abbr: CSIKO, measures: 77 }
+  song_032: { name: Dance All Night, abbr: DALLN, measures: 66 }
+  song_033: { name: Dance With Me, abbr: DWTHM, measures: 52 }
+  song_034: { name: Dawn (Perpetual Mix), abbr: DAWNP, measures: 78 }
+  song_035: { name: D Gang, abbr: DGANG, measures: 58 }
+  song_036: { name: Dignity, abbr: DIGNT, measures: 86 }
