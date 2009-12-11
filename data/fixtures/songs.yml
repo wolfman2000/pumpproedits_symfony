@@ -1,0 +1,20 @@
+PPE_Song_Song:
+  song_001: { name: 2006 Love Song, abbr: 2006L, measures: 37 }
+  song_002: { name: Aliens in Our Midst, abbr: ALIEN, measures: 51 }
+  song_003: { name: Anubis, abbr: ANUBS, measures: 48 }
+  song_004: { name: Arch of Darkness, abbr: ARCHS, measures: 52 }
+  song_005: { name: Art City, abbr: ARTCT, measures: 53 }
+  song_006: { name: Ba Be Loo Be Ra, abbr: BBLBR, measures: 57 }
+  song_007: { name: !, abbr: BANG!, measures: 71 }
+  song_008: { name: Bambole, abbr: BAMBO, measures: 52 }
+  song_009: { name: Beethoven Virus, abbr: BTOVN, measures: 66 }
+  song_010: { name: Be My Friend, abbr: BEMYF, measures: 63 }
+  song_011: { name: Bemera, abbr: BMERA, measures: 141 }
+  song_012: { name: Blazing, abbr: BLAZE, measures: 64 }
+  song_013: { name: Blow My Mind, abbr: BLOWM, measures: 56 }
+  song_014: { name: Boogie Land, abbr: BOOGY, measures: 55 }
+  song_015: { name: Another Truth, abbr: ATRTH: measures: 52 }
+  song_016: { name: Born to Be Alive, abbr: B2BAL, measures: 55 }
+  song_017: { name: Beat of the War 2, abbr: BOTW2, measures: 79 }
+  song_018: { name: Beat of the War, abbr: BOTW1, measures: 70 }
+  
