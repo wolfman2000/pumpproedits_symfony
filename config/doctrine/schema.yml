@@ -75,4 +75,18 @@ PPE_Edit_Edit:
     PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Edit_Edits }
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Edit_Edits } 
   
+PPE_Vote_Vote:
+  actAs: { Timestampable: ~ }
+  columns:
+    created: { type: timestamp, notnull: true }
+    updated: { type: timestamp, notnull: true }
+    user_id: { type: integer, notnull: true }
+    edit_id: { type: integer, notnull: true }
+    rating: { type: integer, notnull: true }
+    reason: { type: string, notnull: false }
+    is_problem: { type: boolean, notnull: true, default: 0 }
+  relations:
+    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Vote_Votes }
+    PPE_Edit_Edit: { local: edit_id, foreign: id, foreignAlias: PPE_Vote_Votes }
+  
 
