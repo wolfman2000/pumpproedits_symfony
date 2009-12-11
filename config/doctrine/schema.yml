@@ -51,4 +51,28 @@ PPE_Song_BPM:
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
   
+PPE_Edit_Edit:
+  actAs: { Timestampable: ~ }
+  columns:
+    created: { type: timestamp, notnull: true }
+    updated: { type: timestamp, notnull: true }
+    user_id: { type: integer, notnull: true }
+    song_id: { type: integer, notnull: true }
+    title: { type: string(12), notnull: true }
+    is_single: { type: boolean, notnull: true, default: 1 }
+    diff: { type: integer, notnull: true, default: 10 }
+    steps: { type: integer, notnull: true }
+    jumps: { type: integer, notnull: true }
+    holds: { type: integer, notnull: true }
+    mines: { type: integer, notnull: true }
+    trips: { type: integer, notnull: true }
+    rolls: { type: integer, notnull: true }
+    lifts: { type: integer, notnull: true, default: 0 }
+    fakes: { type: integer, notnull: true, default: 0 }
+    is_problem: { type: boolean, notnull: true, default: 0 }
+    is_deleted: { type: boolean, notnull: true, default: 0 }
+  relations:
+    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Edit_Edits }
+    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Edit_Edits } 
+  
 
