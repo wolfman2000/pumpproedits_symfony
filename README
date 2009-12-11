@@ -3,23 +3,27 @@ It is called as such because the players can now directly
 contribute to how the website looks, feels, and behaves.
 
 There will be minor configuration required to play around
-with this on your own computers. Those that have used
-Symfony before will realize that config/databases.yml
-is NOT included. This is done for security reasons.
-If you want to play around with the database, please
-set up your own local copy.
+with this on your own computers.
 
-In the root of this project, remember to create the
+1) This project uses the Doctrine ORM plugin. If you
+are used to Propel, the switch shouldn't be that bad.
+
+2) Those that have used Symfony before will realize that
+config/databases.yml is NOT included. This is done for
+security reasons. If you want to play around with the
+database, please set up your own local copy. Likewise,
+you will have to generate the SQL through doctrine:build-sql.
+
+3) In the root of this project, remember to create the
 cache and log folders. Give 777 permissions to
 both of them.
-
-The schema will be set up in the near future. Please
-be patient.
 
 As far as coding standards go, keep it legible. Using
 unicode/utf-8 is alright if it's for a decent reason.
 Tabs versus spaces, where braces go, etc, is not something
-I care deeply about.
+I care deeply about. The only exception to that rule is
+when dealing with the YAML files (yml). Those cannot have
+tabs for any reason.
 
 Try to use git's branching functionality when adding
 new features. The master branch should really only contain
