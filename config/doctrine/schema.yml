@@ -23,3 +23,32 @@ PPE_User_Condiment:
     pepper: { type: string(64), notnull: true }
   relations:
     PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_User_Condiments }
+  
+
+PPE_Song_Song:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(64), notnull: true }
+    abbr: { type: string(5), notnull: true; unique: true }
+    measures: { type: integer, notnull: true, default: 50 }
+    is_problem: { type: boolean, notnull: true, default: 0 }
+  
+PPE_Song_Stop:
+  actAs: { Timestampable: ~ }
+  columns:
+    song_id: { type: integer, notnull: true }
+    beat: { type: float, notnull: true, default: 0 }
+    break: { type: float, notnull: false }
+  relations:
+    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+  
+PPE_Song_BPM:
+  actAs: { Timestampable: ~ }
+  columns:
+    song_id: { type: integer, notnull: true }
+    beat: { type: float, notnull: true, default: 0 }
+    bpm: { type: float, notnull: false }
+  relations:
+    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+  
+
