@@ -11,5 +11,15 @@ PPE_User_User:
     email: { type: string(320), notnull: true; unique: true }
     role_id: { type: integer, notnull: true }
     is_confirmed: { type: boolean, notnull: true, default: 0 }
-  
+  relations:
+    PPE_User_Role: { local: role_id, foreign: id, foreignAlias: PPE_User_Users }
 
+PPE_User_Condiment:
+  actAs: { Timestampable: ~ }
+  columns:
+    user_id: { type: integer, notnull: true }
+    oregano: { type: string(32), notnull: true }
+    salt: { type: string(5), notnull: true }
+    pepper: { type: string(64), notnull: true }
+  relations:
+    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_User_Condiments }
