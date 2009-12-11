@@ -1,0 +1,15 @@
+PPE_User_Role:
+  actAs: { Timestampable: ~ }
+  columns:
+    role: { type: string(32), notnull: true; unique: true }
+    value: { type: integer, notnull: true }
+  
+PPE_User_User:
+  actAs: { Timestampable: ~ }
+  columns:
+    name: { type: string(12), notnull: true; unique: true }
+    email: { type: string(320), notnull: true; unique: true }
+    role_id: { type: integer, notnull: true }
+    is_confirmed: { type: boolean, notnull: true, default: 0 }
+  
+
