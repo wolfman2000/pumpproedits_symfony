@@ -42,7 +42,7 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              ));
         $this->hasColumn('abbr', 'char', 5, array(
              'type' => 'char',
-             'notnull' => 'true; unique: true',
+             'notnull' => true,
              'length' => '5',
              ));
         $this->hasColumn('measures', 'integer', null, array(
@@ -54,6 +54,22 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              'type' => 'boolean',
              'notnull' => true,
              'default' => 0,
+             ));
+
+
+        $this->index('name_index', array(
+             'fields' => 
+             array(
+              0 => 'name',
+             ),
+             'type' => 'unique',
+             ));
+        $this->index('abbr_index', array(
+             'fields' => 
+             array(
+              0 => 'abbr',
+             ),
+             'type' => 'unique',
              ));
     }
 

@@ -42,6 +42,15 @@ abstract class BasePPE_Song_BPM extends sfDoctrineRecord
              'type' => 'float',
              'notnull' => false,
              ));
+
+
+        $this->index('beat_index', array(
+             'fields' => 
+             array(
+              0 => 'song_id beat',
+             ),
+             'type' => 'unique',
+             ));
     }
 
     public function setUp()

@@ -43,12 +43,12 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
         $this->setTableName('p_p_e__user__user');
         $this->hasColumn('name', 'string', 12, array(
              'type' => 'string',
-             'notnull' => 'true; unique: true',
+             'notnull' => true,
              'length' => '12',
              ));
         $this->hasColumn('email', 'string', 320, array(
              'type' => 'string',
-             'notnull' => 'true; unique: true',
+             'notnull' => true,
              'length' => '320',
              ));
         $this->hasColumn('role_id', 'integer', null, array(
@@ -59,6 +59,22 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
              'type' => 'boolean',
              'notnull' => true,
              'default' => 0,
+             ));
+
+
+        $this->index('name_index', array(
+             'fields' => 
+             array(
+              0 => 'name',
+             ),
+             'type' => 'unique',
+             ));
+        $this->index('email_index', array(
+             'fields' => 
+             array(
+              0 => 'email',
+             ),
+             'type' => 'unique',
              ));
     }
 

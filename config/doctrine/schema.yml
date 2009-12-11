@@ -7,12 +7,20 @@ PPE_User_Role:
 PPE_User_User:
   actAs: { Timestampable: ~ }
   columns:
-    name: { type: string(12), notnull: true; unique: true }
-    email: { type: string(320), notnull: true; unique: true }
+    name: { type: string(12), notnull: true }
+    email: { type: string(320), notnull: true }
     role_id: { type: integer, notnull: true }
     is_confirmed: { type: boolean, notnull: true, default: 0 }
   relations:
     PPE_User_Role: { local: role_id, foreign: id, foreignAlias: PPE_User_Users }
+  indexes:
+    name_index:
+      fields: [name]
+      type: unique
+    email_index:
+      fields: [email]
+      type: unique
+      
 
 PPE_User_Condiment:
   actAs: { Timestampable: ~ }
@@ -29,9 +37,16 @@ PPE_Song_Song:
   actAs: { Timestampable: ~ }
   columns:
     name: { type: string(64), notnull: true }
-    abbr: { type: char(5), notnull: true; unique: true }
+    abbr: { type: char(5), notnull: true }
     measures: { type: integer, notnull: true, default: 50 }
     is_problem: { type: boolean, notnull: true, default: 0 }
+  indexes:
+    name_index:
+      fields: [name]
+      type: unique
+    abbr_index:
+      fields: [abbr]
+      type: unique
   
 PPE_Song_Stop:
   actAs: { Timestampable: ~ }
@@ -41,6 +56,10 @@ PPE_Song_Stop:
     break: { type: float, notnull: false }
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+  indexes:
+    beat_index:
+      fields: [song_id beat]
+      type: unique
   
 PPE_Song_BPM:
   actAs: { Timestampable: ~ }
@@ -50,6 +69,10 @@ PPE_Song_BPM:
     bpm: { type: float, notnull: false }
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+  indexes:
+    beat_index:
+      fields: [song_id beat]
+      type: unique
   
 PPE_Edit_Edit:
   actAs: { Timestampable: ~ }
@@ -74,6 +97,10 @@ PPE_Edit_Edit:
   relations:
     PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Edit_Edits }
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Edit_Edits } 
+  indexes:
+    author_index:
+      fields: [user_id song_id title is_single]
+      type: unique
   
 PPE_Vote_Vote:
   actAs: { Timestampable: ~ }
@@ -88,5 +115,8 @@ PPE_Vote_Vote:
   relations:
     PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Vote_Votes }
     PPE_Edit_Edit: { local: edit_id, foreign: id, foreignAlias: PPE_Vote_Votes }
-  
+  indexes:
+    single_vote_index:
+      fields: [user_id edit_id rating]
+      type: unique
 

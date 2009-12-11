@@ -73,6 +73,15 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
              'notnull' => true,
              'default' => 0,
              ));
+
+
+        $this->index('single_vote_index', array(
+             'fields' => 
+             array(
+              0 => 'user_id edit_id rating',
+             ),
+             'type' => 'unique',
+             ));
     }
 
     public function setUp()
