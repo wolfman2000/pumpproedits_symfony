@@ -9,6 +9,10 @@ is NOT included. This is done for security reasons.
 If you want to play around with the database, please
 set up your own local copy.
 
+In the root of this project, remember to create the
+cache and log folders. Give 777 permissions to
+both of them.
+
 The schema will be set up in the near future. Please
 be patient.
 
