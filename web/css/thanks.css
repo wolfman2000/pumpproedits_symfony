@@ -2,6 +2,11 @@
 
 @media screen
 {
+    h3
+    {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
     h3, section > p
     {
         text-align: center;
