@@ -20,4 +20,15 @@ class baseActions extends sfActions
     $b = Doctrine::getTable('PPE_Song_Song')->getBaseEdits();
     $this->base_songs = $b;
   }
+
+ /**
+  * Executes download action (download the files)
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeDownload(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id');
+    $type = $request->getParameter('type');
+  }
 }
