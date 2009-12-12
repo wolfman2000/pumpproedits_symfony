@@ -1,3 +1,4 @@
 config/databases.yml
 data/sql/schema.sql
 .DS_Store
+cache/*
