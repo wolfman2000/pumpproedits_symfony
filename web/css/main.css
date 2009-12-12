@@ -1,0 +1,237 @@
+@import "setup.css";
+
+@media screen
+{
+    html
+    {
+    	background-color: #4863A0;
+    }
+    
+    html, .sans
+    {
+    	font-family: "DejaVu Sans", Arial, Helvetica, sans;
+        font-size: 1em;
+    }
+    .serif
+    {
+    	font-family: "DejaVu Serif", "Times New Roman", Times, serif;
+    }
+    pre, .mono
+    {
+    	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+    }
+    .tcenter
+    {
+        text-align: center;
+    }    
+    p, pre
+    {
+    	line-height: 1.3em;
+    	padding-top: 15px;
+    	padding-bottom: 15px;
+    }
+    
+    table td, table th
+    {
+        padding: 3px;
+    }
+    
+    a:link
+    {
+    	color: #000088;
+    }
+    a:visited
+    {
+    	color: #442244;
+    }
+    
+    /* Majority of CSS based off of CSS Max Design's Float Tutorial */
+    *
+    {
+    	margin: 0;
+    	padding: 0;
+    }
+    
+    body
+    {
+    	width: 98%;
+    	margin: 10px auto;
+    	background-color: #AAAAAA;
+    	color: #333;
+    	border: 1px solid gray;
+    	line-height: 130%;
+    }
+    
+    header
+    {
+    	padding: .5em;
+    	background-color: #ddd;
+    	border-bottom: 1px solid gray;
+    }
+    
+    header h1
+    {
+    	text-align: center;
+        font-size: 2em;
+        font-weight: bold;
+    }
+    
+    /* General content below */
+    
+    article
+    {
+        margin-left: 15em;
+    	padding: 2em;
+        background-color: #BBBBBB;
+        min-height: 25em;
+    }
+    article h2
+    {
+    	margin: 0 0 .5em 0;
+    }
+    
+    /* General menu stuff below */
+    
+    nav
+    {
+        left: 1em;
+        top: 3em;
+        position: absolute;
+    	padding: 1em;
+        width: 13em;
+    }
+    nav p
+    {
+        max-width: 10em;
+    	margin-top: 5px;
+        margin-bottom: 5px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    
+    nav > ul
+    {
+    	width: 100%;
+    	margin: 0 auto;
+    	text-align: center;
+    	border: 1px solid black;
+    }
+    nav > ul a
+    {
+    	display: block;
+    	text-decoration: none;
+        padding-left: .5em;
+        padding-right: .5em;
+    }
+    nav > ul a:hover, nav > ul a:focus
+    {
+    	background-color: orange;
+    	text-decoration: underline;
+    }
+    nav > ul li
+    {
+    	list-style-type: none;
+    	border-top: 1px solid black;
+    	width: 100%;
+    }
+    nav > ul > li > *:first-child
+    {
+        font-size: 1em;
+        font-weight: bold;
+    }
+    nav > ul > li:first-child
+    {
+    	border-top: none;
+    }
+    nav > ul > li
+    {
+    	font-weight: bold;
+    	background-color: #003366;
+        color: white;
+    }
+    nav > ul > li > ul
+    {
+    	font-weight: normal;
+        color: black;
+    	background-color: #77AADD;
+    }
+    nav > ul > li > ul > li
+    {
+        margin-right: 2em;
+    }
+    
+    footer
+    {
+    	clear: both;
+    	margin: 0;
+    	padding: .5em;
+    	color: #333;
+    	background-color: #ddd;
+    	border-top: 1px solid gray;
+        text-align: right;
+    }
+    
+    footer p
+    {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+    
+    /* Common form stuff below */
+    
+    form fieldset legend
+    {
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+    form label
+    {
+        display: inline-block;
+        vertical-align: top;
+    }
+    form p
+    {
+        margin: 5px;
+        padding: 3px 0;
+    }
+    
+    
+    /* Web Accessibility Workaround */
+    
+    .hide
+    {
+        display: none;
+    }
+}
+
+@media tty
+{
+    html
+    {
+        background-color: black;
+        color: white;
+    }
+}
+
+@media print
+{
+    html
+    {
+        background-color: white;
+        color: black;
+    }
+    nav
+    {
+        display: none;
+    }
+    .hide
+    {
+        display: none;
+    }
+    table
+    {
+        font-size: smaller;
+    }
+}
+
