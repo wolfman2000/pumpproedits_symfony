@@ -89,7 +89,10 @@ PPE_Song_Song:
   song_088: { name: Monkey Magic, abbr: MONKM, measures: 56 }
   song_089: { name: Radius, abbr: RADIU, measures: 67 }
   song_090: { name: RE-RAVE, abbr: RERAV, measures: 62 }
-  song_091: { name: Riders, Unite!, abbr: RIDER, measures: 61 }
+  song_091:
+    name: Riders, Unite!
+    abbr: RIDER
+    measures: 61
   song_092: { name: Robotix, abbr: ROBOT, measures: 62 }
   song_093: { name: Round and Round, abbr: ROUND, measures: 58 }
   song_094: { name: Sam-I-Am, abbr: SMIAM, measures: 46 }
@@ -99,3 +102,33 @@ PPE_Song_Song:
   song_098: { name: Feels Just Like That Night, abbr: FJLTN, measures: 58 }
   song_099: { name: Go, abbr: GO!GO, measures: 59 }
   song_100: { name: Into My Dream (Kaveh Azizi Remix), abbr: INTOD, measures: 67 }
+  song_101: { name: Slam, abbr: SLAM!, measures: 53 }
+  song_102: { name: Snow Dream, abbr: SNOWD, measures: 71 }
+  song_103: { name: So, abbr: SOOOO, measures: 58 }
+  song_104: { name: Solitary, abbr: SOL1^, measures: 54 }
+  song_105: { name: Solitary 2, abbr: SOL2^, measures: 57 }
+  song_106: { name: Space Fantasy, abbr: SPACE, measures: 77 }
+  song_107: { name: Starian, abbr: STARI, measures: 53 }
+  song_108: { name: STOP! & Go, abbr: STPGO, measures: 52 }
+  song_109: { name: Summer ~Speedy Mix~, abbr: SUMSP, measures: 81 }
+  song_110: { name: Sunshine, abbr: SUNSH, measures: 52 }
+  song_111: { name: Take Me Back, abbr: TMBCK, measures: 81 }
+  song_112: { name: Take My Time, abbr: TMTIM, measures: 59 }
+  song_113: { name: Terminal Depository, abbr: TDEPO, measures: 51 }
+  song_114: { name: Treme-Vook of the War, abbr: TVOTW, measures: 124 }
+  song_115: { name: Try to B.P.M. - Love is a Danger Zone, abbr: T2BPM, measures: 97 }
+  song_116: { name: Turkey March, abbr: TMRCH, measures: 61 }
+  song_117: { name: U Inside My Dim Memory, abbr: UIMDM, measures: 53 }
+  song_118: { name: Utopia, abbr: UTOPI, measures: 75 }
+  song_119: { name: Virtual Emotion, abbr: VTEMO, measures: 67 }
+  song_120: { name: Vook, abbr: VOOK!, measures: 74 }
+  song_121: { name: VVV, abbr: VVVVV, measures: 98 }
+  song_122: { name: Watch Out, abbr: WTOUT, measures: 43 }
+  song_123: { name: We Goin' Fly Remix, abbr: WGFLY, measures: 49 }
+  song_124: { name: What's Going On?, abbr: WGOON, measures: 53 }
+  song_125: { name: Who, abbr: WHO^^, measures: 66 }
+  song_126: { name: Wi-Ex-Doc-Va, abbr: WEDVA, measures: 132 }
+  song_127: { name: Will o' the Wisp, abbr: WOTWP, measures: 77 }
+  song_128: { name: Winter, abbr: WINTR, measures: 58 }
+  song_129: { name: Witch Doctor #1, abbr: WDOC1, measures: 47 }
+  song_130: { name: Witch Doctor, abbr: WDOC!, measures: 67 }
