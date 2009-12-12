@@ -32,8 +32,9 @@
     <?php foreach ($base_songs as $b): ?>
     <tr>
       <td><?php echo $b->getName() ?></td>
-      <td><a href="<?php echo url_for('base/download/' . $b->getId() . '/single') ?>"><?php echo $b->getAbbr() ?> Single</a></td>
-      <td><a href="<?php echo url_for('base/download/' . $b->getId() . '/double') ?>"><?php echo $b->getAbbr() ?> Double</a></td>
+      <?php $s = '@download_base_edit?id=%d&type=%s'; ?>
+      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), 'single')) ?>"><?php echo $b->getAbbr() ?> Single</a></td>
+      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), 'double')) ?>"><?php echo $b->getAbbr() ?> Double</a></td>
     </tr>
     <?php endforeach; ?>    
   </tbody>
