@@ -83,7 +83,7 @@
         margin-left: 15em;
     	padding: 2em;
         background-color: #BBBBBB;
-        min-height: 35em;
+        min-height: 25em;
     }
     article h2
     {
@@ -98,7 +98,7 @@
         top: 3em;
         position: absolute;
     	padding: 1em;
-        width: 12em;
+        width: 13em;
     }
     nav p
     {
