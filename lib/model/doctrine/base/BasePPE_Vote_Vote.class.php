@@ -70,6 +70,7 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->check('rating >= 0 AND rating <= 10');
     }
 
     public function setUp()

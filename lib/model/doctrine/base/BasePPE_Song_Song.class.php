@@ -71,6 +71,7 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->check('measures > 0');
     }
 
     public function setUp()

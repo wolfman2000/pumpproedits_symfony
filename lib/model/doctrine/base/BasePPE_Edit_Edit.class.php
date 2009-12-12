@@ -142,6 +142,8 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->check('diff > 0');
+        $this->check('steps > 0');
     }
 
     public function setUp()
