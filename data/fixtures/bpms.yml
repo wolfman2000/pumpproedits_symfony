@@ -190,7 +190,7 @@ PPE_Song_BPM:
   bpm_189: { PPE_Song_Song: song_118, bpm: 166 }
   bpm_190: { PPE_Song_Song: song_118, beat: 288, bpm: 87 }
   bpm_191: { PPE_Song_Song: song_119, bpm: 90 }
-  bpm_192: { PPE_Song_Song: song_119, beat: 36: bpm: 180 }
+  bpm_192: { PPE_Song_Song: song_119, beat: 36, bpm: 180 }
   bpm_193: { PPE_Song_Song: song_119, beat: 164, bpm: 90 }
   bpm_194: { PPE_Song_Song: song_119, beat: 196, bpm: 180 }
   bpm_195: { PPE_Song_Song: song_120, bpm: 184 }
