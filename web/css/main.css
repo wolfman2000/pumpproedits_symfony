@@ -69,7 +69,7 @@
     	border-bottom: 1px solid gray;
     }
     
-    header h1
+    header > h1
     {
     	text-align: center;
         font-size: 2em;
