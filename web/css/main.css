@@ -72,6 +72,8 @@
     header h1
     {
     	text-align: center;
+        font-size: 2em;
+        font-weight: bold;
     }
     
     /* General content below */
