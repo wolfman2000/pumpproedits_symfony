@@ -35,3 +35,27 @@ PPE_Song_Song:
   song_034: { name: Dawn (Perpetual Mix), abbr: DAWNP, measures: 78 }
   song_035: { name: D Gang, abbr: DGANG, measures: 58 }
   song_036: { name: Dignity, abbr: DIGNT, measures: 86 }
+  song_037: { name: Don't Bother Me, abbr: DONTB, measures: 44 }
+  song_038: { name: Do What You Wanna Do, abbr: DWYWD, measures: 56 }
+  song_039: { name: Do You Know That - Old School, abbr: DYKTO, measures: 46 }
+  song_040: { name: Dr. M, abbr: DOCTM, measures: 59 }
+  song_041: { name: Emperor, abbr: EMPER, measures: 69 }
+  song_042: { name: Eres Para Mi, abbr: ERPMI, measures: 54 }
+  song_043: { name: Esperanza, abbr: ESPER, measures: 66 }
+  song_044: { name: Everybody, abbr: EVERY, measures: 47 }
+  song_045: { name: Exotica, abbr: XOTIC, measures: 53 }
+  song_046: { name: Extravaganza, abbr: EXTRA, measures: 78 }
+  song_047: { name: Final Audition 2, abbr: FA2^^, measures: 53 }
+  song_048: { name: Final Audition 3 U.F, abbr: FA3UF, measures: 57 }
+  song_049: { name: Final Audition, abbr: FA1^^, measures: 54 }
+  song_050: { name: Final Audition Episode 1, abbr: FAE1^, measures: 64 }
+  song_051: { name: Final Audition Episode 2-1, abbr: FAE21, measures: 66 }
+  song_052: { name: Final Audition Episode 2-2, abbr: FAE22, measures: 82 }
+  song_053: { name: Fly, abbr: FLY^^, measures: 54 }
+  song_054: { name: For You, abbr: 4YOU!, measures: 60 }
+  song_055: { name: Free!, abbr: FREE!, measures: 66 }
+  song_056: { name: Funk Factory, abbr: FACTR, measures: 59 }
+  song_057: { name: Funky Tonight, abbr: FUN2N, measures: 46 }
+  song_058: { name: Get Up!, abbr: GETUP, measures: 70 }
+  song_059: { name: Go Back, abbr: GOBCK, measures: 45 }
+  song_060: { name: Greenhorn, abbr: GHORN, measures: 47 }
