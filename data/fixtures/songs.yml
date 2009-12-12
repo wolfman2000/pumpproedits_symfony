@@ -132,3 +132,36 @@ PPE_Song_Song:
   song_128: { name: Winter, abbr: WINTR, measures: 58 }
   song_129: { name: Witch Doctor #1, abbr: WDOC1, measures: 47 }
   song_130: { name: Witch Doctor, abbr: WDOC!, measures: 67 }
+  song_131: { name: Incognito, abbr: INCOG, measures: 65 }
+  song_132: { name: Energizer, abbr: ENERG, measures: 124 }
+  song_133: { name: X-Treme, abbr: XTRME, measures: 67 }
+  song_134: { name: Xuxa, abbr: XUXA!, measures: 73 }
+  song_135: { name: Y2Z, abbr: Y2Z!!, measures: 71 }
+  song_136: { name: Zodiac, abbr: ZODIA, measures: 47 }
+  song_137: { name: Monolith, abbr: MONOL, measures: 80 }
+  song_138: { name: Moonlight, abbr: MOONL, measures: 62 }
+  song_139: { name: Moonstone, abbr: MOONS, measures: 46 }
+  song_140: { name: Mr. Fire Fighter, abbr: MFIRE, measures: 60 }
+  song_141: { name: Mr. Larpus, abbr: MRLAR, measures: 77 }
+  song_142: { name: My Friend, abbr: MYFRI, measures: 47 }
+  song_143: { name: Naissance, abbr: NAIS1, measures: 57 }
+  song_144: { name: Naissance 2, abbr: NAIS2, measures: 55 }
+  song_145: { name: Nightmoves, abbr: NGTMV, measures: 58 }
+  song_146: { name: Oasis, abbr: OASIS, measures: 66 }
+  song_147: { name: Oh! Rosa, abbr: OROSA, measures: 60 }
+  song_148: { name: Papa Gonzales, abbr: PAPAG, measures: 54 }
+  song_149: { name: Phantom, abbr: PHANT, measures: 52 }
+  song_150: { name: Pump Me Amadeus, abbr: PMAMA, measures: 69 }
+  song_151: { name: Ra, abbr: RA^^^ }
+  song_152: { name: Miss's Story, abbr: MISSS, measures: 47 }
+  song_153: { name: Tribal Style, abbr: TRIBE, measures: 65 }
+  song_154: { name: London Bridge, abbr: LNDNB, measures: 56 }
+  song_155: { name: Epilogue, abbr: EPILO, measures: 53 }
+  song_156: { name: Euphoria, abbr: EUPHO, measures: 54 }
+  song_157: { name: Tension, abbr: TENSE, measures: 77 }
+  song_158: { name: Can Can, abbr: CAN__, measures: 70 }
+  song_159: { name: Kitty Kat, abbr: KITTY, measures: 52 }
+  song_160: { name: Ladybug, abbr: LDBUG, measures: 52 }
+  song_161: { name: Move It Groove It, abbr: MIGIT }
+  song_162: { name: Shooting Star, abbr: SSTAR, measures: 56 }
+  song_163: { name: Style On My Speed Dial, abbr: SDIAL, measures: 57 }
