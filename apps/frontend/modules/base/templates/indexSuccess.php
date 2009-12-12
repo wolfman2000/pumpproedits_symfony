@@ -23,3 +23,30 @@
 
 <?php include_partial('base/table', array('base_songs' => $pager->getResults())) ?>
 
+<?php if ($pager->haveToPaginate()): ?>
+  <div class="pagination">
+    <a href="<?php echo url_for('@base_edit') ?>?page=1">«</a>
+ 
+    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getPreviousPage() ?>">&lt;</a>
+ 
+    <?php foreach ($pager->getLinks() as $page): ?>
+      <?php if ($page == $pager->getPage()): ?>
+        <?php echo $page ?>
+      <?php else: ?>
+        <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $page ?>"><?php echo $page ?></a>
+      <?php endif; ?>
+    <?php endforeach; ?>
+ 
+    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getNextPage() ?>">&gt;</a>
+ 
+    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getLastPage() ?>">»</a>
+  </div>
+<?php endif; ?>
+ 
+<div class="pagination_desc">
+  <strong><?php echo count($pager) ?></strong> jobs in this category
+ 
+  <?php if ($pager->haveToPaginate()): ?>
+    - page <strong><?php echo $pager->getPage() ?>/<?php echo $pager->getLastPage() ?></strong>
+  <?php endif; ?>
+</div>
