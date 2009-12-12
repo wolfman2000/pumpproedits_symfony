@@ -1,3 +1,6 @@
+<?php
+  slot('title', 'Credits / Thanks — Pump Pro Edits') 
+?>
 <h2>Credits and Thanks</h2>
 <p>
     Let it be known that I don't try to be selfish.  There are many people
