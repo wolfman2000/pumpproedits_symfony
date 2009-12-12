@@ -1,0 +1,286 @@
+PPE_Song_BPM:
+  bpm_001: { PPE_Song_Song: song_001, bpm: 96 }
+  bpm_002: { PPE_Song_Song: song_002, bpm: 116 }
+  bpm_003: { PPE_Song_Song: song_003, bpm: 110 }
+  bpm_004: { PPE_Song_Song: song_004, bpm: 136 }
+  bpm_005: { PPE_Song_Song: song_004, beat: 42, bpm: 210 }
+  bpm_006: { PPE_Song_Song: song_004, beat: 57, bpm: 136 }
+  bpm_007: { PPE_Song_Song: song_004, beat: 85, bpm: 68 }
+  bpm_008: { PPE_Song_Song: song_004, beat: 87, bpm: 136 }
+  bpm_009: { PPE_Song_Song: song_004, beat: 115, bpm: 68 }
+  bpm_010: { PPE_Song_Song: song_004, beat: 122, bpm: 34 }
+  bpm_011: { PPE_Song_Song: song_004, beat: 123, bpm: 68 }
+  bpm_012: { PPE_Song_Song: song_004, beat: 129, bpm: 210 }
+  bpm_013: { PPE_Song_Song: song_004, beat: 144, bpm: 136 }
+  bpm_014: { PPE_Song_Song: song_004, beat: 172, bpm: 68 }
+  bpm_015: { PPE_Song_Song: song_004, beat: 174, bpm: 136 }
+  bpm_016: { PPE_Song_Song: song_005, bpm: 112 }
+  bpm_017: { PPE_Song_Song: song_006, bpm: 126 }
+  bpm_018: { PPE_Song_Song: song_007, bpm: 128 }
+  bpm_019: { PPE_Song_Song: song_008, bpm: 155 }
+  bpm_020: { PPE_Song_Song: song_008, beat: 62, bpm: 38.75 }
+  bpm_021: { PPE_Song_Song: song_008, beat: 63, bpm: 155 }
+  bpm_022: { PPE_Song_Song: song_009, bpm: 162 }
+  bpm_023: { PPE_Song_Song: song_010, bpm: 158 }
+  bpm_024: { PPE_Song_Song: song_010, beat: 149, bpm: 79 }
+  bpm_025: { PPE_Song_Song: song_010, beat: 181, bpm: 158 }
+  bpm_026: { PPE_Song_Song: song_011, bpm: 210 }
+  bpm_027: { PPE_Song_Song: song_011, beat: 312, bpm: 52.5 }
+  bpm_028: { PPE_Song_Song: song_011, beat: 314, bpm: 210 }
+  bpm_029: { PPE_Song_Song: song_012, bpm: 157 }
+  bpm_030: { PPE_Song_Song: song_013, bpm: 128 }
+  bpm_031: { PPE_Song_Song: song_014, bpm: 129 }
+  bpm_032: { PPE_Song_Song: song_015, bpm: 136 }
+  bpm_033: { PPE_Song_Song: song_016, bpm: 124 }
+  bpm_034: { PPE_Song_Song: song_017, bpm: 190 }
+  bpm_035: { PPE_Song_Song: song_017, beat: 152, bpm: 140 }
+  bpm_036: { PPE_Song_Song: song_017, beat: 160, bpm: 120 }
+  bpm_037: { PPE_Song_Song: song_017, beat: 208, bpm: 160 }
+  bpm_038: { PPE_Song_Song: song_017, beat: 256, bpm: 190 }
+  bpm_039: { PPE_Song_Song: song_018, bpm: 186 }
+  bpm_040: { PPE_Song_Song: song_018, beat: 132, bpm: 140 }
+  bpm_041: { PPE_Song_Song: song_018, beat: 171, bpm: 202 }
+  bpm_042: { PPE_Song_Song: song_019, bpm: 168 }
+  bpm_043: { PPE_Song_Song: song_020, bpm: 160 }
+  bpm_044: { PPE_Song_Song: song_021, bpm: 210 }
+  bpm_045: { PPE_Song_Song: song_022, bpm: 210 }
+  bpm_046: { PPE_Song_Song: song_023, bpm: 134 }
+  bpm_047: { PPE_Song_Song: song_024, bpm: 74.75 }
+  bpm_048: { PPE_Song_Song: song_024, beat: 7, bpm: 149.5 }
+  bpm_049: { PPE_Song_Song: song_025, bpm: 127 }
+  bpm_050: { PPE_Song_Song: song_026, bpm: 175 }
+  bpm_051: { PPE_Song_Song: song_027, bpm: 100 }
+  bpm_052: { PPE_Song_Song: song_027, beat: 92, bpm: 107 }
+  bpm_053: { PPE_Song_Song: song_027, beat: 126, bpm: 100 }
+  bpm_054: { PPE_Song_Song: song_028, bpm: 137 }
+  bpm_055: { PPE_Song_Song: song_029, bpm: 130 }
+  bpm_056: { PPE_Song_Song: song_030, bpm: 124 }
+  bpm_057: { PPE_Song_Song: song_031, bpm: 180 }
+  bpm_058: { PPE_Song_Song: song_032, bpm: 140 }
+  bpm_059: { PPE_Song_Song: song_033, bpm: 122 }
+  bpm_060: { PPE_Song_Song: song_034, bpm: 171 }
+  bpm_061: { PPE_Song_Song: song_035, bpm: 150 }
+  bpm_062: { PPE_Song_Song: song_036, bpm: 195 }
+  bpm_063: { PPE_Song_Song: song_037, bpm: 110 }
+  bpm_064: { PPE_Song_Song: song_038, bpm: 129 }
+  bpm_065: { PPE_Song_Song: song_039, bpm: 120 }
+  bpm_066: { PPE_Song_Song: song_040, bpm: 145 }
+  bpm_067: { PPE_Song_Song: song_041, bpm: 150 }
+  bpm_068: { PPE_Song_Song: song_042, bpm: 128 }
+  bpm_069: { PPE_Song_Song: song_043, bpm: 147 }
+  bpm_070: { PPE_Song_Song: song_044, bpm: 110 }
+  bpm_071: { PPE_Song_Song: song_045, bpm: 118 }
+  bpm_072: { PPE_Song_Song: song_046, bpm: 195 }
+  bpm_073: { PPE_Song_Song: song_047, bpm: 130.6 }
+  bpm_074: { PPE_Song_Song: song_048, bpm: 130.5 }
+  bpm_075: { PPE_Song_Song: song_049, bpm: 130.5 }
+  bpm_076: { PPE_Song_Song: song_050, bpm: 189 }
+  bpm_077: { PPE_Song_Song: song_051, bpm: 170 }
+  bpm_078: { PPE_Song_Song: song_052, bpm: 200 }
+  bpm_079: { PPE_Song_Song: song_052, beat: 158, bpm: 100 }
+  bpm_080: { PPE_Song_Song: song_052, beat: 162, bpm: 200 } 
+  bpm_081: { PPE_Song_Song: song_053, bpm: 128 }
+  bpm_082: { PPE_Song_Song: song_054, bpm: 130 }
+  bpm_083: { PPE_Song_Song: song_054, beat: 20, bpm: 65 }
+  bpm_084: { PPE_Song_Song: song_054, beat: 48, bpm: 160 }
+  bpm_085: { PPE_Song_Song: song_054, beat: 120, bpm: 80 }
+  bpm_086: { PPE_Song_Song: song_054, beat: 132, bpm: 160 }
+  bpm_087: { PPE_Song_Song: song_054, beat: 244, bpm: 65 }
+  bpm_088: { PPE_Song_Song: song_055, bpm: 174.6 }
+  bpm_089: { PPE_Song_Song: song_055, beat: 47, bpm: 87.3 }
+  bpm_090: { PPE_Song_Song: song_055, beat: 66, bpm: 174.6 }
+  bpm_091: { PPE_Song_Song: song_055, beat: 100, bpm: 87.3 }
+  bpm_092: { PPE_Song_Song: song_055, beat: 118, bpm: 174.6 }
+  bpm_093: { PPE_Song_Song: song_056, bpm: 130 }
+  bpm_094: { PPE_Song_Song: song_057, bpm: 105 }
+  bpm_095: { PPE_Song_Song: song_058, bpm: 180 }
+  bpm_096: { PPE_Song_Song: song_059, bpm: 112 }
+  bpm_097: { PPE_Song_Song: song_060, bpm: 109 }
+  bpm_098: { PPE_Song_Song: song_061, bpm: 130 }
+  bpm_099: { PPE_Song_Song: song_062, bpm: 208 }
+  bpm_100: { PPE_Song_Song: song_063, bpm: 280 }
+  bpm_101: { PPE_Song_Song: song_063, beat: 320, bpm: 140 }
+  bpm_102: { PPE_Song_Song: song_063, beat: 324, bpm: 280 }
+  bpm_103: { PPE_Song_Song: song_063, beat: 379, bpm: 140 }
+  bpm_104: { PPE_Song_Song: song_063, beat: 383, bpm: 280 }
+  bpm_105: { PPE_Song_Song: song_063, beat: 439, bpm: 140 }
+  bpm_106: { PPE_Song_Song: song_063, beat: 443, bpm: 280 }
+  bpm_107: { PPE_Song_Song: song_064, bpm: 125 }
+  bpm_108: { PPE_Song_Song: song_065, bpm: 185 }
+  bpm_109: { PPE_Song_Song: song_066, bpm: 140 }
+  bpm_110: { PPE_Song_Song: song_067, bpm: 145 }
+  bpm_111: { PPE_Song_Song: song_067, beat: 108, bpm: 72.5 }
+  bpm_112: { PPE_Song_Song: song_067, beat: 115, bpm: 145 }
+  bpm_113: { PPE_Song_Song: song_068, bpm: 150 }
+  bpm_114: { PPE_Song_Song: song_069, bpm: 126 }
+  bpm_115: { PPE_Song_Song: song_070, bpm: 98 }
+  bpm_116: { PPE_Song_Song: song_071, bpm: 180 }
+  bpm_117: { PPE_Song_Song: song_072, bpm: 146 }
+  bpm_118: { PPE_Song_Song: song_073, bpm: 164 }
+  bpm_119: { PPE_Song_Song: song_073, beat: 112, bpm: 82 }
+  bpm_120: { PPE_Song_Song: song_073, beat: 118, bpm: 164 }
+  bpm_121: { PPE_Song_Song: song_074, bpm: 100 }
+  bpm_122: { PPE_Song_Song: song_075, bpm: 170 }
+  bpm_123: { PPE_Song_Song: song_076, bpm: 125 }
+  bpm_124: { PPE_Song_Song: song_077, bpm: 145 }
+  bpm_125: { PPE_Song_Song: song_078, bpm: 126 }
+  bpm_126: { PPE_Song_Song: song_079, bpm: 128 }
+  bpm_127: { PPE_Song_Song: song_080, bpm: 140 }
+  bpm_128: { PPE_Song_Song: song_081, bpm: 162 }
+  bpm_129: { PPE_Song_Song: song_082, bpm: 160 }
+  bpm_130: { PPE_Song_Song: song_082, beat: 96, bpm: 80 }
+  bpm_131: { PPE_Song_Song: song_082, beat: 112, bpm: 160 }
+  bpm_132: { PPE_Song_Song: song_082, beat: 184, bpm: 80 }
+  bpm_133: { PPE_Song_Song: song_082, beat: 196, bpm: 160 }
+  bpm_134: { PPE_Song_Song: song_083, bpm: 188 }
+  bpm_135: { PPE_Song_Song: song_083, beat: 132, bpm: 94 }
+  bpm_136: { PPE_Song_Song: song_083, beat: 147, bpm: 188 }
+  bpm_137: { PPE_Song_Song: song_083, beat: 257, bpm: 94 }
+  bpm_138: { PPE_Song_Song: song_084, bpm: 136 }
+  bpm_139: { PPE_Song_Song: song_085, bpm: 129 }
+  bpm_140: { PPE_Song_Song: song_086, bpm: 138 }
+  bpm_141: { PPE_Song_Song: song_087, bpm: 186 }
+  bpm_142: { PPE_Song_Song: song_088, bpm: 152 }
+  bpm_143: { PPE_Song_Song: song_089, bpm: 152 }
+  bpm_144: { PPE_Song_Song: song_090, bpm: 146 }
+  bpm_145: { PPE_Song_Song: song_091, bpm: 136 }
+  bpm_146: { PPE_Song_Song: song_092, bpm: 150 }
+  bpm_147: { PPE_Song_Song: song_093, bpm: 128 }
+  bpm_148: { PPE_Song_Song: song_094, bpm: 112 }
+  bpm_149: { PPE_Song_Song: song_095, bpm: 130 }
+  bpm_150: { PPE_Song_Song: song_096, bpm: 175 }
+  bpm_151: { PPE_Song_Song: song_097, bpm: 141 }
+  bpm_152: { PPE_Song_Song: song_098, bpm: 135 }
+  bpm_153: { PPE_Song_Song: song_099, bpm: 138 }
+  bpm_154: { PPE_Song_Song: song_100, bpm: 140 }
+  bpm_155: { PPE_Song_Song: song_101, bpm: 131.99 }
+  bpm_156: { PPE_Song_Song: song_102, bpm: 170 }
+  bpm_157: { PPE_Song_Song: song_103, bpm: 138 }
+  bpm_158: { PPE_Song_Song: song_104, bpm: 136 }
+  bpm_159: { PPE_Song_Song: song_105, bpm: 136 }
+  bpm_160: { PPE_Song_Song: song_105, beat: 132, bpm: 68 }
+  bpm_161: { PPE_Song_Song: song_105, beat: 134, bpm: 136 }
+  bpm_162: { PPE_Song_Song: song_105, beat: 198, bpm: 68 }
+  bpm_163: { PPE_Song_Song: song_105, beat: 199, bpm: 136 }
+  bpm_164: { PPE_Song_Song: song_105, beat: 213, bpm: 68 }
+  bpm_165: { PPE_Song_Song: song_106, bpm: 186 }
+  bpm_166: { PPE_Song_Song: song_107, bpm: 135 }
+  bpm_167: { PPE_Song_Song: song_108, bpm: 137 }
+  bpm_168: { PPE_Song_Song: song_109, bpm: 185 }
+  bpm_169: { PPE_Song_Song: song_110, bpm: 125 }
+  bpm_170: { PPE_Song_Song: song_111, bpm: 172 }
+  bpm_171: { PPE_Song_Song: song_112, bpm: 131 }
+  bpm_172: { PPE_Song_Song: song_113, bpm: 69 }
+  bpm_173: { PPE_Song_Song: song_113, beat: 76, bpm: 138 }
+  bpm_174: { PPE_Song_Song: song_113, beat: 108, bpm: 69 }
+  bpm_175: { PPE_Song_Song: song_113, beat: 116, bpm: 138 }
+  bpm_176: { PPE_Song_Song: song_113, beat: 176, bpm: 69 }
+  bpm_177: { PPE_Song_Song: song_113, beat: 180, bpm: 138 }
+  bpm_178: { PPE_Song_Song: song_114, bpm: 184 }
+  bpm_179: { PPE_Song_Song: song_114, beat: 344, bpm: 70 }
+  bpm_180: { PPE_Song_Song: song_114, beat: 348, bpm: 140 }
+  bpm_181: { PPE_Song_Song: song_114, beat: 380, bpm: 202 }
+  bpm_182: { PPE_Song_Song: song_115, bpm: 140 }
+  bpm_183: { PPE_Song_Song: song_115, beat: 96, bpm: 147.25 }
+  bpm_184: { PPE_Song_Song: song_115, beat: 192, bpm: 154.5 }
+  bpm_185: { PPE_Song_Song: song_115, beat: 256, bpm: 161.75 }
+  bpm_186: { PPE_Song_Song: song_115, beat: 316, bpm: 169 }
+  bpm_187: { PPE_Song_Song: song_116, bpm: 150 }
+  bpm_188: { PPE_Song_Song: song_117, bpm: 118 }
+  bpm_189: { PPE_Song_Song: song_118, bpm: 166 }
+  bpm_190: { PPE_Song_Song: song_118, beat: 288, bpm: 87 }
+  bpm_191: { PPE_Song_Song: song_119, bpm: 90 }
+  bpm_192: { PPE_Song_Song: song_119, beat: 36, bpm: 180 }
+  bpm_193: { PPE_Song_Song: song_119, beat: 164, bpm: 90 }
+  bpm_194: { PPE_Song_Song: song_119, beat: 196, bpm: 180 }
+  bpm_195: { PPE_Song_Song: song_120, bpm: 184 }
+  bpm_196: { PPE_Song_Song: song_121, bpm: NULL }
+  bpm_197: { PPE_Song_Song: song_121, beat: 14, bpm: NULL }
+  bpm_198: { PPE_Song_Song: song_121, beat: 79, bpm: NULL }
+  bpm_199: { PPE_Song_Song: song_121, beat: 87, bpm: NULL }
+  bpm_200: { PPE_Song_Song: song_121, beat: 91, bpm: NULL }
+  bpm_201: { PPE_Song_Song: song_121, beat: 123, bpm: NULL }
+  bpm_202: { PPE_Song_Song: song_121, beat: 189, bpm: NULL }
+  bpm_203: { PPE_Song_Song: song_121, beat: 193, bpm: NULL }
+  bpm_204: { PPE_Song_Song: song_121, beat: 225, bpm: NULL }
+  bpm_205: { PPE_Song_Song: song_121, beat: 228, bpm: NULL }
+  bpm_206: { PPE_Song_Song: song_121, beat: 245, bpm: NULL }
+  bpm_207: { PPE_Song_Song: song_121, beat: 261, bpm: NULL }
+  bpm_208: { PPE_Song_Song: song_121, beat: 277, bpm: NULL }
+  bpm_209: { PPE_Song_Song: song_121, beat: 285, bpm: NULL }
+  bpm_210: { PPE_Song_Song: song_121, beat: 289, bpm: NULL }
+  bpm_211: { PPE_Song_Song: song_121, beat: 329, bpm: NULL }
+  bpm_212: { PPE_Song_Song: song_121, beat: 369, bpm: NULL }
+  bpm_213: { PPE_Song_Song: song_122, bpm: 106 }
+  bpm_214: { PPE_Song_Song: song_123, bpm: 112 }
+  bpm_215: { PPE_Song_Song: song_124, bpm: 130 }
+  bpm_216: { PPE_Song_Song: song_125, bpm: 142 }
+  bpm_217: { PPE_Song_Song: song_126, bpm: 195 }
+  bpm_218: { PPE_Song_Song: song_126, beat: 163, bpm: 97.5 }
+  bpm_219: { PPE_Song_Song: song_126, beat: 165, bpm: 195 }
+  bpm_220: { PPE_Song_Song: song_126, beat: 216.5, bpm: 75 }
+  bpm_221: { PPE_Song_Song: song_126, beat: 219, bpm: 195 }
+  bpm_222: { PPE_Song_Song: song_126, beat: 363, bpm: 97.5 }
+  bpm_223: { PPE_Song_Song: song_126, beat: 369, bpm: 195 }
+  bpm_224: { PPE_Song_Song: song_126, beat: 487, bpm: 780 }
+  bpm_225: { PPE_Song_Song: song_126, beat: 495, bpm: 195 }
+  bpm_226: { PPE_Song_Song: song_127, bpm: 210 }
+  bpm_227: { PPE_Song_Song: song_128, bpm: 168 }
+  bpm_228: { PPE_Song_Song: song_129, bpm: 122 }
+  bpm_229: { PPE_Song_Song: song_129, beat: 100, bpm: 61 }
+  bpm_230: { PPE_Song_Song: song_129, beat: 109, bpm: 122 }
+  bpm_231: { PPE_Song_Song: song_130, bpm: 195 }
+  bpm_232: { PPE_Song_Song: song_130, beat: 145.5, bpm: 73 }
+  bpm_233: { PPE_Song_Song: song_130, beat: 152.5, bpm: 195 }
+  bpm_234: { PPE_Song_Song: song_131, bpm: 150 }
+  bpm_235: { PPE_Song_Song: song_132, bpm: 303 }
+  bpm_236: { PPE_Song_Song: song_132, beat: 264, bpm: 151.5 }
+  bpm_237: { PPE_Song_Song: song_132, beat: 268, bpm: 75.75 }
+  bpm_238: { PPE_Song_Song: song_132, beat: 284, bpm: 303 }
+  bpm_239: { PPE_Song_Song: song_133, bpm: 162 }
+  bpm_240: { PPE_Song_Song: song_134, bpm: 160 }
+  bpm_241: { PPE_Song_Song: song_135, bpm: 162 }
+  bpm_242: { PPE_Song_Song: song_136, bpm: 107 }
+  bpm_243: { PPE_Song_Song: song_137, bpm: 49 }
+  bpm_244: { PPE_Song_Song: song_137, beat: 8, bpm: 196 }
+  bpm_245: { PPE_Song_Song: song_137, beat: 315, bpm: 65.333 }
+  bpm_246: { PPE_Song_Song: song_138, bpm: 180 }
+  bpm_247: { PPE_Song_Song: song_138, beat: 128, bpm: 45 }
+  bpm_248: { PPE_Song_Song: song_138, beat: 146, bpm: 90 }
+  bpm_249: { PPE_Song_Song: song_138, beat: 150, bpm: 180 }
+  bpm_250: { PPE_Song_Song: song_139, bpm: 106 }
+  bpm_251: { PPE_Song_Song: song_140, bpm: 158 }
+  bpm_252: { PPE_Song_Song: song_140, beat: 132, bpm: 79 }
+  bpm_253: { PPE_Song_Song: song_140, beat: 144, bpm: 158 }
+  bpm_254: { PPE_Song_Song: song_141, bpm: 190 }
+  bpm_255: { PPE_Song_Song: song_142, bpm: 127 }
+  bpm_256: { PPE_Song_Song: song_143, bpm: 135.5 }
+  bpm_257: { PPE_Song_Song: song_144, bpm: 128 }
+  bpm_258: { PPE_Song_Song: song_145, bpm: 130 }
+  bpm_259: { PPE_Song_Song: song_146, bpm: 145 }
+  bpm_260: { PPE_Song_Song: song_147, bpm: 148 }
+  bpm_261: { PPE_Song_Song: song_148, bpm: 145 }
+  bpm_262: { PPE_Song_Song: song_149, bpm: 136 }
+  bpm_263: { PPE_Song_Song: song_149, beat: 48, bpm: 68 } 
+  bpm_264: { PPE_Song_Song: song_149, beat: 64, bpm: 136 }
+  bpm_265: { PPE_Song_Song: song_150, bpm: 170 }
+  bpm_266: { PPE_Song_Song: song_151, bpm: 135 }
+  bpm_267: { PPE_Song_Song: song_152, bpm: 111 }
+  bpm_268: { PPE_Song_Song: song_153, bpm: 140 }
+  bpm_269: { PPE_Song_Song: song_154, bpm: NULL }
+  bpm_270: { PPE_Song_Song: song_154, beat: 176, bpm: NULL }
+  bpm_271: { PPE_Song_Song: song_155, bpm: NULL }
+  bpm_272: { PPE_Song_Song: song_156, bpm: 140 }
+  bpm_273: { PPE_Song_Song: song_156, beat: 136, bpm: 70 }
+  bpm_274: { PPE_Song_Song: song_156, beat: 168, bpm: 140 }
+  bpm_275: { PPE_Song_Song: song_157, bpm: 180 }
+  bpm_276: { PPE_Song_Song: song_157, beat: 120, bpm: 90 }
+  bpm_277: { PPE_Song_Song: song_157, beat: 124, bpm: 180 }
+  bpm_278: { PPE_Song_Song: song_157, beat: 236, bpm: 90 }
+  bpm_279: { PPE_Song_Song: song_157, beat: 240, bpm: 180 }
+  bpm_280: { PPE_Song_Song: song_158, bpm: 197 }
+  bpm_281: { PPE_Song_Song: song_159, bpm: 128 }
+  bpm_282: { PPE_Song_Song: song_160, bpm: 133 }
+  bpm_283: { PPE_Song_Song: song_161, bpm: 112 }
+  bpm_284: { PPE_Song_Song: song_162, bpm: 134 }
+  bpm_285: { PPE_Song_Song: song_163, bpm: 136 }
