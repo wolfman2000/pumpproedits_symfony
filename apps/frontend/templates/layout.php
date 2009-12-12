@@ -35,7 +35,7 @@ or <a href="/register">Register</a>?
 <li>
     <h4>Edits</h4>
     <ul>
-    <li><a href="/base">Base Edits</a></li>
+    <li><a href="<?php echo url_for('@base_edit'); ?>">Base Edits</a></li>
     <li><a href="/stats">Edit Stat Getter</a></li>
     <li><a href="/edits">Edit List</a></li>
     </ul>
