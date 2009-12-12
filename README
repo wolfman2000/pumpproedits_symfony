@@ -14,10 +14,6 @@ security reasons. If you want to play around with the
 database, please set up your own local copy. Likewise,
 you will have to generate the SQL through doctrine:build-sql.
 
-3) In the root of this project, remember to create the
-cache and log folders. Give 777 permissions to
-both of them.
-
 As far as coding standards go, keep it legible. Using
 unicode/utf-8 is alright if it's for a decent reason.
 Tabs versus spaces, where braces go, etc, is not something
