@@ -9,7 +9,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <header>Pump Pro Edits</header>
+    <header><h1>Pump Pro Edits</h1></header>
     <article>
       <?php echo $sf_content ?>
     </article>
