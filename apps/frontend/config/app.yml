@@ -2,4 +2,5 @@
 # http://www.symfony-project.org/reference/1_4/en/11-App
 
 # default values
-#all:
+all:
+  base_edits_per_page: 30
