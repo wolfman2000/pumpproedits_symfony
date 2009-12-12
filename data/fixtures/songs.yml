@@ -59,3 +59,43 @@ PPE_Song_Song:
   song_058: { name: Get Up!, abbr: GETUP, measures: 70 }
   song_059: { name: Go Back, abbr: GOBCK, measures: 45 }
   song_060: { name: Greenhorn, abbr: GHORN, measures: 47 }
+  song_061: { name: Groovin' Motion, abbr: GROMT, measures: 58 }
+  song_062: { name: Gun Rock, abbr: GNRCK, measures: 84 }
+  song_063: { name: Hasse Mich, abbr: HASSE, measures: 132 }
+  song_064: { name: Handsome Character That Pass, abbr: HCTP! }
+  song_065: { name: Heel and Toe, abbr: HANDT, measures: 85 }
+  song_066: { name: Hello, abbr: HELLO, measures: 54 }
+  song_067: { name: Hi-Bi, abbr: HI-BI, measures: 55 }
+  song_068: { name: Hyun Jin Young Go Jin Young Go, abbr: HYUNJ, measures: 59 }
+  song_069: { name: Hold the Line, abbr: HLINE, measures: 51 }
+  song_070: { name: Hot, abbr: HOT!!, measures: 41 }
+  song_071: { name: Hypnosis, abbr: HYPNO, measures: 70 }
+  song_072: { name: Ignition Starts, abbr: IGNIT, measures: 54 }
+  song_073: { name: I'll Give You All My Love, abbr: IGYML, measures: 65 }
+  song_074: { name: I Love You Baby, abbr: ILYBB, measures: 43 }
+  song_075: { name: Infection, abbr: INFEC, measures: 79 }
+  song_076: { name: It's Over Now, abbr: IOVRN, measures: 55 }
+  song_077: { name: July -EuroMix-, abbr: JULYE, measures: 67 }
+  song_078: { name: Kiss Me, abbr: KISME, measures: 51 }
+  song_079: { name: Let the Sunshine, abbr: LTSUN, measures: 52 }
+  song_080: { name: Love is a Danger Zone, abbr: LIDZ1, measures: 59 }
+  song_081: { name: Love is a Danger Zone 2, abbr: LIDZ2, measures: 68 }
+  song_082: { name: Love Eternal, abbr: LETER, measures: 65 }
+  song_083: { name: Lovely, abbr: LOVEL, measures: 80 }
+  song_084: { name: Maria, abbr: MARIA, measures: 59 }
+  song_085: { name: My Brother is Street Singler, abbr: MBISS, measures: 51 }
+  song_086: { name: Mexi Mexi, abbr: MEXI2, measures: 58 }
+  song_087: { name: Monkey Fingers, abbr: MONKF, measures: 78 }
+  song_088: { name: Monkey Magic, abbr: MONKM, measures: 56 }
+  song_089: { name: Radius, abbr: RADIU, measures: 67 }
+  song_090: { name: RE-RAVE, abbr: RERAV, measures: 62 }
+  song_091: { name: Riders, Unite!, abbr: RIDER, measures: 61 }
+  song_092: { name: Robotix, abbr: ROBOT, measures: 62 }
+  song_093: { name: Round and Round, abbr: ROUND, measures: 58 }
+  song_094: { name: Sam-I-Am, abbr: SMIAM, measures: 46 }
+  song_095: { name: Dance Vibrations, abbr: DVIBR, measures: 58 }
+  song_096: { name: Destiny, abbr: DESTN, measures: 79 }
+  song_097: { name: DJ Superstar, abbr: DJSUP, measures: 67 }
+  song_098: { name: Feels Just Like That Night, abbr: FJLTN, measures: 58 }
+  song_099: { name: Go, abbr: GO!GO, measures: 59 }
+  song_100: { name: Into My Dream (Kaveh Azizi Remix), abbr: INTOD, measures: 67 }
