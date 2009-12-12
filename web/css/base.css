@@ -1,0 +1,32 @@
+@import "main.css";
+
+#base
+{
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+#base > caption
+{
+    margin-bottom: 10px;
+}
+#base > thead > tr > th
+{
+    font-weight: normal;
+    font-style: italic;
+}
+#base > thead > tr > th, #base > tbody > tr > td
+{
+    border: 2px solid #003366;
+}
+#base > tbody > tr > td:first-child
+{
+    padding: 3px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans;    
+}
+#base > tbody > tr > td
+{
+    padding-left: 1em;
+    padding-right: 1em;
+    font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+}
+
