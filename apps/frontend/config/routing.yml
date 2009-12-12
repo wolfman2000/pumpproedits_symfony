@@ -6,6 +6,16 @@ homepage:
   url:   /
   param: { module: ppehome, action: index }
 
+# Base edit page:
+base_edit:
+  url: /base/:page
+  param:
+    module: base
+    action: index
+    page: 1
+  requirements:
+    page: \d+
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
