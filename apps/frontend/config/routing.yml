@@ -6,6 +6,13 @@ homepage:
   url:   /
   param: { module: ppehome, action: index }
 
+# credits / thanks page
+thanks:
+  url: /thanks
+  param:
+    module: thanks
+    action: index
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
