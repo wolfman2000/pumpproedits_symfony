@@ -8,6 +8,6 @@ class PPE_Song_SongTable extends Doctrine_Table
   }
   public function getBaseEdits()
   {
-    return $this->createQuery('a')->select('name, id, abbr');
+    return $this->createQuery('a')->select('name, id, abbr')->orderBy('name');
   }
 }
