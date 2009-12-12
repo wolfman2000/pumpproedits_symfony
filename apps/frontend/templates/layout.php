@@ -3,7 +3,7 @@
   <head>
     <?php include_http_metas() ?>
     <?php include_metas() ?>
-    <title>Pump Pro Edits</title>
+    <title><?php include_slot('title', 'Pump Pro Edits') ?></title>
     <link rel="shortcut icon" href="/favicon.ico" />
     <?php include_stylesheets() ?>
     <?php include_javascripts() ?>
