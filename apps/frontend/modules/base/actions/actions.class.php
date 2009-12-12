@@ -17,10 +17,11 @@ class baseActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->page = $request->getParameter('page');
     $this->base = Doctrine::getTable('PPE_Song_Song');
     $this->pager = new sfDoctrinePager('PPE_Song_Song', sfConfig::get('base_edits_per_page'));
     $this->pager->setQuery($this->base->getBaseEdits());
-    $this->pager->setPage($request->getParameter('page'));
+    $this->pager->setPage($this->page);
     $this->pager->init();
   }
 
