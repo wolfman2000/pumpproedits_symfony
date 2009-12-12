@@ -6,6 +6,32 @@ homepage:
   url:   /
   param: { module: ppehome, action: index }
 
+# credits / thanks page
+thanks:
+  url: /thanks
+  param:
+    module: thanks
+    action: index
+
+# Base edit page:
+base_edit:
+  url: /base/:page
+  param:
+    module: base
+    action: index
+    page: 1
+  requirements:
+    page: \d+
+
+# Download a base edit.
+download_base_edit:
+  url: /base/download/:id/:type
+  param:
+    module: base
+    action: download
+  requirements:
+    id: \d+
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:

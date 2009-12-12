@@ -69,11 +69,17 @@
     	border-bottom: 1px solid gray;
     }
     
-    header h1
+    header > h1
     {
     	text-align: center;
         font-size: 2em;
         font-weight: bold;
+    }
+
+    header > h1 > a:link, header > h1 > a:visited
+    {
+        color: inherit;
+        text-decoration: none;
     }
     
     /* General content below */
@@ -85,9 +91,11 @@
         background-color: #BBBBBB;
         min-height: 25em;
     }
-    article h2
+    article > h2
     {
     	margin: 0 0 .5em 0;
+        font-size: 1.75em;
+        font-weight: bold;
     }
     
     /* General menu stuff below */

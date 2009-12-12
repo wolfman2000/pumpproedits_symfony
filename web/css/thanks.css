@@ -1,0 +1,54 @@
+@import "main.css";
+
+@media screen
+{
+    h3
+    {
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+    h3, section > p
+    {
+        text-align: center;
+    }
+    article ul
+    {
+        list-style-type: none;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    article ul li
+    {
+        display: inline;
+    }
+    article ul li a
+    {
+        margin: 0.2em 1em;
+    }
+    
+    section
+    {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border: 2px solid #003366;
+    }
+    
+    section h3
+    {
+        margin-top: 10px;
+    }
+        
+    section dl
+    {
+        padding: 10px;
+    }
+        
+    section dd
+    {
+        padding-left: 20px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+}
+
