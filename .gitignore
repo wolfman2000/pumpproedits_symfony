@@ -2,3 +2,4 @@ config/databases.yml
 log/
 cache/
 data/sql/schema.sql
+.DS_Store
