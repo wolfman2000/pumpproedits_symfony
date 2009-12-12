@@ -25,21 +25,21 @@
 
 <?php if ($pager->haveToPaginate()): ?>
   <div class="pagination">
-    <a href="<?php echo url_for('@base_edit') ?>?page=1">«</a>
+    <a href="<?php echo url_for('@base_edit?page=1') ?>">«</a>
  
-    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getPreviousPage() ?>">&lt;</a>
+    <a href="<?php echo url_for("@base_edit?page={$pager->getPreviousPage()}") ?>">&lt;</a>
  
     <?php foreach ($pager->getLinks() as $page): ?>
       <?php if ($page == $pager->getPage()): ?>
         <?php echo $page ?>
       <?php else: ?>
-        <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $page ?>"><?php echo $page ?></a>
+        <a href="<?php echo url_for("@base_edit?page=$page") ?>"><?php echo $page ?></a>
       <?php endif; ?>
     <?php endforeach; ?>
  
-    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getNextPage() ?>">&gt;</a>
+    <a href="<?php echo url_for("@base_edit?page={$pager->getNextPage()}") ?>">&gt;</a>
  
-    <a href="<?php echo url_for('@base_edit') ?>?page=<?php echo $pager->getLastPage() ?>">»</a>
+    <a href="<?php echo url_for("@base_edit?page={$pager->getLastPage()}") ?>">»</a>
   </div>
 <?php endif; ?>
  
