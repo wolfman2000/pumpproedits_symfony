@@ -23,7 +23,3 @@
 
 <?php include_partial('base/table', array('base_songs' => $pager)) ?>
 
-<?php if ($pager->haveToPaginate()): ?>
-  <strong><?php echo count($pager) ?></strong> jobs in this category
-  - page <strong><?php echo $pager->getPage() ?>/<?php echo $pager->getLastPage() ?></strong>
-<?php endif; ?>
