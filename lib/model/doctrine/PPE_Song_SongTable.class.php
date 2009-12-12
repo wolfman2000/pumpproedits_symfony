@@ -2,9 +2,12 @@
 
 class PPE_Song_SongTable extends Doctrine_Table
 {
+  public function getBaseEditsExecute()
+  {
+    return $this->getBaseEdits()->execute();
+  }
   public function getBaseEdits()
   {
-    $a = $this->createQuery('a')->select('name, id, abbr');
-    return $a->execute();
+    return $this->createQuery('a')->select('name, id, abbr');
   }
 }
