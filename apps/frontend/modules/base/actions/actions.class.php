@@ -17,8 +17,7 @@ class baseActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $b = Doctrine::getTable('PPE_Song_Song')->createQuery('a')->select('name, id, abbr')->execute();
+    $b = Doctrine::getTable('PPE_Song_Song')->getBaseEdits();
     $this->base_songs = $b;
-    # $this->forward('default', 'module');
   }
 }
