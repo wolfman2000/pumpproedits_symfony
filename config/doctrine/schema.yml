@@ -52,8 +52,8 @@ PPE_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:
     song_id: { type: integer, notnull: true }
-    beat: { type: float, notnull: true, default: 0 }
-    break: { type: float, notnull: false }
+    beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
+    break: { type: decimal, notnull: false, size: 4, scale: 2 }
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
   indexes:
@@ -65,8 +65,8 @@ PPE_Song_BPM:
   actAs: { Timestampable: ~ }
   columns:
     song_id: { type: integer, notnull: true }
-    beat: { type: float, notnull: true, default: 0 }
-    bpm: { type: float, notnull: false }
+    beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
+    bpm: { type: decimal, notnull: false, size: 8, scale: 4 }
   relations:
     PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
   indexes:
