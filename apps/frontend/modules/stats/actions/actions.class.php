@@ -26,6 +26,6 @@ class statsActions extends sfActions
   */
   public function executeValidate(sfWebRequest $request)
   {
-    //
+    $this->form = new ValidateEditForm();
   }
 }
