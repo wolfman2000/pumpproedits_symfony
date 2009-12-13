@@ -35,6 +35,6 @@ class baseActions extends sfActions
   {
     $id = sprintf("%06d", $request->getParameter('id'));
     $type = $request->getParameter('type');
-    $file = sprintf("base_%s_%s.edit", $id, $type);
+    $file = sprintf("base_%s_%s.edit", $id, ucfirst($type));
   }
 }
