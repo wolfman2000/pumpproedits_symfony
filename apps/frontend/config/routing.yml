@@ -32,6 +32,24 @@ download_base_edit:
   requirements:
     id: \d+
 
+# The edit stat getter/validator
+edit_stat_get:
+  url: /stats
+  param:
+    module: stats
+    action: index
+  requirements:
+    sf_method: get
+
+# The results of the edit stat getter (post)
+edit_stat_post:
+  url: /stats
+  param:
+    module: stats
+    action: validate
+  requirements:
+    sf_method: post
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
