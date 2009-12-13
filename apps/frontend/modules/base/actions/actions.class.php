@@ -18,7 +18,6 @@ class baseActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->page = $request->getParameter('page');
-    
     $this->base = Doctrine::getTable('PPE_Song_Song');
     $this->pager = new sfDoctrinePager('PPE_Song_Song', sfConfig::get('app_base_edits_per_page'));
     $this->pager->setQuery($this->base->getBaseEdits());
@@ -36,7 +35,16 @@ class baseActions extends sfActions
     $id = sprintf("%06d", $request->getParameter('id'));
     $type = $request->getParameter('type');
     $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
-    $path = sprintf("%s/data/base_edits/", sfConfig::get('sf_root_dir'));
-    echo $path;
+    $path = sprintf("%s/data/base_edits/%s", sfConfig::get('sf_root_dir'), $name);
+    $file = file_get_contents($path);
+
+    $response = $this->getResponse();
+    $response->clearHttpHeaders();
+    $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
+    $response->setHttpHeader('Content-Length', strlen($file));
+    $response->sendHttpHeaders();
+    $response->setContent($file);
+
+    return sfView::NONE;
   }
 }
