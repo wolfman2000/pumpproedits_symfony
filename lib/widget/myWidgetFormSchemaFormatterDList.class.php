@@ -1,3 +1,4 @@
+<?php
 class myWidgetFormSchemaFormatterDList extends sfWidgetFormSchemaFormatter
 {
 
