@@ -28,5 +28,20 @@ class statsActions extends sfActions
   {
     $this->form = new ValidateEditForm();
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
+    $errors = array();
+    if ($this->form->isValid())
+    {
+      $file = $this->form->getValue('file');
+      $filename = 'uploaded'.sha1($file->getOriginalName());
+      $extension = $file->getExtension($file->getOriginalExtension());
+      $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
+      $file->save($path);
+
+      /* File validation takes place here. */
+
+      /* Do this step at the end. */
+      @unlink($path);
+
+    }
   }
 }
