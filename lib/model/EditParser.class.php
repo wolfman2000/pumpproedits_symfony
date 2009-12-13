@@ -67,6 +67,7 @@ class EditParser
     $notes = array();
     $state = $diff = $cols = $measure = $songid = 0;
     $title = $song = $style = "";
+    $base = Doctrine::getTable('PPE_Song_Song');
 
     $numl = 0;
     while(!feof($fh)):
@@ -78,12 +79,31 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
-      $pos = strpos($line, "#SONG:", 0)
-      if $pos !== 0
+      $pos = strpos($line, "#SONG:", 0);
+      if ($pos !== 0)
       {
-        # Exception code here.
+        $s = 'The first line must contain "#SONG:" in it.';
+        throw new sfParseException($s);
       }
-      break;
+      $pos = strpos($line, ";");
+      if ($pos === false)
+      {
+        $s = "This line needs a semicolon at the end: %s";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      $song = substr($line, 6, $pos - strlen($line));
+      $songid = $base->getSongId($song);
+      if ($songid)
+      {
+        $state = 1; # The song exists. We can move on.
+      else
+      {
+        $s = "This song is not found in the database: %s. ";
+        $s .= "Make sure you spelt it right.";
+        throw new sfParseException(sprintf($s, $song));
+      }
+      # break;
+      return "So far so good!";
     }
     case 1:
     {
@@ -91,5 +111,6 @@ class EditParser
     }
     endswitch;
     endwhile;
+    return "So far so good!";
   }
 }
