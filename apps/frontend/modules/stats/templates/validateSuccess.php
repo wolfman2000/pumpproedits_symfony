@@ -1,4 +1,4 @@
-<p>This was posted. Deal with the rest shortly!</p>
+<p>Result: <?php echo $result ?></p>
 
 <p>Submit another edit to get its stats!</p>
 
