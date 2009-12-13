@@ -19,4 +19,13 @@ class statsActions extends sfActions
   {
     $this->form = new ValidateEditForm();
   }
+ /**
+  * Executes validate action (form required)
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeValidate(sfWebRequest $request)
+  {
+    //
+  }
 }
