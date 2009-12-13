@@ -4,3 +4,4 @@
 # default values
 all:
   base_edits_per_page: 30
+  max_edit_file_size: 30720
