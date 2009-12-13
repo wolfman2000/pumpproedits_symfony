@@ -14,22 +14,13 @@
         margin-top: 2px;
     }
     
-    form p
-    {
-        margin: 5px;
-        padding: 3px 0;
-    }
     dl
     {
         font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
-        width: 16em;
-    }
-    dl + p
-    {
-        clear: both;
     }
     dt
     {
+        padding-left: 1em;
         width: 8em;
         float: left;
         line-height: 1.3em;
@@ -40,7 +31,7 @@
     }
     dd
     {
-        float: right;
+        padding-left: 8em;
         line-height: 1.3em;
     }
 }
