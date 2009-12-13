@@ -4,7 +4,7 @@ class myWidgetFormSchemaFormatterDList extends sfWidgetFormSchemaFormatter
 
   protected
     $rowFormat       = "<dt>%label%</dt>
-<dd> custom %error%%field%%help%%hidden_fields%</dd>
+<dd> %error%%field%%help%%hidden_fields%</dd>
 ",
     $helpFormat      = '<br />%help%',
     $errorRowFormat  = "<dt>Errors:</dt>
