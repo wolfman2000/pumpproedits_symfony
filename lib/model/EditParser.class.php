@@ -119,7 +119,7 @@ class EditParser
       $pos = strpos($line, ":", 0);
       if ($pos === false)
       {
-        $s = "This line needs a semicolon at the end: %s";
+        $s = "This line needs a colon at the end: %s";
         throw new sfParseException(sprintf($s, $line));
       }
       $style = substr($line, 0, $pos - strlen($line));
@@ -129,6 +129,30 @@ class EditParser
         throw new sfParseException(sprintf($s, $style));
       }
       $state = 3;
+    }
+    case 3: /* Get the title of the edit. No blank names Dread. ☻ */
+    {
+      $line = ltrim($line);
+      $pos = strpos($line, ":", 0);
+      if ($pos === false)
+      {
+        $s = "This line needs a colon at the end: %s";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      if ($pos === 0)
+      {
+        $s = "Blank edit names are no longer allowed.";
+        throw new sfParseException($s);
+      }
+      $title = substr($line, 0, $pos - strlen($line));
+      $maxlen = sfConfig::get('app_max_edit_name_length');
+      $titlen = strlen($title);
+      if ($titlen > $maxlen)
+      {
+        $s = 'The edit titled "%s" is %d characters too long.';
+        throw new sfParseException(sprintf($s, $title, $titlen));
+      }
+      $state = 4;
     }
     endswitch;
     endwhile;
