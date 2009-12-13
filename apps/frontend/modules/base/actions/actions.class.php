@@ -33,7 +33,8 @@ class baseActions extends sfActions
   */
   public function executeDownload(sfWebRequest $request)
   {
-    $id = $request->getParameter('id');
+    $id = sprintf("%06d", $request->getParameter('id'));
     $type = $request->getParameter('type');
+    $file = sprintf("base_%s_%s.edit", $id, $type);
   }
 }
