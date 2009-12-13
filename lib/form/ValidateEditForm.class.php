@@ -9,7 +9,12 @@ class ValidateEditForm extends sfForm
     ));
     $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
     $this->widgetSchema->addFormFormatter('dlist', $decorator);
-
     $this->widgetSchema->setFormFormatterName('dlist');
+    $this->setValidators(array(
+      'file' => new sfValidatorFile(array(
+        'max_size' => sfConfig::get('app_max_edit_file_size'),
+        'path' => sfConfig::get('sf_upload_dir'),
+      ))
+    ));
   }
 }
