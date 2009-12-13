@@ -7,6 +7,9 @@ class ValidateEditForm extends sfForm
     $this->setWidgets(array(
       'file' => new sfWidgetFormInputFile()
     ));
-    $this->widgetSchema->setFormFormatterName('list');
+    $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
+    $this->widgetSchema->addFormFormatter('dlist', $decorator);
+
+    $this->widgetSchema->setFormFormatterName('dlist');
   }
 }
