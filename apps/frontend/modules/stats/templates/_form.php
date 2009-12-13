@@ -2,6 +2,11 @@
 <?php include_javascripts_for_form($form) ?>
  
 <form action="<?php echo url_for('@edit_stat_post') ?>" method="POST">
-  <?php echo $form ?>
+  <fieldset>
+    <legend>Select your .edit file</legend>
+    <dl>
+      <?php echo $form ?>
+    </dl>
+  </fieldset>
 </form>
 
