@@ -32,7 +32,7 @@ class EditParser
 
     fwrite($fh, $this->gen_measure($cols));
 
-    for ($i = 2, $i <= $measures; $i++)
+    for ($i = 2; $i <= $measures; $i++)
     {
       fwrite($fh, sprintf(",  // measure %s%s", $i, $eol));
       fwrite($fh, $this->gen_measure($cols, true));
@@ -62,7 +62,7 @@ class EditParser
     $res = array(); # Return variables go in here.
     $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
     $steps_on = array();
-    $holds_on = arary();
+    $holds_on = array();
     $actve_on = array();
     $notes = array();
     $state = $diff = $cols = $measure = $songid = 0;
@@ -96,6 +96,7 @@ class EditParser
       if ($songid)
       {
         $state = 1; # The song exists. We can move on.
+      }
       else
       {
         $s = "This song is not found in the database: %s. ";
