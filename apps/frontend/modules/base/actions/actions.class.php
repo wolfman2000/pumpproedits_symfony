@@ -35,6 +35,8 @@ class baseActions extends sfActions
   {
     $id = sprintf("%06d", $request->getParameter('id'));
     $type = $request->getParameter('type');
-    $file = sprintf("base_%s_%s.edit", $id, ucfirst($type));
+    $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
+    $path = sprintf("%s/data/base_edits/", sfConfig::get('sf_root_dir'));
+    echo $path;
   }
 }
