@@ -32,15 +32,6 @@ download_base_edit:
   requirements:
     id: \d+
 
-# The edit stat getter/validator
-edit_stat_get:
-  url: /stats
-  param:
-    module: stats
-    action: index
-  requirements:
-    sf_method: [GET]
-
 # The results of the edit stat getter (post)
 edit_stat_post:
   url: /stats
@@ -48,7 +39,16 @@ edit_stat_post:
     module: stats
     action: validate
   requirements:
-    sf_method: [POST]
+    sf_method: post
+
+# The edit stat getter/validator
+edit_stat_get:
+  url: /stats
+  param:
+    module: stats
+    action: index
+  requirements:
+    sf_method: get
 
 # generic rules
 # please, remove them by adding more specific rules
