@@ -7,6 +7,7 @@
     <dl>
       <?php echo $form ?>
     </dl>
+  <p><button name="submit" id="submit" type="submit" value="submit">Submit!</button></p>
   </fieldset>
 </form>
 
