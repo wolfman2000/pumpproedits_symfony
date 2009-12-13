@@ -42,6 +42,7 @@ class baseActions extends sfActions
     $response->clearHttpHeaders();
     $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
     $response->setHttpHeader('Content-Length', strlen($file));
+    $response->setHttpHeader('Content-Type', 'application/edit');
     $response->sendHttpHeaders();
     $response->setContent($file);
 
