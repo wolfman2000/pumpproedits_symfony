@@ -14,11 +14,14 @@ class EditParser
 
   protected function gen_edit_file($kind, $name, $abbr, $measures)
   {
-
+    
   }
 
   public function generate_base($songid)
   {
+    $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
+    $this->gen_edit_file('single', $base->getName(), $base->getAbbr(), $base->getMeasures());
+    $this->gen_edit_file('double', $base->getName(), $base->getAbbr(), $base->getMeasures());
 
   }
 
