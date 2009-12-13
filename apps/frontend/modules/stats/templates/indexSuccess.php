@@ -28,4 +28,4 @@ Edit:
 ;
 </pre>
 
-<p>The form will come later.</p>
+<?php include_partial('stats/form', array('form' => $form)) ?>
