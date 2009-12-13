@@ -39,7 +39,7 @@ edit_stat_get:
     module: stats
     action: index
   requirements:
-    sf_method: get
+    sf_method: [GET]
 
 # The results of the edit stat getter (post)
 edit_stat_post:
@@ -48,7 +48,7 @@ edit_stat_post:
     module: stats
     action: validate
   requirements:
-    sf_method: post
+    sf_method: [POST]
 
 # generic rules
 # please, remove them by adding more specific rules
