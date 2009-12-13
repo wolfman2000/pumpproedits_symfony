@@ -51,8 +51,45 @@ class EditParser
 
   }
 
-  public function get_stats($data, $inc_notes = false)
+ /**
+  * Pass a file handle, get the note data.
+  * Return the notes themselves ONLY when asked.
+  *
+  * This code uses alternative control syntax a lot to keep indentation low.
+  */
+  public function get_stats($fh, $inc_notes = false)
   {
+    $res = array(); # Return variables go in here.
+    $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
+    $steps_on = array();
+    $holds_on = arary();
+    $actve_on = array();
+    $notes = array();
+    $state = $diff = $cols = $measure = $songid = 0;
+    $title = $song = $style = "";
 
+    $numl = 0;
+    while(!feof($fh)):
+
+    $numl++;
+    $line = rtrim(fgets($fh));
+
+    switch ($state):
+
+    case 0: /* Initial state: verify first line and song title.*/
+    {
+      $pos = strpos($line, "#SONG:", 0)
+      if $pos !== 0
+      {
+        # Exception code here.
+      }
+      break;
+    }
+    case 1:
+    {
+
+    }
+    endswitch;
+    endwhile;
   }
 }
