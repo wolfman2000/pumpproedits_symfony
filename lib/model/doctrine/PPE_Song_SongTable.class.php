@@ -10,4 +10,8 @@ class PPE_Song_SongTable extends Doctrine_Table
   {
     return $this->createQuery('a')->select('name, id, abbr')->orderBy('name');
   }
+  public function getSongRow($songid)
+  {
+    return $this->createQuery('a')->find($songid)->execute();
+  }
 }
