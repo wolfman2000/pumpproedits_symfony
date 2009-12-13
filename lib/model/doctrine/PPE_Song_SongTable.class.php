@@ -16,6 +16,6 @@ class PPE_Song_SongTable extends Doctrine_Table
   }
   public function getSongId($song)
   {
-    return $this->createQuery('a')->select('id')->findOneByName($song)->execute();
+    return $this->createQuery('a')->select('id')->where('name = ?', $song)->execute();
   }
 }
