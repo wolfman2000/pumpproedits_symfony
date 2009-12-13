@@ -10,12 +10,14 @@ class ValidateEditForm extends sfForm
     $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
     $this->widgetSchema->addFormFormatter('dlist', $decorator);
     $this->widgetSchema->setFormFormatterName('dlist');
-    $this->setValidators(array(
-      'file' => new sfValidatorFile(array(
-        'max_size' => sfConfig::get('app_max_edit_file_size'),
-        'path' => sfConfig::get('sf_upload_dir'),
-      ))
-    ));
+    $size = sfConfig::get('app_max_edit_file_size');
+    $validate['max_size'] = $size;
+    $validate['path'] = sfConfig::get('sf_upload_dir');
+    $messages['required'] = 'You must submit an edit file!';
+    $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
+    $vfile = new sfValidatorFile($validate, $messages);
+    $val['file'] = $vfile;
+    $this->setValidators($val);
     $this->widgetSchema->setNameFormat('validate[%s]');
   }
 }
