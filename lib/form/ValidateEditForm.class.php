@@ -16,5 +16,6 @@ class ValidateEditForm extends sfForm
         'path' => sfConfig::get('sf_upload_dir'),
       ))
     ));
+    $this->widgetSchema->setNameFormat('validate[%s]');
   }
 }

@@ -27,5 +27,6 @@ class statsActions extends sfActions
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new ValidateEditForm();
+    $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
   }
 }
