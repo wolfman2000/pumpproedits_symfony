@@ -9,6 +9,6 @@ class ValidateEditForm extends sfForm
     $val = array('required' => true, 'path' => sfConfig::get('sf_upload_dir'));
     $this->validationSchema['file'] = new sfValidatorFile($val);
 #    $this->setWidgets(array('file' => new sfWidgetFormInputFile() ));
-    $this->setWidgets->setFormFormatterName('list');
+#    $this->setWidgets->setFormFormatterName('list');
   }
 }
