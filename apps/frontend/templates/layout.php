@@ -9,7 +9,7 @@
     <?php include_javascripts() ?>
   </head>
   <body>
-    <header><h1><a href="<?php echo url_for('@homepage'); ?>">Pump Pro Edits</a></h1></header>
+    <header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
     <article>
       <?php echo $sf_content ?>
     </article>
@@ -35,8 +35,8 @@ or <a href="/register">Register</a>?
 <li>
     <h4>Edits</h4>
     <ul>
-    <li><a href="<?php echo url_for('@base_edit'); ?>">Base Edits</a></li>
-    <li><a href="/stats">Edit Stat Getter</a></li>
+    <li><?php echo link_to("Base Edits", '@base_edit') ?></li>
+    <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
     <li><a href="/edits">Edit List</a></li>
     </ul>
 
@@ -46,7 +46,7 @@ or <a href="/register">Register</a>?
     <ul>
     <li><a href="/news">Previous Updates</a></li>
     <li><a href="/contact">Contact</a></li>
-    <li><a href="<?php echo url_for('@thanks'); ?>">Credits/Thanks</a></li>
+    <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
 
 </li>
