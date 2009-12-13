@@ -167,6 +167,34 @@ class EditParser
       $state = 5;
       break;
     }
+    case 5: /* Get the difficulty level of the edit. */
+    {
+      $line = ltrim($line);
+      $pos = strpos($line, ":", 0);
+      if ($pos === false)
+      {
+        $s = "This line needs a colon at the end: %s";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      $diff = @int($line);
+      if ($diff != $line) /* Unsure of !== here. */
+      {
+        $s = "The difficulty must be a positive integer. You gave: %d ";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      $mindiff = sfConfig::get('app_min_difficulty_rating');
+      $maxdiff = sfConfig::get('app_max_difficulty_rating');
+      if (!($mindiff <= $diff and $diff <= $maxdiff))
+      {
+        $s = "The difficulty rating %d must be between %d and %d.";
+        throw new sfParseException(sprintf($s, $diff, $mindiff, $maxdiff));
+      }
+      $state = 6;
+    }
+    case 6: /* Radar line: use this time to prep other variables. */
+    {
+
+    }
     endswitch;
     endwhile;
     return "So far so good!";
