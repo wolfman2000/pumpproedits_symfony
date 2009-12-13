@@ -38,7 +38,8 @@ class statsActions extends sfActions
       $file->save($path);
 
       /* File validation takes place here. */
-
+      $tmp = new EditParser();
+      $this->result = $tmp->get_stats(fopen($path, "r"));
       /* Do this step at the end. */
       @unlink($path);
 
