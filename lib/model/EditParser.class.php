@@ -93,22 +93,42 @@ class EditParser
       }
       $song = substr($line, 6, $pos - strlen($line));
       $songid = $base->getSongId($song);
-      if ($songid)
-      {
-        $state = 1; # The song exists. We can move on.
-      }
-      else
+      if (!$songid)
       {
         $s = "This song is not found in the database: %s. ";
         $s .= "Make sure you spelt it right.";
         throw new sfParseException(sprintf($s, $song));
       }
-      # break;
-      return "So far so good!";
+      $state = 1; # The song exists. We can move on.
+      break;
     }
-    case 1:
+    case 1: /* Verify NOTES tag is present next. */
     {
-
+      if ($line === "" or strpos($line, "//", 0) === 0) { continue; }
+      if (strpos($line, "#NOTES:", 0) !== 0)
+      {
+        $s = "The #NOTES: tag must be on line 2.";
+        throw new sfParseException($s);
+      }
+      $state = 2;
+      break;
+    }
+    case 2: /* Confirm this is pump-single or pump-double. */
+    {
+      $line = ltrim($line);
+      $pos = strpos($line, ":", 0);
+      if ($pos === false)
+      {
+        $s = "This line needs a semicolon at the end: %s";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      $style = substr($line, 0, $pos - strlen($line));
+      if (!in_array($style, array("pump-single", "pump-double")))
+      {
+        $s = "The style %s is invalid. Use pump-single or pump-double.";
+        throw new sfParseException(sprintf($s, $style));
+      }
+      $state = 3;
     }
     endswitch;
     endwhile;
