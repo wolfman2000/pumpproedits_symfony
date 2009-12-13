@@ -24,6 +24,7 @@
         width: 8em;
         float: left;
         line-height: 1.3em;
+        padding-top: 0.3em;
     }
     dt:after
     {
