@@ -11,4 +11,19 @@ class EditParser
       $measure = substr_replace($measure, "1", 2, 1);
     }
   }
+
+  protected function gen_edit_file($kind, $name, $abbr, $measures)
+  {
+
+  }
+
+  public function generate_base($songid)
+  {
+
+  }
+
+  public function get_stats($data, $inc_notes = false)
+  {
+
+  }
 }
