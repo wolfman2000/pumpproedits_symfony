@@ -129,6 +129,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $style));
       }
       $state = 3;
+      break;
     }
     case 3: /* Get the title of the edit. No blank names Dread. ☻ */
     {
@@ -153,6 +154,18 @@ class EditParser
         throw new sfParseException(sprintf($s, $title, $titlen));
       }
       $state = 4;
+      break;
+    }
+    case 4: /* Ensure the "Edit:" line is in place. */
+    {
+      $line = ltrim($line);
+      if ($line !== "Edit:")
+      {
+        $s = 'The edit must have "Edit:" on a new line after the title.';
+        throw new sfParseException($s);
+      }
+      $state = 5;
+      break;
     }
     endswitch;
     endwhile;
