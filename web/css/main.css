@@ -1,5 +1,11 @@
 @import "setup.css";
 
+.error_list /* This can apply to all medias easily. */
+{
+    color: red;
+    font-weight: bold;
+}
+
 @media screen
 {
     html
