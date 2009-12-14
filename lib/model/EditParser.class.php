@@ -233,9 +233,78 @@ class EditParser
         if ($inc_notes) { $res['notes'] = $notes; }
         $state = 8;
       }
-      elseif (!($line === "" or strpos($line, "//", 0) === 0)) /* Parse. */
+      elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
       {
+        $steps_per_row = 0;
+        $row = substr($line, 0, $cols);
+        $notes['measure'][] = $row;
 
+        for ($i = 0; $i < $cols; $i++)
+        {
+          $steps_on[$i] = 0; // Reset previous info.
+          $char = substr($row, $i, 1);
+          switch ($char):
+
+          case "0": // Empty space
+          {
+            break;
+          }
+          case "1": // Tap note
+          {
+            $holds_on[$i] = 0;
+            $steps_on[$i] = 1;
+            $steps_per_row++;
+            break;
+          }
+          case "2": // Start of hold note
+          {
+            $holds_on[$i] = 1;
+            $steps_on[$i] = 1;
+            $steps_per_row++;
+            $holds++;
+            break;
+          }
+          case "3": // End of hold/roll note
+          {
+            $holds_on[$i] = 0;
+            $steps_on[$i] = 1; // Triple check. (Why did I have this?)
+            break;
+          }
+          case "4": // Start of roll note
+          {
+            $holds_on[$i] = 1;
+            $steps_on[$i] = 1;
+            $steps_per_row++;
+            $rolls++;
+            break;
+          }
+          case "M": // Mine
+          {
+            $holds_on[$i] = 0;
+            $mines++;
+            break;
+          }
+          case "L": // Lift note (not fully implemented)
+          {
+            $holds_on[$i] = 0;
+            $lifts++;
+            break;
+          }
+          case "F": // Fake note (will be in future builds)
+          {
+            $holds_on[$i] = 0;
+            $fakes;
+            break;
+          }
+          default: // Invalid data found.
+          {
+            $n = "0, 1, 2, 3, 4, M, L, F";
+            $s = "Line %d has an invalid note %s. Stick with %s.";
+            throw new sfParseException(sprintf($s, $numl, $char, $n));
+          }
+
+          endswitch;
+        }
       }
       break;
     }
