@@ -13,20 +13,13 @@
 <article>
 <?php echo $sf_content ?>
 </article>
+<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
 <nav>
-<?php include_partial("global/mess_" . ($sf_user->isAuthenticated() ? "in" : "out"), array()) ?>
+<?php include_partial("global/mess_$authin", array()) ?>
 <ul>
 <li>
-    <h4>Members</h4>
-    <ul>
-
-    <li><?php echo link_to('Register', '@register_get') ?></li>
-    <li><a href="/confirm">Confirm Account</a></li>
-    <li><?php echo link_to('Log In', '@login_get') ?></li>
-    <li><a href="/help">Account Help</a></li>
-    <li><a href="/reset">Reset Password</a></li>
-    </ul>
-
+<h4>Members</h4>
+<?php include_partial("global/memb_$authin", array()) ?>
 </li>
 <li>
     <h4>Edits</h4>
