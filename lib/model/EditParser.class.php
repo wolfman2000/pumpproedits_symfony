@@ -217,20 +217,6 @@ class EditParser
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
-        $res['id'] = $songid;
-        $res['diff'] = $diff;
-        $res['cols'] = $cols;
-        $res['style'] = $style;
-        $res['title'] = $title;
-        $res['steps'] = $steps;
-        $res['jumps'] = $jumps;
-        $res['holds'] = $holds;
-        $res['mines'] = $mines;
-        $res['trips'] = $trips;
-        $res['rolls'] = $rolls;
-        $res['lifts'] = $lifts;
-        $res['fakes'] = $fakes;
-        if ($inc_notes) { $res['notes'] = $notes; }
         $state = 8;
       }
       elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
@@ -302,7 +288,6 @@ class EditParser
             $s = "Line %d has an invalid note %s. Stick with %s.";
             throw new sfParseException(sprintf($s, $numl, $char, $n));
           }
-
           endswitch;
         }
       }
@@ -321,6 +306,20 @@ class EditParser
     }
     endswitch;
     endwhile;
+    $res['id'] = $songid;
+    $res['diff'] = $diff;
+    $res['cols'] = $cols;
+    $res['style'] = $style;
+    $res['title'] = $title;
+    $res['steps'] = $steps;
+    $res['jumps'] = $jumps;
+    $res['holds'] = $holds;
+    $res['mines'] = $mines;
+    $res['trips'] = $trips;
+    $res['rolls'] = $rolls;
+    $res['lifts'] = $lifts;
+    $res['fakes'] = $fakes;
+    if ($inc_notes) { $res['notes'] = $notes; }
     return "So far so good!";
   }
 }
