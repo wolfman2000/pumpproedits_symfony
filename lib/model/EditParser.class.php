@@ -176,7 +176,8 @@ class EditParser
         $s = "This line needs a colon at the end: %s";
         throw new sfParseException(sprintf($s, $line));
       }
-      $diff = @int($line);
+
+      $diff = (int) $line;
       if ($diff != $line) /* Unsure of !== here. */
       {
         $s = "The difficulty must be a positive integer. You gave: %d ";
@@ -190,10 +191,11 @@ class EditParser
         throw new sfParseException(sprintf($s, $diff, $mindiff, $maxdiff));
       }
       $state = 6;
+      break;
     }
     case 6: /* Radar line: use this time to prep other variables. */
     {
-
+      break;
     }
     endswitch;
     endwhile;
