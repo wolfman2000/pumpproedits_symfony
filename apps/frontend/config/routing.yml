@@ -35,6 +35,7 @@ download_base_edit:
 # The edit stat getter/validator
 edit_stat_get:
   url: /stats
+  class: sfRequestRoute
   param:
     module: stats
     action: index
@@ -44,6 +45,7 @@ edit_stat_get:
 # The results of the edit stat getter (post)
 edit_stat_post:
   url: /stats
+  class: sfRequestRoute
   param:
     module: stats
     action: validate
