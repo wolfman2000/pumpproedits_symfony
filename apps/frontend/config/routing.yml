@@ -72,6 +72,13 @@ login_post:
   requirements:
     sf_method: [POST]
 
+# Log the user out.
+logout:
+  url: /logout
+  param:
+    module: logout
+    action: index
+
 # Registration page
 register_get:
   url: /register
