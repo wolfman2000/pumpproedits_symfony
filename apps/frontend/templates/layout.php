@@ -14,19 +14,16 @@
 <?php echo $sf_content ?>
 </article>
 <nav>
-<p>Fix this!</p>
-<p>
-<a href="/login">Log In</a>
-or <a href="/register">Register</a>?
-</p>
+<p><?php echo link_to('Log In', '@login_get') ?> or
+<?php echo link_to('Register', '@register_get') ?>?</p>
 <ul>
 <li>
     <h4>Members</h4>
     <ul>
 
-    <li><a href="/register">Register</a></li>
+    <li><?php echo link_to('Register', '@register_get') ?></li>
     <li><a href="/confirm">Confirm Account</a></li>
-    <li><a href="/login">Log In</a></li>
+    <li><?php echo link_to('Log In', '@login_get') ?></li>
     <li><a href="/help">Account Help</a></li>
     <li><a href="/reset">Reset Password</a></li>
     </ul>
