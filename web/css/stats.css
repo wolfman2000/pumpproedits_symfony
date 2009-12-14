@@ -20,9 +20,13 @@
     }
     dt
     {
-        padding-left: 1em;
+        clear: both;
         width: 8em;
         float: left;
+    }
+    fieldset > dl > dt
+    {
+        padding-left: 1em;
         line-height: 1.3em;
         padding-top: 0.3em;
     }
