@@ -52,6 +52,46 @@ edit_stat_post:
   requirements:
     sf_method: [POST]
 
+# Login page
+login_get:
+  url: /login
+  class: sfRequestRoute
+  param:
+    module: login
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Login after submitting
+login_post:
+  url: /login
+  class: sfRequestRoute
+  param:
+    module: login
+    action: validate
+  requirements:
+    sf_method: [POST]
+
+# Registration page
+register_get:
+  url: /register
+  class: sfRequestRoute
+  param:
+    module: register
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Once you register:
+register_post:
+  url: /register
+  class: sfRequestRoute
+  param:
+    module: register
+    action: validate
+  requirements:
+    sf_method: [POST]
+
 # generic rules
 # please, remove them by adding more specific rules
 default_index:
