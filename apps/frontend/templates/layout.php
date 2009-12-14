@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <?php include_http_metas() ?>
-    <?php include_metas() ?>
-    <title><?php include_slot('title', 'Pump Pro Edits') ?></title>
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <?php include_stylesheets() ?>
-    <?php include_javascripts() ?>
-  </head>
-  <body>
-    <header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
-    <article>
-      <?php echo $sf_content ?>
-    </article>
-    <nav>
-      <p>Fix this!</p>
-      <p>
+<head>
+<?php include_http_metas() ?>
+<?php include_metas() ?>
+<title><?php include_slot('title', 'Pump Pro Edits') ?></title>
+<link rel="shortcut icon" href="/favicon.ico" />
+<?php include_stylesheets() ?>
+<?php include_javascripts() ?>
+</head>
+<body>
+<header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
+<article>
+<?php echo $sf_content ?>
+</article>
+<nav>
+<p>Fix this!</p>
+<p>
 <a href="/login">Log In</a>
 or <a href="/register">Register</a>?
 </p>
@@ -52,7 +52,7 @@ or <a href="/register">Register</a>?
 </li>
 </ul>
 
-    </nav>
-    <footer>This website is © <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a></footer>
-  </body>
+</nav>
+<footer>This website is © <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a></footer>
+</body>
 </html>
