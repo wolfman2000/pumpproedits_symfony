@@ -41,11 +41,13 @@ class statsActions extends sfActions
       $tmp = new EditParser();
       try
       {
+        $this->page = "parseyay";
         $this->result = $tmp->get_stats(fopen($path, "r"));
       }
       catch (sfParseException $e)
       {
-        $this->result = "There was a problem parsing: " . $e->getMessage();
+        $this->page = "parseboo";
+        $this->result = $e;
       }
       /* Do this step at the end. */
       @unlink($path);
