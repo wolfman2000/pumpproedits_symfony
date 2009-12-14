@@ -210,8 +210,33 @@ class EditParser
     case 7: /* Finally at step content. Read until ; is first. */
     {
       $line = ltrim($line);
-      if ($line === "") { break; }
+      if (substr($line, 0, 1) === ",") /* New measure upcoming. */
+      {
+        $measure++;
+        $notes[] = array();
+      }
+      elseif (substr($line, 0, 1) === ";") /* Should be EOF */
+      {
+        $res['id'] = $songid;
+        $res['diff'] = $diff;
+        $res['cols'] = $cols;
+        $res['style'] = $style;
+        $res['title'] = $title;
+        $res['steps'] = $steps;
+        $res['jumps'] = $jumps;
+        $res['holds'] = $holds;
+        $res['mines'] = $mines;
+        $res['trips'] = $trips;
+        $res['rolls'] = $rolls;
+        $res['lifts'] = $lifts;
+        $res['fakes'] = $fakes;
+        if ($inc_notes) { $res['notes'] = $notes };
+        $state = 8;
+      }
+      elseif (!($line === "" or subpos($line, "//", 0) === 0)) /* Parse. */
+      {
 
+      }
       break;
     }
 
