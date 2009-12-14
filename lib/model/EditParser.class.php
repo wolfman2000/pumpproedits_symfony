@@ -195,6 +195,20 @@ class EditParser
     }
     case 6: /* Radar line: use this time to prep other variables. */
     {
+      $cols = ($style === "pump-single" ? 5 : 10);
+
+      for ($dummy = 0; $dummy < $cols; $dummy++)
+      {
+        $holds_on[] = 0;
+        $actve_on[] = 0;
+        $steps_on[] = 0;
+      }
+      $notes[] = array();
+      $state = 7;
+      break;
+    }
+    case 7: /* Finally at step content. Read until ; is first. */
+    {
       break;
     }
     endswitch;
