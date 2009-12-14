@@ -38,7 +38,17 @@ class statsActions extends sfActions
       $file->save($path);
 
       /* File validation takes place here. */
-
+      $tmp = new EditParser();
+      try
+      {
+        $this->page = "parseyay";
+        $this->result = $tmp->get_stats(fopen($path, "r"));
+      }
+      catch (sfParseException $e)
+      {
+        $this->page = "parseboo";
+        $this->result = $e;
+      }
       /* Do this step at the end. */
       @unlink($path);
 
