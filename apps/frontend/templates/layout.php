@@ -14,8 +14,7 @@
 <?php echo $sf_content ?>
 </article>
 <nav>
-<p><?php echo link_to('Log In', '@login_get') ?> or
-<?php echo link_to('Register', '@register_get') ?>?</p>
+<?php include_partial("global/mess_" . ($sf_user->isAuthenticated() ? "in" : "out"), array()) ?>
 <ul>
 <li>
     <h4>Members</h4>
