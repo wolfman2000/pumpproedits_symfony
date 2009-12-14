@@ -1,4 +1,4 @@
-<p>Result: <?php echo $result ?></p>
+<?php include_partial("stats/$page", array('result' => $result)) ?>
 
 <p>Submit another edit to get its stats!</p>
 
