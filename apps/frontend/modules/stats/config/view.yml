@@ -1,0 +1,5 @@
+indexSuccess:
+  stylesheets: [stats.css]
+
+validateSuccess:
+  stylesheets: [stats.css]

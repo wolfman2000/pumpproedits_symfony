@@ -58,6 +58,8 @@ abstract class BasePPE_Song_BPM extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->check('beat >= 0');
+        $this->check('bpm IS NULL OR bpm > 0');
     }
 
     public function setUp()

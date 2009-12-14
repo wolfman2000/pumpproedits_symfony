@@ -51,6 +51,10 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              'notnull' => true,
              'length' => '64',
              ));
+
+        $this->check('char_length(oregano) = 32');
+        $this->check('char_length(salt) = 5');
+        $this->check('char_length(pepper) = 64');
     }
 
     public function setUp()
