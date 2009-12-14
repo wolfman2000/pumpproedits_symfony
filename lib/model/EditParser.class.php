@@ -230,7 +230,7 @@ class EditParser
         $res['rolls'] = $rolls;
         $res['lifts'] = $lifts;
         $res['fakes'] = $fakes;
-        if ($inc_notes) { $res['notes'] = $notes };
+        if ($inc_notes) { $res['notes'] = $notes; }
         $state = 8;
       }
       elseif (!($line === "" or subpos($line, "//", 0) === 0)) /* Parse. */
