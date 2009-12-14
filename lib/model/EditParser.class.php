@@ -233,7 +233,7 @@ class EditParser
         if ($inc_notes) { $res['notes'] = $notes; }
         $state = 8;
       }
-      elseif (!($line === "" or subpos($line, "//", 0) === 0)) /* Parse. */
+      elseif (!($line === "" or strpos($line, "//", 0) === 0)) /* Parse. */
       {
 
       }
@@ -243,7 +243,7 @@ class EditParser
     case 8: /* Ensure no non-comment data is after the end. */
     {
       $line = ltrim($line);
-      if (!($line === "" or subpos($line, "//", 0) === 0))
+      if (!($line === "" or strpos($line, "//", 0) === 0))
       {
         $s = "Remove all data on and after line %d of your file.";
         throw new sfParseException(sprintf($s, $numl));
