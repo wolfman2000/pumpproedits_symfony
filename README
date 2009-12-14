@@ -3,7 +3,7 @@ It is called as such because the players can now directly
 contribute to how the website looks, feels, and behaves.
 
 There will be minor configuration required to play around
-with this on your own computers.
+with this on your own computer.
 
 1) This project uses the Doctrine ORM plugin. If you
 are used to Propel, the switch shouldn't be that bad.
