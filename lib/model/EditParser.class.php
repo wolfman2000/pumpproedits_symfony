@@ -289,7 +289,15 @@ class EditParser
             throw new sfParseException(sprintf($s, $numl, $char, $n));
           }
           endswitch;
+
         }
+        for ($i = 0; $i < $cols; $i++)
+        {
+          $actve_on[$i] = ($holds_on[$i] === 1 or $steps_on[$i] === 1 ? 1 : 0);
+        }
+        if ($steps_per_row > 0 and array_sum($actve_on) >= 3) { $trips++; }
+        if ($steps_per_row >= 2) { $jumps++; }
+        if ($steps_per_row) { $steps++; }
       }
       break;
     }
@@ -320,6 +328,6 @@ class EditParser
     $res['lifts'] = $lifts;
     $res['fakes'] = $fakes;
     if ($inc_notes) { $res['notes'] = $notes; }
-    return "So far so good!";
+    return $res;
   }
 }
