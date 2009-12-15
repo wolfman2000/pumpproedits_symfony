@@ -4,9 +4,13 @@ class RegisterForm extends sfForm
 {
   public function configure()
   {
-    $this->setWidgets(array(
-      'file' => new sfWidgetFormInputFile()
-    ));
+    $unreq['maxlength'] = sfConfig::get('app_max_username_length');
+    $pieces['username'] = new sfWidgetFormInputFile(null, $unreq);
+    $pieces['password'] = new sfWidgetFormInputFile();
+    $pieces['passdual'] = new sfWidgetFormInputFile();
+    $unreq['maxlength'] = sfConfig::get('app_max_email_length');
+    $pieces['email'] = new sfWidgetFormInputFile(null, $unreq);
+    $this->setWidgets($pieces);
     $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
     $this->widgetSchema->addFormFormatter('dlist', $decorator);
     $this->widgetSchema->setFormFormatterName('dlist');

@@ -11,3 +11,4 @@ all:
   max_username_length: 12
   min_username_length: 4
   min_password_length: 5
+  max_email_length: 320
