@@ -3,7 +3,10 @@ PPE_User_Role:
   columns:
     role: { type: string(32), notnull: true; unique: true }
     value: { type: integer, notnull: true }
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_User_User:
   actAs: { Timestampable: ~ }
   columns:
@@ -24,7 +27,9 @@ PPE_User_User:
     email_index:
       fields: [email]
       type: unique
-      
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
 
 PPE_User_Condiment:
   actAs: { Timestampable: ~ }
@@ -43,6 +48,9 @@ PPE_User_Condiment:
     oregano_check: char_length(oregano) = 32
     salt_check: char_length(salt) = 5
     pepper_check: char_length(pepper) = 64
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
 
 PPE_Song_Song:
   actAs: { Timestampable: ~ }
@@ -60,7 +68,10 @@ PPE_Song_Song:
       type: unique
   checks:
     measure_check: measures > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:
@@ -80,7 +91,10 @@ PPE_Song_Stop:
   checks:
     beat_check: beat > 0
     break_check: break IS NULL OR break > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Song_BPM:
   actAs: { Timestampable: ~ }
   columns:
@@ -101,7 +115,10 @@ PPE_Song_BPM:
     beat_check: beat >= 0
     # No negative BPMs yet.
     bpm_check: bpm IS NULL OR bpm > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Edit_Edit:
   actAs: { Timestampable: ~; SoftDelete: ~ }
   columns:
@@ -129,7 +146,7 @@ PPE_Edit_Edit:
       local: song_id
       foreign: id
       foreignAlias: PPE_Edit_Edits
-      foreignKeyName: edit_song_fk 
+      foreignKeyName: edit_song_fk
   indexes:
     author_index:
       fields: [user_id, song_id, title, is_single]
@@ -137,7 +154,10 @@ PPE_Edit_Edit:
   checks:
     diff_check: diff > 0
     steps_check: steps > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Vote_Vote:
   actAs: { Timestampable: ~ }
   columns:
@@ -163,4 +183,6 @@ PPE_Vote_Vote:
       type: unique
   checks:
     rating_check: rating >= 0 AND rating <= 10
-
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
