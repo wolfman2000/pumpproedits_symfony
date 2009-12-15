@@ -26,7 +26,7 @@
     <ul>
     <li><?php echo link_to("Base Edits", '@base_edit') ?></li>
     <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
-    <li><a href="/edits">Edit List</a></li>
+    <li><?php echo link_to("Edit List", '@edits') ?></a></li>
     </ul>
 
 </li>
@@ -34,7 +34,7 @@
     <h4>Everyone</h4>
     <ul>
     <li><a href="/news">Previous Updates</a></li>
-    <li><a href="/contact">Contact</a></li>
+    <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
 
