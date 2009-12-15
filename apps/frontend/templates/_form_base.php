@@ -1,7 +1,8 @@
-<?php include_stylesheets_for_form($form) ?>
-<?php include_javascripts_for_form($form) ?>
-
-<?php echo form_tag($route, 'multipart=' . include_slot('mpart', false)) ?>
+<?php
+include_stylesheets_for_form($form);
+include_javascripts_for_form($form);
+if (!isset($mpart)) { $mpart = false; }
+echo form_tag($route, "multipart=$mpart"); ?>
   <fieldset>
     <legend><?php include_slot('legend', 'Fill in all of the fields.') ?></legend>
     <dl>
