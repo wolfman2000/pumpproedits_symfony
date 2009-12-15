@@ -83,7 +83,8 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_User_Role', array(
              'local' => 'role_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'user_role_fk'));
 
         $this->hasMany('PPE_User_Condiment as PPE_User_Condiments', array(
              'local' => 'id',

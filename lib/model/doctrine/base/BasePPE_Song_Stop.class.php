@@ -67,7 +67,8 @@ abstract class BasePPE_Song_Stop extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_Song_Song', array(
              'local' => 'song_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'stop_song_fk'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

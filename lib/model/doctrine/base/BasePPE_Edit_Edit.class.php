@@ -151,11 +151,13 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_User_User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'edit_user_fk'));
 
         $this->hasOne('PPE_Song_Song', array(
              'local' => 'song_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'edit_song_fk'));
 
         $this->hasMany('PPE_Vote_Vote as PPE_Vote_Votes', array(
              'local' => 'id',
