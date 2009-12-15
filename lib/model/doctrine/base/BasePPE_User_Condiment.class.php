@@ -52,6 +52,9 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              'length' => '64',
              ));
 
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('char_length(oregano) = 32');
         $this->check('char_length(salt) = 5');
         $this->check('char_length(pepper) = 64');

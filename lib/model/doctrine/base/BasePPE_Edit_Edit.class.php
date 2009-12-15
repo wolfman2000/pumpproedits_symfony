@@ -142,6 +142,9 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('diff > 0');
         $this->check('steps > 0');
     }

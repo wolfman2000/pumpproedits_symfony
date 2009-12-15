@@ -58,6 +58,9 @@ abstract class BasePPE_Song_Stop extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('beat > 0');
         $this->check('break IS NULL OR break > 0');
     }
