@@ -1,10 +1,15 @@
 <?php
 
-class ValidateEditForm extends WolfForm
+class ValidateEditForm extends sfForm
 {
   public function configure()
   {
     parent::configure();
+
+    $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
+    $this->widgetSchema->addFormFormatter('dlist', $decorator);
+    $this->widgetSchema->setFormFormatterName('dlist');
+    $this->widgetSchema->setNameFormat('validate[%s]');
 
     $this->setWidgets(array('file' => new sfWidgetFormInputFile()));
     $validate['max_size'] = $size;

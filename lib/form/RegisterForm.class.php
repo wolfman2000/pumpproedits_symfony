@@ -1,10 +1,15 @@
 <?php
 
-class RegisterForm extends WolfForm
+class RegisterForm extends sfForm
 {
   public function configure()
   {
     parent::configure();
+
+    $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
+    $this->widgetSchema->addFormFormatter('dlist', $decorator);
+    $this->widgetSchema->setFormFormatterName('dlist');
+    $this->widgetSchema->setNameFormat('validate[%s]');
 
     $max_un = sfConfig::get('app_max_username_length');
     $min_un = sfConfig::get('app_min_username_length');
