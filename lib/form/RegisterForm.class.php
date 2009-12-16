@@ -20,7 +20,11 @@ class RegisterForm extends sfForm
     $this->widgetSchema->setFormFormatterName('dlist');
     $this->widgetSchema->setNameFormat('validate[%s]');
 
-    $val['email'] = new sfValidatorEmail(array('max_length' => $max_em), array('required' => "You must supply an email address."));
+    $tmp1['max_length'] = $max_em;
+    $tmp2['required'] = "You must supply an email address.";
+    $tmp2['max_length'] = "Your email address must be at most $max_em characters.";
+
+    $val['email'] = new sfValidatorEmail($tmp1, $tmp2);
     $val['username'] = new sfValidatorString(array('max_length' => $max_un, 'min_length' => $min_un),
         array('max_length' => "Your username must be at most $max_un characters.", 'min_length' => "Your username must be at least $min_un characters.",
         'required' => "You must supply a username."));
