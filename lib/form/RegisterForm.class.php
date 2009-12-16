@@ -44,7 +44,9 @@ class RegisterForm extends sfForm
     $val['passdual'] = new sfValidatorString($unerr, $messs);
 */
     $this->setValidators(array(
-      'email'   => new sfValidatorEmail(array('max_length' => $max_em), array('required' => "You must supply an email address."))
+      'email'   => new sfValidatorEmail(array('max_length' => $max_em), array('required' => "You must supply an email address.")),
+      'username' => new sfValidatorString(array('max_length' => $max_un, 'min_length' => $min_un),
+        array('max_length' => "Your username must be at most $max_un characters.", 'min_length' => "Your username must be at least $min_un characters.")),
     ));
 
 //    $this->setValidators(array($val));
