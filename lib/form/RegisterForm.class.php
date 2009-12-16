@@ -19,27 +19,27 @@ class RegisterForm extends sfForm
     $this->widgetSchema->setFormFormatterName('dlist');
 
     $unerr['required'] = "You must supply an email address.";
-    $val['email'] = new sfValidatorEmail($unerr);
+    $val['email'] = new sfValidatorEmail(array(), $unerr);
 
 
-    $unerr['min'] = $min_un;
-    $unerr['min_error'] = "Your username must be at least $min_un characters.";
-    $unerr['max'] = $min_un;
-    $unerr['max_error'] = "Your username must be at most $max_un characters.";
-    $unerr['required'] = "You must supply a username.";
+    $unerr['min_length'] = $min_un;
+    $messs['min_length'] = "Your username must be at least $min_un characters.";
+    $unerr['max_length'] = $min_un;
+    $messs['max_length'] = "Your username must be at most $max_un characters.";
+    $messs['required'] = "You must supply a username.";
 
-    $val['username'] = new sfValidatorString($unerr);
+    $val['username'] = new sfValidatorString($unerr, $messs);
 
-    $unerr['min'] = $min_pw;
-    $unerr['min_error'] = "Your password must be at least $min_pw characters.";
-    $unerr['max'] = null;
-    $unerr['required'] = "You must supply a password.";
+    $unerr['min_length'] = $min_pw;
+    $messs['min_length'] = "Your password must be at least $min_pw characters.";
+    $unerr['max_length'] = null;
+    $messs['required'] = "You must supply a password.";
 
-    $val['password'] = new sfValidatorString($unerr);
+    $val['password'] = new sfValidatorString($unerr, $messs);
 
-    $unerr['required'] = "You must supply a confirmation password.";
+    $messs['required'] = "You must supply a confirmation password.";
 
-    $val['passdual'] = new sfValidatorString($unerr);
+    $val['passdual'] = new sfValidatorString($unerr, $messs);
 
     $this->setValidators($val);
     $this->widgetSchema->setNameFormat('validate[%s]');
