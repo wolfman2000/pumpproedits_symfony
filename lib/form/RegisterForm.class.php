@@ -40,8 +40,10 @@ class RegisterForm extends sfForm
     $tmp2['required'] = "You must supply a password.";
 
     $val['password'] = new sfValidatorString($tmp1, $tmp2);
-    $val['passdual'] = new sfValidatorString(array('min_length' => $min_pw), array('min_length' => "Your password must be at least $min_pw characters.",
-        'required' => "You must supply a confirmation password."));
+
+    $tmp2['required'] = "You must supply a confirmation password.";
+
+    $val['passdual'] = new sfValidatorString($tmp1, $tmp2);
 
     $this->setValidators($val);
   }
