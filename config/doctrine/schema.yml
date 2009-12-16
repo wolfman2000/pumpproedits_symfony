@@ -3,7 +3,10 @@ PPE_User_Role:
   columns:
     role: { type: string(32), notnull: true; unique: true }
     value: { type: integer, notnull: true }
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_User_User:
   actAs: { Timestampable: ~ }
   columns:
@@ -12,7 +15,11 @@ PPE_User_User:
     role_id: { type: integer, notnull: true }
     is_confirmed: { type: boolean, notnull: true, default: 0 }
   relations:
-    PPE_User_Role: { local: role_id, foreign: id, foreignAlias: PPE_User_Users }
+    PPE_User_Role:
+      local: role_id
+      foreign: id
+      foreignAlias: PPE_User_Users
+      foreignKeyName: user_role_fk
   indexes:
     user_index:
       fields: [name]
@@ -20,7 +27,9 @@ PPE_User_User:
     email_index:
       fields: [email]
       type: unique
-      
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
 
 PPE_User_Condiment:
   actAs: { Timestampable: ~ }
@@ -30,11 +39,18 @@ PPE_User_Condiment:
     salt: { type: char(5), notnull: true }
     pepper: { type: char(64), notnull: true }
   relations:
-    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_User_Condiments }
+    PPE_User_User:
+      local: user_id
+      foreign: id
+      foreignAlias: PPE_User_Condiments
+      foreignKeyName: condiment_user_fk
   checks:
     oregano_check: char_length(oregano) = 32
     salt_check: char_length(salt) = 5
     pepper_check: char_length(pepper) = 64
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
 
 PPE_Song_Song:
   actAs: { Timestampable: ~ }
@@ -52,7 +68,10 @@ PPE_Song_Song:
       type: unique
   checks:
     measure_check: measures > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:
@@ -60,7 +79,11 @@ PPE_Song_Stop:
     beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
     break: { type: decimal, notnull: false, size: 4, scale: 2 }
   relations:
-    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+    PPE_Song_Song:
+      local: song_id
+      foreign: id
+      foreignAlias: PPE_Song_Songs
+      foreignKeyName: stop_song_fk
   indexes:
     stop_index:
       fields: [song_id, beat]
@@ -68,7 +91,10 @@ PPE_Song_Stop:
   checks:
     beat_check: beat > 0
     break_check: break IS NULL OR break > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Song_BPM:
   actAs: { Timestampable: ~ }
   columns:
@@ -76,7 +102,11 @@ PPE_Song_BPM:
     beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
     bpm: { type: decimal, notnull: false, size: 8, scale: 4 }
   relations:
-    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Song_Songs }
+    PPE_Song_Song:
+      local: song_id
+      foreign: id
+      foreignAlias: PPE_Song_Songs
+      foreignKeyName: bpm_song_fk
   indexes:
     bpm_index:
       fields: [song_id, beat]
@@ -85,7 +115,10 @@ PPE_Song_BPM:
     beat_check: beat >= 0
     # No negative BPMs yet.
     bpm_check: bpm IS NULL OR bpm > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Edit_Edit:
   actAs: { Timestampable: ~; SoftDelete: ~ }
   columns:
@@ -104,8 +137,16 @@ PPE_Edit_Edit:
     fakes: { type: integer, notnull: true, default: 0 }
     is_problem: { type: boolean, notnull: true, default: 0 }
   relations:
-    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Edit_Edits }
-    PPE_Song_Song: { local: song_id, foreign: id, foreignAlias: PPE_Edit_Edits } 
+    PPE_User_User:
+      local: user_id
+      foreign: id
+      foreignAlias: PPE_Edit_Edits
+      foreignKeyName: edit_user_fk
+    PPE_Song_Song:
+      local: song_id
+      foreign: id
+      foreignAlias: PPE_Edit_Edits
+      foreignKeyName: edit_song_fk
   indexes:
     author_index:
       fields: [user_id, song_id, title, is_single]
@@ -113,7 +154,10 @@ PPE_Edit_Edit:
   checks:
     diff_check: diff > 0
     steps_check: steps > 0
-  
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Vote_Vote:
   actAs: { Timestampable: ~ }
   columns:
@@ -123,12 +167,22 @@ PPE_Vote_Vote:
     reason: { type: string, notnull: false }
     is_problem: { type: boolean, notnull: true, default: 0 }
   relations:
-    PPE_User_User: { local: user_id, foreign: id, foreignAlias: PPE_Vote_Votes }
-    PPE_Edit_Edit: { local: edit_id, foreign: id, foreignAlias: PPE_Vote_Votes }
+    PPE_User_User:
+      local: user_id
+      foreign: id
+      foreignAlias: PPE_Vote_Votes
+      foreignKeyName: vote_user_fk
+    PPE_Edit_Edit:
+      local: edit_id
+      foreign: id
+      foreignAlias: PPE_Vote_Votes
+      foreignKeyName: vote_edit_fk
   indexes:
     single_vote_index:
       fields: [user_id, edit_id, rating]
       type: unique
   checks:
     rating_check: rating >= 0 AND rating <= 10
-
+  options:
+    collate: utf8_unicode_ci
+    charset: utf8

@@ -52,6 +52,9 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              'length' => '64',
              ));
 
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('char_length(oregano) = 32');
         $this->check('char_length(salt) = 5');
         $this->check('char_length(pepper) = 64');
@@ -62,7 +65,8 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_User_User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'condiment_user_fk'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

@@ -70,6 +70,9 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('rating >= 0 AND rating <= 10');
     }
 
@@ -78,11 +81,13 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_User_User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'vote_user_fk'));
 
         $this->hasOne('PPE_Edit_Edit', array(
              'local' => 'edit_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'vote_edit_fk'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

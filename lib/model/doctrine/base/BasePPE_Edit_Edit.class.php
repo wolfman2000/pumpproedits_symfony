@@ -142,6 +142,9 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('collate', 'utf8_unicode_ci');
+        $this->option('charset', 'utf8');
+
         $this->check('diff > 0');
         $this->check('steps > 0');
     }
@@ -151,11 +154,13 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         parent::setUp();
         $this->hasOne('PPE_User_User', array(
              'local' => 'user_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'edit_user_fk'));
 
         $this->hasOne('PPE_Song_Song', array(
              'local' => 'song_id',
-             'foreign' => 'id'));
+             'foreign' => 'id',
+             'foreignKeyName' => 'edit_song_fk'));
 
         $this->hasMany('PPE_Vote_Vote as PPE_Vote_Votes', array(
              'local' => 'id',
