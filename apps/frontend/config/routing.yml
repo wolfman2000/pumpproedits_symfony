@@ -29,9 +29,13 @@ download_base_edit:
   param:
     module: base
     action: download
-  requirements:
-    id: \d+
-    type: single|double
+
+# Illegal base download:
+download_base_edit_404:
+  url: /base/download/*
+  param:
+    module: base
+    action: download
 
 # The edit stat getter/validator
 edit_stat_get:

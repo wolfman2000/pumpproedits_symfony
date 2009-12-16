@@ -61,7 +61,12 @@ class baseActions extends sfActions
     $type = $request->getParameter('type');
     if (!(is_numeric($id) and ($type === "single" or $type === "double")))
     {
-      
+      $response = $this->getResponse();
+      $response->setStatusCode(409);
+      $this->id = $request->getParameter('id');
+      $this->type = $request->getParameter('type');
+
+      return;
     }
     $id = sprintf("%06d", $id);
     $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
