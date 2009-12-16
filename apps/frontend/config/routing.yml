@@ -154,12 +154,3 @@ register_post:
     action: validate
   requirements:
     sf_method: [POST]
-
-# generic rules
-# please, remove them by adding more specific rules
-default_index:
-  url:   /:module
-  param: { action: index }
-
-default:
-  url:   /:module/:action/*
