@@ -1,6 +1,6 @@
 <?php
 
-class ValidateEditForm extends sfForm
+class ValidateEditForm extends WolfForm
 {
   public function configure()
   {

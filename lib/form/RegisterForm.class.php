@@ -1,6 +1,6 @@
 <?php
 
-class RegisterForm extends sfForm
+class RegisterForm extends WolfForm
 {
   public function configure()
   {
