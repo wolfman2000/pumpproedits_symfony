@@ -10,8 +10,8 @@ class RegisterForm extends sfForm
     $max_em = sfConfig::get('app_max_email_length');
     $unreq['maxlength'] = $max_un;
     $pieces['username'] = new sfWidgetFormInput(array(), $unreq);
-    $pieces['password'] = new sfWidgetFormInput(array());
-    $pieces['passdual'] = new sfWidgetFormInput(array());
+    $pieces['password'] = new sfWidgetFormInputPassword(array());
+    $pieces['passdual'] = new sfWidgetFormInputPassword(array());
     $unreq['maxlength'] = sfConfig::get('app_max_email_length');
     $pieces['email'] = new sfWidgetFormInput(array(), $unreq);
     $this->setWidgets($pieces);
