@@ -31,6 +31,7 @@ download_base_edit:
     action: download
   requirements:
     id: \d+
+    type: single|double
 
 # The edit stat getter/validator
 edit_stat_get:
