@@ -1,14 +1,14 @@
 <?php
 
 /**
- * login actions.
+ * help actions.
  *
  * @package    pumpproedits
- * @subpackage login
+ * @subpackage help
  * @author     JasonWolfman2000Felds
  * @version    SVN: $Id: actions.class.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class loginActions extends sfActions
+class helpActions extends sfActions
 {
  /**
   * Executes index action
@@ -17,5 +17,6 @@ class loginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->forward('default', 'module');
   }
 }

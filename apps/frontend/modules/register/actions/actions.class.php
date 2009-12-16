@@ -17,6 +17,19 @@ class registerActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $this->form = new RegisterForm();
+  }
+
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new RegisterForm();
+    if ($this->form->isValid())
+    {
+
+    }
+    else
+    {
+
+    }
   }
 }
