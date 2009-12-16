@@ -14,7 +14,7 @@ class RegisterForm extends sfForm
     $unreq['maxlength'] = $max_un;
     $pieces['username'] = new sfWidgetFormInput(array(), $unreq);
     $pieces['password'] = new sfWidgetFormInputPassword(array());
-    $pieces['passdual'] = new sfWidgetFormInputPassword(array());
+    $pieces['passdual'] = new sfWidgetFormInputPassword(array('label' => 'Confirm Password'));
     $unreq['maxlength'] = sfConfig::get('app_max_email_length');
     $pieces['email'] = new sfWidgetFormInput(array(), $unreq);
     $this->setWidgets($pieces);
@@ -50,5 +50,7 @@ class RegisterForm extends sfForm
     $val['passdual'] = new sfValidatorString($tmp1, $tmp2);
 
     $this->setValidators($val);
+
+    $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('password', '==', 'passduel'));
   }
 }
