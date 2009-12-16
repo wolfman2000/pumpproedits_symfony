@@ -26,31 +26,6 @@ class baseActions extends sfActions
   }
 
  /**
-  * Validate the parameters that came in first.
-  *
-  * @param sfRequest $request A request object
-  */
-  public function validateDownload(sfWebRequest $request)
-  {
-    $id = $request->getParameter('id');
-    $type = $request->getParameter('type');
-    return (is_numeric($id) and ($type === "single" or $type === "double"));
-  }
-
- /**
-  * Stop those that try to access this page the wrong way.
-  *
-  * @param sfRequest $request A request object
- */
-  public function handleErrorDownload(sfWebRequest $request)
-  {
-    $response = $this->getResponse();
-    $response->setStatusCode(409);
-    $this->id = $request->getParameter('id');
-    $this->type = $request->getParameter('type');
-  }
-
- /**
   * Executes download action (download the files)
   *
   * @param sfRequest $request A request object
@@ -65,8 +40,7 @@ class baseActions extends sfActions
       $response->setStatusCode(409);
       $this->id = $request->getParameter('id');
       $this->type = $request->getParameter('type');
-
-      return;
+      return sfView::ERROR;
     }
     $id = sprintf("%06d", $id);
     $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
