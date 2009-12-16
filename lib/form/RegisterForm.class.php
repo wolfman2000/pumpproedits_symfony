@@ -4,6 +4,8 @@ class RegisterForm extends WolfForm
 {
   public function configure()
   {
+    parent::configure();
+
     $max_un = sfConfig::get('app_max_username_length');
     $min_un = sfConfig::get('app_min_username_length');
     $min_pw = sfConfig::get('app_min_password_length');
@@ -15,10 +17,6 @@ class RegisterForm extends WolfForm
     $unreq['maxlength'] = sfConfig::get('app_max_email_length');
     $pieces['email'] = new sfWidgetFormInput(array(), $unreq);
     $this->setWidgets($pieces);
-    $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
-    $this->widgetSchema->addFormFormatter('dlist', $decorator);
-    $this->widgetSchema->setFormFormatterName('dlist');
-    $this->widgetSchema->setNameFormat('validate[%s]');
 
     $tmp1['max_length'] = $max_em;
     $tmp2['required'] = "You must supply an email address.";
