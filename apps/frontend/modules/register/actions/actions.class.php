@@ -23,6 +23,7 @@ class registerActions extends sfActions
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new RegisterForm();
+    $this->form->bind($request->getParameter($this->form->getName()));
     if ($this->form->isValid())
     {
 
