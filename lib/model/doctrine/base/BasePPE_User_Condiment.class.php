@@ -52,6 +52,7 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              'length' => '64',
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
 

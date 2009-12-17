@@ -8,13 +8,16 @@
  * @property string $role
  * @property integer $value
  * @property Doctrine_Collection $PPE_User_Users
+ * @property Doctrine_Collection $PPE_User_Powers
  * 
- * @method string              getRole()           Returns the current record's "role" value
- * @method integer             getValue()          Returns the current record's "value" value
- * @method Doctrine_Collection getPPEUserUsers()   Returns the current record's "PPE_User_Users" collection
- * @method PPE_User_Role       setRole()           Sets the current record's "role" value
- * @method PPE_User_Role       setValue()          Sets the current record's "value" value
- * @method PPE_User_Role       setPPEUserUsers()   Sets the current record's "PPE_User_Users" collection
+ * @method string              getRole()            Returns the current record's "role" value
+ * @method integer             getValue()           Returns the current record's "value" value
+ * @method Doctrine_Collection getPPEUserUsers()    Returns the current record's "PPE_User_Users" collection
+ * @method Doctrine_Collection getPPEUserPowers()   Returns the current record's "PPE_User_Powers" collection
+ * @method PPE_User_Role       setRole()            Sets the current record's "role" value
+ * @method PPE_User_Role       setValue()           Sets the current record's "value" value
+ * @method PPE_User_Role       setPPEUserUsers()    Sets the current record's "PPE_User_Users" collection
+ * @method PPE_User_Role       setPPEUserPowers()   Sets the current record's "PPE_User_Powers" collection
  * 
  * @package    pumpproedits
  * @subpackage model
@@ -36,6 +39,7 @@ abstract class BasePPE_User_Role extends sfDoctrineRecord
              'notnull' => true,
              ));
 
+        $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
     }
@@ -44,6 +48,10 @@ abstract class BasePPE_User_Role extends sfDoctrineRecord
     {
         parent::setUp();
         $this->hasMany('PPE_User_User as PPE_User_Users', array(
+             'local' => 'id',
+             'foreign' => 'role_id'));
+
+        $this->hasMany('PPE_User_Power as PPE_User_Powers', array(
              'local' => 'id',
              'foreign' => 'role_id'));
 

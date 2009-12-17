@@ -71,6 +71,7 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
 
