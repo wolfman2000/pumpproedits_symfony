@@ -1,0 +1,13 @@
+PPE_User_Roles:
+  role_01:
+    role: forbidden
+  role_02:
+    role: banned
+  role_03:
+    role: user
+  role_04:
+    role: moderator
+  role_05:
+    role: administrator
+  role_06:
+    role: owner
