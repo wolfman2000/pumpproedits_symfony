@@ -1,0 +1,5 @@
+indexSuccess:
+  stylesheets: [login.css]
+
+validateSuccess:
+  stylesheets: [login.css]

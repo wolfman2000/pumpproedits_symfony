@@ -29,8 +29,13 @@ download_base_edit:
   param:
     module: base
     action: download
-  requirements:
-    id: \d+
+
+# Illegal base download:
+download_base_edit_404:
+  url: /base/download/*
+  param:
+    module: base
+    action: download
 
 # The edit stat getter/validator
 edit_stat_get:
@@ -52,3 +57,104 @@ edit_stat_post:
   requirements:
     sf_method: [POST]
 
+# Login page
+login_get:
+  url: /login
+  class: sfRequestRoute
+  param:
+    module: login
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Login after submitting
+login_post:
+  url: /login
+  class: sfRequestRoute
+  param:
+    module: login
+    action: validate
+  requirements:
+    sf_method: [POST]
+
+# Log the user out.
+logout:
+  url: /logout
+  param:
+    module: logout
+    action: index
+
+# Contact page: fill out the form
+contact_get:
+  url: /contact
+  class: sfRequestRoute
+  param:
+    module: contact
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Send the contact email.
+contact_post:
+  url: /contact
+  class: sfRequestRoute
+  param:
+    module: contact
+    action: send
+  requirements:
+    sf_method: [POST]
+
+# Confirm someone's account
+confirm_get:
+  # Can I get the URL to work with optional parameters?
+  url: /confirm
+  class: sfRequestRoute
+  param:
+    module: confirm
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Process confirmation request
+confirm_post:
+  url: /confirm
+  class: sfRequestRoute
+  param:
+    module: confirm
+    action: confirm
+  requirements:
+    sf_method: [POST]
+
+# Help getting your account to work
+help:
+  url: /help
+  param:
+    module: help
+    action: index
+
+# General edits page (this may change)
+edits:
+  url: /edits
+  param:
+    module: edits
+    action: index
+
+# Registration page
+register_get:
+  url: /register
+  class: sfRequestRoute
+  param:
+    module: register
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Once you register:
+register_post:
+  url: /register
+  class: sfRequestRoute
+  param:
+    module: register
+    action: validate
+  requirements:
+    sf_method: [POST]

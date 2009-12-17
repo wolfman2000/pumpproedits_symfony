@@ -32,8 +32,17 @@ class baseActions extends sfActions
   */
   public function executeDownload(sfWebRequest $request)
   {
-    $id = sprintf("%06d", $request->getParameter('id'));
+    $id = $request->getParameter('id');
     $type = $request->getParameter('type');
+    if (!(is_numeric($id) and ($type === "single" or $type === "double")))
+    {
+      $response = $this->getResponse();
+      $response->setStatusCode(409);
+      $this->id = $request->getParameter('id');
+      $this->type = $request->getParameter('type');
+      return sfView::ERROR;
+    }
+    $id = sprintf("%06d", $id);
     $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
     $path = sprintf("%s/data/base_edits/%s", sfConfig::get('sf_root_dir'), $name);
     $file = file_get_contents($path);

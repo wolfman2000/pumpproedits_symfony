@@ -1,0 +1,5 @@
+indexSuccess:
+  stylesheets: [register.css]
+
+validateSuccess:
+  stylesheets: [register.css]
