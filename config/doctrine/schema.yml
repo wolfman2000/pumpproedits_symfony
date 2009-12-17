@@ -33,6 +33,30 @@ PPE_User_User:
     collate: utf8_unicode_ci
     charset: utf8
 
+PPE_User_Power:
+  columns:
+    user_id: { type: integer, notnull: true }
+    role_id: { type: integer, notnull: true }
+  relations:
+    PPE_User_User:
+      local: user_id
+      foreign: id
+      foreignAlias: PPE_User_Powers
+      foreignKeyName: power_user_fk
+    PPE_User_Role:
+      local: role_id
+      foreign: id
+      foreignAlias: PPE_User_Powers
+      foreignKeyName: power_role_fk
+  indexes:
+    user_roles_index:
+      fields: [user_id, role_id]
+      type: unique
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_User_Condiment:
   actAs: { Timestampable: ~ }
   columns:
