@@ -29,7 +29,8 @@ class registerActions extends sfActions
     }
     else
     {
-
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
     }
   }
 }
