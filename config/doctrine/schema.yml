@@ -4,6 +4,7 @@ PPE_User_Role:
     role: { type: string(32), notnull: true; unique: true }
     value: { type: integer, notnull: true }
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -28,6 +29,7 @@ PPE_User_User:
       fields: [email]
       type: unique
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -49,6 +51,7 @@ PPE_User_Condiment:
     salt_check: char_length(salt) = 5
     pepper_check: char_length(pepper) = 64
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -69,6 +72,7 @@ PPE_Song_Song:
   checks:
     measure_check: measures > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -92,6 +96,7 @@ PPE_Song_Stop:
     beat_check: beat > 0
     break_check: break IS NULL OR break > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -116,6 +121,7 @@ PPE_Song_BPM:
     # No negative BPMs yet.
     bpm_check: bpm IS NULL OR bpm > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -155,6 +161,7 @@ PPE_Edit_Edit:
     diff_check: diff > 0
     steps_check: steps > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
@@ -184,5 +191,6 @@ PPE_Vote_Vote:
   checks:
     rating_check: rating >= 0 AND rating <= 10
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
