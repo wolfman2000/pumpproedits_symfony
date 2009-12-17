@@ -27,6 +27,7 @@ class RegisterForm extends sfForm
     $tmp1['max_length'] = $max_em;
     $tmp2['required'] = "You must supply an email address.";
     $tmp2['max_length'] = "Your email address must be at most $max_em characters.";
+    $tmp2['invalid'] = "The email address is not in a valid form.";
 
     $val['email'] = new sfValidatorEmail($tmp1, $tmp2);
 
@@ -35,6 +36,7 @@ class RegisterForm extends sfForm
     $tmp2['max_length'] = "Your username must be at most $max_un characters.";
     $tmp2['min_length'] = "Your username must be at least $min_un characters.";
     $tmp2['required'] = "You must supply a username.";
+    $tmp2['invalid'] = null;
 
     $val['username'] = new sfValidatorString($tmp1, $tmp2);
 
