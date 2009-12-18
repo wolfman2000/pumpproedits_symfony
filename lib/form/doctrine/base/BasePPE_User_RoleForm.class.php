@@ -28,6 +28,10 @@ abstract class BasePPE_User_RoleForm extends BaseFormDoctrine
       'updated_at' => new sfValidatorDateTime(),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'PPE_User_Role', 'column' => array('role')))
+    );
+
     $this->widgetSchema->setNameFormat('ppe_user_role[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
