@@ -40,13 +40,13 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
         $this->setTableName('p_p_e__user__user');
         $this->hasColumn('name', 'string', 12, array(
              'type' => 'string',
+             'length' => 12,
              'notnull' => true,
-             'length' => '12',
              ));
         $this->hasColumn('email', 'string', 320, array(
              'type' => 'string',
+             'length' => 320,
              'notnull' => true,
-             'length' => '320',
              ));
         $this->hasColumn('is_confirmed', 'boolean', null, array(
              'type' => 'boolean',

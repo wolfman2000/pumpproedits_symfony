@@ -2,7 +2,8 @@ PPE_User_Role:
   actAs: { Timestampable: ~ }
   columns:
     role:
-      type: string(32)
+      type: string
+      length: 32
       notnull: true
       unique: true
       default: user
@@ -15,10 +16,12 @@ PPE_User_User:
   actAs: { Timestampable: ~ }
   columns:
     name:
-      type: string(12)
+      type: string
+      length: 12
       notnull: true
     email:
-      type: string(320)
+      type: string
+      length: 320
       notnull: true
     is_confirmed:
       type: boolean
@@ -71,13 +74,16 @@ PPE_User_Condiment:
       type: integer
       notnull: true
     oregano:
-      type: char(32)
+      type: char
+      length: 32
       notnull: true
     salt:
-      type: char(5)
+      type: char
+      length: 5
       notnull: true
     pepper:
-      type: char(64)
+      type: char
+      length: 64
       notnull: true
   relations:
     PPE_User_User:
@@ -98,10 +104,12 @@ PPE_Song_Song:
   actAs: { Timestampable: ~ }
   columns:
     name:
-      type: string(64)
+      type: string
+      length: 64
       notnull: true
     abbr:
-      type: char(5)
+      type: char
+      length: 5
       notnull: true
     measures:
       type: integer
@@ -206,7 +214,8 @@ PPE_Edit_Edit:
       type: integer
       notnull: true
     title:
-      type: string(12)
+      type: string
+      length: 12
       notnull: true
     is_single:
       type: boolean

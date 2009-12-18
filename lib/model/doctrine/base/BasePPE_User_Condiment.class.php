@@ -38,18 +38,18 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              ));
         $this->hasColumn('oregano', 'char', 32, array(
              'type' => 'char',
+             'length' => 32,
              'notnull' => true,
-             'length' => '32',
              ));
         $this->hasColumn('salt', 'char', 5, array(
              'type' => 'char',
+             'length' => 5,
              'notnull' => true,
-             'length' => '5',
              ));
         $this->hasColumn('pepper', 'char', 64, array(
              'type' => 'char',
+             'length' => 64,
              'notnull' => true,
-             'length' => '64',
              ));
 
         $this->option('type', 'INNODB');

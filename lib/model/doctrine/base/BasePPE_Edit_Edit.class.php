@@ -78,8 +78,8 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ));
         $this->hasColumn('title', 'string', 12, array(
              'type' => 'string',
+             'length' => 12,
              'notnull' => true,
-             'length' => '12',
              ));
         $this->hasColumn('is_single', 'boolean', null, array(
              'type' => 'boolean',

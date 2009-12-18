@@ -37,13 +37,13 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
         $this->setTableName('p_p_e__song__song');
         $this->hasColumn('name', 'string', 64, array(
              'type' => 'string',
+             'length' => 64,
              'notnull' => true,
-             'length' => '64',
              ));
         $this->hasColumn('abbr', 'char', 5, array(
              'type' => 'char',
+             'length' => 5,
              'notnull' => true,
-             'length' => '5',
              ));
         $this->hasColumn('measures', 'integer', null, array(
              'type' => 'integer',
