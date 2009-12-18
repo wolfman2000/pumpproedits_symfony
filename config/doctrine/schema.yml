@@ -92,6 +92,10 @@ PPE_User_Condiment:
       foreign: id
       foreignAlias: PPE_User_Condiments
       foreignKeyName: condiment_user_fk
+  indexes:
+    spice_index:
+      fields: [user_id]
+      type: unique
   checks:
     oregano_check: char_length(oregano) = 32
     salt_check: char_length(salt) = 5

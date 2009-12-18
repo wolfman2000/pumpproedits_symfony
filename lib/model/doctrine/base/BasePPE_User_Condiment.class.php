@@ -52,6 +52,14 @@ abstract class BasePPE_User_Condiment extends sfDoctrineRecord
              'notnull' => true,
              ));
 
+
+        $this->index('spice_index', array(
+             'fields' => 
+             array(
+              0 => 'user_id',
+             ),
+             'type' => 'unique',
+             ));
         $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
