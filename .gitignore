@@ -1,5 +1,6 @@
 config/*.yml
 data/fixtures/users.yml
+data/fixtures/powers.yml
 data/sql/schema.sql
 .DS_Store
 cache/*
