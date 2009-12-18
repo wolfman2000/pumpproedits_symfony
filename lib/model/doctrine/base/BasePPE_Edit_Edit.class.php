@@ -148,6 +148,13 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
 
         $this->check('diff > 0');
         $this->check('steps > 0');
+        $this->check('jumps >= 0');
+        $this->check('holds >= 0');
+        $this->check('mines >= 0');
+        $this->check('trips >= 0');
+        $this->check('rolls >= 0');
+        $this->check('lifts >= 0');
+        $this->check('fakes >= 0');
     }
 
     public function setUp()
