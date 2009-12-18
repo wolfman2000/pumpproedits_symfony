@@ -26,6 +26,7 @@ abstract class BasePPE_User_Role extends sfDoctrineRecord
         $this->hasColumn('role', 'string', 32, array(
              'type' => 'string',
              'notnull' => 'true; unique: true',
+             'default' => 'user',
              'length' => '32',
              ));
 

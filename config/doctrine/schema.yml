@@ -1,7 +1,7 @@
 PPE_User_Role:
   actAs: { Timestampable: ~ }
   columns:
-    role: { type: string(32), notnull: true; unique: true }
+    role: { type: string(32), notnull: true; unique: true, default: user }
   options:
     type: INNODB
     collate: utf8_unicode_ci
