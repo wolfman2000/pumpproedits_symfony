@@ -28,7 +28,6 @@ abstract class BasePPE_User_Role extends sfDoctrineRecord
              'length' => 32,
              'notnull' => true,
              'unique' => true,
-             'default' => 'user',
              ));
 
         $this->option('type', 'INNODB');

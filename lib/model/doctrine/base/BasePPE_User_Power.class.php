@@ -36,6 +36,7 @@ abstract class BasePPE_User_Power extends sfDoctrineRecord
         $this->hasColumn('role_id', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 3,
              ));
 
 

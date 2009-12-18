@@ -6,7 +6,6 @@ PPE_User_Role:
       length: 32
       notnull: true
       unique: true
-      default: user
   options:
     type: INNODB
     collate: utf8_unicode_ci
@@ -47,6 +46,8 @@ PPE_User_Power:
     role_id:
       type: integer
       notnull: true
+      # This is primarily known by checking the fixture file.
+      default: 3
   relations:
     PPE_User_User:
       local: user_id

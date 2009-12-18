@@ -23,7 +23,7 @@ abstract class BasePPE_User_PowerForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'      => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'user_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('PPE_User_User'))),
-      'role_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('PPE_User_Role'))),
+      'role_id' => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('PPE_User_Role'), 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
