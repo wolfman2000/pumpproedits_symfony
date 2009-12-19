@@ -78,8 +78,8 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ));
         $this->hasColumn('title', 'string', 12, array(
              'type' => 'string',
+             'length' => 12,
              'notnull' => true,
-             'length' => '12',
              ));
         $this->hasColumn('is_single', 'boolean', null, array(
              'type' => 'boolean',
@@ -98,22 +98,27 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         $this->hasColumn('jumps', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('holds', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('mines', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('trips', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('rolls', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('lifts', 'integer', null, array(
              'type' => 'integer',
@@ -142,11 +147,19 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              ),
              'type' => 'unique',
              ));
+        $this->option('type', 'INNODB');
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
 
         $this->check('diff > 0');
         $this->check('steps > 0');
+        $this->check('jumps >= 0');
+        $this->check('holds >= 0');
+        $this->check('mines >= 0');
+        $this->check('trips >= 0');
+        $this->check('rolls >= 0');
+        $this->check('lifts >= 0');
+        $this->check('fakes >= 0');
     }
 
     public function setUp()
@@ -167,6 +180,8 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              'foreign' => 'edit_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);
+        $this->actAs($softdelete0);
     }
 }

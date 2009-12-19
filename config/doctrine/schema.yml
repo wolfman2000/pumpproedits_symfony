@@ -1,25 +1,31 @@
 PPE_User_Role:
   actAs: { Timestampable: ~ }
   columns:
-    role: { type: string(32), notnull: true; unique: true }
-    value: { type: integer, notnull: true }
+    role:
+      type: string
+      length: 32
+      notnull: true
+      unique: true
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_User_User:
   actAs: { Timestampable: ~ }
   columns:
-    name: { type: string(12), notnull: true }
-    email: { type: string(320), notnull: true }
-    role_id: { type: integer, notnull: true }
-    is_confirmed: { type: boolean, notnull: true, default: 0 }
-  relations:
-    PPE_User_Role:
-      local: role_id
-      foreign: id
-      foreignAlias: PPE_User_Users
-      foreignKeyName: user_role_fk
+    name:
+      type: string
+      length: 12
+      notnull: true
+    email:
+      type: string
+      length: 320
+      notnull: true
+    is_confirmed:
+      type: boolean
+      notnull: true
+      default: 0
   indexes:
     user_index:
       fields: [name]
@@ -28,37 +34,96 @@ PPE_User_User:
       fields: [email]
       type: unique
   options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
+PPE_User_Power:
+  columns:
+    user_id:
+      type: integer
+      notnull: true
+    role_id:
+      type: integer
+      notnull: true
+      # This is primarily known by checking the fixture file.
+      default: 3
+  relations:
+    PPE_User_User:
+      local: user_id
+      foreign: id
+      foreignAlias: PPE_User_Powers
+      foreignKeyName: power_user_fk
+    PPE_User_Role:
+      local: role_id
+      foreign: id
+      foreignAlias: PPE_User_Powers
+      foreignKeyName: power_role_fk
+  indexes:
+    user_roles_index:
+      fields: [user_id, role_id]
+      type: unique
+  options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_User_Condiment:
   actAs: { Timestampable: ~ }
   columns:
-    user_id: { type: integer, notnull: true }
-    oregano: { type: char(32), notnull: true }
-    salt: { type: char(5), notnull: true }
-    pepper: { type: char(64), notnull: true }
+    user_id:
+      type: integer
+      notnull: true
+    oregano:
+      type: char
+      length: 32
+      notnull: true
+    salt:
+      type: char
+      length: 5
+      notnull: true
+    pepper:
+      type: char
+      length: 64
+      notnull: true
   relations:
     PPE_User_User:
       local: user_id
       foreign: id
       foreignAlias: PPE_User_Condiments
       foreignKeyName: condiment_user_fk
+  indexes:
+    spice_index:
+      fields: [user_id]
+      type: unique
   checks:
     oregano_check: char_length(oregano) = 32
     salt_check: char_length(salt) = 5
     pepper_check: char_length(pepper) = 64
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_Song_Song:
   actAs: { Timestampable: ~ }
   columns:
-    name: { type: string(64), notnull: true }
-    abbr: { type: char(5), notnull: true }
-    measures: { type: integer, notnull: true, default: 50 }
-    is_problem: { type: boolean, notnull: true, default: 0 }
+    name:
+      type: string
+      length: 64
+      notnull: true
+    abbr:
+      type: char
+      length: 5
+      notnull: true
+    measures:
+      type: integer
+      notnull: true
+      default: 50
+    is_problem:
+      type: boolean
+      notnull: true
+      default: 0
   indexes:
     song_index:
       fields: [name]
@@ -69,15 +134,27 @@ PPE_Song_Song:
   checks:
     measure_check: measures > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:
-    song_id: { type: integer, notnull: true }
-    beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
-    break: { type: decimal, notnull: false, size: 4, scale: 2 }
+    song_id:
+      type: integer
+      notnull: true
+    beat:
+      type: decimal
+      notnull: true
+      default: 0
+      size: 8
+      scale: 4
+    break:
+      type: decimal
+      notnull: false
+      size: 4
+      scale: 2
   relations:
     PPE_Song_Song:
       local: song_id
@@ -92,15 +169,27 @@ PPE_Song_Stop:
     beat_check: beat > 0
     break_check: break IS NULL OR break > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_Song_BPM:
   actAs: { Timestampable: ~ }
   columns:
-    song_id: { type: integer, notnull: true }
-    beat: { type: decimal, notnull: true, default: 0, size: 8, scale: 4 }
-    bpm: { type: decimal, notnull: false, size: 8, scale: 4 }
+    song_id:
+      type: integer
+      notnull: true
+    beat:
+      type: decimal
+      notnull: true
+      default: 0
+      size: 8
+      scale: 4
+    bpm:
+      type: decimal
+      notnull: false
+      size: 8
+      scale: 4
   relations:
     PPE_Song_Song:
       local: song_id
@@ -116,26 +205,68 @@ PPE_Song_BPM:
     # No negative BPMs yet.
     bpm_check: bpm IS NULL OR bpm > 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_Edit_Edit:
-  actAs: { Timestampable: ~; SoftDelete: ~ }
+  actAs:
+    Timestampable:
+    SoftDelete:
   columns:
-    user_id: { type: integer, notnull: true }
-    song_id: { type: integer, notnull: true }
-    title: { type: string(12), notnull: true }
-    is_single: { type: boolean, notnull: true, default: 1 }
-    diff: { type: integer, notnull: true, default: 10 }
-    steps: { type: integer, notnull: true }
-    jumps: { type: integer, notnull: true }
-    holds: { type: integer, notnull: true }
-    mines: { type: integer, notnull: true }
-    trips: { type: integer, notnull: true }
-    rolls: { type: integer, notnull: true }
-    lifts: { type: integer, notnull: true, default: 0 }
-    fakes: { type: integer, notnull: true, default: 0 }
-    is_problem: { type: boolean, notnull: true, default: 0 }
+    user_id:
+      type: integer
+      notnull: true
+    song_id:
+      type: integer
+      notnull: true
+    title:
+      type: string
+      length: 12
+      notnull: true
+    is_single:
+      type: boolean
+      notnull: true
+      default: 1
+    diff:
+      type: integer
+      notnull: true
+      default: 10
+    steps:
+      type: integer
+      notnull: true
+    jumps:
+      type: integer
+      notnull: true
+      default: 0
+    holds:
+      type: integer
+      notnull: true
+      default: 0
+    mines:
+      type: integer
+      notnull: true
+      default: 0
+    trips:
+      type: integer
+      notnull: true
+      default: 0
+    rolls:
+      type: integer
+      notnull: true
+      default: 0
+    lifts:
+      type: integer
+      notnull: true
+      default: 0
+    fakes:
+      type: integer
+      notnull: true
+      default: 0
+    is_problem:
+      type: boolean
+      notnull: true
+      default: 0
   relations:
     PPE_User_User:
       local: user_id
@@ -154,18 +285,37 @@ PPE_Edit_Edit:
   checks:
     diff_check: diff > 0
     steps_check: steps > 0
+    jumps_check: jumps >= 0
+    holds_check: holds >= 0
+    mines_check: mines >= 0
+    trips_check: trips >= 0
+    rolls_check: rolls >= 0
+    lifts_check: lifts >= 0
+    fakes_check: fakes >= 0
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
 PPE_Vote_Vote:
   actAs: { Timestampable: ~ }
   columns:
-    user_id: { type: integer, notnull: true }
-    edit_id: { type: integer, notnull: true }
-    rating: { type: integer, notnull: true }
-    reason: { type: string, notnull: false }
-    is_problem: { type: boolean, notnull: true, default: 0 }
+    user_id:
+      type: integer
+      notnull: true
+    edit_id:
+      type: integer
+      notnull: true
+    rating:
+      type: integer
+      notnull: true
+    reason:
+      type: string
+      notnull: false
+    is_problem:
+      type: boolean
+      notnull: true
+      default: 0
   relations:
     PPE_User_User:
       local: user_id
@@ -184,5 +334,6 @@ PPE_Vote_Vote:
   checks:
     rating_check: rating >= 0 AND rating <= 10
   options:
+    type: INNODB
     collate: utf8_unicode_ci
     charset: utf8

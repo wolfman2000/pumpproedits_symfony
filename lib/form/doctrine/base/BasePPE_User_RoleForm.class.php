@@ -17,7 +17,6 @@ abstract class BasePPE_User_RoleForm extends BaseFormDoctrine
     $this->setWidgets(array(
       'id'         => new sfWidgetFormInputHidden(),
       'role'       => new sfWidgetFormInputText(),
-      'value'      => new sfWidgetFormInputText(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
     ));
@@ -25,10 +24,13 @@ abstract class BasePPE_User_RoleForm extends BaseFormDoctrine
     $this->setValidators(array(
       'id'         => new sfValidatorDoctrineChoice(array('model' => $this->getModelName(), 'column' => 'id', 'required' => false)),
       'role'       => new sfValidatorString(array('max_length' => 32)),
-      'value'      => new sfValidatorInteger(),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
     ));
+
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'PPE_User_Role', 'column' => array('role')))
+    );
 
     $this->widgetSchema->setNameFormat('ppe_user_role[%s]');
 

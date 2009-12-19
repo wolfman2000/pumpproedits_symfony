@@ -32,6 +32,7 @@ abstract class BasePPE_Edit_EditForm extends BaseFormDoctrine
       'is_problem' => new sfWidgetFormInputCheckbox(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'deleted_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -42,16 +43,17 @@ abstract class BasePPE_Edit_EditForm extends BaseFormDoctrine
       'is_single'  => new sfValidatorBoolean(array('required' => false)),
       'diff'       => new sfValidatorInteger(array('required' => false)),
       'steps'      => new sfValidatorInteger(),
-      'jumps'      => new sfValidatorInteger(),
-      'holds'      => new sfValidatorInteger(),
-      'mines'      => new sfValidatorInteger(),
-      'trips'      => new sfValidatorInteger(),
-      'rolls'      => new sfValidatorInteger(),
+      'jumps'      => new sfValidatorInteger(array('required' => false)),
+      'holds'      => new sfValidatorInteger(array('required' => false)),
+      'mines'      => new sfValidatorInteger(array('required' => false)),
+      'trips'      => new sfValidatorInteger(array('required' => false)),
+      'rolls'      => new sfValidatorInteger(array('required' => false)),
       'lifts'      => new sfValidatorInteger(array('required' => false)),
       'fakes'      => new sfValidatorInteger(array('required' => false)),
       'is_problem' => new sfValidatorBoolean(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
+      'deleted_at' => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(

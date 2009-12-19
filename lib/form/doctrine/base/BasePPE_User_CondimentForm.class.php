@@ -34,6 +34,10 @@ abstract class BasePPE_User_CondimentForm extends BaseFormDoctrine
       'updated_at' => new sfValidatorDateTime(),
     ));
 
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorDoctrineUnique(array('model' => 'PPE_User_Condiment', 'column' => array('user_id')))
+    );
+
     $this->widgetSchema->setNameFormat('ppe_user_condiment[%s]');
 
     $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
