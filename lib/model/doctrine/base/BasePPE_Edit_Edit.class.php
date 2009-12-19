@@ -98,22 +98,27 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         $this->hasColumn('jumps', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('holds', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('mines', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('trips', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('rolls', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
+             'default' => 0,
              ));
         $this->hasColumn('lifts', 'integer', null, array(
              'type' => 'integer',

@@ -238,18 +238,23 @@ PPE_Edit_Edit:
     jumps:
       type: integer
       notnull: true
+      default: 0
     holds:
       type: integer
       notnull: true
+      default: 0
     mines:
       type: integer
       notnull: true
+      default: 0
     trips:
       type: integer
       notnull: true
+      default: 0
     rolls:
       type: integer
       notnull: true
+      default: 0
     lifts:
       type: integer
       notnull: true
