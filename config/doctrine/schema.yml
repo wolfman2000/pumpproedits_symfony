@@ -210,7 +210,9 @@ PPE_Song_BPM:
     charset: utf8
 
 PPE_Edit_Edit:
-  actAs: { Timestampable: ~; SoftDelete: ~ }
+  actAs:
+    Timestampable:
+    SoftDelete:
   columns:
     user_id:
       type: integer

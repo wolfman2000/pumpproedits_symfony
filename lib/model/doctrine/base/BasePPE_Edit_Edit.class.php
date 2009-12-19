@@ -175,6 +175,8 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              'foreign' => 'edit_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $softdelete0 = new Doctrine_Template_SoftDelete();
         $this->actAs($timestampable0);
+        $this->actAs($softdelete0);
     }
 }

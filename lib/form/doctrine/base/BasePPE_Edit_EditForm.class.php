@@ -32,6 +32,7 @@ abstract class BasePPE_Edit_EditForm extends BaseFormDoctrine
       'is_problem' => new sfWidgetFormInputCheckbox(),
       'created_at' => new sfWidgetFormDateTime(),
       'updated_at' => new sfWidgetFormDateTime(),
+      'deleted_at' => new sfWidgetFormDateTime(),
     ));
 
     $this->setValidators(array(
@@ -52,6 +53,7 @@ abstract class BasePPE_Edit_EditForm extends BaseFormDoctrine
       'is_problem' => new sfValidatorBoolean(array('required' => false)),
       'created_at' => new sfValidatorDateTime(),
       'updated_at' => new sfValidatorDateTime(),
+      'deleted_at' => new sfValidatorDateTime(array('required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(
