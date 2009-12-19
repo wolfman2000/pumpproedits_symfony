@@ -26,6 +26,9 @@ class registerActions extends sfActions
     $this->form->bind($request->getParameter($this->form->getName()));
     if ($this->form->isValid())
     {
+      // Check the things the form can't do through the database.
+      $table = Doctrine::getTable('PPE_User_User');
+
 
     }
     else
