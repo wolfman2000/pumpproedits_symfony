@@ -1,5 +1,6 @@
 config/*.yml
 data/fixtures/condiments.yml
+data/fixtures/edits.yml
 data/fixtures/users.yml
 data/fixtures/powers.yml
 data/sql/schema.sql
