@@ -20,6 +20,13 @@ class registerActions extends sfActions
     $this->form = new RegisterForm();
   }
 
+  private function validateFailure(sfWebRequest $request, $data = null)
+  {
+    $this->getResponse()->setStatusCode(409);
+    $this->data = $data;
+    return sfView::ERROR;
+  }
+
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new RegisterForm();
@@ -28,13 +35,28 @@ class registerActions extends sfActions
     {
       // Check the things the form can't do through the database.
       $table = Doctrine::getTable('PPE_User_User');
+      $data = array();
 
+      /* Check if the email is taken. */
+      if ($table->getIDByEmail())
+      {
+        array_push($data, "The requested email address is already taken.");
+      }
+      // Check if the username is taken.
+      if ($table->getIDByUser())
+      {
+        // Find out WHY the username is taken.
+        array_push($data, "The requested username is already taken.");
+      }
 
+      if (count($data))
+      {
+        $this->validateFailure($this, $data);
+      }
     }
     else
     {
-      $this->getResponse()->setStatusCode(409);
-      return sfView::ERROR;
+      $this->validateFailure($this);
     }
   }
 }
