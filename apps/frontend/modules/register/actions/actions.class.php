@@ -38,20 +38,39 @@ class registerActions extends sfActions
       $data = array();
 
       /* Check if the email is taken. */
-      if ($table->getIDByEmail())
+      if ($table->getIDByEmail($request->getParameter('email')))
       {
         array_push($data, "The requested email address is already taken.");
       }
+      $id = $table->getIDByUser($request->getParameter('username'));
       // Check if the username is taken.
-      if ($table->getIDByUser())
+      if ($id)
       {
-        // Find out WHY the username is taken.
-        array_push($data, "The requested username is already taken.");
+        // Find out WHY the username is taken. Start with banning.
+        $power = Doctrine::getTable('PPE_User_Power');
+        if ($power->getIsUserBanned($id))
+        {
+          $data = array("You are prohibited from joining again.");
+        }
+        // Not banned: see if the username is just taken.
+        elseif ($table->getConfirmedByID($id))
+        {
+          array_push($data, "The requested username is already taken.");
+        }
+        // Not confirmed: ask for a new confirmation.
+        else
+        {
+          array_push($data, "You need to confirm your username. See Account Help.");
+        }
       }
 
       if (count($data))
       {
         $this->validateFailure($this, $data);
+      }
+      else
+      {
+        // Actually add the user.
       }
     }
     else
