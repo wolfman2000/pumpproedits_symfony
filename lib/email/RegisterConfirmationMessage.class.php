@@ -18,7 +18,7 @@ If you did not request to register, you may delete this email
 and not worry about it.
 
 EOL;
-    parent::construct($subject, sprintf($body, $confirm));
+    parent::__construct($subject, sprintf($body, $confirm));
     $this->setFrom(array('jafelds@gmail.com' => 'Jason "Wolfman2000" Felds'));
     $this->setTo(array($to => $name));
   }
