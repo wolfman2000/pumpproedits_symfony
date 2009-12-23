@@ -51,7 +51,11 @@ class statsActions extends sfActions
       }
       /* Do this step at the end. */
       @unlink($path);
-
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
     }
   }
 }
