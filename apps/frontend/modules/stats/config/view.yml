@@ -3,3 +3,6 @@ indexSuccess:
 
 validateSuccess:
   stylesheets: [stats.css]
+
+validateError:
+  stylesheets: [stats.css]
