@@ -65,10 +65,15 @@ class registerActions extends sfActions
           array_push($data, "You need to confirm your username. See Account Help.");
         }
       }
+      else
+      {
+        $this->validateFailure($request);
+        return;
+      }
 
       if (count($data))
       {
-        $this->validateFailure($this, $data);
+        $this->validateFailure($request, $data);
       }
       else
       {
@@ -78,7 +83,7 @@ class registerActions extends sfActions
     }
     else
     {
-      $this->validateFailure($this);
+      $this->validateFailure($request);
     }
   }
 }
