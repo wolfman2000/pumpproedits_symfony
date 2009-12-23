@@ -30,7 +30,7 @@ class registerActions extends sfActions
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new RegisterForm();
-    $this->form->bind($request->getParameter($this->form->getName()));
+    $this->form->bind($request->getParameter('validate'));
     if ($this->form->isValid())
     {
       // Check the things the form can't do through the database.
@@ -38,12 +38,12 @@ class registerActions extends sfActions
       $data = array();
 
       /* Check if the email is taken. */
-      $email = $request->getParameter('email');
+      $email = $this->form->getValue('email');
       if ($table->getIDByEmail($email))
       {
         array_push($data, "The requested email address is already taken.");
       }
-      $username = $request->getParameter('username');
+      $username = $this->form->getValue('username');
       $id = $table->getIDByUser($username);
       // Check if the username is taken.
       if ($id)
