@@ -38,11 +38,13 @@ class registerActions extends sfActions
       $data = array();
 
       /* Check if the email is taken. */
-      if ($table->getIDByEmail($request->getParameter('email')))
+      $email = $request->getParameter('email');
+      if ($table->getIDByEmail($email))
       {
         array_push($data, "The requested email address is already taken.");
       }
-      $id = $table->getIDByUser($request->getParameter('username'));
+      $username = $request->getParameter('username');
+      $id = $table->getIDByUser($username);
       // Check if the username is taken.
       if ($id)
       {
@@ -70,7 +72,8 @@ class registerActions extends sfActions
       }
       else
       {
-        // Actually add the user.
+        // Test email sending first.
+        $this->getMailer()->send(new RegisterConfirmationMessage($email, $username, '3838'));
       }
     }
     else
