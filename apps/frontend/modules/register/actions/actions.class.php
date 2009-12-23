@@ -49,7 +49,7 @@ class registerActions extends sfActions
       if ($id)
       {
         // Find out WHY the username is taken. Start with banning.
-        $power = Doctrine::getTable('PPE_User_Power');
+        $power = Doctrine::getTable('PPE_User_Role');
         if ($power->getIsUserBanned($id))
         {
           $data = array("You are prohibited from joining again.");
@@ -65,13 +65,7 @@ class registerActions extends sfActions
           array_push($data, "You need to confirm your username. See Account Help.");
         }
       }
-      else
-      {
-        $this->getResponse()->setStatusCode(409);
-        $this->data = $data;
-        return sfView::ERROR;
-      }
-
+      
       if (count($data))
       {
         $this->getResponse()->setStatusCode(409);
