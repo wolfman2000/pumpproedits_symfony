@@ -67,13 +67,16 @@ class registerActions extends sfActions
       }
       else
       {
-        $this->validateFailure($request);
-        return;
+        $this->getResponse()->setStatusCode(409);
+        $this->data = $data;
+        return sfView::ERROR;
       }
 
       if (count($data))
       {
-        $this->validateFailure($request, $data);
+        $this->getResponse()->setStatusCode(409);
+        $this->data = $data;
+        return sfView::ERROR;
       }
       else
       {
@@ -83,7 +86,8 @@ class registerActions extends sfActions
     }
     else
     {
-      $this->validateFailure($request);
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
     }
   }
 }
