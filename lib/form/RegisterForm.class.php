@@ -52,7 +52,11 @@ class RegisterForm extends sfForm
     $val['passdual'] = new sfValidatorString($tmp1, $tmp2);
 
     $this->setValidators($val);
-
-    $this->validatorSchema->setPostValidator(new sfValidatorSchemaCompare('password', '==', 'passduel'));
+    
+    $tmp1 = array();
+    $tmp2 = array();
+    $tmp2['invalid'] = 'Both passwords must be the same.';
+    $val = new sfValidatorSchemaCompare('password', '==', 'passduel');
+    $this->validatorSchema->setPostValidator($val, $tmp1, $tmp2);
   }
 }
