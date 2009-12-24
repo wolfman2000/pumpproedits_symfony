@@ -2,15 +2,26 @@
 
 class Lowercase extends Doctrine_Template
 {
-  protected $_options = array("columns");
+  protected $_options = array("columns" => array());
 
   public function setTableDefinition()
   {
-    foreach (preg_split("/\[\]\s,~", $this->_options['columns']) as $column)
+    $line = $this->_options['columns'];
+    $table = $this->_table;
+    foreach ($line as $key => $column)
     {
-      $columnName = "lc_" . $column;
-      $table = $this->_table->getTable();
-      $table->setColumn($columnName, 'string', null);
+      if (is_array($column))
+      {
+        $columnName = $column['columnName'];
+      }
+      else
+      {
+        $columnName = "lc_" . $column;
+      }
+      
+      $def = $table->getColumnDefinition($key);
+      
+      $table->setColumn($columnName, $def['type'], $def['length']);
     }
     
     $this->addListener(new LowercaseListener($this->_options));

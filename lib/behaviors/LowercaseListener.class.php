@@ -12,15 +12,42 @@ class LowercaseListener extends Doctrine_Record_Listener
   public function preInsert(Doctrine_Event $event)
   {
     $record = $event->getInvoker();
-    foreach (preg_split("/\[\]\s,~", $this->_options['columns']) as $column)
+    
+    foreach ($this->_options['columns'] as $key => $column)
     {
-      $name = $record->getTable()->getFieldName("lc_" . $column);
-      $record->name = strtolower($record->getTable()->getFieldName($column));
+      if (is_array($column))
+      {
+        $columnName = $column['columnName'];
+        $origCol = $key;
+      }
+      else
+      {
+        $columnName = "lc_" . $column;
+        $origCol = $column;
+      }
+      
+      $record->$columnName = strtolower($record->$origCol);
     }
-}
+  }
   
   public function preUpdate(Doctrine_Event $event)
   {
-  
+    $record = $event->getInvoker();
+    
+    foreach ($this->_options['columns'] as $key => $column)
+    {
+      if (is_array($column))
+      {
+        $columnName = $column['columnName'];
+        $origCol = $key;
+      }
+      else
+      {
+        $columnName = "lc_" . $column;
+        $origCol = $column;
+      }
+      
+      $record->$columnName = strtolower($record->$origCol);
+    }
   }
 }
