@@ -48,8 +48,7 @@ class registerActions extends sfActions
       if ($id)
       {
         // Find out WHY the username is taken. Start with banning.
-        $power = Doctrine::getTable('PPE_User_Role');
-        if ($power->getIsUserBanned($id))
+        if (Doctrine::getTable('PPE_User_Role')->getIsUserBanned($id))
         {
           $data = array("You are prohibited from joining again.");
           $this->noshow = 1;
@@ -75,7 +74,8 @@ class registerActions extends sfActions
       else
       {
         // Test email sending first.
-        $this->getMailer()->send(new RegisterConfirmationMessage($email, $username, '3838'));
+        $salt = $table->addUser($username, $email, $this->form->getValue('password'));
+        $this->getMailer()->send(new RegisterConfirmationMessage($email, $username, $salt));
       }
     }
     else
