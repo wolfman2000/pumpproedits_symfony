@@ -19,9 +19,10 @@ class PPE_User_UserTable extends Doctrine_Table
     $user->PPE_User_Condiments[] = $cond;
     
     $role = new PPE_User_Power();
+    
+    // TODO: Make this a subquery instead of using two queries.
     $role->setRoleID(Doctrine::getTable('PPE_User_Role')->getIDByRole('user')); 
     $user->PPE_User_Powers[] = $role;
-    
     
     $user->save();
     return $salt; // Needed for email confirmation.
