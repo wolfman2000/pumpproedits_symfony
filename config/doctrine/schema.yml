@@ -14,7 +14,12 @@ PPE_User_Role:
 PPE_User_User:
   actAs:
     Timestampable: ~
-    Lowercase: ~
+    Lowercase:
+      columns:
+        name:
+          columnName: lc_name
+        email:
+          columnName: lc_email
   columns:
     name:
       type: string
