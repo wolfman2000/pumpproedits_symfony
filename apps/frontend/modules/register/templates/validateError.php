@@ -2,14 +2,22 @@
 <h2>Error!</h2>
 <?php if (isset($data)): ?>
 <p>There was a problem with processing the data.</p>
-<ul>
+<ul class="error_list">
 <?php foreach ($data as $d): ?>
 <li><?php echo $d ?></li>
 <?php endforeach; ?>
 </ul>
-<?php else: ?>
+<?php if (!isset($noshow)): ?>
+<p>Please check your data for typos and try again.</p>
+<?php
+include_partial("register/form", array('form' => $form));
+else: ?>
+<p>Please <?php echo link_to('Contact', '@contact_get'); ?> the webmaster
+for more information.</p>
+<?php
+endif;
+else: ?>
 <p>The errors are listed inside the form.</p>
-<?php endif; ?>
 <p>Please check the form and try again.</p>
-
 <?php include_partial("register/form", array('form' => $form));
+endif;

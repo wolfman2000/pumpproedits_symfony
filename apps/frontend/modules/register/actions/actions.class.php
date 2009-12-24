@@ -52,6 +52,7 @@ class registerActions extends sfActions
         if ($power->getIsUserBanned($id))
         {
           $data = array("You are prohibited from joining again.");
+          $this->noshow = 1;
         }
         // Not banned: see if the username is just taken.
         elseif ($table->getConfirmedByID($id))
