@@ -12,7 +12,9 @@ PPE_User_Role:
     charset: utf8
 
 PPE_User_User:
-  actAs: { Timestampable: ~ }
+  actAs:
+    Timestampable: ~
+    Lowercase: ~
   columns:
     name:
       type: string
