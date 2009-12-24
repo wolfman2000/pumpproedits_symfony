@@ -21,6 +21,8 @@ abstract class BasePPE_User_UserForm extends BaseFormDoctrine
       'is_confirmed' => new sfWidgetFormInputCheckbox(),
       'created_at'   => new sfWidgetFormDateTime(),
       'updated_at'   => new sfWidgetFormDateTime(),
+      'lc_name'      => new sfWidgetFormInputText(),
+      'lc_email'     => new sfWidgetFormTextarea(),
     ));
 
     $this->setValidators(array(
@@ -30,6 +32,8 @@ abstract class BasePPE_User_UserForm extends BaseFormDoctrine
       'is_confirmed' => new sfValidatorBoolean(array('required' => false)),
       'created_at'   => new sfValidatorDateTime(),
       'updated_at'   => new sfValidatorDateTime(),
+      'lc_name'      => new sfValidatorString(array('max_length' => 12, 'required' => false)),
+      'lc_email'     => new sfValidatorString(array('max_length' => 320, 'required' => false)),
     ));
 
     $this->validatorSchema->setPostValidator(

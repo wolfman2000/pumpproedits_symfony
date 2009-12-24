@@ -94,6 +94,20 @@ abstract class BasePPE_User_User extends sfDoctrineRecord
              'foreign' => 'user_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $lowercase0 = new Lowercase(array(
+             'columns' => 
+             array(
+              'name' => 
+              array(
+              'columnName' => 'lc_name',
+              ),
+              'email' => 
+              array(
+              'columnName' => 'lc_email',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($lowercase0);
     }
 }
