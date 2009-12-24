@@ -45,7 +45,6 @@ class registerActions extends sfActions
       }
       $username = $this->form->getValue('username');
       $id = $table->getIDByUser($username);
-      // Check if the username is taken.
       if ($id)
       {
         // Find out WHY the username is taken. Start with banning.
