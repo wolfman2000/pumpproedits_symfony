@@ -2,7 +2,7 @@
 
 class Lowercase extends Doctrine_Template
 {
-  protected $_columns = array("columns");
+  protected $_options = array("columns");
 
   public function setTableDefinition()
   {
@@ -12,6 +12,8 @@ class Lowercase extends Doctrine_Template
       $table = $this->_table->getTable();
       $table->setColumn($columnName, 'string', null);
     }
+    
+    $this->addListener(new LowercaseListener($this->_options));
   }
 
   public function setUp()
