@@ -11,8 +11,10 @@ class PPE_User_UserTable extends Doctrine_Table
     $user->setName($name);
     $user->setEmail($email);
 
+    $md5 = hash("md5", $pass . $salt);
+
     $cond = new PPE_User_Condiment();
-    $cond->setOregano(hash("md5", $pass . $salt));
+    $cond->setOregano($md5);
     $cond->setSalt($salt);
     $cond->setPepper(hash("sha256", $pass . $salt));
     
@@ -25,7 +27,7 @@ class PPE_User_UserTable extends Doctrine_Table
     $user->PPE_User_Powers[] = $role;
     
     $user->save();
-    return $salt; // Needed for email confirmation.
+    return $md5; // Needed for email confirmation.
   }
 
   public function getIDByEmail($email)
