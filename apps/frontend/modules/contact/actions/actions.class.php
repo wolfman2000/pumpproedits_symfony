@@ -19,4 +19,26 @@ class contactActions extends sfActions
   {
     $this->form = new ContactForm();
   }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new ContactForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      // We can immediately send the email.
+      $body = $this->form->getValue('content');
+      $subject = $this->form->getValue('subject');
+      $name = $this->form->getValue('name');
+      $email = $this->form->getValue('email');
+      
+      $cm = new ContactMessage($name, $email, $subject, $body);
+      $this->getMailer()->send($cm);
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
 }
