@@ -114,7 +114,7 @@
     	padding: 1em;
         width: 13em;
     }
-    nav p
+    nav > p
     {
     	margin-top: 5px;
         margin-bottom: 5px;
