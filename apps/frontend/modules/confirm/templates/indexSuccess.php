@@ -4,3 +4,4 @@
 through the navigation links instead of your email message, you will have to
 enter your confirmation code as well.</p>
 
+<?php include_partial('confirm/form', array('form' => $form)) ?>
