@@ -17,5 +17,21 @@ class loginActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    $this->form = new LoginForm();
+  }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new LoginForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      // Database connections here.
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
 }
