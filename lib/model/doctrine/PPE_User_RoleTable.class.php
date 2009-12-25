@@ -2,6 +2,19 @@
 
 class PPE_User_RoleTable extends Doctrine_Table
 {
+  public function getRolesById($id)
+  {
+    $q = $this->createQuery('a')->select('a.role')
+      ->innerJoin('a.PPE_User_Powers b')->where('b.user_id = ?', $id);
+    
+    $a = array();
+    foreach ($q->fetchArray() as $r)
+    {
+      array_push($a, $r['role']);
+    }
+    return $a;
+  }
+
   public function getIDByRole($role)
   {
     $q = $this->createQuery('a')->select('id')->where('role = ?', $role);
