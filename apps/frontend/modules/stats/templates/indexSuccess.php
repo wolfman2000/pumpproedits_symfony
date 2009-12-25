@@ -1,5 +1,5 @@
-<?php slot('title', 'Edit Stat Getter — Pump Pro Edits'); ?>
-<h2>Get Edit's Stats</h2>
+<?php slot('title', 'Edit Stat Getter — Pump Pro Edits');
+slot('h2', "<h2>Get Edit's Stats</h2>"); ?>
 <p>
     Do you need to quickly get stats on an edit without uploading
     the edit file itself?  If so, use the form below.

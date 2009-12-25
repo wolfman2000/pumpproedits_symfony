@@ -1,3 +1,5 @@
+<?php slot('title', 'Register here — Pump Pro Edits');
+slot('h2', '<h2>Register here</h2>'); ?>
 <p> To be able to upload edits and access some member only
 exclusive portions of the website, you will have to register.
 It is easy to do: just fill out the form below, and reply

@@ -1,5 +1,6 @@
 <?php
   slot('title', "Base Edit Files Page $page — Pump Pro Edits");
+  slot('h2', "<h2>Base Edits</h2>");
 ?> 
 <h2>Base Edit Files</h2> 
 <p>

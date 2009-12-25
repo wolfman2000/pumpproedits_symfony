@@ -5,6 +5,11 @@
     color: red;
     font-weight: bold;
 }
+.success_list /* This can also apply to all medias. */
+{
+	color: green;
+	font-weight: bold;
+}
 
 @media screen
 {
