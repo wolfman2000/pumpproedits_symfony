@@ -32,8 +32,20 @@ class contactActions extends sfActions
       $name = $this->form->getValue('name');
       $email = $this->form->getValue('email');
       
-      $cm = new ContactMessage($name, $email, $subject, $body);
-      $this->getMailer()->send($cm);
+      try
+      {
+        $cm = new ContactMessage($name, $email, $subject, $body);
+        $this->getMailer()->send($cm);
+      }
+      catch (Swift_RfcComplianceException $e)
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = array('The mailer is down: please email directly!');
+        $this->noshow = 1;
+        $this->subj = $subject;
+        $this->body = $body;
+        return sfView::ERROR;
+      }
     }
     else
     {

@@ -7,9 +7,24 @@ if (isset($data)): ?>
 <li><?php echo $d ?></li>
 <?php endforeach; ?>
 </ul>
-<p>Please check your data for typos and try again.</p>
+<?php if(isset($noshow)): ?>
+<p>You will have to send a manual email. To make it easier
+for you, just copy and paste the subject and message body
+once you <a href="mailto:jafelds@gmail.com">click the email
+link</a>.</p>
+<pre>
+<?php echo $subj ?>
+
+
+
+<?php echo $body ?>
+</pre>
 <?php else: ?>
+<p>Please check your data for typos and try again.</p>
+<?php include_partial("contact/form", array('form' => $form));
+endif;
+else: ?>
 <p>The errors are listed inside the form.</p>
 <p>Please check the form and try again.</p>
-<?php endif;
-include_partial("contact/form", array('form' => $form));
+<?php include_partial("contact/form", array('form' => $form));
+endif;
