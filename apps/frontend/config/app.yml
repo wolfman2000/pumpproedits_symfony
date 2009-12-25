@@ -16,3 +16,5 @@ all:
   max_salt_char: 126
   min_oregano_length: 32
   max_oregano_length: 32
+  max_subject_length: 50
+  min_email_length: 20
