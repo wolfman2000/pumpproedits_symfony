@@ -2,6 +2,12 @@
 
 class PPE_User_UserTable extends Doctrine_Table
 {
+  public function confirmUser($id)
+  {
+    return $this->createQuery('a')->set('is_confirmed', '?', 1)
+      ->where('id = ?', $id);
+  }
+
   public function addUser($name, $email, $pass)
   {
     $util = new Utilities();
