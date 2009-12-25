@@ -17,7 +17,16 @@ class contactActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->form = new ContactForm();
+    $user = $this->getUser();
+    if ($user->isAuthenticated())
+    {
+      $def = array('name' => $user->getAttribute('name'), 'email' => $user->getAttribute('email'));
+      $this->form = new ContactForm($def);
+    }
+    else
+    {
+      $this->form = new ContactForm();
+    }
   }
   
   public function executeValidate(sfWebRequest $request)
