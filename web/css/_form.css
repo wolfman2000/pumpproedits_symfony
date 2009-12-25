@@ -1,0 +1,41 @@
+@import "main.css";
+
+@media screen
+{
+    fieldset
+    {
+        width: 30em;
+    }
+    legend
+    {
+        display: inline-block;
+        margin-left: 10px;
+        margin-top: 2px;
+    }
+    dl
+    {
+        font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+    }
+    dt
+    {
+        clear: both;
+        width: 8em;
+        float: left;
+    }
+    fieldset > dl > dt
+    {
+        padding-left: 1em;
+        line-height: 1.3em;
+        padding-top: 0.3em;
+    }
+    dt:after
+    {
+        content: ":";
+    }
+    dd
+    {
+        padding-left: 8em;
+        line-height: 1.3em;
+    }
+}
+
