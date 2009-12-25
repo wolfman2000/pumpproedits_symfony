@@ -48,7 +48,8 @@ class confirmActions extends sfActions
       }
       else // We're good!
       {
-      
+        $userT = Doctrine::getTable('PPE_User_User');
+        $user->confirmUser($id);
       }
       
     }
