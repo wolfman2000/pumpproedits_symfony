@@ -28,7 +28,29 @@ class confirmActions extends sfActions
     
     if ($this->form->isValid())
     {
-    
+      $condT = Doctrine::getTable('PPE_User_Condiment');
+      $oreg = $this->form->getValue('confirm');
+      $pass = $this->form->getValue('password');
+      $id = $condT->confirmUser($oreg, $pass);
+      
+      if (!$id)
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = "Make sure you put in the confirmation code and password correctly.";
+        return sfView::ERROR;      
+      }
+      elseif (Doctrine::getTable('PPE_User_Role')->getIsUserBanned($id))
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = "You are not allowed to contribute to the website.";
+        $this->noshow = 1;
+        return sfView::ERROR; 
+      }
+      else // We're good!
+      {
+      
+      }
+      
     }
     else
     {
