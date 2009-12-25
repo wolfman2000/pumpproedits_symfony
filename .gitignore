@@ -7,3 +7,4 @@ data/sql/schema.sql
 .DS_Store
 cache/*
 log/*
+*~
