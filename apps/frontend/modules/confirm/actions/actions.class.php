@@ -36,13 +36,13 @@ class confirmActions extends sfActions
       if (!$id)
       {
         $this->getResponse()->setStatusCode(409);
-        $this->data = "Make sure you put in the confirmation code and password correctly.";
+        $this->data = array("Make sure you put in the confirmation code and password correctly.");
         return sfView::ERROR;      
       }
       elseif (Doctrine::getTable('PPE_User_Role')->getIsUserBanned($id))
       {
         $this->getResponse()->setStatusCode(409);
-        $this->data = "You are not allowed to contribute to the website.";
+        $this->data = array("You are not allowed to contribute to the website.");
         $this->noshow = 1;
         return sfView::ERROR; 
       }
