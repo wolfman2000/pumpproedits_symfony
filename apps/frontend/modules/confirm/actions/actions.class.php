@@ -22,7 +22,8 @@ class confirmActions extends sfActions
   
   public function executeValidate(sfWebRequest $request)
   {
-    $this->form = new ConfirmForm();
+    $code = $request->getParameter('code');
+    $this->form = new ConfirmForm(array('confirm' => $code));
     $this->form->bind($request->getParameter('validate'));
     
     if ($this->form->isValid())

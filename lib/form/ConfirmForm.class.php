@@ -2,7 +2,7 @@
 
 class ConfirmForm extends sfForm
 {
-  public function configure($useConfirm = true)
+  public function configure()
   {
     parent::configure();
 
