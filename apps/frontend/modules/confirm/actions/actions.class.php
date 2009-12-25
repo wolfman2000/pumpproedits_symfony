@@ -17,13 +17,13 @@ class confirmActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->form = new ConfirmForm();
+    $code = $request->getParameter('code');
+    $this->form = new ConfirmForm(array('confirm' => $code));
   }
   
   public function executeValidate(sfWebRequest $request)
   {
-    $code = $request->getParameter('code');
-    $this->form = new ConfirmForm(array('confirm' => $code));
+    $this->form = new ConfirmForm();
     $this->form->bind($request->getParameter('validate'));
     
     if ($this->form->isValid())
