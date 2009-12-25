@@ -56,4 +56,11 @@ class PPE_User_UserTable extends Doctrine_Table
     $q = $q->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     return $q['is_confirmed'];
   }
+  
+  public function getNameByID($id)
+  {
+    $q = $this->createQuery('a')->select('name')->where('id = ?', $id)
+      ->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+    return $q['name'];
+  }
 }
