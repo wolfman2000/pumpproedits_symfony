@@ -107,6 +107,16 @@ contact_post:
 # Confirm someone's account
 confirm_get:
   # Can I get the URL to work with optional parameters?
+  url: /confirm/:code
+  class: sfRequestRoute
+  param:
+    module: confirm
+    action: index
+  requirements:
+    sf_method: [GET]
+
+confirm_get:
+  # Can I get the URL to work with optional parameters?
   url: /confirm
   class: sfRequestRoute
   param:
