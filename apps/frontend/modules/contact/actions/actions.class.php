@@ -17,6 +17,49 @@ class contactActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $user = $this->getUser();
+    if ($user->isAuthenticated())
+    {
+      $def = array('name' => $user->getAttribute('name'), 'email' => $user->getAttribute('email'));
+      $this->form = new ContactForm($def);
+    }
+    else
+    {
+      $this->form = new ContactForm();
+    }
+  }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new ContactForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      // We can immediately send the email.
+      $body = $this->form->getValue('content');
+      $subject = $this->form->getValue('subject');
+      $name = $this->form->getValue('name');
+      $email = $this->form->getValue('email');
+      
+      try
+      {
+        $cm = new ContactMessage($email, $name, $subject, $body);
+        $this->getMailer()->send($cm);
+      }
+      catch (Swift_RfcComplianceException $e)
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = array('The mailer is down: please email directly!');
+        $this->noshow = 1;
+        $this->subj = $subject;
+        $this->body = $body;
+        return sfView::ERROR;
+      }
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
 }

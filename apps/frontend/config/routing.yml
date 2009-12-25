@@ -100,7 +100,7 @@ contact_post:
   class: sfRequestRoute
   param:
     module: contact
-    action: send
+    action: validate
   requirements:
     sf_method: [POST]
 

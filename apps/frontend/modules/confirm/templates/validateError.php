@@ -1,5 +1,5 @@
-<?php slot('title', 'Registration Failure — Pump Pro Edits') ?>
-<h2>Error!</h2>
+<?php slot('title', 'Confirmation Failure — Pump Pro Edits');
+slot('h2', '<h2 class="error_list">Confirmation Error!</h2>'); ?>
 <?php if (isset($data)): ?>
 <p>There was a problem with processing the data.</p>
 <ul class="error_list">

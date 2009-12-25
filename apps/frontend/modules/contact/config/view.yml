@@ -1,0 +1,8 @@
+indexSuccess:
+  stylesheets: [contact.css]
+
+validateSuccess:
+  stylesheets: [contact.css]
+
+validateError:
+  stylesheets: [contact.css]

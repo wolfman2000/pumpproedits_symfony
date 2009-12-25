@@ -1,6 +1,6 @@
-<?php slot('title', 'Login Failure — Pump Pro Edits') ?>
-<h2>Error!</h2>
-<?php if (isset($data)): ?>
+<?php slot('title', 'Login Failure — Pump Pro Edits');
+slot('h2', '<h2 class="error_list">Log In Error!</h2>');
+if (isset($data)): ?>
 <p>There was a problem with processing the data.</p>
 <ul class="error_list">
 <?php foreach ($data as $d): ?>
