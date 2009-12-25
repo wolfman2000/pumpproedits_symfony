@@ -7,8 +7,10 @@ class PPEUser extends sfBasicSecurityUser
     $this->setAuthenticated(true);
     $this->addCredentials($credentials);
     $this->setAttribute('id', $id);
-    $this->setAttribute('name', Doctrine::getTable('PPE_User_User')
-      ->getNameByID($id));
+    $userT = Doctrine::getTable('PPE_User_User');
+    $row = $userT->getAuthByID($id);
+    $this->setAttribute('name', $row['name']);
+    $this->setAttribute('email', $row['email']);
   }
 
   public function signOut()
@@ -17,5 +19,6 @@ class PPEUser extends sfBasicSecurityUser
     $this->clearCredentials();
     $this->getAttributeHolder()->remove('id');
     $this->getAttributeHolder()->remove('user');
+    $this->getAttributeHolder()->remove('email');
   }
 }

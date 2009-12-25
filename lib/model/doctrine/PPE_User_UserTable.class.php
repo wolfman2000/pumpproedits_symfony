@@ -57,6 +57,14 @@ class PPE_User_UserTable extends Doctrine_Table
     return $q['is_confirmed'];
   }
   
+  /* Name and email address */
+  public function getAuthByID($id)
+  {
+    return $this->createQuery('a')->select('name, email')
+      ->where('id = ?', $id)
+      ->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+  }
+  
   public function getNameByID($id)
   {
     $q = $this->createQuery('a')->select('name')->where('id = ?', $id)
