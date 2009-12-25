@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<?php include_http_metas() ?>
-<?php include_metas() ?>
+<?php include_http_metas();
+include_metas();
+include(sfConfig::get('sf_lib_dir') . "/browser_detect.php"); ?>
 <title><?php include_slot('title', 'Pump Pro Edits') ?></title>
 <link rel="shortcut icon" href="/favicon.ico" />
-<?php include_stylesheets() ?>
-<?php include_javascripts() ?>
+<?php include_stylesheets();
+if (browser_detection(7) == "ie"):
+
+endif;
+include_javascripts(); ?>
 </head>
 <body>
 <header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
@@ -28,7 +32,6 @@
     <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
     <li><?php echo link_to("Edit List", '@edits') ?></a></li>
     </ul>
-
 </li>
 <li>
     <h4>Everyone</h4>
@@ -37,10 +40,8 @@
     <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
-
 </li>
 </ul>
-
 </nav>
 <footer>This website is © <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a></footer>
 </body>
