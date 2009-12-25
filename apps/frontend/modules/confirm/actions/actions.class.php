@@ -52,7 +52,7 @@ class confirmActions extends sfActions
         $userT = Doctrine::getTable('PPE_User_User');
         $userT->confirmUser($id);
         $roles = $roleT->getRolesByID($id);
-        $this->getUser()->signIn($roles);
+        $this->getUser()->signIn($roles, $id);
       }
       
     }

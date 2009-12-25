@@ -48,7 +48,7 @@ class loginActions extends sfActions
       else
       {
         $roles = $roleT->getRolesByID($id);
-        $this->getUser()->signIn($roles);
+        $this->getUser()->signIn($roles, $id);
       }
     }
     else

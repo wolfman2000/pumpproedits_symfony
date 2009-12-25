@@ -2,15 +2,17 @@
 
 class PPEUser extends sfBasicSecurityUser
 {
-  public function signIn($credentials)
+  public function signIn($credentials, $id)
   {
     $this->setAuthenticated(true);
     $this->addCredentials($credentials);
+    $this->setAttribute('id', $id);
   }
 
   public function signOut()
   {
     $this->setAuthenticated(false);
     $this->clearCredentials();
+    $this->getAttributeHolder()->remove('id');
   }
 }
