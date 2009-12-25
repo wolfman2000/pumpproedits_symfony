@@ -10,7 +10,7 @@ class ConfirmForm extends sfForm
     $min_un = sfConfig::get('app_min_oregano_length');
     
     $unreq['maxlength'] = $max_un;
-    $pieces['confirm'] = new sfWidgetFormInput(array(), $unreq);
+    $pieces['confirm'] = new sfWidgetFormInput(array('label' => 'Confirmation Code'), $unreq);
     $pieces['password'] = new sfWidgetFormInputPassword(array());
     $unreq['maxlength'] = sfConfig::get('app_max_email_length');
     $this->setWidgets($pieces);
