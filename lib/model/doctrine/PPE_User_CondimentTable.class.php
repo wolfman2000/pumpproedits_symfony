@@ -4,7 +4,7 @@ class PPE_User_CondimentTable extends Doctrine_Table
 {
   private function checkPassword($salt, $pass)
   {
-    $pepper = hash("sha256", $pass . $row['salt']);
+    $pepper = hash("sha256", $pass . $salt);
     $q = $this->createQuery('a')->select('id')->where('pepper = ?', $pepper)
       ->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     return $q['id'];
@@ -22,7 +22,7 @@ class PPE_User_CondimentTable extends Doctrine_Table
   public function checkUser($name, $pass)
   {
     $q = $this->createQuery('a')->select('salt')
-      ->innerJoin('a.PPE_User_Users b')->where('b.name = ?', $name)
+      ->innerJoin('a.PPE_User_User b')->where('b.name = ?', $name)
       ->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     
     return ($q ? $this->checkPassword($q['salt'], $pass) : false);
