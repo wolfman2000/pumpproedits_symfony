@@ -34,7 +34,7 @@ class contactActions extends sfActions
       
       try
       {
-        $cm = new ContactMessage($name, $email, $subject, $body);
+        $cm = new ContactMessage($email, $name, $subject, $body);
         $this->getMailer()->send($cm);
       }
       catch (Swift_RfcComplianceException $e)
