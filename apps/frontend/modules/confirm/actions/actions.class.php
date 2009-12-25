@@ -29,6 +29,7 @@ class confirmActions extends sfActions
     if ($this->form->isValid())
     {
       $condT = Doctrine::getTable('PPE_User_Condiment');
+      $roleT = Doctrine::getTable('PPE_User_Role');
       $oreg = $this->form->getValue('confirm');
       $pass = $this->form->getValue('password');
       $id = $condT->confirmUser($oreg, $pass);
@@ -39,7 +40,7 @@ class confirmActions extends sfActions
         $this->data = array("Make sure you put in the confirmation code and password correctly.");
         return sfView::ERROR;      
       }
-      elseif (Doctrine::getTable('PPE_User_Role')->getIsUserBanned($id))
+      elseif ($roleT->getIsUserBanned($id))
       {
         $this->getResponse()->setStatusCode(409);
         $this->data = array("You are not allowed to contribute to the website.");
@@ -50,6 +51,7 @@ class confirmActions extends sfActions
       {
         $userT = Doctrine::getTable('PPE_User_User');
         $userT->confirmUser($id);
+        $roles = $roleT->getRolesByID($id);
       }
       
     }
