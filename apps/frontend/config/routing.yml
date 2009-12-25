@@ -121,7 +121,7 @@ confirm_post:
   class: sfRequestRoute
   param:
     module: confirm
-    action: confirm
+    action: validate
   requirements:
     sf_method: [POST]
 
