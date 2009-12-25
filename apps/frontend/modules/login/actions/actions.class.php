@@ -26,7 +26,30 @@ class loginActions extends sfActions
     $this->form->bind($request->getParameter('validate'));
     if ($this->form->isValid())
     {
-      // Database connections here.
+      $condT = Doctrine::getTable('PPE_User_Condiment');
+      $roleT = Doctrine::getTable('PPE_User_Role');
+      $user = $this->form->getValue('username');
+      $pass = $this->form->getValue('password');
+      $id = $condT->checkUser($user, $pass);
+      
+      if (!$id)
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = array("Make sure you put in the username and password correctly.");
+        return sfView::ERROR;      
+      }
+      elseif ($roleT->getIsUserBanned($id))
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = array("You are not allowed to contribute to the website.");
+        $this->noshow = 1;
+        return sfView::ERROR; 
+      }
+      else
+      {
+        $roles = $roleT->getRolesByID($id);
+        $this->getUser()->signIn($roles);
+      }
     }
     else
     {
