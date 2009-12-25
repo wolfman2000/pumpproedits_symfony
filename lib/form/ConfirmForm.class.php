@@ -23,7 +23,7 @@ class ConfirmForm extends sfForm
     $tmp1['max_length'] = $max_un;
     $tmp1['min_length'] = $min_un;
     $tmp1['pattern'] = "/([0-9A-Fa-f]){32}/";
-    $tmp2['max_length'] = "The confirmation code must be at $max_un characters.";
+    $tmp2['max_length'] = "The confirmation code must be $max_un characters.";
     $tmp2['min_length'] = $tmp2['max_length'];
     
     $tmp2['required'] = "You must supply the confirmation code.";
