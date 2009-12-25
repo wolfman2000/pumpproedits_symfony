@@ -19,4 +19,20 @@ class confirmActions extends sfActions
   {
     $this->form = new ConfirmForm();
   }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new ConfirmForm();
+    $this->form->bind($request->getParameter('validate'));
+    
+    if ($this->form->isValid())
+    {
+    
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
 }
