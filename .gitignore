@@ -4,6 +4,7 @@ data/fixtures/edits.yml
 data/fixtures/users.yml
 data/fixtures/powers.yml
 data/sql/schema.sql
+dbreload.sh
 .DS_Store
 cache/*
 log/*
