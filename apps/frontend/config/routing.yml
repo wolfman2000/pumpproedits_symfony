@@ -105,8 +105,7 @@ contact_post:
     sf_method: [POST]
 
 # Confirm someone's account
-confirm_get:
-  # Can I get the URL to work with optional parameters?
+confirm_get_code:
   url: /confirm/:code
   class: sfRequestRoute
   param:
