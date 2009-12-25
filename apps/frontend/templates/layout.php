@@ -16,7 +16,8 @@ include_javascripts(); ?>
 <body>
 <header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
 <article>
-<?php echo $sf_content ?>
+<?php include_slot('h2', '<h2>Welcome!</h2>');
+echo $sf_content ?>
 </article>
 <?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
 <nav>
