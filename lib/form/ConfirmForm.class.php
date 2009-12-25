@@ -29,7 +29,7 @@ class ConfirmForm extends sfForm
     $tmp2['required'] = "You must supply the confirmation code.";
     $tmp2['invalid'] = "The confirmation code did not match the pattern.";
 
-    $val['username'] = new sfValidatorRegex($tmp1, $tmp2);
+    $val['confirm'] = new sfValidatorRegex($tmp1, $tmp2);
 
     $tmp2['required'] = "You must supply a password.";
 
