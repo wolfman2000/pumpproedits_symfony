@@ -79,8 +79,35 @@ g#hold_bdy > line, g#ghold_end > line, g#roll_bdy > path, g#roll_end > path
   stroke:black;
   stroke-width: 0.3;
 }
-
+.note_004
+{
+  fill: url('/svg/arrowdef.svg#grad_004');
+}
 .note_008
 {
   fill: url('/svg/arrowdef.svg#grad_008');
+}
+.note_012
+{
+  fill: url('/svg/arrowdef.svg#grad_012');
+}
+.note_016
+{
+  fill: url('/svg/arrowdef.svg#grad_016');
+}
+.note_024
+{
+  fill: url('/svg/arrowdef.svg#grad_024');
+}
+.note_032
+{
+  fill: url('/svg/arrowdef.svg#grad_032');
+}
+.note_048
+{
+  fill: url('/svg/arrowdef.svg#grad_048');
+}
+.note_064
+{
+  fill: url('/svg/arrowdef.svg#grad_064');
 }
