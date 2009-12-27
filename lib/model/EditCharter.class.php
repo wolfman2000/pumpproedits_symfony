@@ -60,6 +60,10 @@ class EditCharter
 
   private function genXMLHeader($measures)
   {
+    $cont = 'type="text/css" href="/css/_svg.css"';
+    $css = $this->xml->createProcessingInstruction('xml-stylesheet',$cont);
+    $this->xml->appendChild($css);
+  
     $svg = $this->xml->createElement('svg');
     $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
