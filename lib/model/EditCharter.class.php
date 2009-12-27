@@ -84,7 +84,7 @@ class EditCharter
     $this->svg = $svg; # Will be used for arrow placements.
   }
   
-  protected function genCharts($notedata, $kind)
+  protected function genChart($notedata, $kind = "classic")
   {
     $measures = array_count($notedata['notes']);
     $this->genXMLHeader($measures);
