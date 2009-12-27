@@ -6,6 +6,13 @@ homepage:
   url:   /
   param: { module: ppehome, action: index }
 
+# temp xml page
+xmltest:
+  url: /xmltest
+  param:
+    module: xmltest
+    action: index
+
 # credits / thanks page
 thanks:
   url: /thanks
