@@ -1,0 +1,81 @@
+radialGradient > stop:first-child + stop
+{
+  stop-opacity: 0.5;
+}
+radialGradient > stop:first-child
+{
+  stop-opacity: 1;
+}
+radialGradient#grad_004 > stop
+{
+  stop-color: blue;
+}
+radialGradient#grad_008 > stop
+{
+  stop-color: red;
+}
+radialGradient#grad_012 > stop
+{
+  stop-color: purple;
+}
+radialGradient#grad_016 > stop
+{
+  stop-color: yellow;
+}
+radialGradient#grad_024 > stop
+{
+  stop-color: pink;
+}
+radialGradient#grad_032 > stop
+{
+  stop-color: brown;
+}
+radialGradient#grad_048 > stop
+{
+  stop-color: aqua;
+}
+radialGradient#grad_064 > stop
+{
+  stop-color: lime;
+}
+g#DLarrow, g#ULarrow, g#URarrow, g#DRarrow, g#mine
+{
+  fill-opacity:1;
+  stroke:black;
+  stroke-width:0.1;
+  stroke-opacity:1;
+}
+g#mine
+{
+  stroke-width: 0.2;
+}
+
+g#mine > circle:first-child
+{
+  fill:red;
+}
+g#mine > circle:first-child + circle
+{
+  fill:black;
+}
+g#DLarrow > line, g#ULarrow > line, g#URarrow > line, g#DRarrow > line
+{
+  stroke: black;
+  stroke-width: 0.1;
+}
+
+g#hold_bdy > rect, g#hold_end > path
+{
+  fill:blue;
+  stroke:none;
+}
+g#roll_bdy > rect, g#roll_end > path
+{
+  fill:purple;
+  stroke:none;
+}
+g#hold_bdy > line, g#ghold_end > line, g#roll_bdy > path, g#roll_end > path
+{
+  stroke:black;
+  stroke-width: 0.3;
+}
