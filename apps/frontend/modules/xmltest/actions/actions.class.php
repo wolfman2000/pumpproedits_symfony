@@ -26,6 +26,7 @@ class xmltestActions extends sfActions
     $xml->appendChild($node);
     $response = $this->getResponse();
     $response->clearHttpHeaders();
+    $response->setHttpHeader('Content-Type', 'application/xml');
     $response->setContent($xml->saveXML());
     return sfView::NONE;
   }
