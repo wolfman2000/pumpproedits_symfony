@@ -90,6 +90,7 @@ class EditCharter
     $numcols = ceil($measures / $this->mpcol);
     $arrwidth = sfConfig::get('app_chart_arrow_width');
     $breather = sfConfig::get('app_chart_column_sep');
+    $bpm = sfConfig::get('app_chart_beat_p_measure');
     $width = ($arrwidth * $this->cols + $breather) * $numcols + $breather;
     $svg->setAttribute('width', $width);
     
@@ -100,7 +101,7 @@ class EditCharter
     assert($beatheight == 16);
     assert($this->speedmod == 2)/ # not changing default
     
-    $height = $beatheight * 4 * $this->speedmod * $this->mpcol;
+    $height = $beatheight * $bpm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
     $svg->setAttribute('height', $height);
     
@@ -123,6 +124,7 @@ class EditCharter
     $numcols = ceil($measures / $this->mpcol); // mpcol is measures per column
     $beatheight = sfConfig::get('app_chart_beat_height'); // default beat height
     $spd = $this->speedmod; // speed mod: also affects columns.
+    $bpm = sfConfig::get('app_chart_beat_p_measure');
     $arrwidth = sfConfig::get('app_chart_arrow_width');
     $breather = sfConfig::get('app_chart_column_sep'); // breather room
     $id = "measure";
@@ -133,7 +135,7 @@ class EditCharter
       $sx = $this->cols;
       for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
       {
-        $y = $beatheight * $j * 4 + $this->headheight;
+        $y = $beatheight * $j * $bpm + $this->headheight;
         $use = $this->genSVGNode($x, $y, $id, '', $sx);
         $this->svg->appendChild($use);
         //break 1;
