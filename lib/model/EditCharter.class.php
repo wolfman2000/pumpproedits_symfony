@@ -84,9 +84,9 @@ class EditCharter
     $this->svg = $svg; # Will be used for arrow placements.
   }
   
-  protected function genChart($notedata, $kind = "classic")
+  public function genChart($notedata, $kind = "classic")
   {
-    $measures = array_count($notedata['notes']);
+    $measures = count($notedata['notes']);
     $this->genXMLHeader($measures);
     //$chart = $this->load_base($notedata['style'], $measures);
     
