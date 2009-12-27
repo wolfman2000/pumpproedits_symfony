@@ -48,7 +48,7 @@ class chartActions extends sfActions
         
         $response = $this->getResponse();
         $response->clearHttpHeaders();
-        $response->setHttpHeader('Content-Type', 'application/xml');
+        $response->setHttpHeader('Content-Type', 'image/svg+xml');
         $response->setContent($xml->saveXML());
         return sfView::NONE;
       }
