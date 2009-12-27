@@ -38,7 +38,7 @@ radialGradient#grad_064 > stop
 {
   stop-color: lime;
 }
-g#DLarrow, g#ULarrow, g#URarrow, g#DRarrow, g#mine
+g#DLarrow, g#ULarrow, g#CNarrow, g#URarrow, g#DRarrow, g#mine
 {
   fill-opacity:1;
   stroke:black;
@@ -54,7 +54,7 @@ g#mine > circle:first-child
 {
   fill:red;
 }
-g#mine > circle:first-child + circle
+g#mine > circle:first-child + circle, g#CNarrow > rect
 {
   fill:black;
 }

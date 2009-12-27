@@ -44,6 +44,11 @@
       <line x1="15" y1="11" x2="11" y2="15" />
       <line x1="14" y1="10" x2="10" y2="14" />
     </g>
+    <g width="16px" height="16px" id="CNarrow">
+      <path d="m 1,2 v 12 l 1,1 h 12 l 1,-1 V 2 L 14,1 H 2 z" />
+      <rect x="4" y="6" height="4" width="2" rx="0.5" />
+      <rect x="10" y="6" height="4" width="2" rx="0.5" />
+    </g>
     <g width="16px" height="16px" id="URarrow">
       <path d="M 15,14 V 2 C 15,2 15,1 14,1 H 2 C 2,1 1,1 1,2 1,2 1,3 2,3 h 7 l -8,8 v 3 c 0,0 0,1 1,1 h 3 l 8,-8 v 7 c 0,0 0,1 1,1 0,0 1,0 1,-1" />
       <line x1="1" y1="11" x2="5" y2="15" />
@@ -76,7 +81,7 @@
     </g>
   </defs>
   
-  <use x="0" y="0" xlink:href="#DRarrow" style="fill:url(#grad_008);" id="use12" />
+  <use x="0" y="0" xlink:href="#CNarrow" style="fill:url(#grad_008);" id="use12" />
   <use x="16" y="16" xlink:href="#URarrow" style="fill:url(#grad_024);" />
   <svg
      width="16"
