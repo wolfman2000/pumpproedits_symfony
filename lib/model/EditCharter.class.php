@@ -46,8 +46,14 @@ class EditCharter
   {
     $base = sfConfig::get('app_chart_def_file');
     $use = $this->xml->createElement('use');
-    $use->setAttribute('x', "$x");
-    $use->setAttribute('y', "$y");
+    if ($x > 0)
+    {
+      $use->setAttribute('x', $x);
+    }
+    if ($y > 0)
+    {
+      $use->setAttribute('y', $y);
+    }
     $use->setAttribute('xlink:href', "$base#$id");
     if (strlen($class) > 1)
     {
@@ -57,8 +63,16 @@ class EditCharter
     {
       $use->setAttribute('transform', "scale($sx $sy)");
     }  
-    $this->svg->appendChild($use);
-    return;
+    return $use;
+  }
+  
+  private function genSVGNode($x, $y, $id, $class = '', $sx = 1, $sy = 1)
+  {
+    $svg = $this->xml->createElement('svg');
+    $svg->setAttribute('x', $x);
+    $svg->setAttribute('y', $y);
+    $svg->appendChild($this->genUseNode(0, 0, $id, $class, $sx, $sy));
+    return $svg;
   }
 
   private function genXMLHeader($measures)
@@ -115,12 +129,13 @@ class EditCharter
     for ($i = 0; $i < $numcols; $i++)
     {
       $x = ($arrwidth * $this->cols + $breather) * $i + $breather;
-      //$sx = $this->cols;
       $sx = 1;
+      $sx = $this->cols;
       for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
       {
         $y = $beatheight * $j * 4 + $this->headheight;
-        $this->genUseNode($x, $y, $id, '', $sx);
+        $use = $this->genSVGNode($x, $y, $id, '', $sx);
+        $this->svg->appendChild($use);
         //break 1;
       }
     }

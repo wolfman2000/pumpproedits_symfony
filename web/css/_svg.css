@@ -49,7 +49,7 @@ g#beat2 > rect:first-child + rect
 g#beat2 > line, g#measure > line
 {
   stroke:black;
-  stroke-width:0.2;
+  stroke-width:0.4;
 }
 g#DLarrow, g#ULarrow, g#CNarrow, g#URarrow, g#DRarrow, g#mine
 {
