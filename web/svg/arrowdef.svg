@@ -80,16 +80,4 @@
       <path d="m 1,0 v 13 c 0,0 0,2 2,2 h 10 c 0,0 2,0 2,-2 v -13" />
     </g>
   </defs>
-  
-  <use x="0" y="0" xlink:href="#CNarrow" style="fill:url(#grad_008);" id="use12" />
-  <use x="16" y="16" xlink:href="#URarrow" style="fill:url(#grad_024);" />
-  <svg
-     width="16"
-     height="16"
-     x="0"
-     y="16">
-    <use xlink:href="#DLarrow" transform="rotate(90 8 8)" style="fill:url(#grad_004);" id="use18" />
-  </svg>
-  <use x="16" y="0" xlink:href="#mine"  />
-  
 </svg>

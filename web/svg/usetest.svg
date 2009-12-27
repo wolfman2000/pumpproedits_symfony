@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet href="/css/_svg.css" type="text/css"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+  
+  <use x="0" y="0" xlink:href="/svg/arrowdef.svg#CNarrow" class="note_008" id="use12" />
+  <use x="16" y="16" xlink:href="/svg/arrowdef.svg#URarrow" style="fill:url(/svg/arrowdef.svg#grad_024);" />
+  <svg
+     width="16"
+     height="16"
+     x="0"
+     y="16">
+    <use xlink:href="/svg/arrowdef.svg#DLarrow" transform="rotate(90 8 8)" style="fill:url(/svg/arrowdef.svg#grad_004);" id="use18" />
+  </svg>
+  <use x="16" y="0" xlink:href="/svg/arrowdef.svg#mine"  />
+  
+</svg>

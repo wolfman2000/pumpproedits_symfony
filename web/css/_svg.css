@@ -79,3 +79,8 @@ g#hold_bdy > line, g#ghold_end > line, g#roll_bdy > path, g#roll_end > path
   stroke:black;
   stroke-width: 0.3;
 }
+
+.note_008
+{
+  fill: url('/svg/arrowdef.svg#grad_008');
+}
