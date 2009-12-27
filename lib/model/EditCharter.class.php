@@ -107,16 +107,6 @@ class EditCharter
     
     $this->xml->appendChild($svg);
     $this->svg = $svg; # Will be used for arrow placements.
-    
-    $rec = $this->xml->createElement('rect');
-    $rec->setAttribute('x', 0);
-    $rec->setAttribute('y', 0);
-    $rec->setAttribute('width', 144);
-    $rec->setAttribute('height', 144);
-    $rec->setAttribute('fill', "none");
-    $rec->setAttribute('stroke', 'black');
-    $rec->setAttribute('stroke-width', 0.1);
-    $this->svg->appendChild($rec);
   }
   
   private function genMeasures($measures)
@@ -143,10 +133,23 @@ class EditCharter
     }
   }
   
+  private function genEditHeader($nd)
+  {
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', sfConfig::get('app_chart_column_sep'));
+    $text->setAttribute('y', 16);
+    $song = Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']);
+    $st = sprintf("%s Edit for %s: %s - %s",
+      ucfirst(substr($nd['style'], 5)), $song, $nd['title'], $nd['diff']);
+    $text->appendChild($this->xml->createTextNode($st));
+    $this->svg->appendChild($text);
+  }
+  
   public function genChart($notedata, $kind = "classic")
   {
     $measures = count($notedata['notes']);
     $this->genXMLHeader($measures);
+    $this->genEditHeader($notedata);
     $this->genMeasures($measures);
     //$chart = $this->load_base($notedata['style'], $measures);
     
