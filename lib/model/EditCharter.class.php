@@ -136,12 +136,61 @@ class EditCharter
   private function genEditHeader($nd)
   {
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', sfConfig::get('app_chart_column_sep'));
+    $buff = sfConfig::get('app_chart_column_sep');
+    $text->setAttribute('x', $buff);
     $text->setAttribute('y', 16);
     $song = Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']);
     $st = sprintf("%s Edit for %s: %s - %s",
       ucfirst(substr($nd['style'], 5)), $song, $nd['title'], $nd['diff']);
     $text->appendChild($this->xml->createTextNode($st));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff);
+    $text->setAttribute('y', 48);
+    $text->appendChild($this->xml->createTextNode("Steps: " .$nd['steps']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff);
+    $text->setAttribute('y', 80);
+    $text->appendChild($this->xml->createTextNode("Jumps: " .$nd['jumps']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 1);
+    $text->setAttribute('y', 48);
+    $text->appendChild($this->xml->createTextNode("Holds: " .$nd['holds']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 1);
+    $text->setAttribute('y', 80);
+    $text->appendChild($this->xml->createTextNode("Mines: " .$nd['mines']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 2);
+    $text->setAttribute('y', 48);
+    $text->appendChild($this->xml->createTextNode("Trips: " .$nd['trips']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 2);
+    $text->setAttribute('y', 80);
+    $text->appendChild($this->xml->createTextNode("Rolls: " .$nd['rolls']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 3);
+    $text->setAttribute('y', 48);
+    $text->appendChild($this->xml->createTextNode("Lifts: " .$nd['lifts']));
+    $this->svg->appendChild($text);
+    
+    $text = $this->xml->createElement('text');
+    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 3);
+    $text->setAttribute('y', 80);
+    $text->appendChild($this->xml->createTextNode("Fakes: " .$nd['fakes']));
     $this->svg->appendChild($text);
   }
   
