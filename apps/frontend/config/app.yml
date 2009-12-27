@@ -25,3 +25,4 @@ all:
   chart_single_cols: 5
   chart_double_cols: 10
   chart_column_sep: 32
+  chart_def_file: '/svg/arrowdef.svg'
