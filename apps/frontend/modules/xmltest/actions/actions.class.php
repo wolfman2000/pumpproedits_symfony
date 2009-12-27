@@ -17,6 +17,16 @@ class xmltestActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    $xml = new DomDocument("1.0", "UTF-8");
+    $node = $xml->createElement('svg');
+    $xml->preserveWhiteSpace = false;
+    $xml->formatOutput = true;
+    $css = $xml->createProcessingInstruction('xml-stylesheet','type="text/css" href="/css/_svg.css"');
+    $xml->appendChild($css);
+    $xml->appendChild($node);
+    $response = $this->getResponse();
+    $response->clearHttpHeaders();
+    $response->setContent($xml->saveXML());
+    return sfView::NONE;
   }
 }
