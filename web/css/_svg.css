@@ -38,6 +38,19 @@ radialGradient#grad_064 > stop
 {
   stop-color: lime;
 }
+g#beat2 > rect:first-child
+{
+  fill:#eeeeee;
+}
+g#beat2 > rect:first-child + rect
+{
+  fill:#cccccc;
+}
+g#beat2 > line, g#measure > line
+{
+  stroke:black;
+  stroke-width:0.1;
+}
 g#DLarrow, g#ULarrow, g#CNarrow, g#URarrow, g#DRarrow, g#mine
 {
   fill-opacity:1;
