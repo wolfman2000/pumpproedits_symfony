@@ -15,21 +15,21 @@ class EditCharter
     {
       $this->headheight = sfConfig::get('app_chart_header_height');
       $this->footheight = sfConfig::get('app_chart_footer_height');
-      if (isset($params['footer_height']))
+      if (array_key_exists('footer_height', $params))
       {
         $this->footheight = $params['footer_height'];
       }
       
       // Allow speed mods in play.
       $this->speedmod = sfConfig::get('app_chart_speed_mod');;
-      if (isset($params['speed_mod']))
+      if (array_key_exists('speed_mod', $params))
       {
         $this->speedmod = $params['speed_mod'];
       }
       
       // How many measures are shown in a column?
       $this->mpcol = sfConfig::get('app_chart_measures_col');
-      if (isset($params['mpcol']))
+      if (array_key_exists('mpcol', $params))
       {
         $this->mpcol = $params['mpcol'];
       }
@@ -49,12 +49,15 @@ class EditCharter
     $use->setAttribute('x', "$x");
     $use->setAttribute('y', "$y");
     $use->setAttribute('xlink:href', "$base#$id");
-    $use->setAttribute('class', "$class");
+    if (strlen($class) > 1)
+    {
+      $use->setAttribute('class', "$class");
+    }
     if (!($sx === 1 and $sy === 1))
     {
       $use->setAttribute('transform', "scale($sx $sy)");
     }  
-    $svg->appendChild($use);
+    $this->svg->appendChild($use);
     return;
   }
 
@@ -67,31 +70,67 @@ class EditCharter
     $svg = $this->xml->createElement('svg');
     $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
-    $svg->setAttribute('version', '1.1');
+    $svg->setAttribute('version', 1.1);
     
     // Calculate the width of the outer svg.
     $numcols = ceil($measures / $this->mpcol);
     $arrwidth = sfConfig::get('app_chart_arrow_width');
     $breather = sfConfig::get('app_chart_column_sep');
     $width = ($arrwidth * $this->cols + $breather) * $numcols + $breather;
-    $svg->setAttribute('width', "$width");
+    $svg->setAttribute('width', $width);
     
     // Calculate the height of the outer svg.
-    $arrheight = sfConfig::get('app_chart_arrow_height');
     $beatheight = sfConfig::get('app_chart_beat_height');
-    $bpm = sfConfig::get('app_beat_p_measure');
-    $height = $beatheight * $bpm * $this->speedmod * $this->mpcol;
+    //$bpm = sfConfig::get('app_beat_p_measure');
+    
+    assert($beatheight == 16);
+    assert($this->speedmod == 2)/ # not changing default
+    
+    $height = $beatheight * 4 * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
-    $svg->setAttribute('height', "$height");
+    $svg->setAttribute('height', $height);
     
     $this->xml->appendChild($svg);
     $this->svg = $svg; # Will be used for arrow placements.
+    
+    $rec = $this->xml->createElement('rect');
+    $rec->setAttribute('x', 0);
+    $rec->setAttribute('y', 0);
+    $rec->setAttribute('width', 144);
+    $rec->setAttribute('height', 144);
+    $rec->setAttribute('fill', "none");
+    $rec->setAttribute('stroke', 'black');
+    $rec->setAttribute('stroke-width', 0.1);
+    $this->svg->appendChild($rec);
+  }
+  
+  private function genMeasures($measures)
+  {
+    $numcols = ceil($measures / $this->mpcol); // mpcol is measures per column
+    $beatheight = sfConfig::get('app_chart_beat_height'); // default beat height
+    $spd = $this->speedmod; // speed mod: also affects columns.
+    $arrwidth = sfConfig::get('app_chart_arrow_width');
+    $breather = sfConfig::get('app_chart_column_sep'); // breather room
+    $id = "measure";
+    for ($i = 0; $i < $numcols; $i++)
+    {
+      $x = ($arrwidth * $this->cols + $breather) * $i + $breather;
+      //$sx = $this->cols;
+      $sx = 1;
+      for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
+      {
+        $y = $beatheight * $j * 4 + $this->headheight;
+        $this->genUseNode($x, $y, $id, '', $sx);
+        //break 1;
+      }
+    }
   }
   
   public function genChart($notedata, $kind = "classic")
   {
     $measures = count($notedata['notes']);
     $this->genXMLHeader($measures);
+    $this->genMeasures($measures);
     //$chart = $this->load_base($notedata['style'], $measures);
     
     return $this->xml;
