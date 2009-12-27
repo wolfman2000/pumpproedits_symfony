@@ -28,4 +28,5 @@ all:
   chart_measures_col: 6
   chart_beat_height: 16
   chart_speed_mod: 2
+  chart_beat_p_measure: 4
   chart_def_file: '/svg/arrowdef.svg'
