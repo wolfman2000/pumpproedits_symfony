@@ -41,16 +41,24 @@ class statsActions extends sfActions
       $tmp = new EditParser();
       try
       {
-        $this->page = "parseyay";
-        $this->result = $tmp->get_stats(fopen($path, "r"));
+        $notedata = $tmp->get_stats(fopen($path, "r"));
+        @unlink($path);
+        $tmp = new EditCharter(array('cols' => $notedata['cols']));
+        $xml = $tmp->genChart($notedata);
+        
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->setHttpHeader('Content-Type', 'application/xml');
+        $response->setContent($xml->saveXML());
+        return sfView::NONE;
       }
       catch (sfParseException $e)
       {
-        $this->page = "parseboo";
-        $this->result = $e;
+        $this->data = $e;
+        @unlink($path);
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
       }
-      /* Do this step at the end. */
-      @unlink($path);
     }
     else
     {
