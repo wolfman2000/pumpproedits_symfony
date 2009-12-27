@@ -124,3 +124,8 @@ g#hold_bdy > line, g#ghold_end > line, g#roll_bdy > path, g#roll_end > path
 {
   fill: url('/svg/arrowdef.svg#grad_064');
 }
+text
+{
+  font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+  font-size: 0.6em;
+}
