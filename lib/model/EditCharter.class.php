@@ -2,8 +2,6 @@
 
 class EditCharter
 {
-  
-  
   function __construct($params)
   {
     $single = sfConfig::get('app_chart_single_cols');
@@ -44,17 +42,54 @@ class EditCharter
     }
   }
 
-  private function genXMLHeader()
+  private function genUseNode($x, $y, $id, $class = '', $sx = 1, $sy = 1)
+  {
+    $base = sfConfig::get('app_chart_def_file');
+    $use = $this->xml->createElement('use');
+    $use->setAttribute('x', "$x");
+    $use->setAttribute('y', "$y");
+    $use->setAttribute('xlink:href', "$base#$id");
+    $use->setAttribute('class', "$class");
+    if (!($sx === 1 and $sy === 1))
+    {
+      $use->setAttribute('transform', "scale($sx $sy)");
+    }  
+    $svg->appendChild($use);
+    return;
+  }
+
+  private function genXMLHeader($measures)
   {
     $svg = $this->xml->createElement('svg');
     $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     $svg->setAttribute('version', '1.1');
+    
+    // Calculate the width of the outer svg.
+    $numcols = ceil($measures / $this->mpcol);
+    $arrwidth = sfConfig::get('app_chart_arrow_width');
+    $breather = sfConfig::get('app_chart_column_sep');
+    $width = ($arrwidth * $this->cols + $breather) * $numcols + $breather;
+    $svg->setAttribute('width', "$width");
+    
+    // Calculate the height of the outer svg.
+    $arrheight = sfConfig::get('app_chart_arrow_height');
+    $beatheight = sfConfig::get('app_chart_beat_height');
+    $bpm = sfConfig::get('app_beat_p_measure');
+    $height = $beatheight * $bpm * $this->speedmod * $this->mpcol;
+    $height += $this->headheight + $this->footheight;
+    $svg->setAttribute('height', "$height");
+    
+    $this->xml->appendChild($svg);
+    $this->svg = $svg; # Will be used for arrow placements.
   }
   
   protected function genCharts($notedata, $kind)
   {
     $measures = array_count($notedata['notes']);
-    $chart = $this->load_base($notedata['style'], $measures);
+    $this->genXMLHeader($measures);
+    //$chart = $this->load_base($notedata['style'], $measures);
+    
+    return $this->xml;
   }
 }
