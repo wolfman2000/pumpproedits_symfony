@@ -44,6 +44,25 @@ download_base_edit_404:
     module: base
     action: download
 
+# The dynamic chart generator
+chart_gen_get:
+  url: /chart
+  class: sfRequestRoute
+  param:
+    module: stats
+    action: index
+  requirements:
+    sf_method: [GET]
+
+chart_gen_post:
+  url: /chart
+  class: sfRequestRoute
+  param:
+    module: stats
+    action: validate
+  requirements:
+    sf_method: [POST]
+
 # The edit stat getter/validator
 edit_stat_get:
   url: /stats
