@@ -32,8 +32,14 @@ class EditCharter
         $this->red4 = 1;
       }
       
-      if (array_key_exists('nobpm', $params)) $this->nobpm = 1;
-      if (array_key_exists('nostop', $params)) $this->nostop = 1;
+      if (array_key_exists('nobpm', $params) and $params['nobpm'])
+      {
+        $this->nobpm = 1;
+      }
+      if (array_key_exists('nostop', $params) and $params['nostop'])
+      {
+        $this->nostop = 1;
+      }
       
       $this->headheight = sfConfig::get('app_chart_header_height');
       $this->footheight = sfConfig::get('app_chart_footer_height');
