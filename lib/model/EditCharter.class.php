@@ -294,6 +294,23 @@ class EditCharter
     throw new sfParseException("The notetype $kind is invalid.");
   }
   
+  private function getBeat($beat)
+  {
+    switch (round($beat) % 32)
+    {
+      case 0: return '4th';
+      case 16: return '8th';
+      case 11: case 21: return '12th';
+      case 8: case 24: return '16th';
+      case 5: case 27: return '24th';
+      case 4: case 12: case 20: case 28: return '32nd';
+      case 3: case 13: case 19: case 29: return '48th';
+      case 2: case 6: case 10: case 14:
+      case 18: case 22: case 26: case 30: return '64th';
+      default: return '64th'; # Unsure of keeping this default.
+    }
+  }
+  
   private function genArrows($notes, $kind)
   {
     $arrows = $this->prepArrows($kind);
@@ -302,7 +319,43 @@ class EditCharter
       $holds[] = array('on' => false, 'hold' => true,
         'x' => 0, 'y' => 0, 'beat' => 0);
     }
+    $w = $this->cw + $this->lb + $this->rb; # width + buffers.
     
+    $mcounter = 0;
+    
+    /* Use colon format here: otherwise, gets too unwieldy. */
+    foreach ($notes as $measure):
+    
+    $rcounter = 0;
+    foreach ($measure as $row):
+    
+    $curbeat = $this->aw * $this->speedmod
+      * $this->bm * $rcounter / count($row);
+    
+    $arow = $kind == "classic" ? $arrows : $arrows($this->getBeat($curbeat));
+    
+    $rcounter++;
+    endforeach;
+    
+    $mcounter++;
+    endforeach;
+    
+    /*
+    for cnt, mes in enumerate(notes): # For each measure in the note data:
+        #gc.collect()
+        for ind, row in enumerate(mes): # For each row in the measure.
+            curbeat = (MUL * 8) * ind / len(mes)
+            beatrow = None if kind == "classic" \
+                           else arrows[_rhythm_line(curbeat)]
+            
+#            if cnt == 14 and ind == 1:
+#                raise Exception("Checking")
+            
+            for pos, let in enumerate(row): # For each note in the row.
+                newx = (int(cnt / 6) * width) + pos * MUL + MUL
+                newy = TOP + ((cnt % 6) * MUL * 8) + int(round(curbeat))
+                _view_step(chart, (pos, let), (newx, newy))
+    */
   }
   
   public function genChart($notedata, $kind = "classic")
