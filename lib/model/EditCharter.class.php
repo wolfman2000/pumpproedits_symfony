@@ -173,6 +173,7 @@ class EditCharter
   {
     $buff = $this->lb + $this->rb;
     $draw = $this->cols * $this->aw / 2;
+    $m = $this->aw * $this->bm * $this->speedmod;
     foreach (Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id) as $b)
     {
       $beat = $b->beat;
@@ -183,7 +184,7 @@ class EditCharter
       $down = $measure % $mpcol + $measure - floor($measure); # Find the specific measure.
       
       $lx = ($buff + ($this->cols * $this->aw)) * $col + $this->lb;
-      $ly = $down * $this->aw * $this->bm * $this->speedmod + $this->headheight;
+      $ly = $down * $m + $this->headheight;
       
       $line = $this->xml->createElement('line');
       $line->setAttribute('x1', $lx + $draw);
@@ -203,7 +204,35 @@ class EditCharter
   
   private function genStop($id)
   {
-  
+    $buff = $this->lb + $this->rb;
+    $draw = $this->cols * $this->aw / 2;
+    $m = $this->aw * $this->bm * $this->speedmod;
+    foreach (Doctrine::getTable('PPE_Song_Stop')->getStopsBySongID($id) as $b)
+    {
+      $beat = $b->beat;
+      $break = $b->break;
+      $measure = $beat / $this->bm;
+      $mpcol = $this->mpcol; # How many measures are in a column?
+      $col = floor(floor($measure) / $mpcol); # Find the right column.
+      $down = $measure % $mpcol + $measure - floor($measure); # Find the specific measure.
+      
+      $lx = ($buff + ($this->cols * $this->aw)) * $col + $this->lb;
+      $ly = $down * $m + $this->headheight;
+      
+      $line = $this->xml->createElement('line');
+      $line->setAttribute('x1', $lx);
+      $line->setAttribute('y1', $ly);
+      $line->setAttribute('x2', $lx + $draw);
+      $line->setAttribute('y2', $ly);
+      $line->setAttribute('class', 'stop');
+      $this->svg->appendChild($line);
+      
+      if (isset($break))
+      {
+        $break = trim(trim($break, '0'), '.') . "B";
+        $this->genTxtNode($lx - $this->aw, $ly + $this->bm, $break, 'stop');
+      }
+    }
   }
   
   private function prepArrows()
