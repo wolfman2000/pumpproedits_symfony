@@ -143,65 +143,37 @@ class EditCharter
     }
   }
   
+  private function genTxtNode($x, $y, $st, $class = '')
+  {
+    $txt = $this->xml->createElement('text');
+    $txt->setAttribute('x', $x);
+    $txt->setAttribute('y', $y);
+    if (strlen($class) > 1) $txt->setAttribute('class', $class);
+    $txt->appendChild($this->xml->createTextNode($st));
+    $this->svg->appendChild($txt);
+  }
+  
   private function genEditHeader($nd)
   {
-    $text = $this->xml->createElement('text');
     $lbuff = $this->lb;
-    $text->setAttribute('x', $lbuff);
-    $text->setAttribute('y', 16);
-    $song = Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']);
-    $st = sprintf("%s Edit for %s: %s - %s",
-      ucfirst(substr($nd['style'], 5)), $song, $nd['title'], $nd['diff']);
-    $text->appendChild($this->xml->createTextNode($st));
-    $this->svg->appendChild($text);
     
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff);
-    $text->setAttribute('y', 48);
-    $text->appendChild($this->xml->createTextNode("Steps: " .$nd['steps']));
-    $this->svg->appendChild($text);
+    $this->genTxtNode($lbuff, 16, sprintf("%s Edit for %s: %s - %s",
+      ucfirst(substr($nd['style'], 5)),
+      Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']),
+      $nd['title'], $nd['diff'])
+    );
     
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff);
-    $text->setAttribute('y', 80);
-    $text->appendChild($this->xml->createTextNode("Jumps: " .$nd['jumps']));
-    $this->svg->appendChild($text);
+    $this->genTxtNode($lbuff, 48, "Steps: " . $nd['steps']);
+    $this->genTxtNode($lbuff, 80, "Jumps: " . $nd['jumps']);
     
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 1);
-    $text->setAttribute('y', 48);
-    $text->appendChild($this->xml->createTextNode("Holds: " .$nd['holds']));
-    $this->svg->appendChild($text);
+    $w = $this->cw + $this->lb + $this->rb;
     
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 1);
-    $text->setAttribute('y', 80);
-    $text->appendChild($this->xml->createTextNode("Mines: " .$nd['mines']));
-    $this->svg->appendChild($text);
-    
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 2);
-    $text->setAttribute('y', 48);
-    $text->appendChild($this->xml->createTextNode("Trips: " .$nd['trips']));
-    $this->svg->appendChild($text);
-    
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 2);
-    $text->setAttribute('y', 80);
-    $text->appendChild($this->xml->createTextNode("Rolls: " .$nd['rolls']));
-    $this->svg->appendChild($text);
-    
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 3);
-    $text->setAttribute('y', 48);
-    $text->appendChild($this->xml->createTextNode("Lifts: " .$nd['lifts']));
-    $this->svg->appendChild($text);
-    
-    $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 3);
-    $text->setAttribute('y', 80);
-    $text->appendChild($this->xml->createTextNode("Fakes: " .$nd['fakes']));
-    $this->svg->appendChild($text);
+    $this->genTxtNode($lbuff + $w * 1, 48, "Holds: " .$nd['holds']);
+    $this->genTxtNode($lbuff + $w * 1, 80, "Mines: " .$nd['mines']);
+    $this->genTxtNode($lbuff + $w * 2, 48, "Trips: " .$nd['trips']);
+    $this->genTxtNode($lbuff + $w * 2, 80, "Rolls: " .$nd['rolls']);
+    $this->genTxtNode($lbuff + $w * 3, 48, "Lifts: " .$nd['lifts']);
+    $this->genTxtNode($lbuff + $w * 3, 80, "Fakes: " .$nd['fakes']);
   }
   
   private function genBPM($id)
@@ -231,12 +203,7 @@ class EditCharter
       if (isset($bpm))
       {
         $bpm = trim(trim($bpm, '0'), '.');
-        $text = $this->xml->createElement('text');
-        $text->setAttribute('x', $lx + $draw + $draw );
-        $text->setAttribute('y', $ly + $this->bm);
-        $text->setAttribute('class', 'bpm');
-        $text->appendChild($this->xml->createTextNode($bpm));
-        $this->svg->appendChild($text);
+        $this->genTxtNode($lx + $draw + $draw, $ly + $this->bm, $bpm, 'bpm');
       }
     }
   }
