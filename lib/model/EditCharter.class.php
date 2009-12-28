@@ -329,7 +329,7 @@ class EditCharter
     $curbeat = intval($this->aw * $this->speedmod
       * $this->bm * $rcounter / count($measure));
       
-    $arow = $kind == "classic" ? $arrows : $arrows($this->getBeat($curbeat));
+    $arow = $kind == "classic" ? $arrows : $arrows[$this->getBeat($curbeat)];
     
     $pcounter = 0;    
     foreach (str_split($row) as $let): # For each note in the row
