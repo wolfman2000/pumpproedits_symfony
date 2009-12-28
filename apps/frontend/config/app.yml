@@ -25,3 +25,10 @@ all:
   chart_single_cols: 5
   chart_double_cols: 10
   chart_column_sep: 32
+  chart_column_left_buffer: 32
+  chart_column_right_buffer: 0
+  chart_measures_col: 6
+  chart_beat_height: 16
+  chart_speed_mod: 2
+  chart_beat_p_measure: 4
+  chart_def_file: '/svg/arrowdef.svg'

@@ -92,7 +92,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $song = substr($line, 6, $pos - strlen($line));
-      $songid = $base->getSongId($song);
+      $songid = $base->getIDBySong($song);
       if (!$songid)
       {
         $s = "This song is not found in the database: %s. ";
@@ -223,7 +223,7 @@ class EditParser
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
-        $notes['measure'][] = $row;
+        $notes[$measure][] = $row;
 
         for ($i = 0; $i < $cols; $i++)
         {

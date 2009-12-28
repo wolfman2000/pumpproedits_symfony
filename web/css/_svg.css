@@ -1,0 +1,151 @@
+radialGradient > stop:first-child + stop
+{
+  stop-opacity: 0.5;
+}
+radialGradient > stop:first-child
+{
+  stop-opacity: 1;
+}
+radialGradient#grad_004 > stop
+{
+  stop-color: blue;
+}
+radialGradient#grad_008 > stop
+{
+  stop-color: red;
+}
+radialGradient#grad_012 > stop
+{
+  stop-color: purple;
+}
+radialGradient#grad_016 > stop
+{
+  stop-color: yellow;
+}
+radialGradient#grad_024 > stop
+{
+  stop-color: pink;
+}
+radialGradient#grad_032 > stop
+{
+  stop-color: brown;
+}
+radialGradient#grad_048 > stop
+{
+  stop-color: aqua;
+}
+radialGradient#grad_064 > stop
+{
+  stop-color: lime;
+}
+g#beat2 > rect:first-child
+{
+  fill:#eeeeee;
+}
+g#beat2 > rect:first-child + rect
+{
+  fill:#cccccc;
+}
+g#beat2 > line, g#measure > line
+{
+  stroke:black;
+  stroke-width:0.4;
+}
+g#DLarrow, g#ULarrow, g#CNarrow, g#URarrow, g#DRarrow, g#mine
+{
+  fill-opacity:1;
+  stroke:black;
+  stroke-width:0.1;
+  stroke-opacity:1;
+}
+g#mine
+{
+  stroke-width: 0.2;
+}
+
+g#mine > circle:first-child
+{
+  fill:red;
+}
+g#mine > circle:first-child + circle, g#CNarrow > rect
+{
+  fill:black;
+}
+g#DLarrow > line, g#ULarrow > line, g#URarrow > line, g#DRarrow > line
+{
+  stroke: black;
+  stroke-width: 0.1;
+}
+
+g#hold_bdy > rect, g#hold_end > path
+{
+  fill-opacity: 1;
+  fill:darkblue;
+  stroke:none;
+}
+g#roll_bdy > rect, g#roll_end > path
+{
+  fill-opacity: 1;
+  fill:purple;
+  stroke:none;
+}
+g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
+{
+  stroke:black;
+  stroke-width: 0.3;
+}
+.note_004
+{
+  fill: blue; /* url('/svg/arrowdef.svg#grad_004'); */
+}
+.note_008
+{
+  fill: red; /* url('/svg/arrowdef.svg#grad_008'); */
+}
+.note_012
+{
+  fill: purple; /* url('/svg/arrowdef.svg#grad_012'); */
+}
+.note_016
+{
+  fill: yellow; /* url('/svg/arrowdef.svg#grad_016'); */
+}
+.note_024
+{
+  fill: pink; /* url('/svg/arrowdef.svg#grad_024'); */
+}
+.note_032
+{
+  fill: brown; /* url('/svg/arrowdef.svg#grad_032'); */
+}
+.note_048
+{
+  fill: aqua; /* url('/svg/arrowdef.svg#grad_048'); */
+}
+.note_064
+{
+  fill: lime; /* url('/svg/arrowdef.svg#grad_064'); */
+}
+text
+{
+  font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+  font-size: 0.8em;
+}
+.bpm
+{
+  font-size: 8px;
+}
+line.bpm
+{
+  stroke: blue;
+  stroke-width: 0.5;
+}
+.stop
+{
+  font-size: 8px;
+}
+line.stop
+{
+  stroke: red;
+  stroke-width: 0.5;
+}
