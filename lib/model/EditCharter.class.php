@@ -248,9 +248,41 @@ class EditCharter
   
   }
   
+  private function prepArrows($kind)
+  {
+    if ($kind == "classic")
+    {
+      $dl = array('a' => 'DL', 'c' => 'grad_004');
+      $ul = array('a' => 'UL', 'c' => 'grad_008');
+      $cn = array('a' => 'CN', 'c' => 'grad_016');
+      $ur = array('a' => 'UR', 'c' => 'grad_008');
+      $dr = array('a' => 'DR', 'c' => 'grad_004');
+      return array($dl, $ul, $cn, $ur, $dr);
+    }
+    if ($kind == "rhythm")
+    {
+      $ret = array();
+      $div = array('4th', '8th', '12th', '16th',
+        '24th', '32nd', '48th', '64th');
+      foreach ($div as $d)
+      {
+        $g = sprintf('grad_%03d', intval($d));
+        $dl = array('a' => 'DL', 'c' => $g);
+        $ul = array('a' => 'UL', 'c' => $g);
+        $cn = array('a' => 'CN', 'c' => $g);
+        $ur = array('a' => 'UR', 'c' => $g);
+        $dr = array('a' => 'DR', 'c' => $g);
+        $ret[$d] = array($dl, $ul, $cn, $ur, $dr);
+      }
+      return $ret;
+    }
+
+    throw new sfParseException("The notetype $kind is invalid.");
+  }
+  
   private function genArrows($notes, $kind)
   {
-  
+    $arrows = $this->prepArrows($kind);
   }
   
   public function genChart($notedata, $kind = "classic")
