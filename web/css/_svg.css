@@ -79,50 +79,52 @@ g#DLarrow > line, g#ULarrow > line, g#URarrow > line, g#DRarrow > line
 
 g#hold_bdy > rect, g#hold_end > path
 {
-  fill:blue;
+  fill-opacity: 1;
+  fill:aqua;
   stroke:none;
 }
 g#roll_bdy > rect, g#roll_end > path
 {
+  fill-opacity: 1;
   fill:purple;
   stroke:none;
 }
-g#hold_bdy > line, g#ghold_end > line, g#roll_bdy > path, g#roll_end > path
+g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
 {
   stroke:black;
   stroke-width: 0.3;
 }
 .note_004
 {
-  fill: url('/svg/arrowdef.svg#grad_004');
+  fill: blue; /* url('/svg/arrowdef.svg#grad_004'); */
 }
 .note_008
 {
-  fill: url('/svg/arrowdef.svg#grad_008');
+  fill: red; /* url('/svg/arrowdef.svg#grad_008'); */
 }
 .note_012
 {
-  fill: url('/svg/arrowdef.svg#grad_012');
+  fill: purple; /* url('/svg/arrowdef.svg#grad_012'); */
 }
 .note_016
 {
-  fill: url('/svg/arrowdef.svg#grad_016');
+  fill: yellow; /* url('/svg/arrowdef.svg#grad_016'); */
 }
 .note_024
 {
-  fill: url('/svg/arrowdef.svg#grad_024');
+  fill: pink; /* url('/svg/arrowdef.svg#grad_024'); */
 }
 .note_032
 {
-  fill: url('/svg/arrowdef.svg#grad_032');
+  fill: brown; /* url('/svg/arrowdef.svg#grad_032'); */
 }
 .note_048
 {
-  fill: url('/svg/arrowdef.svg#grad_048');
+  fill: aqua; /* url('/svg/arrowdef.svg#grad_048'); */
 }
 .note_064
 {
-  fill: url('/svg/arrowdef.svg#grad_064');
+  fill: lime; /* url('/svg/arrowdef.svg#grad_064'); */
 }
 text
 {
