@@ -43,7 +43,9 @@ class chartActions extends sfActions
       {
         $notedata = $tmp->get_stats(fopen($path, "r"), 1);
         @unlink($path);
-        $tmp = new EditCharter(array('cols' => $notedata['cols']));
+        // The others can be gotten later.
+        $p = array('cols' => $notedata['cols']);
+        $tmp = new EditCharter($p);
         $xml = $tmp->genChart($notedata);
         
         $response = $this->getResponse();
