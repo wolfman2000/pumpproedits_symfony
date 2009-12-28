@@ -30,6 +30,13 @@ Try to use git's branching functionality when adding
 new features. The master branch should really only contain
 code that is guaranteed to run.
 
+Don't be afraid to use many different technologies either.
+Presently, this website uses a more flexible SVG
+chart generator than the previous PNG version. Take advantage
+of what the web has to offer. Just make sure it runs on
+proper web browsers. I will leave to you to determine
+what is considered proper.
+
 If there are any questions, feel free to contact me.
 
 -- Jason "Wolfman2000" Felds
