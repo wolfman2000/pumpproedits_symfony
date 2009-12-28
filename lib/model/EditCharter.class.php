@@ -57,7 +57,7 @@ class EditCharter
       
       $this->cols = $params['cols'];
       $this->cw = $this->cols * $this->aw;
-      
+            
       $this->xml = new DomDocument("1.0", "UTF-8");
       $this->xml->preserveWhiteSpace = false;
       $this->xml->formatOutput = true; # May change this.
@@ -117,10 +117,7 @@ class EditCharter
     // Calculate the height of the outer svg.
     $beatheight = sfConfig::get('app_chart_beat_height');
     //$bpm = sfConfig::get('app_beat_p_measure');
-    
-    assert($beatheight == 16);
-    assert($this->speedmod == 2)/ # not changing default
-    
+        
     $height = $beatheight * $this->bm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
     $svg->setAttribute('height', $height);
@@ -340,27 +337,18 @@ class EditCharter
     $nx = (intval($mcounter / $this->mpcol) * $w)
       + $pcounter * $this->aw + $this->lb;
     
-    $ny = $this->headheight + (($mcounter % 6)
+    $ny = $this->headheight + (($mcounter % $this->mpcol)
       * $this->aw * $this->bm * $this->speedmod) + intval(round($curbeat));
     
     # Stepchart part here.
     
     switch ($let)
     {
-      case "F": # Fake note. Not yet available.
+      case "1": # Tap note. Just add to the chart.
       {
-        $holds[$pcounter]['on'] = false;
-        break;
-      }
-      case "L": # Lift note. Can be placed in chart. No image yet.
-      {
-        $holds[$pcounter]['on'] = false;
-        break;
-      }
-      case "M": # Mine. Don't step on these!
-      {
-        $holds[$pcounter]['on'] = false;
-        $this->svg->appendChild($this->genUseNode($nx, $ny, "mine"));
+        $id = $arow[$pcounter]['a'] . "arrow";
+        $cl = $arow[$pcounter]['c'];
+        $this->svg->appendChild($this->genUseNode($nx, $ny, $id, $cl));
         break;
       }
       case "2": case "4": # Start of hold/roll. Minor differences.
@@ -370,14 +358,6 @@ class EditCharter
         $holds[$pcounter]['x'] = $nx;
         $holds[$pcounter]['y'] = $ny;
         $holds[$pcounter]['beat'] = $arow;
-        break;
-      }
-      case "1": # Tap note. Just add to the chart.
-      {
-        $id = $arow[$pcounter]['a'] . "arrow";
-        $cl = $arow[$pcounter]['c'];
-        #echo "$nx $ny $id $cl"; exit;
-        $this->svg->appendChild($this->genUseNode($nx, $ny, $id, $cl));
         break;
       }
       case "3": # End of hold/roll. VERY complicated!
@@ -451,6 +431,22 @@ class EditCharter
           $cl = $arow[$pcounter]['c'];
           $this->svg->appendChild($this->genUseNode($nx, $ny, $id, $cl));
         }
+        break;
+      }
+      case "M": # Mine. Don't step on these!
+      {
+        $holds[$pcounter]['on'] = false;
+        $this->svg->appendChild($this->genUseNode($nx, $ny, "mine"));
+        break;
+      }
+      case "L": # Lift note. Can be placed in chart. No image yet.
+      {
+        $holds[$pcounter]['on'] = false;
+        break;
+      }
+      case "F": # Fake note. Not yet available.
+      {
+        $holds[$pcounter]['on'] = false;
         break;
       }
     }
