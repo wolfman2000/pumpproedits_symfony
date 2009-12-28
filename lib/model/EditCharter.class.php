@@ -2,13 +2,6 @@
 
 class EditCharter
 {
-  private $single;
-  private $double;
-  private $lb; # Left buffer
-  private $rb; # Right buffer
-  private $cw; # Width of column.
-  private $aw; # Arrow width
-  private $bm; # Beats per measure
   function __construct($params)
   {
     $this->single = sfConfig::get('app_chart_single_cols');
@@ -19,56 +12,56 @@ class EditCharter
       $e = "There must be either $single or $double columns in the chart!";
       throw new sfParseException($e);
     }
-    else
+    if (!in_array($params['kind'], array("classic", "rhythm")))
     {
-      $this->lb = sfConfig::get('app_chart_column_left_buffer');
-      $this->rb = sfConfig::get('app_chart_column_right_buffer');
-      $this->aw = sfConfig::get('app_chart_arrow_width');
-      $this->bm = sfConfig::get('app_chart_beat_p_measure');
-      
-      # Have the rhythm skin use red as the quarter note.
-      if (array_key_exists('red4', $params) and $params['red4'])
-      {
-        $this->red4 = 1;
-      }
-      
-      if (array_key_exists('nobpm', $params) and $params['nobpm'])
-      {
-        $this->nobpm = 1;
-      }
-      if (array_key_exists('nostop', $params) and $params['nostop'])
-      {
-        $this->nostop = 1;
-      }
-      
-      $this->headheight = sfConfig::get('app_chart_header_height');
-      $this->footheight = sfConfig::get('app_chart_footer_height');
-      if (array_key_exists('footer_height', $params))
-      {
-        $this->footheight = $params['footer_height'];
-      }
-      
-      // Allow speed mods in play.
-      $this->speedmod = sfConfig::get('app_chart_speed_mod');;
-      if (array_key_exists('speed_mod', $params))
-      {
-        $this->speedmod = $params['speed_mod'];
-      }
-      
-      // How many measures are shown in a column?
-      $this->mpcol = sfConfig::get('app_chart_measures_col');
-      if (array_key_exists('mpcol', $params))
-      {
-        $this->mpcol = $params['mpcol'];
-      }
-      
-      $this->cols = $params['cols'];
-      $this->cw = $this->cols * $this->aw;
-            
-      $this->xml = new DomDocument("1.0", "UTF-8");
-      $this->xml->preserveWhiteSpace = false;
-      $this->xml->formatOutput = true; # May change this.
+      $e = "The notetype chosen is not valid!";
+      throw new sfParseException($e);
     }
+    $this->lb = sfConfig::get('app_chart_column_left_buffer');
+    $this->rb = sfConfig::get('app_chart_column_right_buffer');
+    $this->aw = sfConfig::get('app_chart_arrow_width');
+    $this->bm = sfConfig::get('app_chart_beat_p_measure');
+    $this->kind = $params['kind'];
+    
+    # Have the rhythm skin use red as the quarter note.
+    if (array_key_exists('red4', $params) and $params['red4'])
+    {
+      $this->red4 = 1;
+    }
+    if (array_key_exists('nobpm', $params) and $params['nobpm'])
+    {
+      $this->nobpm = 1;
+    }
+    if (array_key_exists('nostop', $params) and $params['nostop'])
+    {
+      $this->nostop = 1;
+    }
+    
+    $this->headheight = sfConfig::get('app_chart_header_height');
+    $this->footheight = sfConfig::get('app_chart_footer_height');
+    if (array_key_exists('footer_height', $params))
+    {
+      $this->footheight = $params['footer_height'];
+    }
+    
+    $this->speedmod = sfConfig::get('app_chart_speed_mod');;
+    if (array_key_exists('speed_mod', $params))
+    {
+      $this->speedmod = $params['speed_mod'];
+    }
+    
+    $this->mpcol = sfConfig::get('app_chart_measures_col');
+    if (array_key_exists('mpcol', $params))
+    {
+      $this->mpcol = $params['mpcol'];
+    }
+    
+    $this->cols = $params['cols'];
+    $this->cw = $this->cols * $this->aw;
+    
+    $this->xml = new DomDocument("1.0", "UTF-8");
+    $this->xml->preserveWhiteSpace = false;
+    $this->xml->formatOutput = true; # May change this.
   }
 
   private function genUseNode($x, $y, $id, $class = '', $sx = 1, $sy = 1)
@@ -213,9 +206,9 @@ class EditCharter
   
   }
   
-  private function prepArrows($kind)
+  private function prepArrows()
   {
-    if ($kind == "classic")
+    if ($this->kind == "classic")
     {
       $dl = array('a' => 'DL', 'c' => 'note_004');
       $ul = array('a' => 'UL', 'c' => 'note_008');
@@ -229,7 +222,7 @@ class EditCharter
       }
       return $ret;
     }
-    if ($kind == "rhythm")
+    if ($this->kind == "rhythm")
     {
       $ret = array();
       $div = array('4th', '8th', '12th', '16th',
@@ -256,13 +249,11 @@ class EditCharter
       }
       return $ret;
     }
-
-    throw new sfParseException("The notetype $kind is invalid.");
   }
   
   private function getBeat($beat)
   {
-    switch (round($beat) % 32)
+    switch ($beat % 32)
     {
       case 0: return '4th';
       case 16: return '8th';
@@ -277,17 +268,15 @@ class EditCharter
     }
   }
   
-  private function genArrows($notes, $kind)
+  private function genArrows($notes)
   {
-    $arrows = $this->prepArrows($kind);
+    $arrows = $this->prepArrows();
     for ($i = 0; $i < $this->cols; $i++)
     {
-      $holds[] = array('on' => false, 'hold' => true,
-        'x' => 0, 'y' => 0, 'beat' => 0);
+      $holds[] = array('on' => false, 'hold' => true, 'x' => 0, 'y' => 0, 'beat' => 0);
     }
     $w = $this->cw + $this->lb + $this->rb; # width + buffers.
-    
-    /* Use colon format here: otherwise, gets too unwieldy. */
+    $m = $this->aw * $this->bm * $this->speedmod; # height of measure block
     
     $mcounter = 0;    
     foreach ($notes as $measure):
@@ -295,19 +284,15 @@ class EditCharter
     $rcounter = 0;
     foreach ($measure as $row):
     
-    $curbeat = intval($this->aw * $this->speedmod
-      * $this->bm * $rcounter / count($measure));
+    $curbeat = intval(round($m * $rcounter / count($measure)));
       
-    $arow = $kind == "classic" ? $arrows : $arrows[$this->getBeat($curbeat)];
+    $arow = $this->kind == "classic" ? $arrows : $arrows[$this->getBeat($curbeat)];
     
-    $pcounter = 0;    
+    $pcounter = 0;
     foreach (str_split($row) as $let): # For each note in the row
     
-    $nx = (intval($mcounter / $this->mpcol) * $w)
-      + $pcounter * $this->aw + $this->lb;
-    
-    $ny = $this->headheight + (($mcounter % $this->mpcol)
-      * $this->aw * $this->bm * $this->speedmod) + intval(round($curbeat));
+    $nx = (intval($mcounter / $this->mpcol) * $w) + $pcounter * $this->aw + $this->lb;
+    $ny = $this->headheight + ($mcounter % $this->mpcol) * $m + $curbeat;
     
     # Stepchart part here.
     
@@ -355,8 +340,7 @@ class EditCharter
             $node = $this->genSVGNode($ox, $hy, $bod, '', 1, $sy);
             $this->svg->appendChild($node);
             # Place the tap.
-            $node = $this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']);
-            $this->svg->appendChild($node);
+            $this->svg->appendChild($this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']));
             
             $ox += $w;
             $hy = $this->headheight;
@@ -364,16 +348,14 @@ class EditCharter
             {
               $range = $bot - $hy;
               $sy = $range / $this->aw;
-              $node = $this->genSVGNode($ox, $hy, $bod, '', 1, $sy);
-              $this->svg->appendChild($node);
+              $this->svg->appendChild($this->genSVGNode($ox, $hy, $bod, '', 1, $sy));
               $ox += $w;
             }
             # Now we're on the same column as the tail.
             $bot = $ny + $this->aw / 2;
             $range = $bot - $hy;
             $sy = $range / $this->aw;
-            $node = $this->genSVGNode($nx, $hy, $bod, '', 1, $sy);
-            $this->svg->appendChild($node);
+            $this->svg->appendChild($this->genSVGNode($nx, $hy, $bod, '', 1, $sy));
             $this->svg->appendChild($this->genUseNode($nx, $ny, $end));
           }
           else
@@ -384,14 +366,12 @@ class EditCharter
               $hy = $oy + $this->aw / 2;
               $range = $bot - $hy;
               $sy = $range / $this->aw;
-              $node = $this->genSVGNode($nx, $hy, $bod, '', 1, $sy);
-              $this->svg->appendChild($node);
+              $this->svg->appendChild($this->genSVGNode($nx, $hy, $bod, '', 1, $sy));
             }
             # Tail next
             $this->svg->appendChild($this->genUseNode($nx, $ny, $end));
             # Tap note last.
-            $node = $this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']);
-            $this->svg->appendChild($node);
+            $this->svg->appendChild($this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']));
           } 
         }
         else # Throw an error at some point.
@@ -430,7 +410,7 @@ class EditCharter
     endforeach;
   }
   
-  public function genChart($notedata, $kind = "classic")
+  public function genChart($notedata)
   {
     $measures = count($notedata['notes']);
     $this->genXMLHeader($measures);
@@ -438,7 +418,7 @@ class EditCharter
     $this->genMeasures($measures);
     if (!isset($this->nobpm)) $this->genBPM($notedata['id']);
     if (!isset($this->nostop)) $this->genStop($notedata['id']);
-    $this->genArrows($notedata['notes'], $kind);
+    $this->genArrows($notedata['notes']);
     return $this->xml;
   }
 }
