@@ -32,14 +32,8 @@ class EditCharter
         $this->red4 = 1;
       }
       
-      if (array_key_exists('nobpm', $params))
-      {
-        $this->nobpm = 1;
-      }
-      if (array_key_exists('nostop', $params))
-      {
-        $this->nostop = 1;
-      }
+      if (array_key_exists('nobpm', $params)) $this->nobpm = 1;
+      if (array_key_exists('nostop', $params)) $this->nostop = 1;
       
       $this->headheight = sfConfig::get('app_chart_header_height');
       $this->footheight = sfConfig::get('app_chart_footer_height');
@@ -75,19 +69,10 @@ class EditCharter
   {
     $base = sfConfig::get('app_chart_def_file');
     $use = $this->xml->createElement('use');
-    if ($x > 0)
-    {
-      $use->setAttribute('x', $x);
-    }
-    if ($y > 0)
-    {
-      $use->setAttribute('y', $y);
-    }
+    if ($x > 0) $use->setAttribute('x', $x);
+    if ($y > 0) $use->setAttribute('y', $y);
     $use->setAttribute('xlink:href', "$base#$id");
-    if (strlen($class) > 1)
-    {
-      $use->setAttribute('class', "$class");
-    }
+    if (strlen($class) > 1) $use->setAttribute('class', "$class");
     if (!($sx === 1 and $sy === 1))
     {
       $use->setAttribute('transform', "scale($sx $sy)");
@@ -123,7 +108,6 @@ class EditCharter
     
     // Calculate the height of the outer svg.
     $beatheight = sfConfig::get('app_chart_beat_height');
-    //$bpm = sfConfig::get('app_beat_p_measure');
         
     $height = $beatheight * $this->bm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
@@ -140,7 +124,6 @@ class EditCharter
     $beatheight = sfConfig::get('app_chart_beat_height'); // default beat height
     $spd = $this->speedmod; // speed mod: also affects columns.
     $breather = $this->lb + $this->rb;
-    $id = "measure";
     for ($i = 0; $i < $numcols; $i++)
     {
       $x = ($this->aw * $this->cols + $breather) * $i + $breather;
@@ -148,7 +131,7 @@ class EditCharter
       for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
       {
         $y = $beatheight * $j * $this->bm + $this->headheight;
-        $use = $this->genSVGNode($x, $y, $id, '', $sx);
+        $use = $this->genSVGNode($x, $y, "measure", '', $sx);
         $this->svg->appendChild($use);
       }
     }
@@ -282,14 +265,8 @@ class EditCharter
       {
         if (array_key_exists('red4', $this))
         {
-          if (intval($d) == 4)
-          {
-            $g = 'note_008';
-          }
-          elseif (intval($d) == 8)
-          {
-            $g = 'note_004';
-          }
+          if (intval($d) == 4) $g = 'note_008';
+          elseif (intval($d) == 8) $g = 'note_004';
           else $g = sprintf('note_%03d', intval($d));
         }
         else $g = sprintf('note_%03d', intval($d));
@@ -478,7 +455,6 @@ class EditCharter
     
     $mcounter++;
     endforeach;
-    
   }
   
   public function genChart($notedata, $kind = "classic")
@@ -487,14 +463,8 @@ class EditCharter
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
-    if (!isset($this->nobpm))
-    {
-      $this->genBPM($notedata['id']);
-    }
-    if (!isset($this->nostop))
-    {
-      $this->genStop($notedata['id']);
-    }
+    if (!isset($this->nobpm)) $this->genBPM($notedata['id']);
+    if (!isset($this->nostop)) $this->genStop($notedata['id']);
     $this->genArrows($notedata['notes'], $kind);
     return $this->xml;
   }
