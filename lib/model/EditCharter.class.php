@@ -25,6 +25,13 @@ class EditCharter
       $this->rb = sfConfig::get('app_chart_column_right_buffer');
       $this->aw = sfConfig::get('app_chart_arrow_width');
       $this->bm = sfConfig::get('app_chart_beat_p_measure');
+      
+      # Have the rhythm skin use red as the quarter note.
+      if (array_key_exists('red4', $params) and $params['red4'])
+      {
+        $this->red4 = 1;
+      }
+      
       if (array_key_exists('nobpm', $params))
       {
         $this->nobpm = 1;
@@ -273,7 +280,19 @@ class EditCharter
         '24th', '32nd', '48th', '64th');
       foreach ($div as $d)
       {
-        $g = sprintf('note_%03d', intval($d));
+        if (array_key_exists('red4', $this))
+        {
+          if (intval($d) == 4)
+          {
+            $g = 'note_008';
+          }
+          elseif (intval($d) == 8)
+          {
+            $g = 'note_004';
+          }
+          else $g = sprintf('note_%03d', intval($d));
+        }
+        else $g = sprintf('note_%03d', intval($d));
         $dl = array('a' => 'DL', 'c' => $g);
         $ul = array('a' => 'UL', 'c' => $g);
         $cn = array('a' => 'CN', 'c' => $g);
