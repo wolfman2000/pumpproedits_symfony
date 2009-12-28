@@ -2,17 +2,29 @@
 
 class EditCharter
 {
+  private $single;
+  private $double;
+  private $lb; # Left buffer
+  private $rb; # Right buffer
+  private $cw; # Width of column.
+  private $aw; # Arrow width
+  private $bm; # Beats per measure
   function __construct($params)
   {
-    $single = sfConfig::get('app_chart_single_cols');
-    $double = sfConfig::get('app_chart_double_cols');
-    if (!in_array($params['cols'], array($single, $double)))
+    $this->single = sfConfig::get('app_chart_single_cols');
+    $this->double = sfConfig::get('app_chart_double_cols');
+    
+    if (!in_array($params['cols'], array($this->single, $this->double)))
     {
       $e = "There must be either $single or $double columns in the chart!";
       throw new sfParseException($e);
     }
     else
     {
+      $this->lb = sfConfig::get('app_chart_column_left_buffer');
+      $this->rb = sfConfig::get('app_chart_column_right_buffer');
+      $this->aw = sfConfig::get('app_chart_arrow_width');
+      $this->bm = sfConfig::get('app_chart_beat_p_measure');
       if (array_key_exists('nobpm', $params))
       {
         $this->nobpm = 1;
@@ -44,6 +56,7 @@ class EditCharter
       }
       
       $this->cols = $params['cols'];
+      $this->cw = $this->cols * $this->aw;
       
       $this->xml = new DomDocument("1.0", "UTF-8");
       $this->xml->preserveWhiteSpace = false;
@@ -97,10 +110,8 @@ class EditCharter
     
     // Calculate the width of the outer svg.
     $numcols = ceil($measures / $this->mpcol);
-    $arrwidth = sfConfig::get('app_chart_arrow_width');
-    $breather = sfConfig::get('app_chart_column_sep');
-    $bpm = sfConfig::get('app_chart_beat_p_measure');
-    $width = ($arrwidth * $this->cols + $breather) * $numcols + $breather;
+    $breather = $this->lb + $this->rb;
+    $width = ($this->aw * $this->cols + $breather) * $numcols + $breather;
     $svg->setAttribute('width', $width);
     
     // Calculate the height of the outer svg.
@@ -110,7 +121,7 @@ class EditCharter
     assert($beatheight == 16);
     assert($this->speedmod == 2)/ # not changing default
     
-    $height = $beatheight * $bpm * $this->speedmod * $this->mpcol;
+    $height = $beatheight * $this->bm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
     $svg->setAttribute('height', $height);
     
@@ -123,21 +134,17 @@ class EditCharter
     $numcols = ceil($measures / $this->mpcol); // mpcol is measures per column
     $beatheight = sfConfig::get('app_chart_beat_height'); // default beat height
     $spd = $this->speedmod; // speed mod: also affects columns.
-    $bpm = sfConfig::get('app_chart_beat_p_measure');
-    $arrwidth = sfConfig::get('app_chart_arrow_width');
-    $breather = sfConfig::get('app_chart_column_sep'); // breather room
+    $breather = $this->lb + $this->rb;
     $id = "measure";
     for ($i = 0; $i < $numcols; $i++)
     {
-      $x = ($arrwidth * $this->cols + $breather) * $i + $breather;
-      $sx = 1;
+      $x = ($this->aw * $this->cols + $breather) * $i + $breather;
       $sx = $this->cols;
       for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
       {
-        $y = $beatheight * $j * $bpm + $this->headheight;
+        $y = $beatheight * $j * $this->bm + $this->headheight;
         $use = $this->genSVGNode($x, $y, $id, '', $sx);
         $this->svg->appendChild($use);
-        //break 1;
       }
     }
   }
@@ -145,8 +152,8 @@ class EditCharter
   private function genEditHeader($nd)
   {
     $text = $this->xml->createElement('text');
-    $buff = sfConfig::get('app_chart_column_sep');
-    $text->setAttribute('x', $buff);
+    $lbuff = $this->lb;
+    $text->setAttribute('x', $lbuff);
     $text->setAttribute('y', 16);
     $song = Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']);
     $st = sprintf("%s Edit for %s: %s - %s",
@@ -155,49 +162,49 @@ class EditCharter
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff);
+    $text->setAttribute('x', $lbuff);
     $text->setAttribute('y', 48);
     $text->appendChild($this->xml->createTextNode("Steps: " .$nd['steps']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff);
+    $text->setAttribute('x', $lbuff);
     $text->setAttribute('y', 80);
     $text->appendChild($this->xml->createTextNode("Jumps: " .$nd['jumps']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 1);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 1);
     $text->setAttribute('y', 48);
     $text->appendChild($this->xml->createTextNode("Holds: " .$nd['holds']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 1);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 1);
     $text->setAttribute('y', 80);
     $text->appendChild($this->xml->createTextNode("Mines: " .$nd['mines']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 2);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 2);
     $text->setAttribute('y', 48);
     $text->appendChild($this->xml->createTextNode("Trips: " .$nd['trips']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 2);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 2);
     $text->setAttribute('y', 80);
     $text->appendChild($this->xml->createTextNode("Rolls: " .$nd['rolls']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 3);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 3);
     $text->setAttribute('y', 48);
     $text->appendChild($this->xml->createTextNode("Lifts: " .$nd['lifts']));
     $this->svg->appendChild($text);
     
     $text = $this->xml->createElement('text');
-    $text->setAttribute('x', $buff + (sfConfig::get('app_chart_single_cols') * 16 + $buff) * 3);
+    $text->setAttribute('x', $lbuff + ($this->cw + $this->lb + $this->rb) * 3);
     $text->setAttribute('y', 80);
     $text->appendChild($this->xml->createTextNode("Fakes: " .$nd['fakes']));
     $this->svg->appendChild($text);
@@ -205,22 +212,20 @@ class EditCharter
   
   private function genBPM($id)
   {
-    $aw = sfConfig::get('app_chart_arrow_width');
-    $sep = sfConfig::get('app_chart_column_sep');
-    $m = sfConfig::get('app_chart_beat_p_measure');
-    $draw = $this->cols * $aw / 2;
+    $buff = $this->lb + $this->rb;
+    $draw = $this->cols * $this->aw / 2;
     foreach (Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id) as $b)
     {
       $beat = $b->beat;
       $bpm = $b->bpm;
-      $measure = $beat / $m;
+      $measure = $beat / $this->bm;
       $mpcol = $this->mpcol; # How many measures are in a column?
       $col = floor(floor($measure) / $mpcol); # Find the right column.
       $down = $measure % $mpcol; # Find the specific measure.
       
       
-      $lx = ($sep + ($this->cols * $aw)) * $col + $sep;
-      $ly = $down * $aw * $m * $this->speedmod + $this->headheight;
+      $lx = ($buff + ($this->cols * $this->aw)) * $col + $this->lb;
+      $ly = $down * $this->aw * $this->bm * $this->speedmod + $this->headheight;
       
       $line = $this->xml->createElement('line');
       $line->setAttribute('x1', $lx + $draw);
@@ -235,7 +240,7 @@ class EditCharter
         $bpm = trim(trim($bpm, '0'), '.');
         $text = $this->xml->createElement('text');
         $text->setAttribute('x', $lx + $draw + $draw );
-        $text->setAttribute('y', $ly + $m);
+        $text->setAttribute('y', $ly + $this->bm);
         $text->setAttribute('class', 'bpm');
         $text->appendChild($this->xml->createTextNode($bpm));
         $this->svg->appendChild($text);
@@ -258,7 +263,7 @@ class EditCharter
       $ur = array('a' => 'UR', 'c' => 'grad_008');
       $dr = array('a' => 'DR', 'c' => 'grad_004');
       $ret = array($dl, $ul, $cn, $ur, $dr);
-      if ($this->cols == sfConfig::get('app_chart_double_cols'))
+      if ($this->cols == $this->double)
       {
         array_push($ret, $dl, $ul, $cn, $ur, $dr);
       }
@@ -269,7 +274,6 @@ class EditCharter
       $ret = array();
       $div = array('4th', '8th', '12th', '16th',
         '24th', '32nd', '48th', '64th');
-      $double = sfConfig::get('app_chart_double_cols');
       foreach ($div as $d)
       {
         $g = sprintf('grad_%03d', intval($d));
@@ -279,7 +283,7 @@ class EditCharter
         $ur = array('a' => 'UR', 'c' => $g);
         $dr = array('a' => 'DR', 'c' => $g);
         $ret[$d] = array($dl, $ul, $cn, $ur, $dr);
-        if ($this->cols == $double)
+        if ($this->cols == $this->double)
         {
           array_push($ret[$d], $dl, $ul, $cn, $ur, $dr);
         }
@@ -298,6 +302,7 @@ class EditCharter
       $holds[] = array('on' => false, 'hold' => true,
         'x' => 0, 'y' => 0, 'beat' => 0);
     }
+    
   }
   
   public function genChart($notedata, $kind = "classic")
