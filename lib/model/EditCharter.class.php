@@ -124,6 +124,7 @@ class EditCharter
     $height = $beatheight * $this->bm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
     $svg->setAttribute('height', $height);
+    $this->svgheight = $height;
     
     $this->xml->appendChild($svg);
     $this->svg = $svg; # Will be used for arrow placements.
@@ -223,7 +224,6 @@ class EditCharter
       $col = floor(floor($measure) / $mpcol); # Find the right column.
       $down = $measure % $mpcol; # Find the specific measure.
       
-      
       $lx = ($buff + ($this->cols * $this->aw)) * $col + $this->lb;
       $ly = $down * $this->aw * $this->bm * $this->speedmod + $this->headheight;
       
@@ -257,11 +257,11 @@ class EditCharter
   {
     if ($kind == "classic")
     {
-      $dl = array('a' => 'DL', 'c' => 'grad_004');
-      $ul = array('a' => 'UL', 'c' => 'grad_008');
-      $cn = array('a' => 'CN', 'c' => 'grad_016');
-      $ur = array('a' => 'UR', 'c' => 'grad_008');
-      $dr = array('a' => 'DR', 'c' => 'grad_004');
+      $dl = array('a' => 'DL', 'c' => 'note_004');
+      $ul = array('a' => 'UL', 'c' => 'note_008');
+      $cn = array('a' => 'CN', 'c' => 'note_016');
+      $ur = array('a' => 'UR', 'c' => 'note_008');
+      $dr = array('a' => 'DR', 'c' => 'note_004');
       $ret = array($dl, $ul, $cn, $ur, $dr);
       if ($this->cols == $this->double)
       {
@@ -276,7 +276,7 @@ class EditCharter
         '24th', '32nd', '48th', '64th');
       foreach ($div as $d)
       {
-        $g = sprintf('grad_%03d', intval($d));
+        $g = sprintf('note_%03d', intval($d));
         $dl = array('a' => 'DL', 'c' => $g);
         $ul = array('a' => 'UL', 'c' => $g);
         $cn = array('a' => 'CN', 'c' => $g);
@@ -321,28 +321,139 @@ class EditCharter
     }
     $w = $this->cw + $this->lb + $this->rb; # width + buffers.
     
-    $mcounter = 0;
-    
     /* Use colon format here: otherwise, gets too unwieldy. */
+    
+    $mcounter = 0;    
     foreach ($notes as $measure):
     
     $rcounter = 0;
     foreach ($measure as $row):
     
-    $curbeat = $this->aw * $this->speedmod
-      * $this->bm * $rcounter / count($row);
+    $curbeat = intval($this->aw * $this->speedmod
+      * $this->bm * $rcounter / count($measure));
+      
     $arow = $kind == "classic" ? $arrows : $arrows($this->getBeat($curbeat));
     
-    $pcounter = 0;
-    
+    $pcounter = 0;    
     foreach (str_split($row) as $let): # For each note in the row
     
     $nx = (intval($mcounter / $this->mpcol) * $w)
-      + $pcounter * $this->cw + $this->cw;
+      + $pcounter * $this->aw + $this->lb;
+    
     $ny = $this->headheight + (($mcounter % 6)
-      * $this->cw * $this->bm * $this->speedmod) + $curbeat;
+      * $this->aw * $this->bm * $this->speedmod) + intval(round($curbeat));
     
     # Stepchart part here.
+    
+    switch ($let)
+    {
+      case "F": # Fake note. Not yet available.
+      {
+        $holds[$pcounter]['on'] = false;
+        break;
+      }
+      case "L": # Lift note. Can be placed in chart. No image yet.
+      {
+        $holds[$pcounter]['on'] = false;
+        break;
+      }
+      case "M": # Mine. Don't step on these!
+      {
+        $holds[$pcounter]['on'] = false;
+        $this->svg->appendChild($this->genUseNode($nx, $ny, "mine"));
+        break;
+      }
+      case "2": case "4": # Start of hold/roll. Minor differences.
+      {
+        $holds[$pcounter]['on'] = true;
+        $holds[$pcounter]['roll'] = $let == "2" ? false : true;
+        $holds[$pcounter]['x'] = $nx;
+        $holds[$pcounter]['y'] = $ny;
+        $holds[$pcounter]['beat'] = $arow;
+        break;
+      }
+      case "1": # Tap note. Just add to the chart.
+      {
+        $id = $arow[$pcounter]['a'] . "arrow";
+        $cl = $arow[$pcounter]['c'];
+        #echo "$nx $ny $id $cl"; exit;
+        $this->svg->appendChild($this->genUseNode($nx, $ny, $id, $cl));
+        break;
+      }
+      case "3": # End of hold/roll. VERY complicated!
+      {
+        if ($holds[$pcounter]['on'])
+        {
+          $id = $holds[$pcounter]['roll'] ? "roll" : "hold";
+          $bod = "{$id}_bdy";
+          $end = "{$id}_end";
+          $a = $holds[$pcounter]['beat'][$pcounter];
+          
+          $ox = $holds[$pcounter]['x'];
+          $oy = $holds[$pcounter]['y'];
+          
+          # First: check if tap note was on previous column.
+          if ($holds[$pcounter]['x'] < $nx)
+          {
+            # Body goes first.
+            
+            # Calculate the scale for the hold.
+            $bot = $this->svgheight - $this->aw;
+            $hy = $oy + $this->aw / 2;
+            $range = $bot - $hy;
+            $sy = $range / $this->aw;
+            
+            $node = $this->genSVGNode($ox, $hy, $bod, '', 1, $sy);
+            $this->svg->appendChild($node);
+            # Place the tap.
+            $node = $this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']);
+            $this->svg->appendChild($node);
+            
+            $ox += $w;
+            $hy = $this->headheight;
+            while ($ox < $nx)
+            {
+              $range = $bot - $hy;
+              $sy = $range / $this->aw;
+              $node = $this->genSVGNode($ox, $hy, $bod, '', 1, $sy);
+              $this->svg->appendChild($node);
+              $ox += $w;
+            }
+            # Now we're on the same column as the tail.
+            $bot = $ny + $this->aw / 2;
+            $range = $bot - $hy;
+            $sy = $range / $this->aw;
+            $node = $this->genSVGNode($nx, $hy, $bod, '', 1, $sy);
+            $this->svg->appendChild($node);
+            $this->svg->appendChild($this->genUseNode($nx, $ny, $end));
+          }
+          else
+          {
+            if ($ny - $oy >= intval($this->aw / 2)) # Make this variable
+            {
+              $bot = $ny + $this->aw / 2;
+              $hy = $oy + $this->aw / 2;
+              $range = $bot - $hy;
+              $sy = $range / $this->aw;
+              $node = $this->genSVGNode($nx, $hy, $bod, '', 1, $sy);
+              $this->svg->appendChild($node);
+            }
+            # Tail next
+            $this->svg->appendChild($this->genUseNode($nx, $ny, $end));
+            # Tap note last.
+            $node = $this->genUseNode($ox, $oy, $a['a'] . "arrow", $a['c']);
+            $this->svg->appendChild($node);
+          } 
+        }
+        else # Throw an error at some point.
+        {
+          $id = $arow[$pcounter]['a'] . "arrow";
+          $cl = $arow[$pcounter]['c'];
+          $this->svg->appendChild($this->genUseNode($nx, $ny, $id, $cl));
+        }
+        break;
+      }
+    }
     
     $pcounter++;
     endforeach;
