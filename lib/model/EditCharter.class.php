@@ -248,6 +248,11 @@ class EditCharter
   
   }
   
+  private function genArrows($notes, $kind)
+  {
+  
+  }
+  
   public function genChart($notedata, $kind = "classic")
   {
     $measures = count($notedata['notes']);
@@ -264,8 +269,7 @@ class EditCharter
       $this->genStop($notedata['id']);
     }
     
-    //$chart = $this->load_base($notedata['style'], $measures);
-    
+    $this->genArrows($notedata['notes'], $kind);
     return $this->xml;
   }
 }
