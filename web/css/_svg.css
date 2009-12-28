@@ -133,7 +133,19 @@ text
 }
 .bpm
 {
-  stroke: blue;
-  stroke-width: 0.3;
   font-size: 8px;
+}
+line.bpm
+{
+  stroke: blue;
+  stroke-width: 0.5;
+}
+.stop
+{
+  font-size: 8px;
+}
+line.stop
+{
+  stroke: red;
+  stroke-width: 0.5;
 }
