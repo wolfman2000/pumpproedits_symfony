@@ -180,7 +180,7 @@ class EditCharter
       $measure = $beat / $this->bm;
       $mpcol = $this->mpcol; # How many measures are in a column?
       $col = floor(floor($measure) / $mpcol); # Find the right column.
-      $down = $measure % $mpcol; # Find the specific measure.
+      $down = $measure % $mpcol + $measure - floor($measure); # Find the specific measure.
       
       $lx = ($buff + ($this->cols * $this->aw)) * $col + $this->lb;
       $ly = $down * $this->aw * $this->bm * $this->speedmod + $this->headheight;
