@@ -223,7 +223,7 @@ class EditParser
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
-        $notes['measure'][] = $row;
+        $notes[$measure][] = $row;
 
         for ($i = 0; $i < $cols; $i++)
         {
