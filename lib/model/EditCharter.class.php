@@ -223,13 +223,23 @@ class EditCharter
       $ly = $down * $aw * $m * $this->speedmod + $this->headheight;
       
       $line = $this->xml->createElement('line');
-      $line->setAttribute('x1', $lx);
+      $line->setAttribute('x1', $lx + $draw);
       $line->setAttribute('y1', $ly);
-      $line->setAttribute('x2', $lx + $draw);
+      $line->setAttribute('x2', $lx + $draw + $draw);
       $line->setAttribute('y2', $ly);
       $line->setAttribute('class', 'bpm');
-      
       $this->svg->appendChild($line);
+      
+      if (isset($bpm))
+      {
+        $bpm = trim(trim($bpm, '0'), '.');
+        $text = $this->xml->createElement('text');
+        $text->setAttribute('x', $lx + $draw + $draw );
+        $text->setAttribute('y', $ly + $m);
+        $text->setAttribute('class', 'bpm');
+        $text->appendChild($this->xml->createTextNode($bpm));
+        $this->svg->appendChild($text);
+      }
     }
   }
   
