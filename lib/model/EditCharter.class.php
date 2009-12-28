@@ -205,7 +205,14 @@ class EditCharter
   
   private function genBPM($id)
   {
-  
+    $line = $this->cols * sfConfig::get('app_chart_arrow_width') / 2;
+    foreach (Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id) as $b)
+    {
+      $beat = $b->beat;
+      $bpm = $b->bpm;
+      
+      
+    }
   }
   
   private function genStop($id)
