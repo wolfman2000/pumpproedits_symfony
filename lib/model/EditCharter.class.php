@@ -13,6 +13,15 @@ class EditCharter
     }
     else
     {
+      if (array_key_exists('nobpm', $params))
+      {
+        $this->nobpm = 1;
+      }
+      if (array_key_exists('nostop', $params))
+      {
+        $this->nostop = 1;
+      }
+      
       $this->headheight = sfConfig::get('app_chart_header_height');
       $this->footheight = sfConfig::get('app_chart_footer_height');
       if (array_key_exists('footer_height', $params))
@@ -194,12 +203,32 @@ class EditCharter
     $this->svg->appendChild($text);
   }
   
+  private function genBPM($id)
+  {
+  
+  }
+  
+  private function genStop($id)
+  {
+  
+  }
+  
   public function genChart($notedata, $kind = "classic")
   {
     $measures = count($notedata['notes']);
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
+    
+    if (!isset($this->nobpm))
+    {
+      $this->genBPM($notedata['id']);
+    }
+    if (!isset($this->nostop))
+    {
+      $this->genStop($notedata['id']);
+    }
+    
     //$chart = $this->load_base($notedata['style'], $measures);
     
     return $this->xml;
