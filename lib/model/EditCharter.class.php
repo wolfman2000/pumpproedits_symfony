@@ -331,8 +331,21 @@ class EditCharter
     
     $curbeat = $this->aw * $this->speedmod
       * $this->bm * $rcounter / count($row);
-    
     $arow = $kind == "classic" ? $arrows : $arrows($this->getBeat($curbeat));
+    
+    $pcounter = 0;
+    
+    foreach (str_split($row) as $let): # For each note in the row
+    
+    $nx = (intval($mcounter / $this->mpcol) * $w)
+      + $pcounter * $this->cw + $this->cw;
+    $ny = $this->headheight + (($mcounter % 6)
+      * $this->cw * $this->bm * $this->speedmod) + $curbeat;
+    
+    # Stepchart part here.
+    
+    $pcounter++;
+    endforeach;
     
     $rcounter++;
     endforeach;
@@ -340,22 +353,6 @@ class EditCharter
     $mcounter++;
     endforeach;
     
-    /*
-    for cnt, mes in enumerate(notes): # For each measure in the note data:
-        #gc.collect()
-        for ind, row in enumerate(mes): # For each row in the measure.
-            curbeat = (MUL * 8) * ind / len(mes)
-            beatrow = None if kind == "classic" \
-                           else arrows[_rhythm_line(curbeat)]
-            
-#            if cnt == 14 and ind == 1:
-#                raise Exception("Checking")
-            
-            for pos, let in enumerate(row): # For each note in the row.
-                newx = (int(cnt / 6) * width) + pos * MUL + MUL
-                newy = TOP + ((cnt % 6) * MUL * 8) + int(round(curbeat))
-                _view_step(chart, (pos, let), (newx, newy))
-    */
   }
   
   public function genChart($notedata, $kind = "classic")
@@ -364,7 +361,6 @@ class EditCharter
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
-    
     if (!isset($this->nobpm))
     {
       $this->genBPM($notedata['id']);
@@ -373,7 +369,6 @@ class EditCharter
     {
       $this->genStop($notedata['id']);
     }
-    
     $this->genArrows($notedata['notes'], $kind);
     return $this->xml;
   }
