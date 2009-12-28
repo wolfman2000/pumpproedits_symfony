@@ -80,7 +80,7 @@ g#DLarrow > line, g#ULarrow > line, g#URarrow > line, g#DRarrow > line
 g#hold_bdy > rect, g#hold_end > path
 {
   fill-opacity: 1;
-  fill:aqua;
+  fill:darkblue;
   stroke:none;
 }
 g#roll_bdy > rect, g#roll_end > path
