@@ -129,3 +129,8 @@ text
   font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
   font-size: 0.8em;
 }
+line.bpm
+{
+  stroke: blue;
+  stroke-width: 0.2;
+}

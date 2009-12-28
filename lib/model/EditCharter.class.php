@@ -205,13 +205,31 @@ class EditCharter
   
   private function genBPM($id)
   {
-    $line = $this->cols * sfConfig::get('app_chart_arrow_width') / 2;
+    $aw = sfConfig::get('app_chart_arrow_width');
+    $sep = sfConfig::get('app_chart_column_sep');
+    $m = sfConfig::get('app_chart_beat_p_measure');
+    $draw = $this->cols * $aw / 2;
     foreach (Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id) as $b)
     {
       $beat = $b->beat;
       $bpm = $b->bpm;
+      $measure = $beat / $m;
+      $mpcol = $this->mpcol; # How many measures are in a column?
+      $col = floor(floor($measure) / $mpcol); # Find the right column.
+      $down = $measure % $mpcol; # Find the specific measure.
       
       
+      $lx = ($sep + ($this->cols * $aw)) * $col + $sep;
+      $ly = $down * $aw * $m * $this->speedmod + $this->headheight;
+      
+      $line = $this->xml->createElement('line');
+      $line->setAttribute('x1', $lx);
+      $line->setAttribute('y1', $ly);
+      $line->setAttribute('x2', $lx + $draw);
+      $line->setAttribute('y2', $ly);
+      $line->setAttribute('class', 'bpm');
+      
+      $this->svg->appendChild($line);
     }
   }
   
