@@ -257,13 +257,19 @@ class EditCharter
       $cn = array('a' => 'CN', 'c' => 'grad_016');
       $ur = array('a' => 'UR', 'c' => 'grad_008');
       $dr = array('a' => 'DR', 'c' => 'grad_004');
-      return array($dl, $ul, $cn, $ur, $dr);
+      $ret = array($dl, $ul, $cn, $ur, $dr);
+      if ($this->cols == sfConfig::get('app_chart_double_cols'))
+      {
+        array_push($ret, $dl, $ul, $cn, $ur, $dr);
+      }
+      return $ret;
     }
     if ($kind == "rhythm")
     {
       $ret = array();
       $div = array('4th', '8th', '12th', '16th',
         '24th', '32nd', '48th', '64th');
+      $double = sfConfig::get('app_chart_double_cols');
       foreach ($div as $d)
       {
         $g = sprintf('grad_%03d', intval($d));
@@ -273,6 +279,10 @@ class EditCharter
         $ur = array('a' => 'UR', 'c' => $g);
         $dr = array('a' => 'DR', 'c' => $g);
         $ret[$d] = array($dl, $ul, $cn, $ur, $dr);
+        if ($this->cols == $double)
+        {
+          array_push($ret[$d], $dl, $ul, $cn, $ur, $dr);
+        }
       }
       return $ret;
     }
@@ -283,6 +293,11 @@ class EditCharter
   private function genArrows($notes, $kind)
   {
     $arrows = $this->prepArrows($kind);
+    for ($i = 0; $i < $this->cols; $i++)
+    {
+      $holds[] = array('on' => false, 'hold' => true,
+        'x' => 0, 'y' => 0, 'beat' => 0);
+    }
   }
   
   public function genChart($notedata, $kind = "classic")
