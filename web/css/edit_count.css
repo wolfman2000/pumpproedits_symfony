@@ -1,0 +1,29 @@
+@import "main.css";
+
+#count_table
+{
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+#count_table > caption
+{
+    margin-bottom: 10px;
+}
+#count_table > thead > tr > th
+{
+    font-weight: normal;
+    font-style: italic;
+}
+#count_table > thead > tr > th, #count_table > tbody > tr > td
+{
+    border: 2px solid #003366;
+}
+#count_table > tbody > tr > td:first-child
+{
+    padding: 3px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans;    
+}
+#count_table > tbody > tr > td:first-child + td
+{
+	text-align: right;
+}
