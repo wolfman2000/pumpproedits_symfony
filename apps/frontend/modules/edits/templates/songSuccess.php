@@ -1,19 +1,9 @@
-<?php slot('title', 'Edit List by Song Page $page — Pump Pro Edits');
-slot('h2', "<h2>Edits</h2>"); ?>
+<?php slot('title', 'Edit List by Song — Pump Pro Edits');
+slot('h2', "<h2>Edits by Song</h2>"); ?>
 
-<p>Proper content to come shortly.</p>
+<p>Below are all of the songs that have edits available.
+If a song you like doesn't have an edit, feel free to 
+contribute one yourself.</p>
 
-<table>
-<thead><tr>
-<th>Song</th>
-<th>Num Edits</th>
-</tr></thead>
-<tbody>
-<?php foreach($songs as $s): ?>
-<tr>
-<td><?php echo $s->core ?></td>
-<td><?php echo $s->num_edits ?></td>
-</tr>
-<?php endforeach; ?>
-</tbody>
-</table>
+<?php $data = array('query' => $songs, 'what' => 'Song');
+include_partial('edits/count_table', $data) ?>
