@@ -47,7 +47,7 @@ if ($z->rolls): ?>
 </dl>
 </td>
 <td><ul>
-<li>Download</li>
+<li><?php echo link_to("Download", "@edit_download?id=$z->id") ?></li>
 <li>View Ratings</li>
 <li>See Charts</li>
 </ul></td>

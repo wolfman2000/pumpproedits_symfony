@@ -55,6 +55,27 @@ class editsActions extends sfActions
   // Download the edit
   public function executeDownload(sfWebRequest $request)
   {
-  
+    $id = $request->getParameter('id');
+    if (!(is_numeric($id)))
+    {
+      $response = $this->getResponse();
+      $response->setStatusCode(409);
+      $this->id = $request->getParameter('id');
+      return sfView::ERROR;
+    }
+    $id = sprintf("%06d", $id);
+    $name = sprintf("edit_%s.edit", $id);
+    $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $name);
+    $file = file_get_contents($path);
+
+    $response = $this->getResponse();
+    $response->clearHttpHeaders();
+    $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
+    $response->setHttpHeader('Content-Length', strlen($file));
+    $response->setHttpHeader('Content-Type', 'application/edit');
+    $response->sendHttpHeaders();
+    $response->setContent($file);
+
+    return sfView::NONE;
   }
 }
