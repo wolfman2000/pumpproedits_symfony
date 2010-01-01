@@ -4,10 +4,11 @@
     <th><?php echo $what ?></th>
     <th>Edit Count</th>
   </tr></thead>
+  <?php $what = strtolower($what) ?>
   <tbody>
     <?php foreach ($query as $b): ?>
     <tr>
-      <td><?php echo $b->core ?></td>
+      <td><?php echo link_to($b->core, "@edit_c$what?id=$b->id") ?></td>
       <td><?php echo $b->num_edits ?></td>
     </tr>
     <?php endforeach; ?>

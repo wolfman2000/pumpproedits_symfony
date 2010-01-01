@@ -35,7 +35,8 @@ class editsActions extends sfActions
   // View edits of the chosen user
   public function executeChosenUser(sfWebRequest $request)
   {
-  
+    $sid = $request->getParameter('sid');
+    $this->songs = Doctrine::getTable('PPE_Edit_Edit')->getEditsBySong($sid);
   }
   
   public function executeUser(sfWebRequest $request)
