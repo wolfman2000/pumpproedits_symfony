@@ -26,6 +26,18 @@ class editsActions extends sfActions
     $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithEdits();
   }
   
+  // View edits of the chosen song
+  public function executeChosenSong(sfWebRequest $request)
+  {
+  
+  }
+  
+  // View edits of the chosen user
+  public function executeChosenUser(sfWebRequest $request)
+  {
+  
+  }
+  
   public function executeUser(sfWebRequest $request)
   {
     
