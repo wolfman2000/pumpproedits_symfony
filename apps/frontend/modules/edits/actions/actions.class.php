@@ -29,14 +29,15 @@ class editsActions extends sfActions
   // View edits of the chosen song
   public function executeChosenSong(sfWebRequest $request)
   {
-  
+    $sid = $request->getParameter('id');
+    $this->song = Doctrine::getTable('PPE_Song_Song')->getSongByID($sid);
+    $this->songs = Doctrine::getTable('PPE_Edit_Edit')->getEditsBySong($sid);
   }
   
   // View edits of the chosen user
   public function executeChosenUser(sfWebRequest $request)
   {
-    $sid = $request->getParameter('sid');
-    $this->songs = Doctrine::getTable('PPE_Edit_Edit')->getEditsBySong($sid);
+    
   }
   
   public function executeUser(sfWebRequest $request)
