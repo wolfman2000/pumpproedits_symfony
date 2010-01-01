@@ -17,13 +17,13 @@ class editsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('edits', 'song');
+    $this->forward('edits', 'song');
   }
   
   // Viewing songs
   public function executeSong(sfWebRequest $request)
   {
-    
+    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithEdits();
   }
   
   public function executeUser(sfWebRequest $request)
