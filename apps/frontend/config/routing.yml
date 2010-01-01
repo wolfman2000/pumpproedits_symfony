@@ -176,11 +176,17 @@ edits:
 
 # Edits by song:
 edit_song:
-  url: /edits/song
+  url: /songs
   param:
     module: edits
     action: song
-    page: 1
+
+# Edits by user
+edit_user:
+  url: /users
+  param:
+    module: edits
+    action: user
 
 # Download the chosen edit
 edit_download:
