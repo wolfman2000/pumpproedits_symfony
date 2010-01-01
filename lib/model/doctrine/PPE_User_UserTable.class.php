@@ -71,4 +71,11 @@ class PPE_User_UserTable extends Doctrine_Table
       ->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
     return $q['name'];
   }
+  
+  public function getUsersWithEdits()
+  {
+    return $this->createQuery('a')->select('name core, num_edits')
+      ->where('num_edits > ?', 0)
+      ->orderBy('lc_name')->execute();
+  }
 }
