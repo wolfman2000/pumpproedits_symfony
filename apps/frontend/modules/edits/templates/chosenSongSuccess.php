@@ -8,6 +8,7 @@ Feel free to preview, download, play, and rate.</p>
 <caption>Edits of <?php echo $song ?></caption>
 <thead><tr>
 <th>User</th>
+<th>Title</th>
 <th>Stats</th>
 <th>Actions</th>
 </tr></thead>
@@ -15,6 +16,7 @@ Feel free to preview, download, play, and rate.</p>
 <?php foreach ($songs as $z): ?>
 <tr>
 <td><?php echo link_to($z->uname, "@edit_cuser?id=$z->user_id") ?></td>
+<td><?php echo $z->title ?></td>
 <td>Steps: <?php echo $z->steps ?></td>
 <td>Download</td>
 </tr>
