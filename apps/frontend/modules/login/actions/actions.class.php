@@ -34,12 +34,14 @@ class loginActions extends sfActions
       
       if (!$id)
       {
+        $this->getUser()->signOut();
         $this->getResponse()->setStatusCode(409);
         $this->data = array("Make sure you put in the username and password correctly.");
         return sfView::ERROR;      
       }
       elseif ($roleT->getIsUserBanned($id))
       {
+        $this->getUser()->signOut();
         $this->getResponse()->setStatusCode(409);
         $this->data = array("You are not allowed to contribute to the website.");
         $this->noshow = 1;
@@ -53,6 +55,7 @@ class loginActions extends sfActions
     }
     else
     {
+      $this->getUser()->signOut();
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }
