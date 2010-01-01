@@ -1,5 +1,13 @@
 <table id="edits" summary="<?php echo $summary ?>">
 <caption><?php echo $caption ?></caption>
+<?php if (isset($showuser) and isset($showsong)): ?>
+<col span="2" />
+<?php elseif (isset($showuser) or isset($showsong)): ?>
+<col />
+<?php endif; ?>
+<col />
+<col id="statcol" />
+<col />
 <thead><tr>
 <?php if (isset($showuser)): ?><th>User</th><?php endif; ?>
 <th>Title</th>

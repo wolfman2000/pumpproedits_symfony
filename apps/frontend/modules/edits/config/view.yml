@@ -3,3 +3,9 @@ songSuccess:
 
 userSuccess:
   stylesheets: [edit_count.css]
+
+chosenSongSuccess:
+  stylesheets: [edit_table.css]
+
+chosenUserSuccess:
+  stylesheets: [edit_table.css]

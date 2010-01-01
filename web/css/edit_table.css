@@ -1,0 +1,29 @@
+@import "main.css";
+
+#edits
+{
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+#edits > caption
+{
+    margin-bottom: 10px;
+}
+#edits > col#statcol
+{
+    width: 10em;
+}
+#edits > thead > tr > th
+{
+    font-weight: normal;
+    font-style: italic;
+}
+#edits > thead > tr > th, #edits > tbody > tr > td
+{
+    border: 2px solid #003366;
+}
+#edits > tbody > tr > td:first-child
+{
+    padding: 3px;
+    font-family: "DejaVu Sans", Arial, Helvetica, sans;    
+}
