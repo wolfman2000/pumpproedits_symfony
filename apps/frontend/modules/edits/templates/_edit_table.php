@@ -18,7 +18,7 @@
 <?php foreach ($query as $z): ?>
 <tr>
 <?php if (isset($showuser)): ?>
-<td><?php echo link_to($z->uname, "@edit_cuser?id=$z->user_id") ?></td>
+<td><?php echo link_to($z->uname, "@edit_cuser?id=" . $z->user_id) ?></td>
 <?php endif; ?>
 <td><?php echo $z->title ?></td>
 <td>
