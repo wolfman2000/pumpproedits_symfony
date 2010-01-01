@@ -10,6 +10,7 @@
 <col />
 <thead><tr>
 <?php if (isset($showuser)): ?><th>User</th><?php endif; ?>
+<?php if (isset($showsong)): ?><th>Song</th><?php endif; ?>
 <th>Title</th>
 <th>Stats</th>
 <th>Actions</th>
@@ -19,6 +20,9 @@
 <tr>
 <?php if (isset($showuser)): ?>
 <td><?php echo link_to($z->uname, "@edit_cuser?id=" . $z->user_id) ?></td>
+<?php endif;
+if (isset($showsong)): ?>
+<td><?php echo link_to($z->sname, "@edit_csong?id=" . $z->song_id) ?></td>
 <?php endif; ?>
 <td><?php echo $z->title ?></td>
 <td>
@@ -42,7 +46,11 @@ if ($z->rolls): ?>
 <?php endif; ?>
 </dl>
 </td>
-<td>Download</td>
+<td><ul>
+<li>Download</li>
+<li>View Ratings</li>
+<li>See Charts</li>
+</ul></td>
 </tr>
 <?php endforeach; ?>
 </tbody>

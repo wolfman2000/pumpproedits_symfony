@@ -14,4 +14,17 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->execute();
       
   }
+  
+  public function getEditsByUser($userid)
+  {
+    $cols = 'diff, steps, jumps, holds, mines, trips, rolls, fakes, lifts';
+    $cols .= ', song_id, b.name sname, title, is_single';
+    return $this->createQuery('a')
+      ->select($cols)
+      ->innerJoin('a.PPE_Song_Song b')
+      ->where('user_id = ?', $userid)
+      ->orderBy('b.lc_name, a.title')
+      ->execute();
+      
+  }
 }
