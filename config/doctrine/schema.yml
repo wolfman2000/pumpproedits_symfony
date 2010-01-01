@@ -113,7 +113,13 @@ PPE_User_Condiment:
     charset: utf8
 
 PPE_Song_Song:
-  actAs: { Timestampable: ~ }
+  actAs:
+    Timestampable:
+    CountCache:
+      relations:
+        PPE_Edit_Edit:
+          columnName: num_edits
+          foreignAlias: Edits
   columns:
     name:
       type: string
@@ -220,6 +226,7 @@ PPE_Edit_Edit:
   actAs:
     Timestampable:
     SoftDelete:
+    #CountCache: ~
   columns:
     user_id:
       type: integer
