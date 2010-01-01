@@ -188,6 +188,8 @@ edit_csong:
     module: edits
     action: chosenSong
     page: 1
+  requirements:
+    id: \d+
 
 # Edits by user
 edit_user:
@@ -203,6 +205,8 @@ edit_cuser:
     module: edits
     action: chosenUser
     page: 1
+  requirements:
+    id: \d+
 
 # Download the chosen edit
 edit_download:
