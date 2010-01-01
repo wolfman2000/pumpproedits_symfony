@@ -23,7 +23,7 @@
 <td><?php echo $z->title ?></td>
 <td>
 <dl>
-<dt>Style</dt><dd><?php echo $z->is_single ? "S" : "D" . $z->diff ?></dd>
+<dt>Style</dt><dd><?php echo ($z->is_single ? "S" : "D") . $z->diff ?></dd>
 <dt>Steps</dt><dd><?php echo $z->steps ?></dd>
 <dt>Jumps</dt><dd><?php echo $z->jumps ?></dd>
 <dt>Holds</dt><dd><?php echo $z->holds ?></dd>
