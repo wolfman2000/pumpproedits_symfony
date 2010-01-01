@@ -25,11 +25,21 @@
 <dl>
 <dt>Style</dt><dd><?php echo ($z->is_single ? "S" : "D") . $z->diff ?></dd>
 <dt>Steps</dt><dd><?php echo $z->steps ?></dd>
+<?php if ($z->jumps): ?>
 <dt>Jumps</dt><dd><?php echo $z->jumps ?></dd>
+<?php endif;
+if ($z->holds): ?>
 <dt>Holds</dt><dd><?php echo $z->holds ?></dd>
+<?php endif;
+if ($z->mines): ?>
 <dt>Mines</dt><dd><?php echo $z->mines ?></dd>
+<?php endif;
+if ($z->trips): ?>
 <dt>Trips</dt><dd><?php echo $z->trips ?></dd>
+<?php endif;
+if ($z->rolls): ?>
 <dt>Rolls</dt><dd><?php echo $z->rolls ?></dd>
+<?php endif; ?>
 </dl>
 </td>
 <td>Download</td>
