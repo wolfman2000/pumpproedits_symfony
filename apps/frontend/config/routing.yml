@@ -148,6 +148,30 @@ edits:
     module: edits
     action: index
 
+# Edits by song:
+edit_song:
+  url: /edits/song
+  param:
+    module: edits
+    action: song
+    page: 1
+
+# Download the chosen edit
+edit_download:
+  url: /edits/download/:id
+  param:
+    module: edits
+    action: download
+  requirements:
+    id: \d+
+
+# Illegal edit download
+edit_download_404:
+  url: /edits/download/*
+  param:
+    module: edits
+    action: download
+
 # Registration page
 register_get:
   url: /register
