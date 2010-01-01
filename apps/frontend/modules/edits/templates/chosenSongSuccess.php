@@ -14,7 +14,7 @@ Feel free to preview, download, play, and rate.</p>
 <tbody>
 <?php foreach ($songs as $z): ?>
 <tr>
-<td><?php echo $z->user_id ?></td>
+<td><?php echo link_to($z->uname, "@edit_cuser?id=$z->user_id") ?></td>
 <td>Steps: <?php echo $z->steps ?></td>
 <td>Download</td>
 </tr>
