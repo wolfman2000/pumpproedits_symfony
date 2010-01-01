@@ -90,6 +90,16 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              'foreign' => 'song_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $lowercase0 = new Lowercase(array(
+             'columns' => 
+             array(
+              'name' => 
+              array(
+              'columnName' => 'lc_name',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($lowercase0);
     }
 }

@@ -115,6 +115,10 @@ PPE_User_Condiment:
 PPE_Song_Song:
   actAs:
     Timestampable:
+    Lowercase:
+      columns:
+        name:
+          columnName: lc_name
   columns:
     name:
       type: string
