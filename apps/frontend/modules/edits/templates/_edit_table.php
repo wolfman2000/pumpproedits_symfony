@@ -19,10 +19,10 @@
 <?php foreach ($query as $z): ?>
 <tr>
 <?php if (isset($showuser)): ?>
-<td><?php echo link_to($z->uname, "@edit_cuser?id=" . $z->user_id) ?></td>
+<td><?php echo link_to($z->uname, $z->user_id != 2 ? "@edit_cuser?id=$z->user_id" : "@edit_official") ?></td>
 <?php endif;
 if (isset($showsong)): ?>
-<td><?php echo link_to($z->sname, "@edit_csong?id=" . $z->song_id) ?></td>
+<td><?php echo link_to($z->sname, "@edit_csong?id=$z->song_id") ?></td>
 <?php endif; ?>
 <td><?php echo $z->title ?></td>
 <td>

@@ -9,3 +9,6 @@ chosenSongSuccess:
 
 chosenUserSuccess:
   stylesheets: [edit_table.css]
+
+officialSuccess:
+  stylesheets: [edit_table.css]

@@ -198,6 +198,16 @@ edit_user:
     module: edits
     action: user
 
+# Edits made by Andamiro / Official Charts.
+edit_official:
+  url: /andamiro/:page
+  param:
+    module: edits
+    action: official
+    page: 1
+  requirements:
+    page: \d+
+
 # The chosen user (unsure if I'll use the pager)
 edit_cuser:
   url: /users/:id/:page

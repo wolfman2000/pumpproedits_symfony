@@ -47,6 +47,11 @@ class editsActions extends sfActions
     $this->users = Doctrine::getTable('PPE_User_User')->getUsersWithEdits();
   }
   
+  public function executeOfficial(sfWebRequest $request)
+  {
+    $this->users = Doctrine::getTable('PPE_Edit_Edit')->getEditsByUser(2);
+  }
+  
   // Download the edit
   public function executeDownload(sfWebRequest $request)
   {
