@@ -181,12 +181,28 @@ edit_song:
     module: edits
     action: song
 
+# The chosen song (unsure if I'll use the pager)
+edit_csong:
+  url: /songs/:id/:page
+  param:
+    module: edits
+    action: chosenSong
+    page: 1
+
 # Edits by user
 edit_user:
   url: /users
   param:
     module: edits
     action: user
+
+# The chosen user (unsure if I'll use the pager)
+edit_cuser:
+  url: /users/:id/:page
+  param:
+    module: edits
+    action: chosenUser
+    page: 1
 
 # Download the chosen edit
 edit_download:
