@@ -43,6 +43,12 @@ if ($z->trips): ?>
 <?php endif;
 if ($z->rolls): ?>
 <dt>Rolls</dt><dd><?php echo $z->rolls ?></dd>
+<?php endif;
+if ($z->lifts): ?>
+<dt>Lifts</dt><dd><?php echo $z->lifts ?></dd>
+<?php endif;
+if ($z->fakes): ?>
+<dt>Fakes</dt><dd><?php echo $z->fakes ?></dd>
 <?php endif; ?>
 </dl>
 </td>
