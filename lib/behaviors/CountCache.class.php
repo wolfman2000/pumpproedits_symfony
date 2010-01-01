@@ -1,3 +1,4 @@
+<?php
 class CountCache extends Doctrine_Template
 {
 protected $_options = array(

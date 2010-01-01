@@ -1,3 +1,4 @@
+<?php
 class CountCacheListener extends Doctrine_Record_Listener
 {
   protected $_options;
