@@ -115,11 +115,6 @@ PPE_User_Condiment:
 PPE_Song_Song:
   actAs:
     Timestampable:
-    CountCache:
-      relations:
-        PPE_Edit_Edit:
-          columnName: num_edits
-          foreignAlias: Edits
   columns:
     name:
       type: string
@@ -226,7 +221,11 @@ PPE_Edit_Edit:
   actAs:
     Timestampable:
     SoftDelete:
-    #CountCache: ~
+    CountCache:
+      relations:
+        PPE_Song_Song:
+          columnName: num_edits
+          foreignAlias: PPE_Edit_Edits
   columns:
     user_id:
       type: integer

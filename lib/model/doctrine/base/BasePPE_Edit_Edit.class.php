@@ -181,7 +181,18 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $softdelete0 = new Doctrine_Template_SoftDelete();
+        $countcache0 = new CountCache(array(
+             'relations' => 
+             array(
+              'PPE_Song_Song' => 
+              array(
+              'columnName' => 'num_edits',
+              'foreignAlias' => 'PPE_Edit_Edits',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
         $this->actAs($softdelete0);
+        $this->actAs($countcache0);
     }
 }

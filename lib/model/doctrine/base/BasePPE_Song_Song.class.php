@@ -90,17 +90,6 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              'foreign' => 'song_id'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
-        $countcache0 = new CountCache(array(
-             'relations' => 
-             array(
-              'PPE_Edit_Edits' => 
-              array(
-              'columnName' => 'num_edits',
-              'foreignAlias' => 'Edits',
-              ),
-             ),
-             ));
         $this->actAs($timestampable0);
-        $this->actAs($countcache0);
     }
 }
