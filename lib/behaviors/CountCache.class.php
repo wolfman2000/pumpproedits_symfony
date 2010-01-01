@@ -1,7 +1,7 @@
 <?php
 class CountCache extends Doctrine_Template
 {
-protected $_options = array(
+  protected $_options = array(
     'relations' => array()
   );
  
@@ -21,8 +21,8 @@ protected $_options = array(
       $this->_options['relations'][$relation]['className'] = $relatedTable->getOption('name');
       $relatedTable->setColumn($columnName, 'integer', null, array('default' => 0));
 
-      #this->addListener(new CountCacheListener($this->_options));
     }
+    $this->addListener(new CountCacheListener($this->_options));
   }
   public function setUp()
   {

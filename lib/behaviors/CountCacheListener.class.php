@@ -13,6 +13,7 @@ class CountCacheListener extends Doctrine_Record_Listener
     $invoker = $event->getInvoker();
     foreach ($this->_options['relations'] as $relation => $options)
     {
+    
       $table = Doctrine::getTable($options['className']);
       $relation = $table->getRelation($options['foreignAlias']);
  
@@ -63,5 +64,5 @@ class CountCacheListener extends Doctrine_Record_Listener
           ->execute();
       }
     }
-
+  }
 }

@@ -189,6 +189,11 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
               'columnName' => 'num_edits',
               'foreignAlias' => 'PPE_Edit_Edits',
               ),
+              'PPE_User_User' => 
+              array(
+              'columnName' => 'num_edits',
+              'foreignAlias' => 'PPE_Edit_Edits',
+              ),
              ),
              ));
         $this->actAs($timestampable0);
