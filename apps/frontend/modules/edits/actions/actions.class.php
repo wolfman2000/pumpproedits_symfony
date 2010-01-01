@@ -17,6 +17,23 @@ class editsActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    //$this->forward('edits', 'song');
+  }
+  
+  // Viewing songs
+  public function executeSong(sfWebRequest $request)
+  {
+    
+  }
+  
+  public function executeUser(sfWebRequest $request)
+  {
+    
+  }
+  
+  // Download the edit
+  public function executeDownload(sfWebRequest $request)
+  {
+  
   }
 }
