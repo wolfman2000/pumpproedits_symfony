@@ -1,2 +1,5 @@
 songSuccess:
   stylesheets: [edit_count.css]
+
+userSuccess:
+  stylesheets: [edit_count.css]
