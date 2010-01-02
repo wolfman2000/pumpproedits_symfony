@@ -8,23 +8,25 @@ class CountCacheListener extends Doctrine_Record_Listener
     $this->_options = $options;
   }
 
-  public function postInsert(Doctrine_Event $event)
+  public function preInsert(Doctrine_Event $event)
   {
     $invoker = $event->getInvoker();
+    
     foreach ($this->_options['relations'] as $relation => $options)
     {
-    
       $table = Doctrine::getTable($options['className']);
       $relation = $table->getRelation($options['foreignAlias']);
- 
-      $table
-        ->createQuery()
-        ->update()
-        ->set($options['columnName'], $options['columnName'].' + 1')
-        ->where($relation['local'].' = ?', $invoker->$relation['foreign'])
-        ->execute();
+      
+      if (!(isset($invoker->is_problem) and $invoker->is_problem))
+      {
+        $table->createQuery()->update()
+          ->set($options['columnName'], $options['columnName'].' + 1')
+          ->where($relation['local'].' = ?', $invoker->$relation['foreign'])
+          ->execute();
+      }
     }
   }
+
   public function postDelete(Doctrine_Event $event)
   {
     $invoker = $event->getInvoker();
