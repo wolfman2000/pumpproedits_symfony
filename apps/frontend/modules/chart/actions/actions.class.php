@@ -73,7 +73,7 @@ class chartActions extends sfActions
   {
     $id = $request->getParameter('id');
     $kind = $request->getParameter('kind');
-    if (!(is_numeric($id) and ($type === "classic" or $type === "rhythm")))
+    if (!(is_numeric($id) and ($kind === "classic" or $kind === "rhythm")))
     {
       $response = $this->getResponse();
       $response->setStatusCode(409);
