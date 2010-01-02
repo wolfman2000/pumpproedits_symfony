@@ -68,4 +68,45 @@ class chartActions extends sfActions
       return sfView::ERROR;
     }
   }
+  
+  public function executeQuick(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id');
+    $kind = $request->getParameter('kind');
+    if (!(is_numeric($id) and ($type === "classic" or $type === "rhythm")))
+    {
+      $response = $this->getResponse();
+      $response->setStatusCode(409);
+      $this->id = $request->getParameter('id');
+      $this->kind = $kind;
+      return sfView::ERROR;
+    }
+    
+    $id = sprintf("%06d", $id);
+    $root = sfConfig::get('sf_root_dir');
+    $name = sprintf("edit_%s.edit", $id);
+    $path = sprintf("%s/data/user_edits/%s", $root, $name);
+    
+    /* File validation takes place here. */
+    $tmp = new EditParser();
+    try
+    {
+      $notedata = $tmp->get_stats(fopen($path, "r"), 1);
+      $p = array('cols' => $notedata['cols'], 'kind' => $kind);
+      $tmp = new EditCharter($p);
+      $xml = $tmp->genChart($notedata);
+      
+      $response = $this->getResponse();
+      $response->clearHttpHeaders();
+      $response->setHttpHeader('Content-Type', 'image/svg+xml');
+      $response->setContent($xml->saveXML());
+      return sfView::NONE;
+    }
+    catch (sfParseException $e)
+    {
+      $this->data = $e;
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
 }

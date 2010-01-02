@@ -54,6 +54,7 @@ chart_gen_get:
   requirements:
     sf_method: [GET]
 
+# The result of the chart generator.
 chart_gen_post:
   url: /chart
   class: sfRequestRoute
@@ -62,6 +63,15 @@ chart_gen_post:
     action: validate
   requirements:
     sf_method: [POST]
+
+# Quickly generate a chart.
+chart_quick:
+  url: /chart/quick/:id/:kind
+  param:
+    module: chart
+    action: quick
+  requirements:
+    id: \d+
 
 # The edit stat getter/validator
 edit_stat_get:
