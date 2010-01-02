@@ -27,4 +27,10 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->execute();
       
   }
+  
+  public function getProblemByID($id)
+  {
+    return $this->createQuery('a')->select('is_problem')
+      ->where('id = ?', $id)->fetchOne()->is_problem;
+  }
 }
