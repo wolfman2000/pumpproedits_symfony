@@ -33,4 +33,10 @@ class PPE_Edit_EditTable extends Doctrine_Table
     return $this->createQuery('a')->select('is_problem')
       ->where('id = ?', $id)->fetchOne()->is_problem;
   }
+  
+  public function confirmExistence($id)
+  {
+    return $this->createQuery('a')->select('title')
+      ->where('id = ?', $id)->count();
+  }
 }
