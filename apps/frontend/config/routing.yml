@@ -13,6 +13,21 @@ xmltest:
     module: xmltest
     action: index
 
+# see the ratings of an edit.
+ratings:
+  url: /votes/:eid
+  param:
+    module: votes
+    action: index
+  requirements:
+    eid: \d+
+
+ratings_404:
+  url: /votes
+  param:
+    module: votes
+    action: none
+
 # credits / thanks page
 thanks:
   url: /thanks

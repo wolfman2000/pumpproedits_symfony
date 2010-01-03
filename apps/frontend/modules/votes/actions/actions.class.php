@@ -17,6 +17,13 @@ class votesActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    //$this->forward('default', 'module');
+  }
+  
+  public function executeNone(sfWebRequest $request)
+  {
+    $response = $this->getResponse();
+    $response->setStatusCode(404);
+    return sfView::ERROR;
   }
 }
