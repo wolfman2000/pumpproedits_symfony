@@ -5,7 +5,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
   public function getEditsBySong($songid)
   {
     $cols = 'diff, steps, jumps, holds, mines, trips, rolls, fakes, lifts';
-    $cols .= ', user_id, b.name uname, title, is_single';
+    $cols .= ', user_id, b.name uname, title, is_single, num_votes, tot_votes';
     return $this->createQuery('a')
       ->select($cols)
       ->innerJoin('a.PPE_User_User b')
@@ -18,7 +18,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
   public function getEditsByUser($userid)
   {
     $cols = 'diff, steps, jumps, holds, mines, trips, rolls, fakes, lifts';
-    $cols .= ', song_id, b.name sname, title, is_single';
+    $cols .= ', song_id, b.name sname, title, is_single, num_votes, tot_votes';
     return $this->createQuery('a')
       ->select($cols)
       ->innerJoin('a.PPE_Song_Song b')

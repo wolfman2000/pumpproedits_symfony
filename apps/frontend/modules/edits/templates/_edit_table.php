@@ -49,6 +49,9 @@ if ($z->lifts): ?>
 <?php endif;
 if ($z->fakes): ?>
 <dt>Fakes</dt><dd><?php echo $z->fakes ?></dd>
+<?php endif;
+if ($z->num_votes): ?>
+<dt>Avg Score</dt><dd><?php echo $z->tot_votes / $z->num_votes ?></dd>
 <?php endif; ?>
 </dl>
 </td>

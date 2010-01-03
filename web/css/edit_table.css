@@ -31,7 +31,7 @@
   #edits > tbody > tr > td > dl > dt
   {
     clear: both;
-    width: 6em;
+    width: 8em;
     float: left;
   }
   #edits > tbody > tr > td > dl > dt:after
@@ -40,7 +40,7 @@
   }
   #edits > tbody > tr > td > dl > dd
   {
-    padding-left: 6em;
+    padding-left: 8em;
     line-height: 1.3em;
     text-align: right;
   }
