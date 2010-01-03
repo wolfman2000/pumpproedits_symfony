@@ -318,7 +318,13 @@ PPE_Edit_Edit:
     charset: utf8
 
 PPE_Vote_Vote:
-  actAs: { Timestampable: ~ }
+  actAs:
+    Timestampable:
+    VoteCache:
+      relations:
+        PPE_Edit_Edit:
+          baseName: votes
+          foreignAlias: PPE_Vote_Votes
   columns:
     user_id:
       type: integer

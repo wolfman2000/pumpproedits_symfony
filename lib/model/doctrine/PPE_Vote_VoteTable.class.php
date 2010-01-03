@@ -10,4 +10,10 @@ class PPE_Vote_VoteTable extends Doctrine_Table
       ->andWhere('is_problem = ?', false)
       ->orderBy('created_at')->execute();
   }
+  
+  public function getRatingByID($id)
+  {
+    return $this->createQuery('a')->select('rating, is_problem')
+      ->where('id = ?', $id)->fetchOne();
+  }
 }
