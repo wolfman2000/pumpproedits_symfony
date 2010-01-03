@@ -113,7 +113,12 @@ PPE_User_Condiment:
     charset: utf8
 
 PPE_Song_Song:
-  actAs: { Timestampable: ~ }
+  actAs:
+    Timestampable:
+    Lowercase:
+      columns:
+        name:
+          columnName: lc_name
   columns:
     name:
       type: string
@@ -218,8 +223,16 @@ PPE_Song_BPM:
 
 PPE_Edit_Edit:
   actAs:
-    Timestampable:
-    SoftDelete:
+    Timestampable: ~
+    SoftDelete: ~
+    CountCache:
+      relations:
+        PPE_Song_Song:
+          columnName: num_edits
+          foreignAlias: PPE_Edit_Edits
+        PPE_User_User:
+          columnName: num_edits
+          foreignAlias: PPE_Edit_Edits
   columns:
     user_id:
       type: integer

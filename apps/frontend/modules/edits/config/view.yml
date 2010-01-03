@@ -1,0 +1,14 @@
+songSuccess:
+  stylesheets: [edit_count.css]
+
+userSuccess:
+  stylesheets: [edit_count.css]
+
+chosenSongSuccess:
+  stylesheets: [edit_table.css]
+
+chosenUserSuccess:
+  stylesheets: [edit_table.css]
+
+officialSuccess:
+  stylesheets: [edit_table.css]

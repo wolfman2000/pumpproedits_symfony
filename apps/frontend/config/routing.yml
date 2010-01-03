@@ -54,6 +54,7 @@ chart_gen_get:
   requirements:
     sf_method: [GET]
 
+# The result of the chart generator.
 chart_gen_post:
   url: /chart
   class: sfRequestRoute
@@ -62,6 +63,15 @@ chart_gen_post:
     action: validate
   requirements:
     sf_method: [POST]
+
+# Quickly generate a chart.
+chart_quick:
+  url: /chart/quick/:id/:kind
+  param:
+    module: chart
+    action: quick
+  requirements:
+    id: \d+
 
 # The edit stat getter/validator
 edit_stat_get:
@@ -176,11 +186,47 @@ edits:
 
 # Edits by song:
 edit_song:
-  url: /edits/song
+  url: /songs
   param:
     module: edits
     action: song
+
+# The chosen song (unsure if I'll use the pager)
+edit_csong:
+  url: /songs/:id/:page
+  param:
+    module: edits
+    action: chosenSong
     page: 1
+  requirements:
+    id: \d+
+
+# Edits by user
+edit_user:
+  url: /users
+  param:
+    module: edits
+    action: user
+
+# Edits made by Andamiro / Official Charts.
+edit_official:
+  url: /andamiro/:page
+  param:
+    module: edits
+    action: official
+    page: 1
+  requirements:
+    page: \d+
+
+# The chosen user (unsure if I'll use the pager)
+edit_cuser:
+  url: /users/:id/:page
+  param:
+    module: edits
+    action: chosenUser
+    page: 1
+  requirements:
+    id: \d+
 
 # Download the chosen edit
 edit_download:

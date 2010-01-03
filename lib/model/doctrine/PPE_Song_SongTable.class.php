@@ -24,4 +24,12 @@ class PPE_Song_SongTable extends Doctrine_Table
     return $this->createQuery('a')->select('name')->where('id = ?', $id)
       ->fetchOne()->name;
   }
+  
+  public function getSongsWithEdits()
+  {
+    return $this->createQuery('a')->select('name core, num_edits')
+      ->where('is_problem = ?', false)
+      ->andWhere('num_edits > ?', 0)
+      ->orderBy('lc_name')->execute();
+  }
 }
