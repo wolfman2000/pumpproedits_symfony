@@ -3,6 +3,7 @@ data/fixtures/condiments.yml
 data/fixtures/edits.yml
 data/fixtures/users.yml
 data/fixtures/powers.yml
+data/fixtures/votes.yml
 data/sql/schema.sql
 dbreload.sh
 .DS_Store
