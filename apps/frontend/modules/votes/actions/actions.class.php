@@ -17,7 +17,11 @@ class votesActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    //$this->forward('default', 'module');
+    $id = $request->getParameter('eid');
+    if (!Doctrine::getTable('PPE_Edit_Edit')->confirmExistence($id))
+    {
+      return $this->forward('votes', 'none');
+    }
   }
   
   public function executeNone(sfWebRequest $request)
