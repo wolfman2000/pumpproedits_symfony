@@ -18,10 +18,14 @@ class votesActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $id = $request->getParameter('eid');
-    if (!Doctrine::getTable('PPE_Edit_Edit')->confirmExistence($id))
+    $editT = Doctrine::getTable('PPE_Edit_Edit');
+    if (!$editT->confirmExistence($id))
     {
       return $this->forward('votes', 'none');
     }
+    
+    // Deal with the cache.
+    
   }
   
   public function executeNone(sfWebRequest $request)
