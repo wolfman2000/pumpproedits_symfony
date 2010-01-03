@@ -91,6 +91,17 @@ abstract class BasePPE_Vote_Vote extends sfDoctrineRecord
              'foreignKeyName' => 'vote_edit_fk'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
+        $votecache0 = new VoteCache(array(
+             'relations' => 
+             array(
+              'PPE_Edit_Edit' => 
+              array(
+              'baseName' => 'votes',
+              'foreignAlias' => 'PPE_Vote_Votes',
+              ),
+             ),
+             ));
         $this->actAs($timestampable0);
+        $this->actAs($votecache0);
     }
 }

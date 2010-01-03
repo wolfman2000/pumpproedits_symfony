@@ -22,7 +22,7 @@ class VoteCacheListener extends Doctrine_Record_Listener
         $table->createQuery()->update()
           ->set("num_" . $options['baseName'], "num_" . $options['baseName'].' + 1')
           ->set("tot_" . $options['baseName'], "tot_" . $options['baseName'].' + ' . $invoker->rating)
-          ->where($relation['local'].' = ?', $invoker->$relation['foreign'])
+          ->where($relation['local'].' = ?', $invoker->$relation['foreign']->id)
           ->execute();
       }
     }
@@ -55,7 +55,7 @@ class VoteCacheListener extends Doctrine_Record_Listener
         {
           $q = $q->set("tot_" . $options['baseName'], "tot_" . $options['baseName'].' - ' . $orate . ' + ' . $invoker->rating);
         }
-        $q->where($relation['local'].' = ?', $invoker->$relation['foreign'])
+        $q->where($relation['local'].' = ?', $invoker->$relation['foreign']->id)
           ->execute();
       }
       else # There is a problem now.
@@ -69,7 +69,7 @@ class VoteCacheListener extends Doctrine_Record_Listener
           $table->createQuery()->update()
           ->set("num_" . $options['baseName'], "num_" . $options['baseName'].' - 1')
           ->set("tot_" . $options['baseName'], "tot_" . $options['baseName'].' - ' . $orate)
-          ->where($relation['local'].' = ?', $invoker->$relation['foreign'])
+          ->where($relation['local'].' = ?', $invoker->$relation['foreign']->id)
           ->execute();
         }
       }
