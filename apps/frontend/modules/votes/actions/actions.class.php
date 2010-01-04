@@ -38,6 +38,24 @@ class votesActions extends sfActions
     
   }
   
+  # Add a vote here.
+  public function executeAdd(sfWebRequest $request)
+  {
+  
+  }
+  
+  # The vote has been added.
+  public function executeAdded(sfWebRequest $request)
+  {
+  
+  }
+  
+  # You can't contribute a vote to your own edit.
+  public function executeSubtract(sfWebRequest $request)
+  {
+  
+  }
+  
   public function executeNone(sfWebRequest $request)
   {
     $response = $this->getResponse();
