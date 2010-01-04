@@ -1,5 +1,5 @@
-<table id="edits" summary="<?php echo $summary ?>">
-<caption><?php echo $caption ?></caption>
+<table id="edits" summary="<?php echo html_entity_decode($summary, ENT_COMPAT, "UTF-8") ?>">
+<caption><?php echo html_entity_decode($caption, ENT_COMPAT, "UTF-8") ?></caption>
 <?php if (isset($showuser) and isset($showsong)): ?>
 <col span="2" />
 <?php elseif (isset($showuser) or isset($showsong)): ?>
