@@ -17,7 +17,7 @@ class VoteCacheListener extends Doctrine_Record_Listener
       $table = Doctrine::getTable($options['className']);
       $relation = $table->getRelation($options['foreignAlias']);
       
-      if (!(isset($invoker->is_problem) and $invoker->is_problem))
+      if (!$invoker->is_problem)
       {
         $table->createQuery()->update()
           ->set("num_" . $options['baseName'], "num_" . $options['baseName'].' + 1')
@@ -42,7 +42,7 @@ class VoteCacheListener extends Doctrine_Record_Listener
       $relation = $table->getRelation($options['foreignAlias']);
       
       # If there is no problem now:
-      if (!(isset($invoker->is_problem) and $invoker->is_problem))
+      if (!$invoker->is_problem)
       {
         $q = $table->createQuery()->update();
       
