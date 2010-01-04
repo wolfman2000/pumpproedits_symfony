@@ -1,0 +1,43 @@
+@import "main.css";
+
+@media screen
+{
+  #rating
+  {
+      margin: 0 auto;
+      border-collapse: collapse;
+  }
+  #rating > caption
+  {
+      margin-bottom: 10px;
+  }
+  #rating > thead > tr > th
+  {
+      font-weight: normal;
+      font-style: italic;
+  }
+  #rating > thead > tr > th, #rating > tbody > tr > td
+  {
+      border: 2px solid #003366;
+  }
+  #rating > tbody > tr > td > dl
+  {
+    font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+  }
+  #rating > tbody > tr > td > dl > dt
+  {
+    clear: both;
+    width: 8em;
+    float: left;
+  }
+  #rating > tbody > tr > td > dl > dt:after
+  {
+    content: ":";
+  }
+  #rating > tbody > tr > td > dl > dd
+  {
+    padding-left: 8em;
+    line-height: 1.3em;
+    text-align: right;
+  }
+}
