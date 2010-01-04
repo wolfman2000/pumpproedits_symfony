@@ -13,7 +13,7 @@ edit. All ratings are from 0 - 10, with an optional description.</p>
 <tbody>
 <?php foreach ($votes as $v): ?>
 <tr>
-<td><?php echo link_to($v->name, "@edit_cuser?id=$v->user_id") ?></td>
+<td><?php echo link_to($v->PPE_User_User->name, "@edit_cuser?id=$v->user_id") ?></td>
 <td><?php echo $v->rating ?></td>
 <td><?php echo $v->reason ? $v->reason : "No comment" ?></td>
 </tr>

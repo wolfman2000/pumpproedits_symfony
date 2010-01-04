@@ -36,7 +36,7 @@ class PPE_Song_SongTable extends Doctrine_Table
   public function getSongByEditID($eid)
   {
     return $this->createQuery('a')->select('name')
-      ->innerJoin('a.PPE_Edit_Edit e')
+      ->innerJoin('a.PPE_Edit_Edits e')
       ->where('e.song_id = ?', $eid)->fetchOne()->name;
   }
 }

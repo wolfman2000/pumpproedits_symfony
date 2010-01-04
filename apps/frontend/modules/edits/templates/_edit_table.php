@@ -57,7 +57,9 @@ if ($z->num_votes): ?>
 </td>
 <td><ul>
 <li><?php echo link_to("Download", "@edit_download?id=$z->id") ?></li>
-<li>View Ratings</li>
+<?php if ($z->num_votes): ?>
+<li><?php echo link_to("View Ratings", "@ratings?eid=$z->id") ?></li>
+<?php endif; ?>
 <li><?php echo link_to("Classic Chart", "@chart_quick?id={$z->id}&kind=classic") ?></li>
 <li><?php echo link_to("Rhythm Chart", "@chart_quick?id={$z->id}&kind=rhythm") ?></li>
 </ul></td>
