@@ -33,7 +33,7 @@ class votesActions extends sfActions
     }
     
     $this->votes = $votes->execute();
-    $this->sname = Doctrine::getTable('PPE_Song_Song')->getSongByEditID($id);
+    $this->song = Doctrine::getTable('PPE_Song_Song')->getSongByEditID($id);
     
     
   }

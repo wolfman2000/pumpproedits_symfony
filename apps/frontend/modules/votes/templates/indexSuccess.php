@@ -3,8 +3,8 @@ slot('h2', '<h2>Ratings on Edit</h2>'); ?>
 <p>Listed below are all of the ratings made for the chosen
 edit. All ratings are from 0 - 10, with an optional description.</p>
 
-<table id="rating" summary="View all ratings and comments for <?php echo $sname ?>.">
-<caption>Ratings for <?php echo $sname ?></caption>
+<table id="rating" summary="View all ratings and comments for <?php echo $song->name ?>.">
+<caption>Ratings for <?php echo link_to($song->name, "@edit_csong?id=$song->id") ?></caption>
 <thead><tr>
 <th>Voter</th>
 <th>Rating</th>
