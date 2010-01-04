@@ -25,6 +25,16 @@ class votesActions extends sfActions
     }
     
     // Deal with the cache.
+    $votes = Doctrine::getTable('PPE_Vote_Vote')->getVotesByID($id);
+    
+    if (!$votes->count()) # Must have votes here.
+    {
+      return $this->forward('votes', 'none');
+    }
+    
+    $this->votes = $votes->execute();
+    $this->sname = Doctrine::getTable('PPE_Song_Song')->getSongByEditID($id);
+    
     
   }
   

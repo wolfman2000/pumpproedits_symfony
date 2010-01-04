@@ -32,4 +32,11 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->andWhere('num_edits > ?', 0)
       ->orderBy('lc_name')->execute();
   }
+  
+  public function getSongByEditID($eid)
+  {
+    return $this->createQuery('a')->select('name')
+      ->innerJoin('a.PPE_Edit_Edit e')
+      ->where('e.song_id = ?', $eid)->fetchOne()->name;
+  }
 }
