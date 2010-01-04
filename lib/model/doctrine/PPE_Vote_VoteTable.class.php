@@ -8,7 +8,7 @@ class PPE_Vote_VoteTable extends Doctrine_Table
     return $this->createQuery('a')->select($cols)
       ->innerJoin('a.PPE_User_User u')->where('edit_id = ?', $editid)
       ->andWhere('is_problem = ?', false)
-      ->orderBy('created_at'); // Don't execute yet.
+      ->orderBy('a.created_at, u.lc_name'); // Don't execute yet.
   }
   
   public function getRatingByID($id)
