@@ -27,6 +27,31 @@ ratings_404:
   param:
     module: votes
     action: none
+  
+# Add/change a vote for an edit.
+rate_add_get:
+  url: /rate/:eid
+  class: sfRequestRoute
+  param:
+    module: votes
+    action: add
+  requirements:
+    sf_method: [GET]
+
+rate_add_post:
+  url: /rate/:eid
+  class: sfRequestRoute
+  param:
+    module: votes
+    action: added
+  requirements:
+    sf_method: [POST]
+
+# You can't vote for your own edit.
+rate_subtract:
+  url: /rate
+  param: votes
+  action: subtract
 
 # credits / thanks page
 thanks:
