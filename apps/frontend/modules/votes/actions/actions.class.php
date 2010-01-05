@@ -41,7 +41,7 @@ class votesActions extends sfActions
   # Add a vote here.
   public function executeAdd(sfWebRequest $request)
   {
-  
+    $this->form = new VotingForm();
   }
   
   # The vote has been added.
