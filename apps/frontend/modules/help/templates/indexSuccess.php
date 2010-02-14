@@ -9,4 +9,4 @@ slot('h2', "<h2>Account Help</h2>"); ?>
   Both options are available, and work in similar ways.
   Fill out the form, and click on the submit button.
 </p>
-<?php #include_partial("help/form", array('form' => $form));
+<?php include_partial("help/form", array('form' => $form));
