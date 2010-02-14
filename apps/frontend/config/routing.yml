@@ -213,9 +213,22 @@ confirm_post:
 # Help getting your account to work
 help:
   url: /help
+  class: sfRequestRoute
   param:
     module: help
     action: index
+  requirements:
+    sf_method: [GET]
+
+# Help has been given (hopefully)
+help_post:
+  url: /help
+  class: sfRequestRoute
+  param:
+    module: help
+    action: validate
+  requirements:
+    sf_method: [POST]
 
 # General edits page (this may change)
 edits:
