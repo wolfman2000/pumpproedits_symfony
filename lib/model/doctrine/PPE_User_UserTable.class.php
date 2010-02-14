@@ -2,9 +2,9 @@
 
 class PPE_User_UserTable extends Doctrine_Table
 {
-  public function confirmUser($id)
+  public function confirmUser($id, $value = 1)
   {
-    return $this->createQuery('a')->update()->set('is_confirmed', '?', 1)
+    return $this->createQuery('a')->update()->set('is_confirmed', '?', $value)
       ->where('id = ?', $id)->execute();
   }
 
