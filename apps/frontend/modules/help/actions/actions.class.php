@@ -28,5 +28,15 @@ class helpActions extends sfActions
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new HelpForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+    
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
 }
