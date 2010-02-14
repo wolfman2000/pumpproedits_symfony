@@ -27,4 +27,23 @@ class PPE_User_CondimentTable extends Doctrine_Table
     
     return ($q ? $this->checkPassword($q['salt'], $pass) : false);
   }
+  
+  public function getSalt($id)
+  {
+    return $this->createQuery('a')->select('salt')
+      ->where('id = ?', $id)->fetchOne()->salt;
+  }
+  
+  public function updateOregano($id)
+  {
+    $value = hash("md5", date("YmdHis") . $this->getSalt($id));
+    return $this->createQuery('a')->update()->set('oregano', '?', $value)
+      ->where('id = ?', $id)->execute();
+  }
+  
+  public function getOregano($id)
+  {
+    return $this->createQuery('a')->select('oregano')
+      ->where('id = ?', $id)->fetchOne()->oregano;
+  }
 }
