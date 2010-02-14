@@ -56,17 +56,16 @@ class helpActions extends sfActions
         return sfView::ERROR;
       }
       $username = $table->getNameByID($id);
-      
+      $table->confirmUser($id, 0);
+      $table = Doctrine::getTable('PPE_User_Condiment');
+      $table->updateOregano($id);
       if ($this->form->getValue('choice') === "resend")
       {
-        $table->confirmUser($id, 0);
-        $table = Doctrine::getTable('PPE_User_Condiment');
-        $table->updateOregano($id);
         $mailer = new ResendConfirmationMessage($email, $username, $table->getOregano($id));
       }
       else
       {
-        $mailer = null;
+        $mailer = new ResetPasswordMessage($email, $username, $table->getOregano($id));
       }
       
       $this->getMailer()->send($mailer);
