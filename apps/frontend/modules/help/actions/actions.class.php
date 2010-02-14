@@ -17,6 +17,11 @@ class helpActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
     $this->forward('default', 'module');
   }
 }
