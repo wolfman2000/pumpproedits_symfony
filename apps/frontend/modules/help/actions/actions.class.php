@@ -22,6 +22,11 @@ class helpActions extends sfActions
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }
-    $this->forward('default', 'module');
+    #$this->form = new HelpForm();
+  }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    #$this->form = new HelpForm();
   }
 }
