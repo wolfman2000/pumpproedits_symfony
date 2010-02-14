@@ -22,7 +22,7 @@ class PPE_User_CondimentTable extends Doctrine_Table
   public function checkUser($name, $pass)
   {
     $q = $this->createQuery('a')->select('salt')
-      ->innerJoin('a.PPE_User_User b')->where('b.name = ?', $name)
+      ->innerJoin('a.PPE_User_User b')->where('b.lc_name = ?', strtolower($name))
       ->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     
     return ($q ? $this->checkPassword($q['salt'], $pass) : false);
