@@ -1,6 +1,6 @@
 <?php
 
-class RegisterConfirmationMessage extends BaseMessage
+class ResendConfirmationMessage extends BaseMessage
 {
   public function __construct($to, $name, $confirm)
   {
