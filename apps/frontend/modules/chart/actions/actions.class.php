@@ -71,6 +71,11 @@ class chartActions extends sfActions
   
   public function executeAdvanced(sfWebRequest $request)
   {
+    if (!$this->getUser()->isAuthenticated())
+    {
+      $this->forward('login', 'index');
+      return;
+    }
     $this->form = new ChartGeneratorForm();
   }
  /**
