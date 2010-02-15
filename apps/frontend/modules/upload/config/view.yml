@@ -1,2 +1,8 @@
 indexSuccess:
   stylesheets: [upload.css]
+
+validateSuccess:
+  stylesheets: [upload.css]
+
+validateError:
+  stylesheets: [upload.css]
