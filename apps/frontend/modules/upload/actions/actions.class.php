@@ -72,14 +72,15 @@ class uploadActions extends sfActions
       $row['uid'] = $uid;
       $eid = $editT->getIDByUpload($row);
       
-      if (isset($eid) and $owner != "me")
+      if ($eid and $owner != "me")
       {
         $this->data = array("You are not allowed to override edits you do not own.");
         $this->getResponse()->setStatusCode(409);
         return sfView::ERROR;
       }
-      elseif (isset($eid))
+      elseif ($eid)
       {
+        $eid = $eid->id;
         $editT->updateEdit($eid, $row);
       }
       else

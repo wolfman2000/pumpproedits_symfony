@@ -9,7 +9,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
     $edit->setSongID($row['id']);
     $edit->setUserID($row['uid']);
     $edit->setTitle($row['title']);
-    $edit->setIsSingle($row['style'] == "single" ? 1 : 0);
+    $edit->setIsSingle($row['style'] == "pump-single" ? 1 : 0);
     $edit->setDiff($row['diff']);
     $edit->setSteps($row['steps']);
     $edit->setJumps($row['jumps']);
@@ -44,9 +44,8 @@ class PPE_Edit_EditTable extends Doctrine_Table
   {
     return $this->createQuery('a')->select('id')
       ->where('title = ?', $row['title'])
-      ->andWhere('is_single = ?', $row['style'] == "single" ? 1 : 0)
-      ->andWhere('user_id = ?', $row['uid'])
-      ->fetchOne()->id;
+      ->andWhere('is_single = ?', $row['style'] == "pump-single" ? true : false)
+      ->andWhere('user_id = ?', $row['uid'])->fetchOne();
   }
 
   public function getEditsBySong($songid)
