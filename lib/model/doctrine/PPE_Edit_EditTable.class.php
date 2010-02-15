@@ -10,6 +10,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->select($cols)
       ->innerJoin('a.PPE_User_User b')
       ->where('song_id = ?', $songid)
+      ->andWhere('a.is_problem = ?', 0)
       ->orderBy('b.lc_name, a.title')
       ->execute();
       
@@ -23,6 +24,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->select($cols)
       ->innerJoin('a.PPE_Song_Song b')
       ->where('user_id = ?', $userid)
+      ->andWhere('a.is_problem = ?', 0)
       ->orderBy('b.lc_name, a.title')
       ->execute();
       
