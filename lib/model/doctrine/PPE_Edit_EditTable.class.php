@@ -39,6 +39,16 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->set('fakes', $row['fakes'])
       ->where('id = ?', $id)->execute();
   }
+  
+  public function getNonProblemEdits()
+  {
+    return $this->createQuery('a')
+      ->select('id, b.name uname, is_single, title, diff')
+      ->innerJoin('a.PPE_User_User b')
+      ->where('a.is_problem = ?', false)
+      ->orderBy('b.lc_name, title, is_single')
+      ->execute();
+  }
 
   public function getIDByUpload($row)
   {

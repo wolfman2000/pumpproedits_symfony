@@ -69,6 +69,61 @@ class chartActions extends sfActions
     }
   }
   
+  public function executeAdvanced(sfWebRequest $request)
+  {
+    $this->form = new ChartGeneratorForm();
+  }
+ /**
+  * Executes validate action (form required)
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeAdvProcess(sfWebRequest $request)
+  {
+    $this->form = new ValidateEditForm();
+    $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
+    $errors = array();
+    if ($this->form->isValid())
+    {
+      $file = $this->form->getValue('file');
+      $filename = 'uploaded'.sha1($file->getOriginalName());
+      $extension = $file->getExtension($file->getOriginalExtension());
+      $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
+      $file->save($path);
+
+      /* File validation takes place here. */
+      $tmp = new EditParser();
+      try
+      {
+        $notedata = $tmp->get_stats(fopen($path, "r"), 1);
+        @unlink($path);
+        // The others can be gotten later.
+        $p = array('cols' => $notedata['cols']);
+        $tmp = new EditCharter($p);
+        $xml = $tmp->genChart($notedata);
+        
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->setHttpHeader('Content-Type', 'image/svg+xml');
+        $response->setContent($xml->saveXML());
+        return sfView::NONE;
+      }
+      catch (sfParseException $e)
+      {
+        $this->data = $e;
+        @unlink($path);
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
+  
+  
   public function executeQuick(sfWebRequest $request)
   {
     $id = $request->getParameter('id');
