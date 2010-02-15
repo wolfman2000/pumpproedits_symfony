@@ -3,8 +3,10 @@
 
 # default rules
 homepage:
-  url:   /
-  param: { module: ppehome, action: index }
+  url: '/'
+  param:
+    module: ppehome
+    action: index
 
 # temp xml page
 xmltest:
@@ -50,8 +52,9 @@ rate_add_post:
 # You can't vote for your own edit.
 rate_subtract:
   url: /rate
-  param: votes
-  action: subtract
+  param:
+    module: votes
+    action: subtract
 
 # credits / thanks page
 thanks:
