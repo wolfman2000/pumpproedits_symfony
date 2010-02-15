@@ -3,6 +3,6 @@
 <li><?php echo link_to('Confirm Account', '@confirm_get') ?></li>
 <li><?php echo link_to('Log In', '@login_get') ?></li>
 <li><?php echo link_to('Account Help', '@help') ?></li>
-<li><a href="/reset">Reset Password</a></li>
+<li><?php echo link_to('Reset Password', '@reset_get') ?></li>
 </ul>
 
