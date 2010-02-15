@@ -21,6 +21,32 @@ class PPE_Edit_EditTable extends Doctrine_Table
     $edit->setFakes($row['fakes']);
     
     $edit->save();
+    return $edit->id;
+  }
+  
+  // Update data based on EditParser::get_stats
+  public function updateEdit($id, $row)
+  {
+    return $this->createQuery('a')->update()
+      ->set('diff', $row['diff'])
+      ->set('steps', $row['steps'])
+      ->set('jumps', $row['jumps'])
+      ->set('holds', $row['holds'])
+      ->set('mines', $row['mines'])
+      ->set('trips', $row['trips'])
+      ->set('rolls', $row['rolls'])
+      ->set('lifts', $row['lifts'])
+      ->set('fakes', $row['fakes'])
+      ->where('id = ?', $id)->execute();
+  }
+
+  public function getIDByUpload($row)
+  {
+    return $this->createQuery('a')->select('id')
+      ->where('title = ?', $row['title'])
+      ->andWhere('is_single = ?', $row['style'] == "single" ? 1 : 0)
+      ->andWhere('user_id = ?', $row['uid'])
+      ->fetchOne()->id;
   }
 
   public function getEditsBySong($songid)
