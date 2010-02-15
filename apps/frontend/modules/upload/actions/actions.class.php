@@ -28,7 +28,7 @@ class uploadActions extends sfActions
   public function executeValidate(sfWebRequest $request)
   {
     $this->form = new UploadEditForm();
-    $this->form->bind($request->getParameter('validate'));
+    $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
     if ($this->form->isValid())
     {
     }
