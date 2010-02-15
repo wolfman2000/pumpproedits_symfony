@@ -35,6 +35,7 @@ echo $sf_content ?>
     <li><?php echo link_to("Edit List by Song", '@edit_song') ?></li>
     <li><?php echo link_to("Edit List by User", '@edit_user') ?></li>
     <li><?php echo link_to("Official Chart Edits", '@edit_official') ?></li>
+    <li><?php echo link_to("Unknown Author Edits", '@edit_unknown') ?></li>
     </ul>
 </li>
 <li>

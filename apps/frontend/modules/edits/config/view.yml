@@ -12,3 +12,6 @@ chosenUserSuccess:
 
 officialSuccess:
   stylesheets: [edit_table.css]
+
+unknownSuccess:
+  stylesheets: [edit_table.css]

@@ -301,6 +301,16 @@ edit_official:
   requirements:
     page: \d+
 
+# Edits with no known author.
+edit_unknown:
+  url: /unknown/:page
+  param:
+    module: edits
+    action: unknown
+    page: 1
+  requirements:
+    page: \d+
+
 # The chosen user (unsure if I'll use the pager)
 edit_cuser:
   url: /users/:id/:page
