@@ -1,0 +1,18 @@
+@import "_form.css";
+
+@media screen
+{
+    fieldset
+    {
+        width: 45em;
+    }
+    dt
+    {
+        width: 12em;
+    }
+    dd
+    {
+        padding-left: 12em;
+    }
+}
+

@@ -22,6 +22,58 @@ class helpActions extends sfActions
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }
-    $this->forward('default', 'module');
+    $this->form = new HelpForm();
+  }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new HelpForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      // Check the things the form can't do through the database.
+      $table = Doctrine::getTable('PPE_User_User');
+      $data = array();
+
+      /* Check if the email is taken. */
+      $email = $this->form->getValue('email');
+      $id = $table->getIDByEmail($email);
+      if (!$id)
+      {
+        array_push($data, "There is no one with this email account.");
+      }
+      // Make sure the user isn't banned.
+      elseif (Doctrine::getTable('PPE_User_Role')->getIsUserBanned($id))
+      {
+        $data = array("You are prohibited from joining again.");
+        $this->noshow = 1;
+      }
+      
+      if (count($data))
+      {
+        $this->getResponse()->setStatusCode(409);
+        $this->data = $data;
+        return sfView::ERROR;
+      }
+      $username = $table->getNameByID($id);
+      $table->confirmUser($id, 0);
+      $table = Doctrine::getTable('PPE_User_Condiment');
+      $table->updateOregano($id);
+      if ($this->form->getValue('choice') === "resend")
+      {
+        $mailer = new ResendConfirmationMessage($email, $username, $table->getOregano($id));
+      }
+      else
+      {
+        $mailer = new ResetPasswordMessage($email, $username, $table->getOregano($id));
+      }
+      
+      $this->getMailer()->send($mailer);
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
 }

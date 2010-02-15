@@ -2,9 +2,9 @@
 
 class PPE_User_UserTable extends Doctrine_Table
 {
-  public function confirmUser($id)
+  public function confirmUser($id, $value = 1)
   {
-    return $this->createQuery('a')->update()->set('is_confirmed', '?', 1)
+    return $this->createQuery('a')->update()->set('is_confirmed', '?', $value)
       ->where('id = ?', $id)->execute();
   }
 
@@ -45,16 +45,24 @@ class PPE_User_UserTable extends Doctrine_Table
   
   public function getIDByUser($user)
   {
+    return $this->createQuery('a')->select('id')
+      ->where('lc_name = ?', strtolower($user))->fetchOne()->id;
+    /*
     $q = $this->createQuery('a')->select('id')->where('lc_name = ?', strtolower($user));
     $q = $q->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     return $q['id'];
+    */
   }
   
   public function getConfirmedByID($id)
   {
+    return $this->createQuery('a')->select('is_confirmed')
+      ->where('id = ?', $id)->fetchOne()->is_confirmed;
+    /*
     $q = $this->createQuery('a')->select('is_confirmed')->where('id = ?', $id);
     $q = $q->fetchOne(array(), Doctrine_Core::HYDRATE_ARRAY);
     return $q['is_confirmed'];
+    */
   }
   
   /* Name and email address */

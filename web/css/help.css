@@ -1,0 +1,9 @@
+@import "_form.css";
+
+@media screen
+{
+    fieldset
+    {
+        width: 30em;
+    }
+}
