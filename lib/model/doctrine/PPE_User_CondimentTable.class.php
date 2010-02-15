@@ -25,7 +25,7 @@ class PPE_User_CondimentTable extends Doctrine_Table
   public function getIDByOregano($oregano)
   {
     return $this->createQuery('a')->select('id')
-      ->where('oregano = ?', $oregano)->fetchOne()->oregano;
+      ->where('oregano = ?', $oregano)->fetchOne()->id;
   }
   
   public function confirmUser($oregano, $pass)

@@ -38,7 +38,6 @@ class resetActions extends sfActions
       $userT = Doctrine::getTable('PPE_User_User');
       $oreg = $this->form->getValue('confirm');
       $id = $condT->getIDByOregano($oreg);
-      
       $this->data = array();
       
       if (!$id)
