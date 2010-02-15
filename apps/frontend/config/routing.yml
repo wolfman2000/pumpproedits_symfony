@@ -230,6 +230,36 @@ help_post:
   requirements:
     sf_method: [POST]
 
+# Reset your password here (hopefully)
+reset_get:
+  url: /reset
+  class: sfRequestRoute
+  param:
+    module: reset
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Reset + confirmation code
+reset_get_code:
+  url: /reset/:code
+  class: sfRequestRoute
+  param:
+    module: reset
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# Actual processing of above
+reset_post:
+  url: /reset
+  class: sfRequestRoute
+  param:
+    module: reset
+    action: validate
+  requirements:
+    sf_method: [POST]
+
 # General edits page (this may change)
 edits:
   url: /edits
@@ -267,6 +297,16 @@ edit_official:
   param:
     module: edits
     action: official
+    page: 1
+  requirements:
+    page: \d+
+
+# Edits with no known author.
+edit_unknown:
+  url: /unknown/:page
+  param:
+    module: edits
+    action: unknown
     page: 1
   requirements:
     page: \d+
