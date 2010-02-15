@@ -17,6 +17,11 @@ class confirmActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
     $code = $request->getParameter('code');
     $this->form = new ConfirmForm(array('confirm' => $code));
   }
