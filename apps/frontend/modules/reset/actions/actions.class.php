@@ -17,6 +17,27 @@ class resetActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    if ($this->getUser()->isAuthenticated())
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+    $code = $request->getParameter('code');
+    $this->form = new ResetPasswordForm(array('confirm' => $code));
+  }
+  
+  public function executeValidate(sfWebRequest $request)
+  {
+    $this->form = new ResetPasswordForm();
+    $this->form->bind($request->getParameter('validate'));
+    
+    if ($this->form->isValid())
+    {
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
 }
