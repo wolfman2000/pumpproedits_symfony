@@ -28,7 +28,7 @@ class HelpForm extends sfForm
 
     $tmp2['invalid'] = "You did not choose a selection.";
     unset($tmp2['max_length']);
-    $tmp1['choices'] = $choices;
+    $tmp1['choices'] = array_keys($choices);
     unset($tmp1['max_length']);
 
     $val['choice'] = new sfValidatorChoice($tmp1, $tmp2);
