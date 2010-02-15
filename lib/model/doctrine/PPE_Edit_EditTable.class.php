@@ -2,6 +2,27 @@
 
 class PPE_Edit_EditTable extends Doctrine_Table
 {
+  // Insert data based on EditParser::get_stats
+  public function addEdit($row)
+  {
+    $edit = new PPE_Edit_Edit();
+    $edit->setSongID($row['id']);
+    $edit->setUserID($row['uid']);
+    $edit->setTitle($row['title']);
+    $edit->setIsSingle($row['style'] == "single" ? 1 : 0);
+    $edit->setDiff($row['diff']);
+    $edit->setSteps($row['steps']);
+    $edit->setJumps($row['jumps']);
+    $edit->setHolds($row['holds']);
+    $edit->setMines($row['mines']);
+    $edit->setTrips($row['trips']);
+    $edit->setRolls($row['rolls']);
+    $edit->setLifts($row['lifts']);
+    $edit->setFakes($row['fakes']);
+    
+    $edit->save();
+  }
+
   public function getEditsBySong($songid)
   {
     $cols = 'diff, steps, jumps, holds, mines, trips, rolls, fakes, lifts';
