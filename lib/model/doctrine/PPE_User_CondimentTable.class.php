@@ -10,6 +10,24 @@ class PPE_User_CondimentTable extends Doctrine_Table
     return $q['id'];
   }
 
+  public function setPassword($id, $pass)
+  {
+    $pepper = hash("sha256", $pass . $this->getSalt($id));
+    return $this->createQuery('a')->update()->set('pepper', '?', $pepper)
+      ->where('id = ?', $id)->execute();
+  }
+  
+  public function setPepper($id, $pass)
+  {
+    return $this->setPassword($id, $pass);
+  }
+
+  public function getIDByOregano($oregano)
+  {
+    return $this->createQuery('a')->select('id')
+      ->where('oregano = ?', $oregano)->fetchOne()->oregano;
+  }
+  
   public function confirmUser($oregano, $pass)
   {
     $q = $this->createQuery('a')->select('salt')
