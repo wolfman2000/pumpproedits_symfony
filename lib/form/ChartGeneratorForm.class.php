@@ -8,8 +8,17 @@ class ChartGeneratorForm extends sfForm
     
     $editT = Doctrine::getTable('PPE_Edit_Edit');
     $rows = $editT->getNonProblemEdits();
+    
+    $choices = array();
+    
+    foreach ($rows as $r):
+      $choices[$r->id] = "$r->uname's $r->title -- $r->sname";
+    endforeach;
+    
+    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices), array('size' => 20));
+    $pieces['file'] = new sfWidgetFormInputFile();
 
-    $this->setWidgets(array('file' => new sfWidgetFormInputFile()));
+    $this->setWidgets($pieces);
 
     $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
     $this->widgetSchema->addFormFormatter('dlist', $decorator);
