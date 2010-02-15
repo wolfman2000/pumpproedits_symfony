@@ -8,6 +8,26 @@ homepage:
     module: ppehome
     action: index
 
+# Upload an edit
+upload_get:
+  url: /upload
+  class: sfRequestRoute
+  param:
+    module: upload
+    action: index
+  requirements:
+    sf_method: [GET]
+
+# The actual processing
+upload_post:
+  url: /upload
+  class: sfRequestRoute
+  param:
+    module: upload
+    action: validate
+  requirements:
+    sf_method: [POST]
+
 # temp xml page
 xmltest:
   url: /xmltest
