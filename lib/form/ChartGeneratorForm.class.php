@@ -11,15 +11,21 @@ class ChartGeneratorForm extends sfForm
     
     $choices = array();
     
+    $oname = "無"; // Start with no match.
+    
     foreach ($rows as $r):
-      $choices[$r->id] = "$r->uname's $r->title -- $r->sname";
+      $nname = $r->uname;
+      if ($oname !== $nname)
+      {
+        $choices[$nname] = array();
+        $oname = $nname;
+      }
+      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . ")";
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices), array('size' => 20));
     $pieces['file'] = new sfWidgetFormInputFile();
     $pieces['rm_file'] = new myWidgetFormButton(array('label' => '&nbsp;'), array('type' => 'button'));
-    
-    var_dump($pieces);
 
     $this->setWidgets($pieces);
 
