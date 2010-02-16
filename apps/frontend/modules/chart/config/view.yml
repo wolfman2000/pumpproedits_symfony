@@ -1,6 +1,9 @@
 indexSuccess:
   stylesheets: [stats.css]
 
+advancedSuccess:
+  stylesheets: [chart.css]
+
 validateSuccess:
   stylesheets: [stats.css]
 

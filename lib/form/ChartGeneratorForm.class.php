@@ -17,7 +17,7 @@ class ChartGeneratorForm extends sfForm
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices), array('size' => 20));
     $pieces['file'] = new sfWidgetFormInputFile();
-    $pieces['rm_file'] = new myWidgetFormButton(array(), array('type' => 'button'));
+    $pieces['rm_file'] = new myWidgetFormButton(array('label' => '&nbsp;'), array('type' => 'button'));
     
     var_dump($pieces);
 
