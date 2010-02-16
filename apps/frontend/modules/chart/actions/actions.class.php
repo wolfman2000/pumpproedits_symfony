@@ -90,10 +90,14 @@ class chartActions extends sfActions
     $errors = array();
     if ($this->form->isValid())
     {
-      // Have to repeat this to reset the button value.
-      $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
-      $this->getResponse()->setStatusCode(409);
       $file = $this->form->getValue('file');
+      
+      print_r($file);
+      
+      // Have to repeat this to reset the button value.
+      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+      $this->data = "General testing.";
+      $this->getResponse()->setStatusCode(409);
       
       return sfView::ERROR;
       $filename = 'uploaded'.sha1($file->getOriginalName());
@@ -128,6 +132,7 @@ class chartActions extends sfActions
     }
     else
     {
+      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }

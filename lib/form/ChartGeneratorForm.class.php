@@ -48,5 +48,17 @@ class ChartGeneratorForm extends sfForm
     $vfile = new sfValidatorFile($validate, $messages);
     $val['file'] = $vfile;
     $this->setValidators($val);
+    
+    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureOne'))));
+
+  }
+  
+  public function ensureOne($validator, $values)
+  {
+    if ($values['edits'] xor $values['file'])
+    {
+      return $values;
+    }
+    throw new sfValidatorError($validator, "Select either an author's edit or your own.");
   }
 }
