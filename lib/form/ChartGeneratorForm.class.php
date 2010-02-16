@@ -10,6 +10,7 @@ class ChartGeneratorForm extends sfForm
     $rows = $editT->getNonProblemEdits();
     
     $choices = array();
+    $choices[0] = 'Select an edit.';
     
     $oname = "無"; // Start with no match.
     
@@ -38,7 +39,7 @@ class ChartGeneratorForm extends sfForm
     
     $validate['max_size'] = $size;
     $validate['path'] = sfConfig::get('sf_upload_dir');
-    $messages['required'] = 'You must submit an edit file!';
+    # $messages['required'] = 'You must submit an edit file!';
     $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
     $vfile = new sfValidatorFile($validate, $messages);
     $val['file'] = $vfile;

@@ -85,7 +85,7 @@ class chartActions extends sfActions
   */
   public function executeAdvProcess(sfWebRequest $request)
   {
-    $this->form = new ChartGeneratorForm();
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind"));
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
     $errors = array();
     if ($this->form->isValid())
