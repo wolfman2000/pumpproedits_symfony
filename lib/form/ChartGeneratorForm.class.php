@@ -37,9 +37,13 @@ class ChartGeneratorForm extends sfForm
     
     $size = sfConfig::get('app_max_edit_file_size');
     
+    $tmp1['required'] = false;
+    $tmp1['choices'] = array_keys($choices);
+    $val['edits'] = new sfValidatorChoice($tmp1);
+    
     $validate['max_size'] = $size;
     $validate['path'] = sfConfig::get('sf_upload_dir');
-    # $messages['required'] = 'You must submit an edit file!';
+    $validate['required'] = false;
     $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
     $vfile = new sfValidatorFile($validate, $messages);
     $val['file'] = $vfile;

@@ -76,7 +76,7 @@ class chartActions extends sfActions
       $this->forward('login', 'index');
       return;
     }
-    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind"));
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
   }
  /**
   * Executes validate action (form required)
@@ -85,12 +85,17 @@ class chartActions extends sfActions
   */
   public function executeAdvProcess(sfWebRequest $request)
   {
-    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind"));
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
     $errors = array();
     if ($this->form->isValid())
     {
+      // Have to repeat this to reset the button value.
+      $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+      $this->getResponse()->setStatusCode(409);
       $file = $this->form->getValue('file');
+      
+      return sfView::ERROR;
       $filename = 'uploaded'.sha1($file->getOriginalName());
       $extension = $file->getExtension($file->getOriginalExtension());
       $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
