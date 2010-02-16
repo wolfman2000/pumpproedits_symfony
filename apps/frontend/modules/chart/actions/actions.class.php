@@ -76,7 +76,7 @@ class chartActions extends sfActions
       $this->forward('login', 'index');
       return;
     }
-    $this->form = new ChartGeneratorForm();
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind"));
   }
  /**
   * Executes validate action (form required)
@@ -85,7 +85,7 @@ class chartActions extends sfActions
   */
   public function executeAdvProcess(sfWebRequest $request)
   {
-    $this->form = new ValidateEditForm();
+    $this->form = new ChartGeneratorForm();
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
     $errors = array();
     if ($this->form->isValid())
