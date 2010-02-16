@@ -23,8 +23,8 @@ class ChartGeneratorForm extends sfForm
       $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . ")";
     endforeach;
     
-    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices), array('size' => 20));
-    $pieces['file'] = new sfWidgetFormInputFile();
+    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
+    $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
     $pieces['rm_file'] = new myWidgetFormButton(array('label' => '&nbsp;'), array('type' => 'button'));
 
     $this->setWidgets($pieces);
