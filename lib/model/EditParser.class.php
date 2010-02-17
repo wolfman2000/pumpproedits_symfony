@@ -57,7 +57,7 @@ class EditParser
   *
   * This code uses alternative control syntax a lot to keep indentation low.
   */
-  public function get_stats($fh, $inc_notes = false)
+  public function get_stats($fh, $inc_notes = false, $strict_song = true)
   {
     $res = array(); # Return variables go in here.
     $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
@@ -92,12 +92,19 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $song = substr($line, 6, $pos - strlen($line));
-      $songid = $base->getIDBySong($song);
-      if (!$songid)
+      if ($song_strict)
       {
-        $s = "This song is not found in the database: %s. ";
-        $s .= "Make sure you spelt it right.";
-        throw new sfParseException(sprintf($s, $song));
+        $songid = $base->getIDBySong($song);
+        if (!$songid)
+        {
+          $s = "This song is not found in the database: %s. ";
+          $s .= "Make sure you spelt it right.";
+          throw new sfParseException(sprintf($s, $song));
+        }
+      }
+      else
+      {
+        $songid = -1;
       }
       $state = 1; # The song exists. We can move on.
       break;

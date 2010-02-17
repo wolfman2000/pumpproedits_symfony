@@ -90,27 +90,29 @@ class chartActions extends sfActions
     $errors = array();
     if ($this->form->isValid())
     {
-      $file = $this->form->getValue('file');
+      $eid = $this->form->getValue('edits');
+      if ($eid > 0)
+      {
+        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
+      }
+      else
+      {
+        $file = $this->form->getValue('file');
+        $filename = 'uploaded'.sha1($file->getOriginalName());
+        $extension = $file->getExtension($file->getOriginalExtension());
+        $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
+        $file->save($path);
+      }
       
-      print_r($file);
-      
-      // Have to repeat this to reset the button value.
-      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
-      $this->data = "General testing.";
-      $this->getResponse()->setStatusCode(409);
-      
-      return sfView::ERROR;
-      $filename = 'uploaded'.sha1($file->getOriginalName());
-      $extension = $file->getExtension($file->getOriginalExtension());
-      $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
-      $file->save($path);
-
       /* File validation takes place here. */
       $tmp = new EditParser();
       try
       {
-        $notedata = $tmp->get_stats(fopen($path, "r"), 1);
-        @unlink($path);
+        $notedata = $tmp->get_stats(fopen($path, "r"), true, false);
+        if (isset($file))
+        {
+          @unlink($path);
+        }
         // The others can be gotten later.
         $p = array('cols' => $notedata['cols']);
         $tmp = new EditCharter($p);
@@ -125,7 +127,10 @@ class chartActions extends sfActions
       catch (sfParseException $e)
       {
         $this->data = $e;
-        @unlink($path);
+        if (isset($file))
+        {
+          @unlink($path);
+        }
         $this->getResponse()->setStatusCode(409);
         return sfView::ERROR;
       }
