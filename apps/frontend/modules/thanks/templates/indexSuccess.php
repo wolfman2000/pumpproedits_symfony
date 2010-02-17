@@ -35,8 +35,9 @@ slot('h2', '<h2>Credits and Thanks</h2>'); ?>
 <h3>Real Life</h3>
 <dl>
 <dt><a href="http://www.ncsu.edu">North Carolina State University</a></dt>
-
 <dd>They gave me the majority of my education.</dd>
+<dt><a href="http://www.uncw.edu">University of North Carolina Wilmington</a></dt>
+<dd>My present college, they are helping me become a high school math teacher.</dd>
 <dt>Jboy AAA</dt>
 <dd>He has helped with private testing on the website, and also had a machine available that I could use.</dd>
 <dt>BAMABoxy</dt>
@@ -57,7 +58,6 @@ slot('h2', '<h2>Credits and Thanks</h2>'); ?>
 <dt><a href="http://www.kyle-ward.com">Kyle Ward</a></dt>
 <dd>It was Kyle that helped make me realize the potential of such a web site.</dd>
 <dt>Ryan McKanna</dt>
-
 <dd>He has kept my head cool in previous endeavors, so I thank him again here.</dd>
 <dt>Jason Dread</dt>
 <dd>Another nice guy, he has brought traffic to this page in the past.</dd>
@@ -79,17 +79,17 @@ slot('h2', '<h2>Credits and Thanks</h2>'); ?>
 <dt>Kyrandian</dt>
 <dd>Another beta tester, he found some bugs that I was able to fix.</dd>
 <dt>dasbacon</dt>
-
 <dd>His videos and statistics were of big help for me.</dd>
 <dt>Hatena Zubon</dt>
 <dd>All of his edits, especially for Hasse Mich, proved useful.</dd>
 <dt><a href="http://techpatterns.com/downloads/php_browser_detection.php">TechPatterns' PHP &amp; OS Detection Scripts</a></dt>
 <dd>My original source for user agent switching, their code is useful on any PHP page.</dd>
 <dt><a href="http://www.pylonshq.com">Pylons</a></dt>
-<dd>This redesign would not have taken place if it wasn't for this Python framework.</dd>
+<dd>The first redesign would not have taken place if it wasn't for this Python framework.</dd>
 <dt><a href="http://www.sqlalchemy.org/">SQLAlchemy</a></dt>
-
-<dd>Database queries became simpler with SQLAlchemy.  They also became more fun.</dd>
+<dd>While on Pylons, database queries became simpler with SQLAlchemy.  They also became more fun.</dd>
+<dt><a href="http://www.symfony-project.org/">Symfony Project</a></dt>
+<dd>The second redesign was thanks to this PHP framework. The learning curve is easy to work with.</dd>
 </dl>
 <p><a href="#top">Back to Top</a></p>
 </section>
@@ -124,11 +124,12 @@ slot('h2', '<h2>Credits and Thanks</h2>'); ?>
 <dl>
 <dt><a href="http://www.site5.com">Site5 Web Hosting</a></dt>
 <dd>The original host for this page, they've been good to me.</dd>
-
 <dt><a href="http://www.slicehost.com">Slicehost - VPS Hosting</a></dt>
-<dd>My current host, they give me a lot of control at a reasonable rate.</dd>
+<dd>Anyone that requires a virtual private server should check these guys out. They used to host this website.</dd>
 <dt><a href="http://www.piu-pro.com">Pump It Up Pro Blog</a></dt>
 <dd>They were one of the first fan websites to link to back here.</dd>
+<dt><a href="http://www.nearlyfreespeech.net">NearlyFreeSpeech.NET</a></dt>
+<dd>My present host, they are the only A la carte web host that I know of.</dd>
 </dl>
 <p><a href="#top">Back to Top</a></p>
 </section>
