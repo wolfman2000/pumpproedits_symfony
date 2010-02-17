@@ -10,4 +10,8 @@
   {
     content: '';
   }
+  dd
+  {
+	min-height: 3em;
+  }
 }
