@@ -7,4 +7,4 @@ below to preview your creation.</p>
 Internet Explorer users may either require a plugin or a different
 web browser to view the content.</p>
 
-<?php include_partial('chart/form', array('form' => $form, 'route' => '@chart_gen_post')) ?>
+<?php include_partial('chart/form', array('form' => $form, 'route' => '@chart_gen_post', 'legend' => 'Select your .edit file.')) ?>
