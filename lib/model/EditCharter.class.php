@@ -127,7 +127,7 @@ class EditCharter
     {
       $x = ($this->aw * $this->cols + $breather) * $i + $breather;
       $sx = $this->cols;
-      for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
+      for ($j = 0; $j < $this->mpcol * $spd; $j++)
       {
         $y = $beatheight * $j * $this->bm + $this->headheight;
         $use = $this->genSVGNode($x, $y, "measure", '', $sx);
