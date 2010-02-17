@@ -115,7 +115,14 @@ class chartActions extends sfActions
         }
         // The others can be gotten later.
         $p = array('cols' => $notedata['cols']);
-        $p['kind'] = "classic"; // TODO: make this a form variable.
+        $p['kind'] = $this->form->getValue('kind');
+        
+        $p['red4'] = $this->form->getValue('red4');
+        
+        $p['speed_mod'] = $this->form->getValue('speed');
+        
+        $p['mpcol'] = $this->form->getValue('mpcol');
+        
         $tmp = new EditCharter($p);
         $xml = $tmp->genChart($notedata);
         

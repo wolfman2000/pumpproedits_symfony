@@ -31,16 +31,22 @@ class ChartGeneratorForm extends sfForm
     $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
     $pieces['rm_file'] = new myWidgetFormButton(array('label' => '&nbsp;'), array('type' => 'button'));
     
-    unset($choices);
-    $choices = array('classic', 'rhythm');
+    $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
     $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin', 'expanded' => true));
+    $this->setDefault('kind', 'classic');
+
     
     $r_choices = array(0 => 'blue', 1 => 'red');
     $pieces['red4'] = new sfWidgetFormChoice(array('choices' => $r_choices, 'label' => '4th Note Color'));
+    $this->setDefault('red4', 0);
     
-    $s_choices = array(1, 2, 3, 4, 6, 8);
+    $s_choices = array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 6 => 6, 8 => 8);
     $pieces['speed'] = new sfWidgetFormChoice(array('choices' => $s_choices, 'label' => 'Speed Mod'));
+    $this->setDefault('speed', 2);
     
+    $m_choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16);
+    $pieces['mpcol'] = new sfWidgetFormChoice(array('choices' => $m_choices, 'label' => 'Measures per column'));
+    $this->setDefault('mpcol', 6);
     
 
     $this->setWidgets($pieces);
@@ -56,17 +62,21 @@ class ChartGeneratorForm extends sfForm
     $tmp1['choices'] = $possible;
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
-    $tmp1['required'] = "A noteskin must be chosen.";
+    $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
-    $val['kind'] = new sfValidatorChoice($tmp1, array());
+    $val['kind'] = new sfValidatorChoice($tmp1, array('required' => 'A noteskin must be chosen.'));
     
     $tmp1['required'] = false;
     $tmp1['choices'] = array_keys($r_choices);
     $val['red4'] = new sfValidatorChoice($tmp1, array());
     
-    $tmp1['required'] = "A speed mod must be chosen.";
+    $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($s_choices);
-    $val['speed'] = new sfValidatorChoice($tmp1, array());
+    $val['speed'] = new sfValidatorChoice($tmp1, array('required' => "A speed mod must be chosen."));
+    
+    $tmp1['required'] = true;
+    $tmp1['choices'] = array_keys($m_choices);
+    $val['mpcol'] = new sfValidatorChoice($tmp1, array('required' => "You must choose how many measures appear in each column."));
     
     unset($tmp1);
     $tmp1['max_size'] = $size;
@@ -80,8 +90,9 @@ class ChartGeneratorForm extends sfForm
     
     $this->setValidators($val);
     
+    
     $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureOne'))));
-    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureRhtyhm'))));
+    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm'))));
 
   }
   
@@ -96,10 +107,21 @@ class ChartGeneratorForm extends sfForm
   
   public function ensureRhythm($validator, $values)
   {
-    if ($values['kind'] === 'classic' or ($values['red4'] === 0 or $values['red4'] === 1))
+    if ($values['kind'] === 'classic')
     {
       return $values;
     }
-    throw new sfValidatorError($validator, "If using Rhythm, you must select the quarter note color.");
+    if ($values['kind'] === 'rhythm')
+    {
+      if ($values['red4'] == 0 or $values['red4'] == 1)
+      {
+        return $values;
+      }
+      else
+      {
+            throw new sfValidatorError($validator, "If using Rhythm, you must select the quarter note color.");
+      }
+    }
+    return $values;
   }
 }
