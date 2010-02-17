@@ -89,7 +89,7 @@ class PPE_User_UserTable extends Doctrine_Table
   {
     return $this->createQuery('a')->select('name core, num_edits')
       ->where('num_edits > ?', 0)
-      ->andWhere('id != ?', 2)
+      ->andWhereNotIn('id', array(2, 95))
       ->orderBy('lc_name')->execute();
   }
 }
