@@ -21,7 +21,7 @@ class ChartGeneratorForm extends sfForm
         $choices[$nname] = array();
         $oname = $nname;
       }
-      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . ")";
+      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . "$r->diff)";
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
