@@ -152,7 +152,7 @@ class EditCharter
     
     $this->genTxtNode($lbuff, 16, sprintf("%s Edit for %s: %s - %s",
       ucfirst(substr($nd['style'], 5)),
-      Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']),
+      $nd['song'],
       $nd['title'], $nd['diff'])
     );
     

@@ -92,7 +92,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $song = substr($line, 6, $pos - strlen($line));
-      if ($song_strict)
+      if ($strict_song)
       {
         $songid = $base->getIDBySong($song);
         if (!$songid)
@@ -322,6 +322,7 @@ class EditParser
     endswitch;
     endwhile;
     $res['id'] = $songid;
+    $res['song'] = $song;
     $res['diff'] = $diff;
     $res['cols'] = $cols;
     $res['style'] = $style;
