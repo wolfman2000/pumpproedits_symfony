@@ -115,6 +115,7 @@ class chartActions extends sfActions
         }
         // The others can be gotten later.
         $p = array('cols' => $notedata['cols']);
+        $p['kind'] = "classic"; // TODO: make this a form variable.
         $tmp = new EditCharter($p);
         $xml = $tmp->genChart($notedata);
         
