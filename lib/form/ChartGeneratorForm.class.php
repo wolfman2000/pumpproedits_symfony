@@ -12,6 +12,8 @@ class ChartGeneratorForm extends sfForm
     $choices = array();
     $choices[0] = 'Select an edit.';
     
+    $possible[] = 0;
+    
     $oname = "無"; // Start with no match.
     
     foreach ($rows as $r):
@@ -22,6 +24,7 @@ class ChartGeneratorForm extends sfForm
         $oname = $nname;
       }
       $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . "$r->diff)";
+      $possible[] = $r->id;
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
@@ -38,14 +41,15 @@ class ChartGeneratorForm extends sfForm
     $size = sfConfig::get('app_max_edit_file_size');
     
     $tmp1['required'] = false;
-    $tmp1['choices'] = array_keys($choices);
-    $val['edits'] = new sfValidatorChoice($tmp1);
+    $tmp1['choices'] = $possible;
+    $val['edits'] = new sfValidatorChoice($tmp1, array());
     
-    $validate['max_size'] = $size;
-    $validate['path'] = sfConfig::get('sf_upload_dir');
-    $validate['required'] = false;
+    unset($tmp1);
+    $tmp1['max_size'] = $size;
+    $tmp1['path'] = sfConfig::get('sf_upload_dir');
+    $tmp1['required'] = false;
     $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
-    $vfile = new sfValidatorFile($validate, $messages);
+    $vfile = new sfValidatorFile($tmp1, $messages);
     $val['file'] = $vfile;
     $this->setValidators($val);
     
@@ -59,6 +63,6 @@ class ChartGeneratorForm extends sfForm
     {
       return $values;
     }
-    throw new sfValidatorError($validator, "Select either an author's edit or your own.");
+    throw new sfValidatorError($validator, "Select either an author's edit or your own file.");
   }
 }
