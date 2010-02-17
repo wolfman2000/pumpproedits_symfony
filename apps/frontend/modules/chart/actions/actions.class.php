@@ -69,6 +69,89 @@ class chartActions extends sfActions
     }
   }
   
+  public function executeAdvanced(sfWebRequest $request)
+  {
+    if (!$this->getUser()->isAuthenticated())
+    {
+      $this->forward('login', 'index');
+      return;
+    }
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+  }
+ /**
+  * Executes validate action (form required)
+  *
+  * @param sfRequest $request A request object
+  */
+  public function executeAdvProcess(sfWebRequest $request)
+  {
+    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+    $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
+    $errors = array();
+    if ($this->form->isValid())
+    {
+      $eid = $this->form->getValue('edits');
+      if ($eid > 0)
+      {
+        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
+      }
+      else
+      {
+        $file = $this->form->getValue('file');
+        $filename = 'uploaded'.sha1($file->getOriginalName());
+        $extension = $file->getExtension($file->getOriginalExtension());
+        $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
+        $file->save($path);
+      }
+      
+      /* File validation takes place here. */
+      $tmp = new EditParser();
+      try
+      {
+        $notedata = $tmp->get_stats(fopen($path, "r"), true, false);
+        if (isset($file))
+        {
+          @unlink($path);
+        }
+        // The others can be gotten later.
+        $p = array('cols' => $notedata['cols']);
+        $p['kind'] = $this->form->getValue('kind');
+        
+        $p['red4'] = $this->form->getValue('red4');
+        
+        $p['speed_mod'] = $this->form->getValue('speed');
+        
+        $p['mpcol'] = $this->form->getValue('mpcol');
+        
+        $tmp = new EditCharter($p);
+        $xml = $tmp->genChart($notedata);
+        
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->setHttpHeader('Content-Type', 'image/svg+xml');
+        $response->setContent($xml->saveXML());
+        return sfView::NONE;
+      }
+      catch (sfParseException $e)
+      {
+        $this->data = $e;
+        if (isset($file))
+        {
+          @unlink($path);
+        }
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+    }
+    else
+    {
+      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
+  
+  
   public function executeQuick(sfWebRequest $request)
   {
     $id = $request->getParameter('id');

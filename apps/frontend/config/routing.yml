@@ -127,6 +127,26 @@ chart_gen_post:
   requirements:
     sf_method: [POST]
 
+# The newer, friendlier chart generator (members only)
+chart_adv_get:
+  url: /chart/adv
+  class: sfRequestRoute
+  param:
+    module: chart
+    action: advanced
+  requirements:
+    sf_method: [GET]
+
+# The result of the above processing
+chart_adv_post:
+  url: /chart/adv
+  class: sfRequestRoute
+  param:
+    module: chart
+    action: advProcess
+  requirements:
+    sf_method: [POST]
+
 # Quickly generate a chart.
 chart_quick:
   url: /chart/quick/:id/:kind

@@ -127,7 +127,7 @@ class EditCharter
     {
       $x = ($this->aw * $this->cols + $breather) * $i + $breather;
       $sx = $this->cols;
-      for ($j = 0; $j < $this->mpcol * $this->speedmod; $j++)
+      for ($j = 0; $j < $this->mpcol * $spd; $j++)
       {
         $y = $beatheight * $j * $this->bm + $this->headheight;
         $use = $this->genSVGNode($x, $y, "measure", '', $sx);
@@ -152,7 +152,7 @@ class EditCharter
     
     $this->genTxtNode($lbuff, 16, sprintf("%s Edit for %s: %s - %s",
       ucfirst(substr($nd['style'], 5)),
-      Doctrine::getTable('PPE_Song_Song')->getSongByID($nd['id']),
+      $nd['song'],
       $nd['title'], $nd['diff'])
     );
     
