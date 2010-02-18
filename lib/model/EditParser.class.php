@@ -149,16 +149,26 @@ class EditParser
       }
       if ($pos === 0)
       {
-        $s = "Blank edit names are no longer allowed.";
-        throw new sfParseException($s);
+        if ($strict_song)
+        {
+          $s = "Blank edit names are no longer allowed.";
+          throw new sfParseException($s);
+        }
+        else
+        {
+          $title = "JDread Law ☻";
+        }
       }
-      $title = substr($line, 0, $pos - strlen($line));
+      else
+      {
+        $title = substr($line, 0, $pos - strlen($line));
+      }
       $maxlen = sfConfig::get('app_max_edit_name_length');
-      $titlen = strlen($title);
-      if ($titlen > $maxlen)
+      $titlen = mb_strlen($title);
+      if ($titlen > $maxlen and $strict_song)
       {
         $s = 'The edit titled "%s" is %d characters too long.';
-        throw new sfParseException(sprintf($s, $title, $titlen));
+        throw new sfParseException(sprintf($s, $title, $titlen - $maxlen));
       }
       $state = 4;
       break;
