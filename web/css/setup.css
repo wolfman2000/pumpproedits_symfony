@@ -29,7 +29,7 @@ version: 2.6.0
 */
 body{font:13px/1.231 "DejaVu Sans",arial,helvetica,clean,sans-serif;}
 select,input,button,textarea{font:99% "DejaVu Sans",arial,helvetica,clean,sans-serif;outline: none;}
-table{font-size:inherit;font:100%;}
+table{font-size:inherit;font:100% "DejaVu Sans",arial,helvetica,clean,sans-serif;}
 pre,code,kbd,samp,tt{font-family:"DejaVu Sans Mono",monospace;}
 
 /* HTML 5 tags */
