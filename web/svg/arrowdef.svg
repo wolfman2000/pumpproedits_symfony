@@ -34,18 +34,21 @@
       <stop offset="0" />
       <stop offset="1" />
     </radialGradient>
+    <g id="beat1">
+      <rect x="0" y="0" height="16" width="16" />
+      <rect x="0" y="16" height="16" width="16" />
+      <line x1="0" y1="0.1" x2="16" y2="0.1" />
+    </g>
     <g id="beat2">
       <rect x="0" y="0" height="16" width="16" />
       <rect x="0" y="16" height="16" width="16" />
     </g>
     <g id="measure">
-      <use x="0" y="0" xlink:href="#beat2" />
+      <use x="0" y="0" xlink:href="#beat1" />
       <use x="0" y="32" xlink:href="#beat2" />
-      <line x1="0" y1="0" x2="16" y2="0" />
-      <!--
-      <line x1="0" y1="0" x2="0" y2="64" />
-      <line x1="16" y1="0" x2="16" y2="64" />
-      -->
+      <line x1="0.05" y1="0" x2="0.05" y2="64" />
+      <line x1="15.95" y1="0" x2="15.95" y2="64" />
+      
     </g>
     <g id="DLarrow">
       <path d="m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 0,0 0,-1 -1,-1 H 7 L 15,5 V 2 C 15,2 15,1 14,1 H 11 L 3,9 V 2 C 3,2 3,1 2,1 2,1 1,1 1,2" />
