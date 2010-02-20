@@ -15,6 +15,18 @@ echo form_tag($route, "multipart=true"); ?>
         </dd>
     </dl>
     </section>
+    <section>
+    <dl>
+      <dt><?php echo $form['kind']->renderLabel() ?></dt>
+      <dd><?php echo $form['kind'] ?></dd>
+      <dt><?php echo $form['red4']->renderLabel() ?></dt>
+      <dd><?php echo $form['red4'] ?></dd>
+      <dt><?php echo $form['speed']->renderLabel() ?></dt>
+      <dd><?php echo $form['speed'] ?></dd>
+      <dt><?php echo $form['mpcol']->renderLabel() ?></dt>
+      <dd><?php echo $form['mpcol'] ?></dd>
+    </dl>
+    </section>
   <p><button name="submit" id="submit" type="submit" value="submit">Submit!</button></p>
   </fieldset>
 </form>
