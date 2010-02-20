@@ -6,12 +6,14 @@
   {
     width: 60em;
   }
-  dt:after
+  section > p:nth-child(odd)
   {
-    content: '';
+	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
   }
-  dd
+  /* Note to self: this seems backwards. Test in other browsers. */
+  section:nth-child(even)
   {
-	min-height: 3em;
+	float: left;
+	width: 35em;
   }
 }
