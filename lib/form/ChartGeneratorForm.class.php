@@ -85,14 +85,12 @@ class ChartGeneratorForm extends sfForm
     $vfile = new sfValidatorFile($tmp1, $messages);
     $val['file'] = $vfile;
     
-    
-    
     $this->setValidators($val);
     
+    $one = new sfValidatorCallback(array('callback' => array($this, 'ensureOne')));
+    $rhy = new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm')));
     
-    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureOne'))));
-    $this->validatorSchema->setPostValidator(new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm'))));
-
+    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array($one, $rhy)));
   }
   
   public function ensureOne($validator, $values)
