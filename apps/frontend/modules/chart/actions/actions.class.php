@@ -18,6 +18,7 @@ class chartActions extends sfActions
   public function executeIndex(sfWebRequest $request)
   {
     $this->form = new ValidateEditForm();
+    $this->part = 'chart/form';
   }
  /**
   * Executes validate action (form required)
@@ -77,6 +78,7 @@ class chartActions extends sfActions
       return;
     }
     $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+    $this->part = 'chart/chart';
   }
  /**
   * Executes validate action (form required)
