@@ -77,7 +77,7 @@ class chartActions extends sfActions
       $this->forward('login', 'index');
       return;
     }
-    $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
+    $this->form = new ChartGeneratorForm(array('edits' => 0));
     $this->part = 'chart/chart';
   }
  /**
