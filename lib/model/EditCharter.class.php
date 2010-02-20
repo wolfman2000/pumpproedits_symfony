@@ -237,7 +237,8 @@ class EditCharter
       
       if (isset($break))
       {
-        $break = trim(trim($break, '0'), '.') . "B";
+        $break = rtrim(rtrim($break, '0'), '.') . "B";
+        $break = ltrim($break, '0');
         $this->genTxtNode($lx - $this->aw, $ly + $this->bm, $break, 'stop');
       }
     }
