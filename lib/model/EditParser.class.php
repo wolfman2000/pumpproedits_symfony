@@ -92,9 +92,12 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $song = substr($line, 6, $pos - strlen($line));
+      
+      $songid = $base->getIDBySong($song);
+      
       if ($strict_song)
       {
-        $songid = $base->getIDBySong($song);
+        
         if (!$songid)
         {
           $s = "This song is not found in the database: %s. ";
@@ -104,7 +107,7 @@ class EditParser
       }
       else
       {
-        $songid = -1;
+        if (!$songid) $songid = -1;
       }
       $state = 1; # The song exists. We can move on.
       break;
