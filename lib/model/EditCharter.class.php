@@ -30,11 +30,19 @@ class EditCharter
     }
     if (array_key_exists('nobpm', $params) and $params['nobpm'])
     {
-      $this->nobpm = 1;
+      $this->showbpm = 0;
+    }
+    else
+    {
+      $this->showbpm = 1;
     }
     if (array_key_exists('nostop', $params) and $params['nostop'])
     {
-      $this->nostop = 1;
+      $this->showstop = 0;
+    }
+    else
+    {
+      $this->showstop = 1;
     }
     
     $this->headheight = sfConfig::get('app_chart_header_height');
@@ -188,9 +196,9 @@ class EditCharter
       
       $line = $this->xml->createElement('line');
       $line->setAttribute('x1', $lx + $draw);
-      $line->setAttribute('y1', $ly);
+      $line->setAttribute('y1', $ly + 0.2);
       $line->setAttribute('x2', $lx + $draw + $draw);
-      $line->setAttribute('y2', $ly);
+      $line->setAttribute('y2', $ly + 0.2);
       $line->setAttribute('class', 'bpm');
       $this->svg->appendChild($line);
       
@@ -221,9 +229,9 @@ class EditCharter
       
       $line = $this->xml->createElement('line');
       $line->setAttribute('x1', $lx);
-      $line->setAttribute('y1', $ly);
+      $line->setAttribute('y1', $ly + 0.2);
       $line->setAttribute('x2', $lx + $draw);
-      $line->setAttribute('y2', $ly);
+      $line->setAttribute('y2', $ly + 0.2);
       $line->setAttribute('class', 'stop');
       $this->svg->appendChild($line);
       
@@ -445,8 +453,8 @@ class EditCharter
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
-    if (!isset($this->nobpm)) $this->genBPM($notedata['id']);
-    if (!isset($this->nostop)) $this->genStop($notedata['id']);
+    if ($this->showbpm) $this->genBPM($notedata['id']);
+    if ($this->showstop) $this->genStop($notedata['id']);
     $this->genArrows($notedata['notes']);
     return $this->xml;
   }
