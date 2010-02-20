@@ -23,6 +23,9 @@ echo form_tag($route, "multipart=true"); ?>
     <p><?php echo $form['mpcol']->renderLabel() ?></p>
     <p><?php echo $form['mpcol'] ?></p>
     </section>
-  <p><button name="submit" id="submit" type="submit" value="submit">Submit!</button></p>
+  <p>
+    <?php echo $form['_csrf_token'] ?>
+    <button name="submit" id="submit" type="submit" value="submit">Submit!</button>
+  </p>
   </fieldset>
 </form>
