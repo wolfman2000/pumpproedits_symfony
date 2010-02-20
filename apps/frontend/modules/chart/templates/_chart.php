@@ -4,7 +4,10 @@ include_javascripts_for_form($form);
 echo form_tag($route, "multipart=true"); ?>
   <fieldset>
     <legend>Select the edit to preview.</legend>
-    <section>
+    <?php if ($form->hasGlobalErrors()):
+    echo $form->renderGlobalErrors();
+    endif; ?>
+    <section id="edit">
       <p><?php echo $form['edits']->renderLabel() ?></p>
       <p><?php echo $form['edits'] ?></p>
       <p><?php echo $form['file']->renderLabel() ?></p>
