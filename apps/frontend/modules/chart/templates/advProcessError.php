@@ -7,4 +7,4 @@ if (isset($data)): ?>
 <?php else: ?>
 <p>Are you sure you selected an edit file? Double check and try again.</p>
 <?php endif;
-include_partial('chart/form', array('form' => $form, 'route' => '@chart_adv_post', 'legend' => 'Select the edit to preview.')) ?>
+include_partial($part, array('form' => $form, 'route' => '@chart_adv_post', 'legend' => 'Select the edit to preview.')) ?>

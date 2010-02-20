@@ -89,6 +89,7 @@ class chartActions extends sfActions
   {
     $this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
+    $this->part = 'chart/chart';
     $errors = array();
     if ($this->form->isValid())
     {
