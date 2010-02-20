@@ -11,9 +11,14 @@
 	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
   }
   /* Note to self: this seems backwards. Test in other browsers. */
-  section:nth-child(even)
+  #edit
   {
 	float: left;
 	width: 35em;
+  }
+  ul.error_list > li
+  {
+	padding-left: 1em;
+	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
   }
 }
