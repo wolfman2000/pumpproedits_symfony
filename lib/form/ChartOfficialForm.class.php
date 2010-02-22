@@ -1,6 +1,6 @@
 <?php
 
-class ChartGeneratorForm extends sfForm
+class ChartOfficialForm extends sfForm
 {
   public function configure()
   {
@@ -29,7 +29,7 @@ class ChartGeneratorForm extends sfForm
     
     $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
-    $val['diff'] new sfValidatorChoice($tmp1, array('required' => 'A difficulty must be chosen.'));
+    $val['diff'] = new sfValidatorChoice($tmp1, array('required' => 'A difficulty must be chosen.'));
     
     $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
     $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
