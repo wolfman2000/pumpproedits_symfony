@@ -156,6 +156,11 @@ class chartActions extends sfActions
   
   public function executeOfficial(sfWebRequest $request)
   {
+    if (!$this->getUser()->isAuthenticated())
+    {
+      $this->forward('login', 'index');
+      return;
+    }
     $this->form = new ChartOfficialForm();
   }
   
