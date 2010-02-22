@@ -50,9 +50,6 @@ class ChartGeneratorForm extends sfForm
 
     $this->setWidgets($pieces);
 
-    $decorator = new myWidgetFormSchemaFormatterDList($this->getWidgetSchema());
-    $this->widgetSchema->addFormFormatter('dlist', $decorator);
-    $this->widgetSchema->setFormFormatterName('dlist');
     $this->widgetSchema->setNameFormat('validate[%s]');
     
     $size = sfConfig::get('app_max_edit_file_size');
