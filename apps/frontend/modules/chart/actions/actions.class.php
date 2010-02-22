@@ -166,6 +166,13 @@ class chartActions extends sfActions
       $dif = $this->form->getValue('diff');
       $path = sfConfig::get('sf_data_dir').sprintf("/official/%d_%s.edit", $eid, $dif);
       
+      if (!file_exists($path))
+      {
+        $this->data = "This chart does not exist presently. Please choose another song / difficulty combination.";
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+      
       /* File validation takes place here. */
       $tmp = new EditParser();
       try
