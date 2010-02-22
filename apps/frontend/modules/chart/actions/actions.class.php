@@ -184,7 +184,8 @@ class chartActions extends sfActions
 
         $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
         'red4' => $this->form->getValue('red4'), 'speed_mod' => $this->form->getValue('speed'),
-        'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'));
+        'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'),
+        'arcade' => 1);
 
         $tmp = new EditCharter($p);
         $xml = $tmp->genChart($notedata);
