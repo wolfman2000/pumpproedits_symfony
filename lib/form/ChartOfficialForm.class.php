@@ -10,7 +10,6 @@ class ChartOfficialForm extends sfForm
     $rows = $songT->getSongs();
     
     $choices = array();
-    $choices[0] = 'Select a song.';
     
     foreach ($rows as $r):
       $choices[$r->id] = $r->name;
