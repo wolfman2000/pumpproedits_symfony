@@ -105,9 +105,9 @@ class EditParser
     $title = $song = $style = "";
     $base = Doctrine::getTable('PPE_Song_Song');
     
-    if (!isset($params['strict_song'])) { $params['strict_song'] = true };
-    if (!isset($params['strict_edit'])) { $params['strict_edit'] = true };
-    if (!isset($params['arcade'])) { $params['arcade'] = false };
+    if (!isset($params['strict_song'])) { $params['strict_song'] = true; }
+    if (!isset($params['strict_edit'])) { $params['strict_edit'] = true; }
+    if (!isset($params['arcade'])) { $params['arcade'] = false; }
 
     $numl = 0;
     while(!feof($fh)):
