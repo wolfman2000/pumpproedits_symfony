@@ -6,31 +6,20 @@ class ChartGeneratorForm extends sfForm
   {
     parent::configure();
     
-    $editT = Doctrine::getTable('PPE_Edit_Edit');
-    $rows = $editT->getNonProblemEdits();
+    $songT = Doctrine::getTable('PPE_Song_Song');
+    $rows = $songT->getSongs();
     
     $choices = array();
-    $choices[0] = 'Select an edit.';
-    
-    $possible[] = 0;
-    
-    $oname = "無"; // Start with no match.
+    $choices[0] = 'Select a song.';
     
     foreach ($rows as $r):
-      $nname = $r->uname;
-      if ($oname !== $nname)
-      {
-        $choices[$nname] = array();
-        $oname = $nname;
-      }
-      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . "$r->diff)";
-      $possible[] = $r->id;
+      $choices[$r->id] = $r->name;
     endforeach;
     
-    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
+    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose a song'), array('size' => 20));
 
-    $tmp1['required'] = false;
-    $tmp1['choices'] = $possible;
+    $tmp1['required'] = true;
+    $tmp1['choices'] = array_keys($choices);
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
     $choices = array('ez' => 'Easy', 'nr' => 'Normal', 'hr' => 'Hard', 'cz' => 'Crazy',
