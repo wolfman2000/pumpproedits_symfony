@@ -1,6 +1,6 @@
 PPE_Song_Stop:
   stop_001: { PPE_Song_Song: song_004, beat: 115, break: 4 }
-  stop_002: { PPE_Song_Song: song_008, beat: 159, break: 8 }
+  stop_002: { PPE_Song_Song: song_007, beat: 167, break: 8 }
   stop_003: { PPE_Song_Song: song_026, beat: 160, break: 3 }
   stop_004: { PPE_Song_Song: song_026, beat: 173, break: 3 }
   stop_005: { PPE_Song_Song: song_026, beat: 234, break: 3 }

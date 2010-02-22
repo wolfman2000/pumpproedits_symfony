@@ -16,10 +16,10 @@ PPE_Song_BPM:
   bpm_015: { PPE_Song_Song: song_004, beat: 174, bpm: 136 }
   bpm_016: { PPE_Song_Song: song_005, bpm: 112 }
   bpm_017: { PPE_Song_Song: song_006, bpm: 126 }
-  bpm_018: { PPE_Song_Song: song_007, bpm: 128 }
-  bpm_019: { PPE_Song_Song: song_008, bpm: 155 }
-  bpm_020: { PPE_Song_Song: song_008, beat: 62, bpm: 38.75 }
-  bpm_021: { PPE_Song_Song: song_008, beat: 63, bpm: 155 }
+  bpm_018: { PPE_Song_Song: song_007, bpm: 155 }
+  bpm_019: { PPE_Song_Song: song_007, beat: 70, bpm: 38.75 }
+  bpm_020: { PPE_Song_Song: song_007, beat: 71, bpm: 155 }
+  bpm_021: { PPE_Song_Song: song_008, bpm: 128 }
   bpm_022: { PPE_Song_Song: song_009, bpm: 162 }
   bpm_023: { PPE_Song_Song: song_010, bpm: 158 }
   bpm_024: { PPE_Song_Song: song_010, beat: 149, bpm: 79 }
