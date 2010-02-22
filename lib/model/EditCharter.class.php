@@ -10,7 +10,7 @@ class EditCharter
     
     if (!in_array($params['cols'], array($this->single, $this->double, $this->halfdouble)))
     {
-      $e = "There must be either $single or $double columns in the chart!";
+      $e = "There must be either $this->single, $this->halfdouble, or $this->double columns in the chart!";
       throw new sfParseException($e);
     }
     if (!in_array($params['kind'], array("classic", "rhythm")))
