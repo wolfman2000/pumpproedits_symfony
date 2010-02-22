@@ -33,13 +33,19 @@ class ChartGeneratorForm extends sfForm
     $tmp1['choices'] = $possible;
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
-    $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
+    $choices = array('ez' => 'Easy', 'nr' => 'Normal', 'hr' => 'Hard', 'cz' => 'Crazy',
+      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare');
+    $pieces['diff'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Difficulty'));
+    $this->setDefault('diff', 'cz');
+    
+    $tmp1['required'] = true;
+    $tmp1['choices'] = array_keys($choices);
+    $val['diff'] new sfValidatorChoice($tmp1, array('required' => 'A difficulty must be chosen.'));
     
     $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
     $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
     $this->setDefault('kind', 'classic');
     
-    $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
     $val['kind'] = new sfValidatorChoice($tmp1, array('required' => 'A noteskin must be chosen.'));
     
@@ -82,19 +88,8 @@ class ChartGeneratorForm extends sfForm
     
     $this->setValidators($val);
     
-    $one = new sfValidatorCallback(array('callback' => array($this, 'ensureOne')));
     $rhy = new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm')));
-    
-    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array($one, $rhy)));
-  }
-  
-  public function ensureOne($validator, $values)
-  {
-    if ($values['edits'] xor $values['file'])
-    {
-      return $values;
-    }
-    throw new sfValidatorError($validator, "Select either an author's edit or your own file.");
+    $this->validatorSchema->setPostValidator($rhy);
   }
   
   public function ensureRhythm($validator, $values)
