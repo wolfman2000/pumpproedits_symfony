@@ -195,7 +195,7 @@ class EditCharter
     $this->genTxtNode($lbuff, 64, "Steps: " . $nd['steps']);
     $this->genTxtNode($lbuff, 80, "Jumps: " . $nd['jumps']);
     
-    $w = $this->cw + $this->lb + $this->rb;
+    $w = $this->cw + $lbuff + $this->rb;
     
     $this->genTxtNode($lbuff + $w * 1, 64, "Holds: " .$nd['holds']);
     $this->genTxtNode($lbuff + $w * 1, 80, "Mines: " .$nd['mines']);
