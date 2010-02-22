@@ -132,7 +132,7 @@ class chartActions extends sfActions
       }
       catch (sfParseException $e)
       {
-        $this->data = $e;
+        $this->data = $e->getMessage();
         if (isset($file))
         {
           @unlink($path);
