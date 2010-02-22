@@ -22,13 +22,13 @@ class EditParser
     /* File is opened: now write the headers. */
 
     fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
-    fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
+    fwrite($fh, sprintf("     %s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
 
-    $cols = ($kind === "double" ? 10 : 5);
+    $cols = $this->getCols($kind);
 
     fwrite($fh, $this->gen_measure($cols));
 
@@ -46,8 +46,10 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
-    $this->gen_edit_file('single', $base->getName(), $base->getAbbr(), $base->getMeasures());
-    $this->gen_edit_file('double', $base->getName(), $base->getAbbr(), $base->getMeasures());
+    foreach (array("single", "double", "halfdouble") as $kind)
+    {
+      $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
+    }
 
   }
   
@@ -61,6 +63,44 @@ class EditParser
       default: return 5; // Lazy right now.
     }
   }
+  
+  protected function getOfficialStyle($style, $title)
+  {
+    switch ($style)
+    {
+      case "pump-single":
+      {
+        switch ($title)
+        {
+          case "Beginner": return "Easy";
+          case "Easy": return "Normal";
+          case "Medium": return "Hard";
+          case "Hard": return "Crazy";
+        }
+      }
+      case "pump-double":
+      {
+        return $title == "Hard" ? "Nightmare" : "Freestyle";
+      }
+      case "pump-halfdouble": return "Halfdouble";
+      default: return "Undefined"; // Lazy right now.
+    }
+  }
+  
+  protected function getOfficialAbbr($diff)
+  {
+    switch ($diff)
+    {
+      case "Easy": return "ez";
+      case "Normal": return "nr";
+      case "Hard": return "hr";
+      case "Crazy": return "cz";
+      case "Halfdouble": return "hd";
+      case "Freestyle": return "fs";
+      case "Nightmare": return "nm";
+      default: return "xx";
+    }
+  }
 
  /**
   * Pass a file handle, get the note data.
@@ -68,7 +108,7 @@ class EditParser
   *
   * This code uses alternative control syntax a lot to keep indentation low.
   */
-  public function get_stats($fh, $inc_notes = false, $strict_song = true)
+  public function get_stats($fh, $params)
   {
     $res = array(); # Return variables go in here.
     $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
@@ -79,6 +119,10 @@ class EditParser
     $state = $diff = $cols = $measure = $songid = 0;
     $title = $song = $style = "";
     $base = Doctrine::getTable('PPE_Song_Song');
+    
+    if (!isset($params['strict_song'])) { $params['strict_song'] = true; }
+    if (!isset($params['strict_edit'])) { $params['strict_edit'] = true; }
+    if (!isset($params['arcade'])) { $params['arcade'] = false; }
 
     $numl = 0;
     while(!feof($fh)):
@@ -90,10 +134,11 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
-      $pos = strpos($line, "#SONG:", 0);
+      $key = $params['arcade'] ? "#TITLE:" : "#SONG:";
+      $pos = strpos($line, $key, 0);
       if ($pos !== 0)
       {
-        $s = 'The first line must contain "#SONG:" in it.';
+        $s = "The first line must contain \"$key\" in it.";
         throw new sfParseException($s);
       }
       $pos = strpos($line, ";");
@@ -102,11 +147,12 @@ class EditParser
         $s = "This line needs a semicolon at the end: %s";
         throw new sfParseException(sprintf($s, $line));
       }
-      $song = substr($line, 6, $pos - strlen($line));
+      $line = rtrim($line, ";");
+      $song = substr($line, strlen($key));
       
       $songid = $base->getIDBySong($song);
       
-      if ($strict_song)
+      if ($params['strict_song'])
       {
         
         if (!$songid)
@@ -120,7 +166,15 @@ class EditParser
       {
         if (!$songid) $songid = -1;
       }
-      $state = 1; # The song exists. We can move on.
+      $state = $params['arcade'] ? 10 : 1; # The song exists. We can move on.
+      break;
+    }
+    case 10: /* Idle until we find a notes tag. */
+    {
+      if (trim($line) === "#NOTES:")
+      {
+        $state = 2;
+      }
       break;
     }
     case 1: /* Verify NOTES tag is present next. */
@@ -152,7 +206,7 @@ class EditParser
       $state = 3;
       break;
     }
-    case 3: /* Get the title of the edit. No blank names Dread. ☻ */
+    case 3: /* Get the title / author of the edit. No blank names Dread. ☻ */
     {
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
@@ -161,36 +215,68 @@ class EditParser
         $s = "This line needs a colon at the end: %s";
         throw new sfParseException(sprintf($s, $line));
       }
-      if ($pos === 0)
+      
+      if ($params['arcade']) // Different rules:
       {
-        if ($strict_song)
+        if ($pos)
         {
-          $s = "Blank edit names are no longer allowed.";
-          throw new sfParseException($s);
+          $author = substr($line, 0, $pos - strlen($line));
         }
         else
         {
-          $title = "JDread Law ☻";
+          $author = 'Someone';
         }
       }
       else
       {
-        $title = substr($line, 0, $pos - strlen($line));
-      }
-      $maxlen = sfConfig::get('app_max_edit_name_length');
-      $titlen = mb_strlen($title);
-      if ($titlen > $maxlen and $strict_song)
-      {
-        $s = 'The edit titled "%s" is %d characters too long.';
-        throw new sfParseException(sprintf($s, $title, $titlen - $maxlen));
+        if ($pos === 0)
+        {
+          if ($params['strict_edit'])
+          {
+            $s = "Blank edit names are no longer allowed.";
+            throw new sfParseException($s);
+          }
+          else
+          {
+            $title = "JDread Law ☻";
+          }
+        }
+        else
+        {
+          $title = substr($line, 0, $pos - strlen($line));
+        }
+        $maxlen = sfConfig::get('app_max_edit_name_length');
+        $titlen = mb_strlen($title);
+        if ($titlen > $maxlen and $params['strict_edit'])
+        {
+          $s = 'The edit titled "%s" is %d characters too long.';
+          throw new sfParseException(sprintf($s, $title, $titlen - $maxlen));
+        }
+        $author = false;
       }
       $state = 4;
       break;
     }
-    case 4: /* Ensure the "Edit:" line is in place. */
+    case 4: /* Arcade mode: get title here. Otherwise, ensure the "Edit:" line is in place. */
     {
       $line = ltrim($line);
-      if ($line !== "Edit:" and $strict_song) // temp measure.
+      $pos = strpos($line, ":", 0);
+      if ($pos === false)
+      {
+        $s = "This line needs a colon at the end: %s";
+        throw new sfParseException(sprintf($s, $line));
+      }
+      $line = substr($line, 0, $pos - strlen($line));
+      if ($params['arcade'])
+      {
+        $title = $this->getOfficialStyle($style, $line); // set title now.
+        if ($params['arcade'] !== $this->getOfficialAbbr($title))
+        {
+          $state = 10;
+          break;
+        }
+      }
+      elseif ($line !== "Edit" and !$params['arcade']) // temp measure.
       {
         $s = 'The edit must have "Edit:" on a new line after the title.';
         throw new sfParseException($s);
@@ -248,7 +334,9 @@ class EditParser
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
+        if ($params['arcade']) { break 2; }
         $state = 8;
+        
       }
       elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
       {
@@ -345,6 +433,12 @@ class EditParser
     }
     endswitch;
     endwhile;
+    
+    if ($params['arcade'] and !count($notes))
+    {
+      throw new sfParseException("The chosen song / difficulty combination doesn't exist! Please choose another.");
+    }
+    
     $res['id'] = $songid;
     $res['song'] = $song;
     $res['diff'] = $diff;
@@ -359,7 +453,8 @@ class EditParser
     $res['rolls'] = $rolls;
     $res['lifts'] = $lifts;
     $res['fakes'] = $fakes;
-    if ($inc_notes) { $res['notes'] = $notes; }
+    $res['author'] = $author;
+    if (isset($params['notes']) and $params['notes']) { $res['notes'] = $notes; }
     return $res;
   }
 }

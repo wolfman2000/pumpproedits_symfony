@@ -2,24 +2,24 @@ PPE_Song_BPM:
   bpm_001: { PPE_Song_Song: song_001, bpm: 96 }
   bpm_002: { PPE_Song_Song: song_002, bpm: 116 }
   bpm_003: { PPE_Song_Song: song_003, bpm: 110 }
-  bpm_004: { PPE_Song_Song: song_004, bpm: 136 }
-  bpm_005: { PPE_Song_Song: song_004, beat: 42, bpm: 210 }
-  bpm_006: { PPE_Song_Song: song_004, beat: 57, bpm: 136 }
-  bpm_007: { PPE_Song_Song: song_004, beat: 85, bpm: 68 }
-  bpm_008: { PPE_Song_Song: song_004, beat: 87, bpm: 136 }
-  bpm_009: { PPE_Song_Song: song_004, beat: 115, bpm: 68 }
-  bpm_010: { PPE_Song_Song: song_004, beat: 122, bpm: 34 }
-  bpm_011: { PPE_Song_Song: song_004, beat: 123, bpm: 68 }
-  bpm_012: { PPE_Song_Song: song_004, beat: 129, bpm: 210 }
-  bpm_013: { PPE_Song_Song: song_004, beat: 144, bpm: 136 }
-  bpm_014: { PPE_Song_Song: song_004, beat: 172, bpm: 68 }
-  bpm_015: { PPE_Song_Song: song_004, beat: 174, bpm: 136 }
+  bpm_004: { PPE_Song_Song: song_004, bpm: 135.9 }
+  bpm_005: { PPE_Song_Song: song_004, beat: 42, bpm: 203.85 }
+  bpm_006: { PPE_Song_Song: song_004, beat: 57, bpm: 135.9 }
+  bpm_007: { PPE_Song_Song: song_004, beat: 85, bpm: 67.95 }
+  bpm_008: { PPE_Song_Song: song_004, beat: 87, bpm: 135.9 }
+  bpm_009: { PPE_Song_Song: song_004, beat: 115, bpm: 67.95 }
+  bpm_010: { PPE_Song_Song: song_004, beat: 122, bpm: 33.97 }
+  bpm_011: { PPE_Song_Song: song_004, beat: 123, bpm: 67.95 }
+  bpm_012: { PPE_Song_Song: song_004, beat: 129, bpm: 203.85 }
+  bpm_013: { PPE_Song_Song: song_004, beat: 144, bpm: 133.9 }
+  bpm_014: { PPE_Song_Song: song_004, beat: 172, bpm: 67.95 }
+  bpm_015: { PPE_Song_Song: song_004, beat: 174, bpm: 135.9 }
   bpm_016: { PPE_Song_Song: song_005, bpm: 112 }
   bpm_017: { PPE_Song_Song: song_006, bpm: 126 }
-  bpm_018: { PPE_Song_Song: song_007, bpm: 128 }
-  bpm_019: { PPE_Song_Song: song_008, bpm: 155 }
-  bpm_020: { PPE_Song_Song: song_008, beat: 62, bpm: 38.75 }
-  bpm_021: { PPE_Song_Song: song_008, beat: 63, bpm: 155 }
+  bpm_018: { PPE_Song_Song: song_007, bpm: 155 }
+  bpm_019: { PPE_Song_Song: song_007, beat: 70, bpm: 38.75 }
+  bpm_020: { PPE_Song_Song: song_007, beat: 71, bpm: 155 }
+  bpm_021: { PPE_Song_Song: song_008, bpm: 128 }
   bpm_022: { PPE_Song_Song: song_009, bpm: 162 }
   bpm_023: { PPE_Song_Song: song_010, bpm: 158 }
   bpm_024: { PPE_Song_Song: song_010, beat: 149, bpm: 79 }
@@ -160,9 +160,9 @@ PPE_Song_BPM:
   bpm_159: { PPE_Song_Song: song_105, bpm: 136 }
   bpm_160: { PPE_Song_Song: song_105, beat: 132, bpm: 68 }
   bpm_161: { PPE_Song_Song: song_105, beat: 134, bpm: 136 }
-  bpm_162: { PPE_Song_Song: song_105, beat: 198, bpm: 68 }
+  bpm_162: { PPE_Song_Song: song_105, beat: 197.5, bpm: 82.875 }
   bpm_163: { PPE_Song_Song: song_105, beat: 199, bpm: 136 }
-  bpm_164: { PPE_Song_Song: song_105, beat: 213, bpm: 68 }
+  bpm_164: { PPE_Song_Song: song_105, beat: 213.125, bpm: 68 }
   bpm_165: { PPE_Song_Song: song_106, bpm: 186 }
   bpm_166: { PPE_Song_Song: song_107, bpm: 135 }
   bpm_167: { PPE_Song_Song: song_108, bpm: 137 }
@@ -241,14 +241,14 @@ PPE_Song_BPM:
   bpm_240: { PPE_Song_Song: song_124, bpm: 130 }
   bpm_241: { PPE_Song_Song: song_125, bpm: 142 }
   bpm_242: { PPE_Song_Song: song_126, bpm: 195 }
-  bpm_243: { PPE_Song_Song: song_126, beat: 163, bpm: 97.5 }
-  bpm_244: { PPE_Song_Song: song_126, beat: 165, bpm: 195 }
-  bpm_245: { PPE_Song_Song: song_126, beat: 216.5, bpm: 75 }
-  bpm_246: { PPE_Song_Song: song_126, beat: 219, bpm: 195 }
-  bpm_247: { PPE_Song_Song: song_126, beat: 363, bpm: 97.5 }
-  bpm_248: { PPE_Song_Song: song_126, beat: 369, bpm: 195 }
-  bpm_249: { PPE_Song_Song: song_126, beat: 487, bpm: 780 }
-  bpm_250: { PPE_Song_Song: song_126, beat: 495, bpm: 195 }
+  bpm_243: { PPE_Song_Song: song_126, beat: 159, bpm: 97.5 }
+  bpm_244: { PPE_Song_Song: song_126, beat: 161, bpm: 195 }
+  bpm_245: { PPE_Song_Song: song_126, beat: 211.5, bpm: 120.9 }
+  bpm_246: { PPE_Song_Song: song_126, beat: 214, bpm: 195 }
+  bpm_247: { PPE_Song_Song: song_126, beat: 358, bpm: 97.5 }
+  bpm_248: { PPE_Song_Song: song_126, beat: 364, bpm: 195 }
+  bpm_249: { PPE_Song_Song: song_126, beat: 482.5, bpm: 780 }
+  bpm_250: { PPE_Song_Song: song_126, beat: 487.25, bpm: 195 }
   bpm_251: { PPE_Song_Song: song_127, bpm: 210 }
   bpm_252: { PPE_Song_Song: song_128, bpm: 168 }
   bpm_253: { PPE_Song_Song: song_129, bpm: 122 }

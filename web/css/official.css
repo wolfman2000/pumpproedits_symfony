@@ -1,0 +1,24 @@
+@import "_form.css";
+
+@media screen
+{
+  fieldset
+  {
+    width: 40em;
+  }
+  section > p:nth-child(odd)
+  {
+	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+  }
+  /* Note to self: this seems backwards. Test in other browsers. */
+  #edit
+  {
+	float: left;
+	width: 25em;
+  }
+  ul.error_list > li
+  {
+	padding-left: 1em;
+	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
+  }
+}

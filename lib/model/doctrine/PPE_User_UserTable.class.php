@@ -92,4 +92,11 @@ class PPE_User_UserTable extends Doctrine_Table
       ->andWhereNotIn('id', array(2, 95))
       ->orderBy('lc_name')->execute();
   }
+  
+  public function getUserByEditID($eid)
+  {
+    return $this->createQuery('a')->select('a.name')
+      ->innerJoin('a.PPE_Edit_Edits b')
+      ->where('b.id = ?', $eid)->fetchOne()->name;
+  }
 }

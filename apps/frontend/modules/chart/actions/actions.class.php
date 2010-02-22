@@ -97,6 +97,7 @@ class chartActions extends sfActions
       if ($eid > 0)
       {
         $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
+        $author = Doctrine::getTable('PPE_User_User')->getUserByEditID($eid);
       }
       else
       {
@@ -105,13 +106,17 @@ class chartActions extends sfActions
         $extension = $file->getExtension($file->getOriginalExtension());
         $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
         $file->save($path);
+        $author = "Unknown Author";
       }
       
       /* File validation takes place here. */
       $tmp = new EditParser();
       try
       {
-        $notedata = $tmp->get_stats(fopen($path, "r"), true, false);
+        $p['notes'] = 1;
+        $p['strict_song'] = 0;
+        $p['strict_edit'] = 0;
+        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
         if (isset($file))
         {
           @unlink($path);
@@ -122,6 +127,7 @@ class chartActions extends sfActions
         'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'));
 
         $tmp = new EditCharter($p);
+        $notedata['author'] = $author;
         $xml = $tmp->genChart($notedata);
         
         $response = $this->getResponse();
@@ -143,12 +149,74 @@ class chartActions extends sfActions
     }
     else
     {
-      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }
   }
   
+  public function executeOfficial(sfWebRequest $request)
+  {
+    if (!$this->getUser()->isAuthenticated())
+    {
+      $this->forward('login', 'index');
+      return;
+    }
+    $this->form = new ChartOfficialForm();
+  }
+  
+  public function executeOffProcess(sfWebRequest $request)
+  {
+    $this->form = new ChartOfficialForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      $eid = $this->form->getValue('edits');
+      $dif = $this->form->getValue('diff');
+      $path = sfConfig::get('sf_data_dir').sprintf("/official/%d.sm", $eid);
+      
+      if (!file_exists($path))
+      {
+        $this->data = "This song does not have charts presently. Please choose another song.";
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+      
+      /* File validation takes place here. */
+      $tmp = new EditParser();
+      try
+      {
+        $p['notes'] = 1;
+        $p['strict_song'] = 1;
+        $p['arcade'] = $dif;
+        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
+
+        $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
+        'red4' => $this->form->getValue('red4'), 'speed_mod' => $this->form->getValue('speed'),
+        'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'),
+        'arcade' => 1);
+
+        $tmp = new EditCharter($p);
+        $xml = $tmp->genChart($notedata);
+        
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->setHttpHeader('Content-Type', 'image/svg+xml');
+        $response->setContent($xml->saveXML());
+        return sfView::NONE;
+      }
+      catch (sfParseException $e)
+      {
+        $this->data = $e->getMessage();
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+  }
   
   public function executeQuick(sfWebRequest $request)
   {

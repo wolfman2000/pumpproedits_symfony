@@ -1,6 +1,6 @@
 PPE_Song_Stop:
   stop_001: { PPE_Song_Song: song_004, beat: 115, break: 4 }
-  stop_002: { PPE_Song_Song: song_008, beat: 159, break: 8 }
+  stop_002: { PPE_Song_Song: song_007, beat: 167, break: 8 }
   stop_003: { PPE_Song_Song: song_026, beat: 160, break: 3 }
   stop_004: { PPE_Song_Song: song_026, beat: 173, break: 3 }
   stop_005: { PPE_Song_Song: song_026, beat: 234, break: 3 }
@@ -48,12 +48,12 @@ PPE_Song_Stop:
   stop_047: { PPE_Song_Song: song_121, beat: 14, break: 3.5 }
   stop_048: { PPE_Song_Song: song_121, beat: 123, break: 7.5 }
   stop_049: { PPE_Song_Song: song_121, beat: 228, break: 1.5 }
-  stop_050: { PPE_Song_Song: song_126, beat: 155, break: 0.5 }
-  stop_051: { PPE_Song_Song: song_126, beat: 158.5, break: 0.5 }
-  stop_052: { PPE_Song_Song: song_126, beat: 200, break: 0.5 }
-  stop_053: { PPE_Song_Song: song_126, beat: 203.5, break: 0.5 }
-  stop_054: { PPE_Song_Song: song_126, beat: 207, break: 0.5 }
-  stop_055: { PPE_Song_Song: song_126, beat: 495, break: 1 }
+  stop_050: { PPE_Song_Song: song_126, beat: 151, break: 0.5 }
+  stop_051: { PPE_Song_Song: song_126, beat: 154.5, break: 0.5 }
+  stop_052: { PPE_Song_Song: song_126, beat: 196, break: 0.5 }
+  stop_053: { PPE_Song_Song: song_126, beat: 199.5, break: 0.5 }
+  stop_054: { PPE_Song_Song: song_126, beat: 203, break: 0.5 }
+  stop_055: { PPE_Song_Song: song_126, beat: 487.25, break: 1 }
   stop_056: { PPE_Song_Song: song_130, beat: 83, break: 0.5 }
   stop_057: { PPE_Song_Song: song_130, beat: 86.5, break: 0.5 }
   stop_058: { PPE_Song_Song: song_130, beat: 130, break: 0.5 }

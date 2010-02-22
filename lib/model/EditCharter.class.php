@@ -10,7 +10,7 @@ class EditCharter
     
     if (!in_array($params['cols'], array($this->single, $this->double, $this->halfdouble)))
     {
-      $e = "There must be either $single or $double columns in the chart!";
+      $e = "There must be either $this->single, $this->halfdouble, or $this->double columns in the chart!";
       throw new sfParseException($e);
     }
     if (!in_array($params['kind'], array("classic", "rhythm")))
@@ -46,6 +46,18 @@ class EditCharter
       $this->showstop = 1;
     }
     
+    # Is the header supposed to be arcade style?
+    
+    if (array_key_exists('arcade', $params) and $params['arcade'])
+    {
+      $this->arcade = 1;
+    }
+    else
+    {
+      $this->arcade = 0;
+    }
+    
+    # How much of a zoom is there for the chart?
     if (array_key_exists('scale', $params) and $params['scale'])
     {
       $this->scale = $params['scale'];
@@ -174,22 +186,35 @@ class EditCharter
   {
     $lbuff = $this->lb;
     
+    if ($this->arcade)
+    {
+      $this->genTxtNode($lbuff, 16, sprintf("%s %s - %d",
+        $nd['song'], $nd['title'], $nd['diff']));
+    }
+    else
+    {
+      $this->genTxtNode($lbuff, 16, sprintf("%s %s Edit: %s - %d",
+        $nd['song'], ucfirst(substr($nd['style'], 5)), $nd['title'], $nd['diff']));
+    }
+    $this->genTxtNode($lbuff, 32, $nd['author']);
+    /*
     $this->genTxtNode($lbuff, 16, sprintf("%s Edit for %s: %s - %s",
       ucfirst(substr($nd['style'], 5)),
       $nd['song'],
       $nd['title'], $nd['diff'])
     );
+    */
     
-    $this->genTxtNode($lbuff, 48, "Steps: " . $nd['steps']);
+    $this->genTxtNode($lbuff, 64, "Steps: " . $nd['steps']);
     $this->genTxtNode($lbuff, 80, "Jumps: " . $nd['jumps']);
     
-    $w = $this->cw + $this->lb + $this->rb;
+    $w = $this->cw + $lbuff + $this->rb;
     
-    $this->genTxtNode($lbuff + $w * 1, 48, "Holds: " .$nd['holds']);
+    $this->genTxtNode($lbuff + $w * 1, 64, "Holds: " .$nd['holds']);
     $this->genTxtNode($lbuff + $w * 1, 80, "Mines: " .$nd['mines']);
-    $this->genTxtNode($lbuff + $w * 2, 48, "Trips: " .$nd['trips']);
+    $this->genTxtNode($lbuff + $w * 2, 64, "Trips: " .$nd['trips']);
     $this->genTxtNode($lbuff + $w * 2, 80, "Rolls: " .$nd['rolls']);
-    $this->genTxtNode($lbuff + $w * 3, 48, "Lifts: " .$nd['lifts']);
+    $this->genTxtNode($lbuff + $w * 3, 64, "Lifts: " .$nd['lifts']);
     $this->genTxtNode($lbuff + $w * 3, 80, "Fakes: " .$nd['fakes']);
   }
   

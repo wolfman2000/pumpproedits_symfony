@@ -39,4 +39,11 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->innerJoin('a.PPE_Edit_Edits e')
       ->where('e.id = ?', $eid)->fetchOne();
   }
+  
+  public function getSongs()
+  {
+    return $this->createQuery('a')->select('id, name')
+      ->where('is_problem = ?', false)
+      ->orderBy('lc_name')->execute();
+  }
 }
