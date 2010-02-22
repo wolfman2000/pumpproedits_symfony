@@ -86,6 +86,21 @@ class EditParser
       default: return "Undefined"; // Lazy right now.
     }
   }
+  
+  protected function getOfficialAbbr($diff)
+  {
+    switch ($diff)
+    {
+      case "Easy": return "ez";
+      case "Normal": return "nr";
+      case "Hard": return "hr";
+      case "Crazy": return "cz";
+      case "Halfdouble": return "hd";
+      case "Freestyle": return "fs";
+      case "Nightmare": return "nm";
+      default: return "xx";
+    }
+  }
 
  /**
   * Pass a file handle, get the note data.
@@ -119,10 +134,11 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
-      $pos = strpos($line, "#SONG:", 0);
+      $key = $params['arcade'] ? "#TITLE:" : "#SONG:";
+      $pos = strpos($line, $key, 0);
       if ($pos !== 0)
       {
-        $s = 'The first line must contain "#SONG:" in it.';
+        $s = "The first line must contain \"$key\" in it.";
         throw new sfParseException($s);
       }
       $pos = strpos($line, ";");
@@ -131,7 +147,8 @@ class EditParser
         $s = "This line needs a semicolon at the end: %s";
         throw new sfParseException(sprintf($s, $line));
       }
-      $song = substr($line, 6, $pos - strlen($line));
+      $line = rtrim($line, ";");
+      $song = substr($line, strlen($key));
       
       $songid = $base->getIDBySong($song);
       
@@ -149,7 +166,15 @@ class EditParser
       {
         if (!$songid) $songid = -1;
       }
-      $state = 1; # The song exists. We can move on.
+      $state = $params['arcade'] ? 10 : 1; # The song exists. We can move on.
+      break;
+    }
+    case 10: /* Idle until we find a notes tag. */
+    {
+      if (trim($line) === "#NOTES:")
+      {
+        $state = 2;
+      }
       break;
     }
     case 1: /* Verify NOTES tag is present next. */
@@ -245,6 +270,11 @@ class EditParser
       if ($params['arcade'])
       {
         $title = $this->getOfficialStyle($style, $line); // set title now.
+        if ($params['arcade'] !== $this->getOfficialAbbr($title))
+        {
+          $state = 10;
+          break;
+        }
       }
       elseif ($line !== "Edit" and !$params['arcade']) // temp measure.
       {
@@ -304,7 +334,9 @@ class EditParser
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
+        if ($params['arcade']) { break 2; }
         $state = 8;
+        
       }
       elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
       {

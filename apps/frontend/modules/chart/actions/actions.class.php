@@ -167,11 +167,11 @@ class chartActions extends sfActions
     {
       $eid = $this->form->getValue('edits');
       $dif = $this->form->getValue('diff');
-      $path = sfConfig::get('sf_data_dir').sprintf("/official/%d_%s.edit", $eid, $dif);
+      $path = sfConfig::get('sf_data_dir').sprintf("/official/%d.sm", $eid);
       
       if (!file_exists($path))
       {
-        $this->data = "This chart does not exist presently. Please choose another song / difficulty combination.";
+        $this->data = "This song does not have charts presently. Please choose another song.";
         $this->getResponse()->setStatusCode(409);
         return sfView::ERROR;
       }
@@ -182,7 +182,7 @@ class chartActions extends sfActions
       {
         $p['notes'] = 1;
         $p['strict_song'] = 1;
-        $p['arcade'] = 1;
+        $p['arcade'] = $dif;
         $notedata = $tmp->get_stats(fopen($path, "r"), $p);
 
         $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
