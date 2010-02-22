@@ -25,6 +25,8 @@ echo form_tag($route, "multipart=true"); ?>
     <p><?php echo $form['speed'] ?></p>
     <p><?php echo $form['mpcol']->renderLabel() ?></p>
     <p><?php echo $form['mpcol'] ?></p>
+    <p><?php echo $form['scale']->renderLabel() ?></p>
+    <p><?php echo $form['scale'] ?></p>
     </section>
   <p>
     <?php echo $form['_csrf_token'] ?>
