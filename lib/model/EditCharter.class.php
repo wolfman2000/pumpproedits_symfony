@@ -45,6 +45,15 @@ class EditCharter
       $this->showstop = 1;
     }
     
+    if (array_key_exists('scale', $params) and $params['scale'])
+    {
+      $this->scale = $params['scale'];
+    }
+    else
+    {
+      $this->scale = 1;
+    }
+    
     $this->headheight = sfConfig::get('app_chart_header_height');
     $this->footheight = sfConfig::get('app_chart_footer_height');
     if (array_key_exists('footer_height', $params))
@@ -111,18 +120,24 @@ class EditCharter
     $numcols = ceil($measures / $this->mpcol);
     $breather = $this->lb + $this->rb;
     $width = ($this->aw * $this->cols + $breather) * $numcols + $breather;
-    $svg->setAttribute('width', $width);
+    $svg->setAttribute('width', $width * $this->scale);
     
     // Calculate the height of the outer svg.
     $beatheight = sfConfig::get('app_chart_beat_height');
         
     $height = $beatheight * $this->bm * $this->speedmod * $this->mpcol;
     $height += $this->headheight + $this->footheight;
-    $svg->setAttribute('height', $height);
+    $svg->setAttribute('height', $height * $this->scale);
     $this->svgheight = $height;
     
     $this->xml->appendChild($svg);
-    $this->svg = $svg; # Will be used for arrow placements.
+    
+    $g = $this->xml->createElement('g');
+    $g->setAttribute('transform', "scale($this->scale)");
+    $svg->appendChild($g);
+    
+    $this->svg = $g; # Will be used for arrow placements.
+    
   }
   
   private function genMeasures($measures)
