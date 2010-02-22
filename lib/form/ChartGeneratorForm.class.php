@@ -6,6 +6,7 @@ class ChartGeneratorForm extends sfForm
   {
     parent::configure();
     
+    $size = sfConfig::get('app_max_edit_file_size');
     $editT = Doctrine::getTable('PPE_Edit_Edit');
     $rows = $editT->getNonProblemEdits();
     
@@ -28,59 +29,57 @@ class ChartGeneratorForm extends sfForm
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
+
+    $tmp1['required'] = false;
+    $tmp1['choices'] = $possible;
+    $val['edits'] = new sfValidatorChoice($tmp1, array());
+    
     $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
     
     $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
     $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
     $this->setDefault('kind', 'classic');
-
-    
-    $r_choices = array(0 => 'blue', 1 => 'red');
-    $pieces['red4'] = new sfWidgetFormChoice(array('choices' => $r_choices, 'label' => '4th Note Color'));
-    $this->setDefault('red4', 0);
-    
-    $s_choices = array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 6 => 6, 8 => 8);
-    $pieces['speed'] = new sfWidgetFormChoice(array('choices' => $s_choices, 'label' => 'Speed Mod'));
-    $this->setDefault('speed', 2);
-    
-    $m_choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16);
-    $pieces['mpcol'] = new sfWidgetFormChoice(array('choices' => $m_choices, 'label' => 'Measures per column'));
-    $this->setDefault('mpcol', 6);
-    
-
-    $this->setWidgets($pieces);
-
-    $this->widgetSchema->setNameFormat('validate[%s]');
-    
-    $size = sfConfig::get('app_max_edit_file_size');
-    
-    $tmp1['required'] = false;
-    $tmp1['choices'] = $possible;
-    $val['edits'] = new sfValidatorChoice($tmp1, array());
     
     $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
     $val['kind'] = new sfValidatorChoice($tmp1, array('required' => 'A noteskin must be chosen.'));
     
+    $choices = array(0 => 'blue', 1 => 'red');
+    $pieces['red4'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => '4th Note Color'));
+    $this->setDefault('red4', 0);
+
     $tmp1['required'] = false;
-    $tmp1['choices'] = array_keys($r_choices);
+    $tmp1['choices'] = array_keys($choices);
     $val['red4'] = new sfValidatorChoice($tmp1, array());
-    
+
+    $choices = array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 6 => 6, 8 => 8);
+    $pieces['speed'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Speed Mod'));
+    $this->setDefault('speed', 2);
+
     $tmp1['required'] = true;
-    $tmp1['choices'] = array_keys($s_choices);
+    $tmp1['choices'] = array_keys($choices);
     $val['speed'] = new sfValidatorChoice($tmp1, array('required' => "A speed mod must be chosen."));
-    
+
+
+    $choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16);
+    $pieces['mpcol'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Measures per column'));
+    $this->setDefault('mpcol', 6);
+
     $tmp1['required'] = true;
-    $tmp1['choices'] = array_keys($m_choices);
+    $tmp1['choices'] = array_keys($choices);
     $val['mpcol'] = new sfValidatorChoice($tmp1, array('required' => "You must choose how many measures appear in each column."));
+
+
+    $this->setWidgets($pieces);
+
+    $this->widgetSchema->setNameFormat('validate[%s]');
     
     unset($tmp1);
     $tmp1['max_size'] = $size;
     $tmp1['path'] = sfConfig::get('sf_upload_dir');
     $tmp1['required'] = false;
     $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
-    $vfile = new sfValidatorFile($tmp1, $messages);
-    $val['file'] = $vfile;
+    $val['file'] = new sfValidatorFile($tmp1, $messages);
     
     $this->setValidators($val);
     
