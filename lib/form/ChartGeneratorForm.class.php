@@ -69,7 +69,7 @@ class ChartGeneratorForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['mpcol'] = new sfValidatorChoice($tmp1, array('required' => "You must choose how many measures appear in each column."));
     
-    $choices = array('0.5' => 0.5, 1 => 1, 2 => 2);
+    $choices = array('0.5' => 0.5, '0.75' => 0.75, 1 => 1, '1.25' => 1.25, '1.5' => 1.5, '1.75' => 1.75, 2 => 2);
     $pieces['scale'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Scale Factor'));
     $this->setDefault('scale', 1);
     
