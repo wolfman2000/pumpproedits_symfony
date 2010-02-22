@@ -186,11 +186,14 @@ class EditCharter
   {
     $lbuff = $this->lb;
     
+    $this->genTxtNode($lbuff, 16, $nd['song']);
+    /*
     $this->genTxtNode($lbuff, 16, sprintf("%s Edit for %s: %s - %s",
       ucfirst(substr($nd['style'], 5)),
       $nd['song'],
       $nd['title'], $nd['diff'])
     );
+    */
     
     $this->genTxtNode($lbuff, 64, "Steps: " . $nd['steps']);
     $this->genTxtNode($lbuff, 80, "Jumps: " . $nd['jumps']);
