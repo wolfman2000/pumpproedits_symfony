@@ -50,6 +50,17 @@ class EditParser
     $this->gen_edit_file('double', $base->getName(), $base->getAbbr(), $base->getMeasures());
 
   }
+  
+  protected function getCols($style)
+  {
+    switch ($style)
+    {
+      case "pump-single": return 5;
+      case "pump-double": return 10;
+      case "pump-halfdouble": return 6;
+      default: return 5; // Lazy right now.
+    }
+  }
 
  /**
   * Pass a file handle, get the note data.
@@ -123,7 +134,7 @@ class EditParser
       $state = 2;
       break;
     }
-    case 2: /* Confirm this is pump-single or pump-double. */
+    case 2: /* Confirm this is pump-single, pump-double, or pump-halfdouble. */
     {
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
@@ -133,7 +144,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $style = substr($line, 0, $pos - strlen($line));
-      if (!in_array($style, array("pump-single", "pump-double")))
+      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble")))
       {
         $s = "The style %s is invalid. Use pump-single or pump-double.";
         throw new sfParseException(sprintf($s, $style));
@@ -179,7 +190,7 @@ class EditParser
     case 4: /* Ensure the "Edit:" line is in place. */
     {
       $line = ltrim($line);
-      if ($line !== "Edit:")
+      if ($line !== "Edit:" and $strict_song) // temp measure.
       {
         $s = 'The edit must have "Edit:" on a new line after the title.';
         throw new sfParseException($s);
@@ -215,7 +226,7 @@ class EditParser
     }
     case 6: /* Radar line: use this time to prep other variables. */
     {
-      $cols = ($style === "pump-single" ? 5 : 10);
+      $cols = $this->getCols($style);
 
       for ($dummy = 0; $dummy < $cols; $dummy++)
       {

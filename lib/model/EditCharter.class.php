@@ -6,8 +6,9 @@ class EditCharter
   {
     $this->single = sfConfig::get('app_chart_single_cols');
     $this->double = sfConfig::get('app_chart_double_cols');
+    $this->halfdouble = 6;
     
-    if (!in_array($params['cols'], array($this->single, $this->double)))
+    if (!in_array($params['cols'], array($this->single, $this->double, $this->halfdouble)))
     {
       $e = "There must be either $single or $double columns in the chart!";
       throw new sfParseException($e);
@@ -273,6 +274,10 @@ class EditCharter
       {
         array_push($ret, $dl, $ul, $cn, $ur, $dr);
       }
+      elseif ($this->cols == $this->halfdouble)
+      {
+        $ret = array($cn, $ur, $dr, $dl, $ul, $cn);
+      }
       return $ret;
     }
     if ($this->kind == "rhythm")
@@ -298,6 +303,10 @@ class EditCharter
         if ($this->cols == $this->double)
         {
           array_push($ret[$d], $dl, $ul, $cn, $ur, $dr);
+        }
+        elseif ($this->cols == $this->halfdouble)
+        {
+          $ret[$d] = array($cn, $ur, $dr, $dl, $ul, $cn);
         }
       }
       return $ret;
