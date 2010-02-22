@@ -152,6 +152,15 @@ class chartActions extends sfActions
     }
   }
   
+  public function executeOfficial(sfWebRequest $request)
+  {
+    $this->form = new ChartOfficialForm();
+  }
+  
+  public function executeOffProcess(sfWebRequest $request)
+  {
+    $this->form = new ChartOfficialForm();
+  }
   
   public function executeQuick(sfWebRequest $request)
   {

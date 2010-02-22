@@ -147,6 +147,26 @@ chart_adv_post:
   requirements:
     sf_method: [POST]
 
+# Show the list of songs for official charting.
+chart_off_get:
+  url: /chart/official
+  class: sfRequestRoute
+  param:
+    module: chart
+    action: official
+  requirements:
+    sf_method: [GET]
+
+# Generate the chosen chart.
+chart_off_post:
+  url: /chart/official
+  class: sfRequestRoute
+  param:
+    module: chart
+    action: offProcess
+  requirements:
+    sf_method: [POST]
+
 # Quickly generate a chart.
 chart_quick:
   url: /chart/quick/:id/:kind
