@@ -111,7 +111,10 @@ class chartActions extends sfActions
       $tmp = new EditParser();
       try
       {
-        $notedata = $tmp->get_stats(fopen($path, "r"), true, false);
+        $p['notes'] = 1;
+        $p['strict_song'] = 0;
+        $p['strict_edit'] = 0;
+        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
         if (isset($file))
         {
           @unlink($path);
