@@ -97,6 +97,7 @@ class chartActions extends sfActions
       if ($eid > 0)
       {
         $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
+        $author = Doctrine::getTable('PPE_User_User')->getUserByEditID($eid);
       }
       else
       {
@@ -105,6 +106,7 @@ class chartActions extends sfActions
         $extension = $file->getExtension($file->getOriginalExtension());
         $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
         $file->save($path);
+        $author = "Unknown Author";
       }
       
       /* File validation takes place here. */
@@ -125,6 +127,7 @@ class chartActions extends sfActions
         'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'));
 
         $tmp = new EditCharter($p);
+        $notedata['author'] = $author;
         $xml = $tmp->genChart($notedata);
         
         $response = $this->getResponse();
