@@ -146,7 +146,6 @@ class chartActions extends sfActions
     }
     else
     {
-      //$this->form = new ChartGeneratorForm(array('rm_file' => "Nevermind", 'edits' => 0));
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
     }
@@ -160,6 +159,47 @@ class chartActions extends sfActions
   public function executeOffProcess(sfWebRequest $request)
   {
     $this->form = new ChartOfficialForm();
+    $this->form->bind($request->getParameter('validate'));
+    if ($this->form->isValid())
+    {
+      $eid = $this->form->getValue('edits');
+      $dif = $this->form->getValue('diff');
+      $path = sfConfig::get('sf_data_dir').sprintf("/official/%d_%s.edit", $eid, $dif);
+      
+      /* File validation takes place here. */
+      $tmp = new EditParser();
+      try
+      {
+        $p['notes'] = 1;
+        $p['strict_song'] = 1;
+        $p['arcade'] = 1;
+        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
+
+        $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
+        'red4' => $this->form->getValue('red4'), 'speed_mod' => $this->form->getValue('speed'),
+        'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'));
+
+        $tmp = new EditCharter($p);
+        $xml = $tmp->genChart($notedata);
+        
+        $response = $this->getResponse();
+        $response->clearHttpHeaders();
+        $response->setHttpHeader('Content-Type', 'image/svg+xml');
+        $response->setContent($xml->saveXML());
+        return sfView::NONE;
+      }
+      catch (sfParseException $e)
+      {
+        $this->data = $e->getMessage();
+        $this->getResponse()->setStatusCode(409);
+        return sfView::ERROR;
+      }
+    }
+    else
+    {
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
   }
   
   public function executeQuick(sfWebRequest $request)
