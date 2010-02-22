@@ -22,13 +22,13 @@ class EditParser
     /* File is opened: now write the headers. */
 
     fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
-    fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
+    fwrite($fh, sprintf("     %s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
 
-    $cols = ($kind === "double" ? 10 : 5);
+    $cols = $this->getCols($kind);
 
     fwrite($fh, $this->gen_measure($cols));
 
@@ -46,8 +46,10 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
-    $this->gen_edit_file('single', $base->getName(), $base->getAbbr(), $base->getMeasures());
-    $this->gen_edit_file('double', $base->getName(), $base->getAbbr(), $base->getMeasures());
+    foreach (array("single", "double", "halfdouble") as $kind)
+    {
+      $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
+    }
 
   }
   
