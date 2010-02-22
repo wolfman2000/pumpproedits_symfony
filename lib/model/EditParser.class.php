@@ -433,6 +433,12 @@ class EditParser
     }
     endswitch;
     endwhile;
+    
+    if ($params['arcade'] and !count($notes))
+    {
+      throw new sfParseException("The chosen song / difficulty combination doesn't exist! Please choose another.");
+    }
+    
     $res['id'] = $songid;
     $res['song'] = $song;
     $res['diff'] = $diff;
