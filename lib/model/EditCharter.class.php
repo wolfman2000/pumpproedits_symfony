@@ -245,7 +245,10 @@ class EditCharter
       
       if (isset($bpm))
       {
-        $bpm = trim(trim($bpm, '0'), '.');
+        if (strpos($bpm, ".", 0) > 0);
+        {
+          $bpm = trim(trim($bpm, '0'), '.');
+        }
         $this->genTxtNode($lx + $draw + $draw, $ly + $this->bm, $bpm, 'bpm');
       }
     }
