@@ -7,6 +7,12 @@ advancedSuccess:
 advProcessError:
   stylesheets: [chart.css]
 
+officialSuccess:
+  stylesheets: [official.css]
+
+offProcessError:
+  stylesheets: [official.css]
+
 validateSuccess:
   stylesheets: [stats.css]
 
