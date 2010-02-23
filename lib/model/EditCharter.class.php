@@ -245,7 +245,8 @@ class EditCharter
       
       if (isset($bpm))
       {
-        if (strpos($bpm, ".", 0) > 0);
+        $pos = strpos($bpm, ".");
+        if ($pos !== false)
         {
           $bpm = trim(trim($bpm, '0'), '.');
         }
