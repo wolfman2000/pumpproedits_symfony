@@ -240,7 +240,7 @@ class chartActions extends sfActions
     $tmp = new EditParser();
     try
     {
-      $notedata = $tmp->get_stats(fopen($path, "r"), 1);
+      $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1));
       $p = array('cols' => $notedata['cols'], 'kind' => $kind);
       $tmp = new EditCharter($p);
       $xml = $tmp->genChart($notedata);

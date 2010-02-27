@@ -108,7 +108,7 @@ class EditParser
   *
   * This code uses alternative control syntax a lot to keep indentation low.
   */
-  public function get_stats($fh, $params)
+  public function get_stats($fh, $params = array())
   {
     $res = array(); # Return variables go in here.
     $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
@@ -120,9 +120,9 @@ class EditParser
     $title = $song = $style = "";
     $base = Doctrine::getTable('PPE_Song_Song');
     
-    if (!isset($params['strict_song'])) { $params['strict_song'] = true; }
-    if (!isset($params['strict_edit'])) { $params['strict_edit'] = true; }
-    if (!isset($params['arcade'])) { $params['arcade'] = false; }
+    if (!array_key_exists('strict_song', $params)) { $params['strict_song'] = true; }
+    if (!array_key_exists('strict_edit', $params)) { $params['strict_edit'] = true; }
+    if (!array_key_exists('arcade', $params)) { $params['arcade'] = false; }
 
     $numl = 0;
     while(!feof($fh)):
