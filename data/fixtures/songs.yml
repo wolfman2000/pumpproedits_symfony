@@ -1,167 +1,139 @@
-PPE_Song_Song:
-  song_001: { name: 2006 Love Song, abbr: 2006L, measures: 37 }
-  song_002: { name: Aliens in Our Midst, abbr: ALIEN, measures: 51 }
-  song_003: { name: Anubis, abbr: ANUBS, measures: 48 }
-  song_004: { name: Arch of Darkness, abbr: ARCHS, measures: 52 }
-  song_005: { name: Art City, abbr: ARTCT, measures: 53 }
-  song_006: { name: Ba Be Loo Be Ra, abbr: BBLBR, measures: 57 }
-  song_007: { name: !, abbr: BANG!, measures: 71 }
-  song_008: { name: Bambole, abbr: BAMBO, measures: 52 }
-  song_009: { name: Beethoven Virus, abbr: BTOVN, measures: 66 }
-  song_010: { name: Be My Friend, abbr: BEMYF, measures: 63 }
-  song_011: { name: Bemera, abbr: BMERA, measures: 141 }
-  song_012: { name: Blazing, abbr: BLAZE, measures: 64 }
-  song_013: { name: Blow My Mind, abbr: BLOWM, measures: 56 }
-  song_014: { name: Boogie Land, abbr: BOOGY, measures: 55 }
-  song_015: { name: Another Truth, abbr: ATRTH, measures: 52 }
-  song_016: { name: Born to Be Alive, abbr: B2BAL, measures: 55 }
-  song_017: { name: Beat of the War 2, abbr: BOTW2, measures: 79 }
-  song_018: { name: Beat of the War, abbr: BOTW1, measures: 70 }
-  song_019: { name: Bullfighter's Song, abbr: BULLF, measures: 58 }
-  song_020: { name: Canon-D, abbr: CANON, measures: 67 }
-  song_021: { name: Chicken Wing, abbr: CWING, measures: 80 }
-  song_022: { name: Chimera, abbr: CMERA, measures: 94 }
-  song_023: { name: Chopstix, abbr: CHOPS, measures: 62 }
-  song_024: { name: Chung Hwa Ban Jeom, abbr: CHUNG, measures: 61 }
-  song_025: { name: Clap Your Hands, abbr: CLAPS }
-  song_026: { name: Clockwork Genesis, abbr: CLOCK, measures: 76 }
-  song_027: { name: Come to Me (Banya), abbr: C2MEB, measures: 40 }
-  song_028: { name: Come to Me (Clon), abbr: C2MEC, measures: 53 }
-  song_029: { name: Coming Out, abbr: CMOUT, measures: 58 }
-  song_030: { name: Conga, abbr: CONGA, measures: 54 }
-  song_031: { name: Csikos Post, abbr: CSIKO, measures: 77 }
-  song_032: { name: Dance All Night, abbr: DALLN, measures: 66 }
-  song_033: { name: Dance With Me, abbr: DWTHM, measures: 52 }
-  song_034: { name: Dawn (Perpetual Mix), abbr: DAWNP, measures: 78 }
-  song_035: { name: D Gang, abbr: DGANG, measures: 58 }
-  song_036: { name: Dignity, abbr: DIGNT, measures: 86 }
-  song_037: { name: Don't Bother Me, abbr: DONTB, measures: 44 }
-  song_038: { name: Do What You Wanna Do, abbr: DWYWD, measures: 56 }
-  song_039: { name: Do You Know That - Old School, abbr: DYKTO, measures: 46 }
-  song_040: { name: Dr. M, abbr: DOCTM, measures: 59 }
-  song_041: { name: Emperor, abbr: EMPER, measures: 69 }
-  song_042: { name: Eres Para Mi, abbr: ERPMI, measures: 54 }
-  song_043: { name: Esperanza, abbr: ESPER, measures: 66 }
-  song_044: { name: Everybody, abbr: EVERY, measures: 47 }
-  song_045: { name: Exotica, abbr: XOTIC, measures: 53 }
-  song_046: { name: Extravaganza, abbr: EXTRA, measures: 78 }
-  song_047: { name: Final Audition 2, abbr: FA2^^, measures: 53 }
-  song_048: { name: Final Audition 3 U.F, abbr: FA3UF, measures: 57 }
-  song_049: { name: Final Audition, abbr: FA1^^, measures: 54 }
-  song_050: { name: Final Audition Episode 1, abbr: FAE1^, measures: 64 }
-  song_051: { name: Final Audition Episode 2-1, abbr: FAE21, measures: 66 }
-  song_052: { name: Final Audition Episode 2-2, abbr: FAE22, measures: 82 }
-  song_053: { name: Fly, abbr: FLY^^, measures: 54 }
-  song_054: { name: For You, abbr: 4YOU!, measures: 60 }
-  song_055: { name: Free!, abbr: FREE!, measures: 66 }
-  song_056: { name: Funk Factory, abbr: FACTR, measures: 59 }
-  song_057: { name: Funky Tonight, abbr: FUN2N, measures: 46 }
-  song_058: { name: Get Up!, abbr: GETUP, measures: 70 }
-  song_059: { name: Go Back, abbr: GOBCK, measures: 45 }
-  song_060: { name: Greenhorn, abbr: GHORN, measures: 47 }
-  song_061: { name: Groovin' Motion, abbr: GROMT, measures: 58 }
-  song_062: { name: Gun Rock, abbr: GNRCK, measures: 84 }
-  song_063: { name: Hasse Mich, abbr: HASSE, measures: 132 }
-  song_064: { name: Handsome Character That Pass, abbr: HCTP! }
-  song_065: { name: Heel and Toe, abbr: HANDT, measures: 85 }
-  song_066: { name: Hello, abbr: HELLO, measures: 54 }
-  song_067: { name: Hi-Bi, abbr: HI-BI, measures: 55 }
-  song_068: { name: Hyun Jin Young Go Jin Young Go, abbr: HYUNJ, measures: 59 }
-  song_069: { name: Hold the Line, abbr: HLINE, measures: 51 }
-  song_070: { name: Hot, abbr: HOT!!, measures: 41 }
-  song_071: { name: Hypnosis, abbr: HYPNO, measures: 70 }
-  song_072: { name: Ignition Starts, abbr: IGNIT, measures: 54 }
-  song_073: { name: I'll Give You All My Love, abbr: IGYML, measures: 65 }
-  song_074: { name: I Love You Baby, abbr: ILYBB, measures: 43 }
-  song_075: { name: Infection, abbr: INFEC, measures: 79 }
-  song_076: { name: It's Over Now, abbr: IOVRN, measures: 55 }
-  song_077: { name: July -EuroMix-, abbr: JULYE, measures: 67 }
-  song_078: { name: Kiss Me, abbr: KISME, measures: 51 }
-  song_079: { name: Let the Sunshine, abbr: LTSUN, measures: 52 }
-  song_080: { name: Love is a Danger Zone, abbr: LIDZ1, measures: 59 }
-  song_081: { name: Love is a Danger Zone 2, abbr: LIDZ2, measures: 68 }
-  song_082: { name: Love Eternal, abbr: LETER, measures: 65 }
-  song_083: { name: Lovely, abbr: LOVEL, measures: 80 }
-  song_084: { name: Maria, abbr: MARIA, measures: 59 }
-  song_085: { name: My Brother is Street Singler, abbr: MBISS, measures: 51 }
-  song_086: { name: Mexi Mexi, abbr: MEXI2, measures: 58 }
-  song_087: { name: Monkey Fingers, abbr: MONKF, measures: 78 }
-  song_088: { name: Monkey Magic, abbr: MONKM, measures: 56 }
-  song_089: { name: Radius, abbr: RADIU, measures: 67 }
-  song_090: { name: RE-RAVE, abbr: RERAV, measures: 62 }
-  song_091:
-    name: Riders, Unite!
-    abbr: RIDER
-    measures: 61
-  song_092: { name: Robotix, abbr: ROBOT, measures: 62 }
-  song_093: { name: Round and Round, abbr: ROUND, measures: 58 }
-  song_094: { name: Sam-I-Am, abbr: SMIAM, measures: 46 }
-  song_095: { name: Dance Vibrations, abbr: DVIBR, measures: 58 }
-  song_096: { name: Destiny, abbr: DESTN, measures: 79 }
-  song_097: { name: DJ Superstar, abbr: DJSUP, measures: 67 }
-  song_098: { name: Feels Just Like That Night, abbr: FJLTN, measures: 58 }
-  song_099: { name: Go, abbr: GO!GO, measures: 59 }
-  song_100: { name: Into My Dream (Kaveh Azizi Remix), abbr: INTOD, measures: 67 }
-  song_101: { name: Slam, abbr: SLAM!, measures: 53 }
-  song_102: { name: Snow Dream, abbr: SNOWD, measures: 71 }
-  song_103: { name: So, abbr: SOOOO, measures: 58 }
-  song_104: { name: Solitary, abbr: SOL1^, measures: 54 }
-  song_105: { name: Solitary 2, abbr: SOL2^, measures: 57 }
-  song_106: { name: Space Fantasy, abbr: SPACE, measures: 77 }
-  song_107: { name: Starian, abbr: STARI, measures: 53 }
-  song_108: { name: STOP! & Go, abbr: STPGO, measures: 52 }
-  song_109: { name: Summer ~Speedy Mix~, abbr: SUMSP, measures: 81 }
-  song_110: { name: Sunshine, abbr: SUNSH, measures: 52 }
-  song_111: { name: Take Me Back, abbr: TMBCK, measures: 81 }
-  song_112: { name: Take My Time, abbr: TMTIM, measures: 59 }
-  song_113: { name: Terminal Depository, abbr: TDEPO, measures: 51 }
-  song_114: { name: Treme-Vook of the War, abbr: TVOTW, measures: 124 }
-  song_115: { name: Try to B.P.M. - Love is a Danger Zone, abbr: T2BPM, measures: 97 }
-  song_116: { name: Turkey March, abbr: TMRCH, measures: 61 }
-  song_117: { name: U Inside My Dim Memory, abbr: UIMDM, measures: 53 }
-  song_118: { name: Utopia, abbr: UTOPI, measures: 75 }
-  song_119: { name: Virtual Emotion, abbr: VTEMO, measures: 67 }
-  song_120: { name: Vook, abbr: VOOK!, measures: 74 }
-  song_121: { name: VVV, abbr: VVVVV, measures: 98 }
-  song_122: { name: Watch Out, abbr: WTOUT, measures: 43 }
-  song_123: { name: We Goin' Fly Remix, abbr: WGFLY, measures: 49 }
-  song_124: { name: What's Going On?, abbr: WGOON, measures: 53 }
-  song_125: { name: Who, abbr: WHO^^, measures: 66 }
-  song_126: { name: Wi-Ex-Doc-Va, abbr: WEDVA, measures: 132 }
-  song_127: { name: Will o' the Wisp, abbr: WOTWP, measures: 77 }
-  song_128: { name: Winter, abbr: WINTR, measures: 58 }
-  song_129: { name: Witch Doctor #1, abbr: WDOC1, measures: 47 }
-  song_130: { name: Witch Doctor, abbr: WDOC!, measures: 67 }
-  song_131: { name: Incognito, abbr: INCOG, measures: 65 }
-  song_132: { name: Energizer, abbr: ENERG, measures: 124 }
-  song_133: { name: X-Treme, abbr: XTRME, measures: 67 }
-  song_134: { name: Xuxa, abbr: XUXA!, measures: 73 }
-  song_135: { name: Y2Z, abbr: Y2Z!!, measures: 71 }
-  song_136: { name: Zodiac, abbr: ZODIA, measures: 47 }
-  song_137: { name: Monolith, abbr: MONOL, measures: 80 }
-  song_138: { name: Moonlight, abbr: MOONL, measures: 62 }
-  song_139: { name: Moonstone, abbr: MOONS, measures: 46 }
-  song_140: { name: Mr. Fire Fighter, abbr: MFIRE, measures: 60 }
-  song_141: { name: Mr. Larpus, abbr: MRLAR, measures: 77 }
-  song_142: { name: My Friend, abbr: MYFRI, measures: 47 }
-  song_143: { name: Naissance, abbr: NAIS1, measures: 57 }
-  song_144: { name: Naissance 2, abbr: NAIS2, measures: 55 }
-  song_145: { name: Nightmoves, abbr: NGTMV, measures: 58 }
-  song_146: { name: Oasis, abbr: OASIS, measures: 66 }
-  song_147: { name: Oh! Rosa, abbr: OROSA, measures: 60 }
-  song_148: { name: Papa Gonzales, abbr: PAPAG, measures: 54 }
-  song_149: { name: Phantom, abbr: PHANT, measures: 52 }
-  song_150: { name: Pump Me Amadeus, abbr: PMAMA, measures: 69 }
-  song_151: { name: Ra, abbr: RA^^^ }
-  song_152: { name: Miss's Story, abbr: MISSS, measures: 47 }
-  song_153: { name: Tribal Style, abbr: TRIBE, measures: 65 }
-  song_154: { name: London Bridge, abbr: LNDNB, measures: 56 }
-  song_155: { name: Epilogue, abbr: EPILO, measures: 53 }
-  song_156: { name: Euphoria, abbr: EUPHO, measures: 54 }
-  song_157: { name: Tension, abbr: TENSE, measures: 77 }
-  song_158: { name: Can Can, abbr: CAN__, measures: 70 }
-  song_159: { name: Kitty Kat, abbr: KITTY, measures: 52 }
-  song_160: { name: Ladybug, abbr: LDBUG, measures: 52 }
-  song_161: { name: Move It Groove It, abbr: MIGIT }
-  song_162: { name: Shooting Star, abbr: SSTAR, measures: 56 }
-  song_163: { name: Style On My Speed Dial, abbr: SDIAL, measures: 57 }
+ITG_Song_Song:
+  Bang: { name: !, abbr: BANG!, measures: 71 }
+  Agent_Blatant: { name: Agent Blatant, abbr: AGENT, measures: 61 }
+  Amore: { name: Amore, abbr: Amore, measures: 60 }
+  Anubis: { name: Anubis, abbr: ANUBS, measures: 48 }
+  Baby_Baby: { name: Baby Baby, abbr: BABY2, measures: 57 }
+  Baby_Dont_You_Want_Me: { name: "Baby Don't You Want Me", abbr: BDYWM, measures: 58 }
+  Bend_Your_Mind: { name: Bend Your Mind, abbr: BMIND, measures: 71 }
+  Birdie: { name: Birdie, abbr: BIRDY, measures: 56 }
+  Bloodrush: { name: Bloodrush, abbr: BLOOD, measures: 60 }
+  Boogie_Down: { name: Boogie Down, abbr: BOOGY, measures: 87 }
+  Bouff: { name: Bouff, abbr: BOUFF, measures: 92 }
+  Bubble_Dancer: { name: Bubble Dancer, abbr: BUBBL, measures: 69 }
+  Bumble_Bee: { name: Bumble Bee, abbr: BMBLB, measures: 58 }
+  Changes: { name: Changes, abbr: CHANG, measures: 61 }
+  Charlene: { name: Charlene, abbr: CHARL, measures: 71 }
+  Clockwork_Genesis: { name: Clockwork Genesis, abbr: CLOCK, measures: 76 }
+  Crazy: { name: Crazy, abbr: CRAZY, measures: 70 }
+  Cryosleep: { name: Cryosleep, abbr: CRYOS, measures: 52 }
+  DCode: { name: D-Code, abbr: DCODE, measures: 44 }
+  Da_Roots: { name: Da Roots, abbr: DROOT, measures: 65 }
+  Dawn: { name: Dawn, abbr: DAWN_, measures: 67 }
+  Delirium: { name: Delirium, abbr: DELIR, measures: 81 }
+  Destiny: { name: Destiny, abbr: DESTN, measures: 81 }
+  Determinator: { name: Determinator, abbr: DETER, measures: 65 }
+  Disconnected: { name: Disconnected, abbr: DISC_, measures: 101 }
+  Disconnected_Hyper: { name: Disconnected -Hyper-, abbr: DISCH, measures: 95 }
+  Disconnected_Mobius: { name: Disconnected -Mobius-, abbr: DISCM, measures: 80 }
+  Disconnected_Disco: { name: Disconnected Disco, abbr: DISCO, measures: 61 }
+  DJ_Party: { name: DJ Party, abbr: DJPRT, measures: 67 }
+  Do_U_Love_Me: { name: Do U Love Me, abbr: DULME, measures: 66 }
+  Dont_Promise_Me: { name: Don't Promise Me, abbr: DPME_, measures: 64 }
+  Dont_Promise_Me_Happiness: { name: Don't Promise Me -Happiness-, abbr: DPMEH, measures: 65 }
+  Dreams_of_Passion: { name: Dreams of Passion, abbr: DREAM, measures: 48 }
+  Drifting_Away: { name: Drifting Away, abbr: DAWAY, measures: 71 }
+  Driving_Force_Classical: { name: Driving Force Classical, abbr: DRIVE, measures: 85 }
+  Energizer: { name: Energizer, abbr: ENERG, measures: 124 }
+  Euphoria: { name: Euphoria, abbr: EUPHO, measures: 54 }
+  Fleadh_Uncut: { name: Fleadh Uncut, abbr: FLEAD, measures: 56 }
+  Fly_Away: { name: Fly Away, abbr: FAWAY, measures: 73 }
+  Flying_High: { name: Flying High, abbr: FHIGH, measures: 74 }
+  Fly_With_Me: { name: Fly With Me, abbr: FLYME, measures: 68 }
+  Funk_Factory: { name: Funk Factory, abbr: FACTR, measures: 59 }
+  Get_Happy: { name: Get Happy, abbr: HAPPY, measures: 59 }
+  Go_60_Go: { name: Go 60 Go, abbr: G60GO, measures: 73 }
+  Habanera_1: { name: Habanera 1, abbr: HABA1, measures: 67 }
+  Hand_of_Time: { name: Hand of Time, abbr: HTIME, measures: 67 }
+  Hardcore_of_the_North: { name: Hardcore of the North, abbr: HCOTN, measure: 80 }
+  Hardcore_Symfony: { name: Hardcore Symphony, abbr: HSYMP, measures: 73 }
+  High: { name: High, abbr: HIGH!, measures: 57 }
+  Hillbilly_Hardcore: { name: Hillbilly Hardcore, abbr: HILLB, measures: 60 }
+  Hip_Hop_Jam: { name: Hip Hop Jam, abbr: HHJAM, measures: 99 }
+  Hispanic_Panic: { name: Hispanic Panic, abbr: HISPA, measures: 60 }
+  Holy_Guacamole: { name: Holy Guacamole, abbr: HOLYG, measures: 62 }
+  Hustle_Beach: { name: Hustle Beach, abbr: HUSTL, measures: 57 }
+  Hybrid: { name: Hybrid, abbr: HYBRI, measures: 86 }
+  Ill_Get_There_Anyway: { name: "I'll Get There Anyway", abbr: IGTAW, measures: 50 }
+  Incognito: { name: Incognio, abbr: INCOG, measures: 65 }
+  Infection: { name: Infection, abbr: INFEC, measures: 83 }
+  I_Think_I_Like_That_Sound: { name: I Think I Like That Sound, abbr: SOUND, measures: 67 }
+  Ize_Pie: { name: Ize Pie, abbr: IZEPI, measures: 53 }
+  July: { name: July, abbr: JULY_, measures: 89 }
+  July_Euromix: { name: July -EuroMix-, abbr: JULYE, measures: 67 }
+  Kagami: { name: Kagami, abbr: KGAMI, measures: 70 }
+  Kiss_Me_Red: { name: Kiss Me Red, abbr: KMRED, measures: 62 }
+  Know_Your_Enemy: { name: Know Your Enemy, abbr: KYNME, measures: 57 }
+  Land_of_the_Rising_Sun: { name: Land of the Rising Sun, abbr: LOTRS, measures: 67 }
+  Lemmings_on_the_Run: { name: Lemmings on the Run, abbr: LORUN, measures: 67 }
+  Let_Me_Be_The_One: { name: Let Me Be The One, abbr: LMBT1, measures: 61 }
+  Let_My_Love_Go_Blind: { name: Let My Love Go Blind, abbr: LMLGB, measures: 81 }
+  Life_of_a_Butterfly: { name: Life of a Butterfly, abbr: LOABF, measures: 55 }
+  Lipstick_Kiss: { name: Lipstick Kiss, abbr: LKISS, measures: 72 }
+  Liquid_Moon: { name: Liquid Moon, abbr: LMOON, measures: 73 }
+  Little_Kitty_Mine: { name: Little Kitty Mine, abbr: LKMIN, measures: 62 }
+  Mellow: { name: Mellow, abbr: MELLO, measures: 83 }
+  Monolith: { name: Monolith, abbr: MONOL, meausres: 80 }
+  Mouth: { name: Mouth, abbr: MOUTH, measures: 69 }
+  Music_Pleeze: { name: Music Pleeze, abbr: MUSIC, measures: 55 }
+  My_Favourite_Game: { name: My Favourite Game, abbr: MGAME, measures: 63 }
+  My_Life_Is_So_Crazy: { name: My Life Is So Crazy, abbr: MLISC, measures: 63 }
+  Mythology: { name: Mythology, abbr: MYTHO, measures: 72 }
+  No_1_Nation: { name: No 1 Nation, abbr: N1NAT, measures: 97 }
+  No_Princess: { name: No Princess, abbr: NPRIN, measures: 63 }
+  Normal: { name: Normal, abbr: NORML, measures: 70 }
+  Not_Worth_The_Paper: { name: Not Worth The Paper, abbr: NWTPP, measures: 67 }
+  Oasis: { name: Oasis, abbr: OASIS, measures: 65 }
+  On_a_Day_Like_Today: { name: On a Day Like Today, abbr: OADLT, measures: 69 }
+  One_False_Move: { name: One False Move, abbr: OFMOV, measures: 44 }
+  Out_of_the_Dark: { name: Out of the Dark, abbr: OFTDK, measures: 61 }
+  Pandemonium: { name: Pandemonium, abbr: PANDY, measures: 154 }
+  PA_Theme: { name: PA Theme, abbr: PENNY, measures: 73 }
+  Perfect: { name: Perfect, abbr: PRFCT, measures: 53 }
+  Pick_Me_Up_And_Tango: { name: "Pick Me Up & Tango", abbr: PMUAT, measures: 60 }
+  Psalm_Pilot: { name: Psalm Pilot, abbr: PSALM, measures: 61 }
+  Queen_of_Light: { name: Queen of Light, abbr: QUEEN, measures: 67 }
+  Reactor: { name: Reactor, abbr: REACT, measures: 55 }
+  Remember_December: { name: Remember December, abbr: RMDEC, measures: 101 }
+  Renaissance: { name: Renaissance, abbr: RENAI, measures: 70 }
+  Ride_the_Bass: { name: Ride the Bass, abbr: RBASS, measures: 60 }
+  Robotix: { name: Robotix, abbr: ROBOT, measures: 95 }
+  Romeo_and_Juli8: { name: "ROM-eo & Juli8", abbr: ROMEO, measures: 69 }
+  Soapy_Bubble: { name: Soapy Bubble, abbr: SOAPY, measures: 61 }
+  Solina: { name: Solina, abbr: SOLIN, measures: 67 }
+  Spaceman: { name: Spaceman, abbr: SPACE, measures: 57 }
+  Spacy_Crazy_Girl: { name: Spacy Crazy Girl, abbr: SGIRL, measures: 57 }
+  Spin_Chicken: { name: Spin Chicken, abbr: SPINC, measures: 59 }
+  Summer_in_Belize: { name: Summer in Belize, abbr: SIBEL, measure: 61 }
+  Summer_Speedy: { name: Summer ~Speedy Mix~, abbr: SUMSP, measures: 81 }
+  Sunshine: { name: Sunshine, abbr: SUNSH, measures: 72 }
+  Sweet_World: { name: Sweet World, abbr: SWEET, measures: 60 }
+  Tell: { name: Tell, abbr: WTELL, measures: 75 }
+  Temple_of_Boom: { name: Temple of Boom, abbr: TBOOM, measures: 65 }
+  Tension: { name: Tension, abbr: TENSE, measures: 93 }
+  The_Beginning: { name: The Beginning, abbr: BEGIN, measures: 66 }
+  The_Game: { name: The Game, abbr: TGAME, measures: 69 }
+  The_Message: { name: The Message, abbr: TMESS, measures: 55 }
+  This_is_Rock_and_Roll: { name: This is Rock and Roll, abbr: TIRAR, measures: 64 }
+  Torn: { name: Torn, abbr: TORN!, measures: 68 }
+  Touch_Me: { name: Touch Me, abbr: TOUCH, measures: 74 }
+  Tough_Enough: { name: Tough Enough, abbr: TOUGH, measures: 80 }
+  Tribal_Style: { name: Tribal Style, abbr: TRIBE, measures: 65 }
+  Turn_it_On: { name: Turn it On, abbr: TITON, measures: 65 }
+  Twilight: { name: Twilight, abbr: TWILI, measures: 61 }
+  Typical_Tropical: { name: Typical Tropical, abbr: TYPIC, measures: 57 }
+  Utopia: { name: Utopia, abbr: UTOPI, measures: 81 }
+  Vertex: { name: Vertex, abbr: VRTX1, measures: 127 }
+  Vertex_2: { name: Vertex^2, abbr: VRTX2, measures: 130 }
+  Visible_Noise: { name: Visible Noise, abbr: NOISE, measures: 57 }
+  Vorsprung_Durch_Techno: { name: Vorsprung Durch Techno, abbr: VORSP, measures: 57 }
+  Wake_Up: { name: Wake Up, abbr: WAKUP, measures: 59 }
+  Walking_on_Fire: { name: Walking on Fire, abbr: WFIRE, measures: 68 }
+  Wanna_Do_Hardhouse: { name: Wanna Do Hardhouse, abbr: WANDO, measures: 67 }
+  We_Know_What_To_Do: { name: We Know What To Do, abbr: WKWTD, measures: 62 }
+  Which_MC_Was_That: { name: Which MC Was That, abbr: WMCWT, measures: 56 }
+  While_Tha_Rekkid_Spinz: { name: While Tha Rekkid Spinz, abbr: WTRKS, measures: 69 }
+  Why_Me: { name: Why Me, abbr: WHYME, measures: 65 }
+  Xuxa: { name: XUXA, abbr: XUXA!, measures: 79 }
+  Zodiac: { name: Zodiac, abbr: ZODIA, measures: 51 }
+  
