@@ -6,14 +6,13 @@ default:
     content-type: text/html
 
   metas:
-    title:        Pump Pro Edits
-    description:  This website allows users to create and share custom made step edits for the arcade game Pump It Up Pro.
-    keywords:     Pump It Up Pro, Pump Pro, Pump It Up, Pro, edits, Wolfman2000, Jason Felds
+    title:        ITG Edits
+    description:  This website allows users to play almost every edit made for the In The Groove series.
+    keywords:     ITG, ITG2, Groove, Groove 2, In The Groove 2, In The Groove, edits, Wolfman2000, Jason Felds
     language:     en
     robots:       index, follow
 
-  stylesheets:    [main.css]
-
+  stylesheets:    []
   javascripts:    []
 
   has_layout:     true
