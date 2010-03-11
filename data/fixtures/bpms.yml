@@ -13,7 +13,7 @@ ITG_Song_BPM:
   bpm_012: { ITG_Song_Song: Da_Roots, beat: 12, bpm: 125.4 }
   bpm_013: { ITG_Song_Song: Da_Roots, beat: 15, bpm: 133.14 }
   bpm_014: { ITG_Song_Song: Da_Roots, beat: 16, bpm: 122.48 }
-  bpm_015: { ITG_Song_Song: Da_Roots, beat: 18, 132.34 }
+  bpm_015: { ITG_Song_Song: Da_Roots, beat: 18, bpm: 132.34 }
   bpm_016: { ITG_Song_Song: Da_Roots, beat: 24, bpm: 128.02 }
   bpm_017: { ITG_Song_Song: Da_Roots, beat: 28, bpm: 131.1 }
   bpm_018: { ITG_Song_Song: Da_Roots, beat: 30, bpm: 134.08 }
@@ -86,7 +86,7 @@ ITG_Song_BPM:
   bpm_085: { ITG_Song_Song: Hand_of_Time, beat: 304, bpm: 184 }
   bpm_086: { ITG_Song_Song: Dont_Promise_Me_Happiness, bpm: 132.1 }
   bpm_087: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat: 40, bpm: 66.05 }
-  bpm_088: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat, 44, bpm: 132.1 }
+  bpm_088: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat: 44, bpm: 132.1 }
   bpm_089: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat: 120, bpm: 66.05 }
   bpm_090: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat: 122, bpm: 131 }
   bpm_091: { ITG_Song_Song: Dont_Promise_Me_Happiness, beat: 178, bpm: 66.05 }
