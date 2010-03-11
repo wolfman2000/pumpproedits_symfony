@@ -1,4 +1,4 @@
-PPE_User_Role:
+ITG_User_Role:
   actAs: { Timestampable: ~ }
   columns:
     role:
@@ -11,7 +11,7 @@ PPE_User_Role:
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_User_User:
+ITG_User_User:
   actAs:
     Timestampable: ~
     Lowercase:
@@ -28,7 +28,7 @@ PPE_User_User:
     email:
       type: string
       length: 320
-      notnull: true
+      notnull: false
     is_confirmed:
       type: boolean
       notnull: true
@@ -37,15 +37,15 @@ PPE_User_User:
     user_index:
       fields: [name]
       type: unique
-    email_index:
-      fields: [email]
-      type: unique
+#    email_index:
+#      fields: [email]
+#      type: unique
   options:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_User_Power:
+ITG_User_Power:
   columns:
     user_id:
       type: integer
@@ -56,15 +56,15 @@ PPE_User_Power:
       # This is primarily known by checking the fixture file.
       default: 3
   relations:
-    PPE_User_User:
+    ITG_User_User:
       local: user_id
       foreign: id
-      foreignAlias: PPE_User_Powers
+      foreignAlias: ITG_User_Powers
       foreignKeyName: power_user_fk
-    PPE_User_Role:
+    ITG_User_Role:
       local: role_id
       foreign: id
-      foreignAlias: PPE_User_Powers
+      foreignAlias: ITG_User_Powers
       foreignKeyName: power_role_fk
   indexes:
     user_roles_index:
@@ -75,7 +75,7 @@ PPE_User_Power:
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_User_Condiment:
+ITG_User_Condiment:
   actAs: { Timestampable: ~ }
   columns:
     user_id:
@@ -94,10 +94,10 @@ PPE_User_Condiment:
       length: 64
       notnull: true
   relations:
-    PPE_User_User:
+    ITG_User_User:
       local: user_id
       foreign: id
-      foreignAlias: PPE_User_Condiments
+      foreignAlias: ITG_User_Condiments
       foreignKeyName: condiment_user_fk
   indexes:
     spice_index:
@@ -106,13 +106,13 @@ PPE_User_Condiment:
   checks:
     oregano_check: char_length(oregano) = 32
     salt_check: char_length(salt) = 5
-    pepper_check: char_length(pepper) = 64
+    peITGr_check: char_length(pepper) = 64
   options:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_Song_Song:
+ITG_Song_Song:
   actAs:
     Timestampable:
     Lowercase:
@@ -150,7 +150,7 @@ PPE_Song_Song:
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_Song_Stop:
+ITG_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:
     song_id:
@@ -168,10 +168,10 @@ PPE_Song_Stop:
       size: 4
       scale: 2
   relations:
-    PPE_Song_Song:
+    ITG_Song_Song:
       local: song_id
       foreign: id
-      foreignAlias: PPE_Song_Songs
+      foreignAlias: ITG_Song_Songs
       foreignKeyName: stop_song_fk
   indexes:
     stop_index:
@@ -185,7 +185,7 @@ PPE_Song_Stop:
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_Song_BPM:
+ITG_Song_BPM:
   actAs: { Timestampable: ~ }
   columns:
     song_id:
@@ -203,10 +203,10 @@ PPE_Song_BPM:
       size: 8
       scale: 4
   relations:
-    PPE_Song_Song:
+    ITG_Song_Song:
       local: song_id
       foreign: id
-      foreignAlias: PPE_Song_Songs
+      foreignAlias: ITG_Song_Songs
       foreignKeyName: bpm_song_fk
   indexes:
     bpm_index:
@@ -221,18 +221,18 @@ PPE_Song_BPM:
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_Edit_Edit:
+ITG_Edit_Edit:
   actAs:
     Timestampable: ~
     SoftDelete: ~
     CountCache:
       relations:
-        PPE_Song_Song:
+        ITG_Song_Song:
           columnName: num_edits
-          foreignAlias: PPE_Edit_Edits
-        PPE_User_User:
+          foreignAlias: ITG_Edit_Edits
+        ITG_User_User:
           columnName: num_edits
-          foreignAlias: PPE_Edit_Edits
+          foreignAlias: ITG_Edit_Edits
   columns:
     user_id:
       type: integer
@@ -275,28 +275,20 @@ PPE_Edit_Edit:
       type: integer
       notnull: true
       default: 0
-    lifts:
-      type: integer
-      notnull: true
-      default: 0
-    fakes:
-      type: integer
-      notnull: true
-      default: 0
     is_problem:
       type: boolean
       notnull: true
       default: 0
   relations:
-    PPE_User_User:
+    ITG_User_User:
       local: user_id
       foreign: id
-      foreignAlias: PPE_Edit_Edits
+      foreignAlias: ITG_Edit_Edits
       foreignKeyName: edit_user_fk
-    PPE_Song_Song:
+    ITG_Song_Song:
       local: song_id
       foreign: id
-      foreignAlias: PPE_Edit_Edits
+      foreignAlias: ITG_Edit_Edits
       foreignKeyName: edit_song_fk
   indexes:
     author_index:
@@ -310,21 +302,19 @@ PPE_Edit_Edit:
     mines_check: mines >= 0
     trips_check: trips >= 0
     rolls_check: rolls >= 0
-    lifts_check: lifts >= 0
-    fakes_check: fakes >= 0
   options:
     type: INNODB
     collate: utf8_unicode_ci
     charset: utf8
 
-PPE_Vote_Vote:
+ITG_Vote_Vote:
   actAs:
     Timestampable:
     VoteCache:
       relations:
-        PPE_Edit_Edit:
+        ITG_Edit_Edit:
           baseName: votes
-          foreignAlias: PPE_Vote_Votes
+          foreignAlias: ITG_Vote_Votes
   columns:
     user_id:
       type: integer
@@ -343,15 +333,15 @@ PPE_Vote_Vote:
       notnull: true
       default: 0
   relations:
-    PPE_User_User:
+    ITG_User_User:
       local: user_id
       foreign: id
-      foreignAlias: PPE_Vote_Votes
+      foreignAlias: ITG_Vote_Votes
       foreignKeyName: vote_user_fk
-    PPE_Edit_Edit:
+    ITG_Edit_Edit:
       local: edit_id
       foreign: id
-      foreignAlias: PPE_Vote_Votes
+      foreignAlias: ITG_Vote_Votes
       foreignKeyName: vote_edit_fk
   indexes:
     single_vote_index:
