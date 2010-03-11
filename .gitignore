@@ -1,4 +1,4 @@
-config/*.yml
+config/factories.yml
 data/fixtures/condiments.yml
 data/fixtures/edits.yml
 data/fixtures/users.yml
