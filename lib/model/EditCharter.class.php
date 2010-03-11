@@ -6,11 +6,10 @@ class EditCharter
   {
     $this->single = sfConfig::get('app_chart_single_cols');
     $this->double = sfConfig::get('app_chart_double_cols');
-    $this->halfdouble = 6;
     
-    if (!in_array($params['cols'], array($this->single, $this->double, $this->halfdouble)))
+    if (!in_array($params['cols'], array($this->single, $this->double)))
     {
-      $e = "There must be either $this->single, $this->halfdouble, or $this->double columns in the chart!";
+      $e = "There must be either $this->single or $this->double columns in the chart!";
       throw new sfParseException($e);
     }
     if (!in_array($params['kind'], array("classic", "rhythm")))
@@ -223,7 +222,7 @@ class EditCharter
     $buff = $this->lb + $this->rb;
     $draw = $this->cols * $this->aw / 2;
     $m = $this->aw * $this->bm * $this->speedmod;
-    foreach (Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id) as $b)
+    foreach (Doctrine::getTable('ITG_Song_BPM')->getBPMsBySongID($id) as $b)
     {
       $beat = $b->beat;
       $bpm = $b->bpm;
@@ -260,7 +259,7 @@ class EditCharter
     $buff = $this->lb + $this->rb;
     $draw = $this->cols * $this->aw / 2;
     $m = $this->aw * $this->bm * $this->speedmod;
-    foreach (Doctrine::getTable('PPE_Song_Stop')->getStopsBySongID($id) as $b)
+    foreach (Doctrine::getTable('ITG_Song_Stop')->getStopsBySongID($id) as $b)
     {
       $beat = $b->beat;
       $break = $b->break;
@@ -291,55 +290,29 @@ class EditCharter
   
   private function prepArrows()
   {
-    if ($this->kind == "classic")
+    $ret = array();
+    $div = array('4th', '8th', '12th', '16th',
+      '24th', '32nd', '48th', '64th', '192nd');
+    foreach ($div as $d)
     {
-      $dl = array('a' => 'DL', 'c' => 'note_004');
-      $ul = array('a' => 'UL', 'c' => 'note_008');
-      $cn = array('a' => 'CN', 'c' => 'note_016');
-      $ur = array('a' => 'UR', 'c' => 'note_008');
-      $dr = array('a' => 'DR', 'c' => 'note_004');
-      $ret = array($dl, $ul, $cn, $ur, $dr);
+      if (array_key_exists('red4', $this))
+      {
+        if (intval($d) == 4) $g = 'note_008';
+        elseif (intval($d) == 8) $g = 'note_004';
+        else $g = sprintf('note_%03d', intval($d));
+      }
+      else $g = sprintf('note_%03d', intval($d));
+      $l = array('a' => 'L', 'c' => $g);
+      $d = array('a' => 'D', 'c' => $g);
+      $u = array('a' => 'U', 'c' => $g);
+      $r = array('a' => 'R', 'c' => $g);
+      $ret[$d] = array($l, $d, $u, $r);
       if ($this->cols == $this->double)
       {
-        array_push($ret, $dl, $ul, $cn, $ur, $dr);
+        array_push($ret[$d], $l, $d, $u, $r);
       }
-      elseif ($this->cols == $this->halfdouble)
-      {
-        $ret = array($cn, $ur, $dr, $dl, $ul, $cn);
-      }
-      return $ret;
     }
-    if ($this->kind == "rhythm")
-    {
-      $ret = array();
-      $div = array('4th', '8th', '12th', '16th',
-        '24th', '32nd', '48th', '64th');
-      foreach ($div as $d)
-      {
-        if (array_key_exists('red4', $this))
-        {
-          if (intval($d) == 4) $g = 'note_008';
-          elseif (intval($d) == 8) $g = 'note_004';
-          else $g = sprintf('note_%03d', intval($d));
-        }
-        else $g = sprintf('note_%03d', intval($d));
-        $dl = array('a' => 'DL', 'c' => $g);
-        $ul = array('a' => 'UL', 'c' => $g);
-        $cn = array('a' => 'CN', 'c' => $g);
-        $ur = array('a' => 'UR', 'c' => $g);
-        $dr = array('a' => 'DR', 'c' => $g);
-        $ret[$d] = array($dl, $ul, $cn, $ur, $dr);
-        if ($this->cols == $this->double)
-        {
-          array_push($ret[$d], $dl, $ul, $cn, $ur, $dr);
-        }
-        elseif ($this->cols == $this->halfdouble)
-        {
-          $ret[$d] = array($cn, $ur, $dr, $dl, $ul, $cn);
-        }
-      }
-      return $ret;
-    }
+    return $ret;
   }
   
   private function getBeat($beat)
@@ -355,7 +328,7 @@ class EditCharter
       case 3: case 13: case 19: case 29: return '48th';
       case 2: case 6: case 10: case 14:
       case 18: case 22: case 26: case 30: return '64th';
-      default: return '64th'; # Unsure of keeping this default.
+      default: return '192nd';
     }
   }
   

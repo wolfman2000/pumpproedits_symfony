@@ -45,8 +45,8 @@ class EditParser
 
   public function generate_base($songid)
   {
-    $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
-    foreach (array("single", "double", "halfdouble") as $kind)
+    $base = Doctrine::getTable('ITG_Song_Song')->getSongRow($songid);
+    foreach (array("single", "double") as $kind)
     {
       $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
     }
@@ -57,33 +57,26 @@ class EditParser
   {
     switch ($style)
     {
-      case "pump-single": return 5;
-      case "pump-double": return 10;
-      case "pump-halfdouble": return 6;
-      default: return 5; // Lazy right now.
+      case "dance-single": return 4;
+      case "dance-double": return 8;
+      default: return 4; // Lazy right now.
     }
   }
   
   protected function getOfficialStyle($style, $title)
   {
-    switch ($style)
+    if (strpos($style, "dance-") !== false)
     {
-      case "pump-single":
-      {
-        switch ($title)
-        {
-          case "Beginner": return "Easy";
-          case "Easy": return "Normal";
-          case "Medium": return "Hard";
-          case "Hard": return "Crazy";
-        }
-      }
-      case "pump-double":
-      {
-        return $title == "Hard" ? "Nightmare" : "Freestyle";
-      }
-      case "pump-halfdouble": return "Halfdouble";
-      default: return "Undefined"; // Lazy right now.
+      $style = ucfirst(substr($style, 6));
+    }
+    switch ($title)
+    {
+      case "Beginner": return $style . " Beginner";
+      case "Easy": return $style . " Easy";
+      case "Medium": return $style . " Medium";
+      case "Hard": return $style . " Hard";
+      case "Challenge": return $style . "Expert";
+      default: return $style . "Undefined"; # lazy right now
     }
   }
   
@@ -118,7 +111,7 @@ class EditParser
     $notes = array();
     $state = $diff = $cols = $measure = $songid = 0;
     $title = $song = $style = "";
-    $base = Doctrine::getTable('PPE_Song_Song');
+    $base = Doctrine::getTable('ITG_Song_Song');
     
     if (!array_key_exists('strict_song', $params)) { $params['strict_song'] = true; }
     if (!array_key_exists('strict_edit', $params)) { $params['strict_edit'] = true; }
