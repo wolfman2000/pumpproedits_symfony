@@ -64,9 +64,9 @@ abstract class BaseITG_User_Condiment extends sfDoctrineRecord
         $this->option('collate', 'utf8_unicode_ci');
         $this->option('charset', 'utf8');
 
-        $this->check('char_length(oregano) = 32');
-        $this->check('char_length(salt) = 5');
-        $this->check('char_length(pepper) = 64');
+        $this->check('length(oregano) = 32');
+        $this->check('length(salt) = 5');
+        $this->check('length(pepper) = 64');
     }
 
     public function setUp()

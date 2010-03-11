@@ -104,9 +104,9 @@ ITG_User_Condiment:
       fields: [user_id]
       type: unique
   checks:
-    oregano_check: char_length(oregano) = 32
-    salt_check: char_length(salt) = 5
-    peITGr_check: char_length(pepper) = 64
+    oregano_check: length(oregano) = 32
+    salt_check: length(salt) = 5
+    peITGr_check: length(pepper) = 64
   options:
     type: INNODB
     collate: utf8_unicode_ci
