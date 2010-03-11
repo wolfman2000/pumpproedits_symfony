@@ -18,7 +18,7 @@ ITG_Song_Song:
   Crazy: { name: Crazy, abbr: CRAZY, measures: 70 }
   Cryosleep: { name: Cryosleep, abbr: CRYOS, measures: 52 }
   DCode: { name: D-Code, abbr: DCODE, measures: 44 }
-  Da_Roots: { name: Da Roots, abbr: DROOT, measures: 65 }
+  Da_Roots: { name: "Da Roots (Folk Mix)", abbr: DROOT, measures: 65 }
   Dawn: { name: Dawn, abbr: DAWN_, measures: 67 }
   Delirium: { name: Delirium, abbr: DELIR, measures: 81 }
   Destiny: { name: Destiny, abbr: DESTN, measures: 81 }
