@@ -12,6 +12,8 @@ echo form_tag($route, "multipart=false"); ?>
       <p><?php echo $form['edits'] ?></p>
     </section>
     <section>
+    <p><?php echo $form['style']->renderLabel() ?></p>
+    <p><?php echo $form['style'] ?></p>
     <p><?php echo $form['diff']->renderLabel() ?></p>
     <p><?php echo $form['diff'] ?></p>
     <p><?php echo $form['speed']->renderLabel() ?></p>

@@ -21,10 +21,15 @@ class ChartOfficialForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
-    $choices = array('ez' => 'Easy', 'nr' => 'Normal', 'hr' => 'Hard', 'cz' => 'Crazy',
-      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare');
+    $choices = array('single' => 'Single', 'double' => 'Double');
+    $pieces['style'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Style'));
+    
+    $tmp1['choices'] = array_keys($choices);
+    $val['style'] = new sfValidatorChoice($tmp1, array('required' => 'A style must be chosen.'));
+    
+    $choices = array('b' => 'Beginner', 'e' => 'Easy', 'm' => 'Medium', 'h' => 'Hard', 'x' => 'Expert');
     $pieces['diff'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Difficulty'));
-    $this->setDefault('diff', 'cz');
+    $this->setDefault('diff', 'h');
     
     $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
