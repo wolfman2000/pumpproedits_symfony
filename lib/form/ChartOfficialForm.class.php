@@ -44,7 +44,7 @@ class ChartOfficialForm extends sfForm
     $val['speed'] = new sfValidatorChoice($tmp1, array('required' => "A speed mod must be chosen."));
 
 
-    $choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16);
+    $choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16, 24 => 24, 32 => 32);
     $pieces['mpcol'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Measures per column'));
     $this->setDefault('mpcol', 6);
 
@@ -52,7 +52,8 @@ class ChartOfficialForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['mpcol'] = new sfValidatorChoice($tmp1, array('required' => "You must choose how many measures appear in each column."));
     
-    $choices = array('0.5' => 0.5, '0.75' => 0.75, 1 => 1, '1.25' => 1.25, '1.5' => 1.5, '1.75' => 1.75, 2 => 2);
+    $choices = array('0.5' => 0.5, '0.75' => 0.75, 1 => 1, '1.25' => 1.25, '1.5' => 1.5,
+      '1.75' => 1.75, 2 => 2, '2.5' => 2.5, 3 => 3, '3.5' => 3.5, 4 => 4);
     $pieces['scale'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Scale Factor'));
     $this->setDefault('scale', 1);
     
