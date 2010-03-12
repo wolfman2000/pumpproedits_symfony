@@ -156,11 +156,6 @@ class chartActions extends sfActions
   
   public function executeOfficial(sfWebRequest $request)
   {
-    if (!$this->getUser()->isAuthenticated())
-    {
-      $this->forward('login', 'index');
-      return;
-    }
     $this->form = new ChartOfficialForm();
   }
   
@@ -190,14 +185,14 @@ class chartActions extends sfActions
         $p['arcade'] = $dif;
         $notedata = $tmp->get_stats(fopen($path, "r"), $p);
 
-        $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
-        'red4' => $this->form->getValue('red4'), 'speed_mod' => $this->form->getValue('speed'),
+        $p = array('cols' => $notedata['cols'],
+        'red4' => 1, 'speed_mod' => $this->form->getValue('speed'),
         'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'),
         'arcade' => 1);
 
         $tmp = new EditCharter($p);
         $xml = $tmp->genChart($notedata);
-        
+
         $response = $this->getResponse();
         $response->clearHttpHeaders();
         $response->setHttpHeader('Content-Type', 'image/svg+xml');

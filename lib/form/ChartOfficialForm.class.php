@@ -6,7 +6,7 @@ class ChartOfficialForm extends sfForm
   {
     parent::configure();
     
-    $songT = Doctrine::getTable('PPE_Song_Song');
+    $songT = Doctrine::getTable('ITG_Song_Song');
     $rows = $songT->getSongs();
     
     $choices = array();
@@ -30,21 +30,6 @@ class ChartOfficialForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['diff'] = new sfValidatorChoice($tmp1, array('required' => 'A difficulty must be chosen.'));
     
-    $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
-    $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
-    $this->setDefault('kind', 'classic');
-    
-    $tmp1['choices'] = array_keys($choices);
-    $val['kind'] = new sfValidatorChoice($tmp1, array('required' => 'A noteskin must be chosen.'));
-    
-    $choices = array(0 => 'blue', 1 => 'red');
-    $pieces['red4'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => '4th Note Color'));
-    $this->setDefault('red4', 0);
-
-    $tmp1['required'] = false;
-    $tmp1['choices'] = array_keys($choices);
-    $val['red4'] = new sfValidatorChoice($tmp1, array());
-
     $choices = array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 6 => 6, 8 => 8);
     $pieces['speed'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Speed Mod'));
     $this->setDefault('speed', 2);
@@ -75,28 +60,5 @@ class ChartOfficialForm extends sfForm
     
     
     $this->setValidators($val);
-    
-    $rhy = new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm')));
-    $this->validatorSchema->setPostValidator($rhy);
-  }
-  
-  public function ensureRhythm($validator, $values)
-  {
-    if ($values['kind'] === 'classic')
-    {
-      return $values;
-    }
-    if ($values['kind'] === 'rhythm')
-    {
-      if ($values['red4'] == 0 or $values['red4'] == 1)
-      {
-        return $values;
-      }
-      else
-      {
-            throw new sfValidatorError($validator, "If using Rhythm, you must select the quarter note color.");
-      }
-    }
-    return $values;
   }
 }
