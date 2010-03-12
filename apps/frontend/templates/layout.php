@@ -19,14 +19,9 @@ include_javascripts(); ?>
 <?php include_slot('h2', '<h2>Welcome!</h2>');
 echo $sf_content ?>
 </article>
-<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
 <nav>
-<?php include_partial("global/mess_$authin", array()) ?>
+<p>Make your selection below and have fun.</p>
 <ul>
-<li>
-<h4>Members</h4>
-<?php include_partial("global/memb_$authin", array()) ?>
-</li>
 <li>
     <h4>Edits</h4>
     <ul>
@@ -34,14 +29,12 @@ echo $sf_content ?>
     <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
     <li><?php echo link_to("Edit List by Song", '@edit_song') ?></li>
     <li><?php echo link_to("Edit List by User", '@edit_user') ?></li>
-    <li><?php echo link_to("Official Chart Edits", '@edit_official') ?></li>
-    <li><?php echo link_to("Unknown Author Edits", '@edit_unknown') ?></li>
     </ul>
 </li>
 <li>
     <h4>Everyone</h4>
     <ul>
-    <li><a href="/news">Previous Updates</a></li>
+    <li><?php echo link_to("Official Stepcharts", '@chart_off_get') ?></li>
     <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>

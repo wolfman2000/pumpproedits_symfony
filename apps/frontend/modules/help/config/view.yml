@@ -1,8 +1,0 @@
-indexSuccess:
-  stylesheets: [help.css]
-
-validateSuccess:
-  stylesheets: [help.css]
-
-validateError:
-  stylesheets: [help.css]

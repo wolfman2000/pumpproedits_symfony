@@ -1,8 +1,0 @@
-indexSuccess:
-  stylesheets: [login.css]
-
-validateSuccess:
-  stylesheets: [login.css]
-
-validateError:
-  stylesheets: [login.css]
