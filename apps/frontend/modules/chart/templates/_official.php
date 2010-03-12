@@ -14,10 +14,6 @@ echo form_tag($route, "multipart=false"); ?>
     <section>
     <p><?php echo $form['diff']->renderLabel() ?></p>
     <p><?php echo $form['diff'] ?></p>
-    <p><?php echo $form['kind']->renderLabel() ?></p>
-    <p><?php echo $form['kind'] ?></p>
-    <p><?php echo $form['red4']->renderLabel() ?></p>
-    <p><?php echo $form['red4'] ?></p>
     <p><?php echo $form['speed']->renderLabel() ?></p>
     <p><?php echo $form['speed'] ?></p>
     <p><?php echo $form['mpcol']->renderLabel() ?></p>
