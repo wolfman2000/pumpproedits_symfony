@@ -92,21 +92,32 @@ g#mine > circle:first-child + circle
 
 g#hold_bdy > rect, g#hold_end > path
 {
-  fill-opacity: 1;
-  fill:darkblue;
-  stroke:none;
+  fill:blue;
 }
+
 g#roll_bdy > rect, g#roll_end > path
 {
-  fill-opacity: 1;
   fill:purple;
+}
+
+g#hold_bdy > rect, g#roll_bdy > rect
+{
+  fill-opacity: 1;
+  stroke-width: 0.1;
   stroke:none;
 }
-g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
+g#hold_bdy > line, g#roll_bdy > line
 {
   stroke:black;
-  stroke-width: 0.3;
+  stroke-width: 0.2;
 }
+g#hold_end > path, g#roll_end > path
+{
+  stroke:black;
+  stroke-width: 0.2;
+  fill-opacity: 1;
+}
+
 .note_004
 {
   fill: blue; /* url('/svg/arrowdef.svg#grad_004'); */
