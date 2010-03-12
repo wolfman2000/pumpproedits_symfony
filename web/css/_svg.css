@@ -65,7 +65,7 @@ g#beat1 > line
   stroke:black;
   fill:black;
 }
-g#DLarrow, g#ULarrow, g#CNarrow, g#URarrow, g#DRarrow, g#mine
+g#Darrow, g#Larrow, g#Uarrow, g#Rarrow, g#mine
 {
   fill-opacity:1;
   stroke:black;
@@ -81,14 +81,9 @@ g#mine > circle:first-child
 {
   fill:red;
 }
-g#mine > circle:first-child + circle, g#CNarrow > rect
+g#mine > circle:first-child + circle
 {
   fill:black;
-}
-g#DLarrow > line, g#ULarrow > line, g#URarrow > line, g#DRarrow > line
-{
-  stroke: black;
-  stroke-width: 0.1;
 }
 
 g#hold_bdy > rect, g#hold_end > path
@@ -139,6 +134,10 @@ g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
 .note_064
 {
   fill: lime; /* url('/svg/arrowdef.svg#grad_064'); */
+}
+.note_192
+{
+  fill: #808080;
 }
 text
 {
