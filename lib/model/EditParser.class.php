@@ -191,9 +191,9 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $style = substr($line, 0, $pos - strlen($line));
-      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble")))
+      if (!in_array($style, array("dance-single", "dance-double")))
       {
-        $s = "The style %s is invalid. Use pump-single or pump-double.";
+        $s = "The style %s is invalid. Use dance-single or dance-double.";
         throw new sfParseException(sprintf($s, $style));
       }
       $state = 3;
