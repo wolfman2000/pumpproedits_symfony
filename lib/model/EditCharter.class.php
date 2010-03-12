@@ -12,16 +12,10 @@ class EditCharter
       $e = "There must be either $this->single or $this->double columns in the chart!";
       throw new sfParseException($e);
     }
-    if (!in_array($params['kind'], array("classic", "rhythm")))
-    {
-      $e = "The notetype chosen is not valid!";
-      throw new sfParseException($e);
-    }
     $this->lb = sfConfig::get('app_chart_column_left_buffer');
     $this->rb = sfConfig::get('app_chart_column_right_buffer');
     $this->aw = sfConfig::get('app_chart_arrow_width');
     $this->bm = sfConfig::get('app_chart_beat_p_measure');
-    $this->kind = $params['kind'];
     
     # Have the rhythm skin use red as the quarter note.
     if (array_key_exists('red4', $params) and $params['red4'])
@@ -293,23 +287,23 @@ class EditCharter
     $ret = array();
     $div = array('4th', '8th', '12th', '16th',
       '24th', '32nd', '48th', '64th', '192nd');
-    foreach ($div as $d)
+    foreach ($div as $f)
     {
       if (array_key_exists('red4', $this))
       {
-        if (intval($d) == 4) $g = 'note_008';
-        elseif (intval($d) == 8) $g = 'note_004';
-        else $g = sprintf('note_%03d', intval($d));
+        if (intval($f) == 4) $g = 'note_008';
+        elseif (intval($f) == 8) $g = 'note_004';
+        else $g = sprintf('note_%03d', intval($f));
       }
-      else $g = sprintf('note_%03d', intval($d));
+      else $g = sprintf('note_%03d', intval($f));
       $l = array('a' => 'L', 'c' => $g);
       $d = array('a' => 'D', 'c' => $g);
       $u = array('a' => 'U', 'c' => $g);
       $r = array('a' => 'R', 'c' => $g);
-      $ret[$d] = array($l, $d, $u, $r);
+      $ret[$f] = array($l, $d, $u, $r);
       if ($this->cols == $this->double)
       {
-        array_push($ret[$d], $l, $d, $u, $r);
+        array_push($ret[$f], $l, $d, $u, $r);
       }
     }
     return $ret;
@@ -350,7 +344,7 @@ class EditCharter
     
     $curbeat = intval(round($m * $rcounter / count($measure)));
       
-    $arow = $this->kind == "classic" ? $arrows : $arrows[$this->getBeat($curbeat)];
+    $arow = $arrows[$this->getBeat($curbeat)];
     
     $pcounter = 0;
     foreach (str_split($row) as $let): # For each note in the row
