@@ -80,18 +80,16 @@ class EditParser
     }
   }
   
-  protected function getOfficialAbbr($diff)
+  protected function getStyle($abbr)
   {
-    switch ($diff)
+    switch ($abbr)
     {
-      case "Easy": return "ez";
-      case "Normal": return "nr";
-      case "Hard": return "hr";
-      case "Crazy": return "cz";
-      case "Halfdouble": return "hd";
-      case "Freestyle": return "fs";
-      case "Nightmare": return "nm";
-      default: return "xx";
+      case "b": return "Beginner";
+      case "e": return "Easy";
+      case "m": return "Medium";
+      case "h": return "Hard";
+      case "x": return "Expert";
+      default: return "Undefined";
     }
   }
 
@@ -116,6 +114,8 @@ class EditParser
     if (!array_key_exists('strict_song', $params)) { $params['strict_song'] = true; }
     if (!array_key_exists('strict_edit', $params)) { $params['strict_edit'] = true; }
     if (!array_key_exists('arcade', $params)) { $params['arcade'] = false; }
+    # Intended style.
+    if (!array_key_exists('style', $params)) { $params['style'] = 'Single'; }
 
     $numl = 0;
     while(!feof($fh)):
@@ -262,8 +262,9 @@ class EditParser
       $line = substr($line, 0, $pos - strlen($line));
       if ($params['arcade'])
       {
+      
         $title = $this->getOfficialStyle($style, $line); // set title now.
-        if ($params['arcade'] !== $this->getOfficialAbbr($title))
+        if ($params['style'] . " " . $this->getStyle($params['arcade']) !== $title)
         {
           $state = 10;
           break;
