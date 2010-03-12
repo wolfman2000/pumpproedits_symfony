@@ -309,17 +309,17 @@ class EditCharter
   
   private function getBeat($beat)
   {
-    switch ($beat % 32)
+    switch ($beat % 48)
     {
       case 0: return '4th';
-      case 16: return '8th';
-      case 11: case 21: return '12th';
-      case 8: case 24: return '16th';
-      case 5: case 27: return '24th';
-      case 4: case 12: case 20: case 28: return '32nd';
-      case 3: case 13: case 19: case 29: return '48th';
-      case 2: case 6: case 10: case 14:
-      case 18: case 22: case 26: case 30: return '64th';
+      case 24: return '8th';
+      case 16: case 32: return '12th';
+      case 12: case 36: return '16th';
+      case 8: case 40: return '24th';
+      case 6: case 18: case 30: case 42: return '32nd';
+      case 4: case 20: case 28: case 44: return '48th';
+      case 3: case 9: case 15: case 21:
+      case 27: case 33: case 39: case 45: return '64th';
       default: return '192nd';
     }
   }
@@ -341,8 +341,8 @@ class EditCharter
     foreach ($measure as $row):
     
     $curbeat = intval(round($m * $rcounter / count($measure)));
-      
-    $arow = $arrows[$this->getBeat($curbeat)];
+    
+    $arow = $arrows[$this->getBeat(192 * $rcounter / count($measure))];
     
     $pcounter = 0;
     foreach (str_split($row) as $let): # For each note in the row
