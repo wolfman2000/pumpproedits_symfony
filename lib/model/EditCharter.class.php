@@ -207,8 +207,6 @@ class EditCharter
     $this->genTxtNode($lbuff + $w * 1, 80, "Mines: " .$nd['mines']);
     $this->genTxtNode($lbuff + $w * 2, 64, "Trips: " .$nd['trips']);
     $this->genTxtNode($lbuff + $w * 2, 80, "Rolls: " .$nd['rolls']);
-    $this->genTxtNode($lbuff + $w * 3, 64, "Lifts: " .$nd['lifts']);
-    $this->genTxtNode($lbuff + $w * 3, 80, "Fakes: " .$nd['fakes']);
   }
   
   private function genBPM($id)
