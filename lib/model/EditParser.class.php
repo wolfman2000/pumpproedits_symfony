@@ -200,8 +200,16 @@ class EditParser
       $style = substr($line, 0, $pos - strlen($line));
       if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble")))
       {
-        $s = "The style %s is invalid. Use pump-single or pump-double.";
-        throw new sfParseException(sprintf($s, $style));
+        if ($params['arcade'])
+        {
+          $state = 10; // don't deal with extraneous modes.
+          break;
+        }
+        else
+        {
+          $s = "The style %s is invalid. Use pump-single or pump-double.";
+          throw new sfParseException(sprintf($s, $style));
+        }
       }
       $state = 3;
       break;
