@@ -167,6 +167,7 @@ class chartActions extends sfActions
     {
       $eid = $this->form->getValue('edits');
       $dif = $this->form->getValue('diff');
+      $sty = $this->form->getValue('style');
       $path = sfConfig::get('sf_data_dir').sprintf("/official/%d.sm", $eid);
       
       if (!file_exists($path))
@@ -183,6 +184,7 @@ class chartActions extends sfActions
         $p['notes'] = 1;
         $p['strict_song'] = 1;
         $p['arcade'] = $dif;
+        $p['style'] = $sty;
         $notedata = $tmp->get_stats(fopen($path, "r"), $p);
 
         $p = array('cols' => $notedata['cols'],
