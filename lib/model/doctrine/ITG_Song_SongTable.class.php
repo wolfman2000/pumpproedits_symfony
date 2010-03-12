@@ -11,5 +11,10 @@ class ITG_Song_SongTable extends Doctrine_Table
   {
     return $this->createQuery('a')->find($songid)->execute();
   }
-  
+  public function getSongs()
+  {
+    return $this->createQuery('a')->select('id, name')
+      ->where('is_problem = ?', false)
+      ->orderBy('lc_name')->execute();
+  }
 }
