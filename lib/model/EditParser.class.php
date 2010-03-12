@@ -75,7 +75,7 @@ class EditParser
       case "Easy": return $style . " Easy";
       case "Medium": return $style . " Medium";
       case "Hard": return $style . " Hard";
-      case "Challenge": return $style . "Expert";
+      case "Challenge": return $style . " Expert";
       default: return $style . "Undefined"; # lazy right now
     }
   }
