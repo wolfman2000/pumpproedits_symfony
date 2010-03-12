@@ -28,7 +28,7 @@ radialGradient#grad_024 > stop
 }
 radialGradient#grad_032 > stop
 {
-  stop-color: brown;
+  stop-color: orange;
 }
 radialGradient#grad_048 > stop
 {
@@ -140,7 +140,7 @@ g#hold_end > path, g#roll_end > path
 }
 .note_032
 {
-  fill: brown; /* url('/svg/arrowdef.svg#grad_032'); */
+  fill: orange; /* url('/svg/arrowdef.svg#grad_032'); */
 }
 .note_048
 {
