@@ -1,19 +1,5 @@
-ITG_User_Role:
-  actAs: { Timestampable: ~ }
-  columns:
-    role:
-      type: string
-      length: 32
-      notnull: true
-      unique: true
-  options:
-    type: INNODB
-    collate: utf8_unicode_ci
-    charset: utf8
-
 ITG_User_User:
   actAs:
-    Timestampable: ~
     Lowercase:
       columns:
         name:
@@ -23,7 +9,7 @@ ITG_User_User:
   columns:
     name:
       type: string
-      length: 12
+      length: 64
       notnull: true
     email:
       type: string
@@ -45,76 +31,8 @@ ITG_User_User:
     collate: utf8_unicode_ci
     charset: utf8
 
-ITG_User_Power:
-  columns:
-    user_id:
-      type: integer
-      notnull: true
-    role_id:
-      type: integer
-      notnull: true
-      # This is primarily known by checking the fixture file.
-      default: 3
-  relations:
-    ITG_User_User:
-      local: user_id
-      foreign: id
-      foreignAlias: ITG_User_Powers
-      foreignKeyName: power_user_fk
-    ITG_User_Role:
-      local: role_id
-      foreign: id
-      foreignAlias: ITG_User_Powers
-      foreignKeyName: power_role_fk
-  indexes:
-    user_roles_index:
-      fields: [user_id, role_id]
-      type: unique
-  options:
-    type: INNODB
-    collate: utf8_unicode_ci
-    charset: utf8
-
-ITG_User_Condiment:
-  actAs: { Timestampable: ~ }
-  columns:
-    user_id:
-      type: integer
-      notnull: true
-    oregano:
-      type: char
-      length: 32
-      notnull: true
-    salt:
-      type: char
-      length: 5
-      notnull: true
-    pepper:
-      type: char
-      length: 64
-      notnull: true
-  relations:
-    ITG_User_User:
-      local: user_id
-      foreign: id
-      foreignAlias: ITG_User_Condiments
-      foreignKeyName: condiment_user_fk
-  indexes:
-    spice_index:
-      fields: [user_id]
-      type: unique
-  checks:
-    oregano_check: length(oregano) = 32
-    salt_check: length(salt) = 5
-    peITGr_check: length(pepper) = 64
-  options:
-    type: INNODB
-    collate: utf8_unicode_ci
-    charset: utf8
-
 ITG_Song_Song:
   actAs:
-    Timestampable:
     Lowercase:
       columns:
         name:
@@ -151,7 +69,6 @@ ITG_Song_Song:
     charset: utf8
 
 ITG_Song_Stop:
-  actAs: { Timestampable: ~ }
   columns:
     song_id:
       type: integer
@@ -186,7 +103,6 @@ ITG_Song_Stop:
     charset: utf8
 
 ITG_Song_BPM:
-  actAs: { Timestampable: ~ }
   columns:
     song_id:
       type: integer
@@ -223,8 +139,6 @@ ITG_Song_BPM:
 
 ITG_Edit_Edit:
   actAs:
-    Timestampable: ~
-    SoftDelete: ~
     CountCache:
       relations:
         ITG_Song_Song:

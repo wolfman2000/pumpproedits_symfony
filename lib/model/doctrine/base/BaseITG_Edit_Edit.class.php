@@ -19,38 +19,35 @@
  * @property boolean $is_problem
  * @property ITG_User_User $ITG_User_User
  * @property ITG_Song_Song $ITG_Song_Song
- * @property Doctrine_Collection $ITG_Vote_Votes
  * 
- * @method integer             getUserId()         Returns the current record's "user_id" value
- * @method integer             getSongId()         Returns the current record's "song_id" value
- * @method string              getTitle()          Returns the current record's "title" value
- * @method boolean             getIsSingle()       Returns the current record's "is_single" value
- * @method integer             getDiff()           Returns the current record's "diff" value
- * @method integer             getSteps()          Returns the current record's "steps" value
- * @method integer             getJumps()          Returns the current record's "jumps" value
- * @method integer             getHolds()          Returns the current record's "holds" value
- * @method integer             getMines()          Returns the current record's "mines" value
- * @method integer             getTrips()          Returns the current record's "trips" value
- * @method integer             getRolls()          Returns the current record's "rolls" value
- * @method boolean             getIsProblem()      Returns the current record's "is_problem" value
- * @method ITG_User_User       getITGUserUser()    Returns the current record's "ITG_User_User" value
- * @method ITG_Song_Song       getITGSongSong()    Returns the current record's "ITG_Song_Song" value
- * @method Doctrine_Collection getITGVoteVotes()   Returns the current record's "ITG_Vote_Votes" collection
- * @method ITG_Edit_Edit       setUserId()         Sets the current record's "user_id" value
- * @method ITG_Edit_Edit       setSongId()         Sets the current record's "song_id" value
- * @method ITG_Edit_Edit       setTitle()          Sets the current record's "title" value
- * @method ITG_Edit_Edit       setIsSingle()       Sets the current record's "is_single" value
- * @method ITG_Edit_Edit       setDiff()           Sets the current record's "diff" value
- * @method ITG_Edit_Edit       setSteps()          Sets the current record's "steps" value
- * @method ITG_Edit_Edit       setJumps()          Sets the current record's "jumps" value
- * @method ITG_Edit_Edit       setHolds()          Sets the current record's "holds" value
- * @method ITG_Edit_Edit       setMines()          Sets the current record's "mines" value
- * @method ITG_Edit_Edit       setTrips()          Sets the current record's "trips" value
- * @method ITG_Edit_Edit       setRolls()          Sets the current record's "rolls" value
- * @method ITG_Edit_Edit       setIsProblem()      Sets the current record's "is_problem" value
- * @method ITG_Edit_Edit       setITGUserUser()    Sets the current record's "ITG_User_User" value
- * @method ITG_Edit_Edit       setITGSongSong()    Sets the current record's "ITG_Song_Song" value
- * @method ITG_Edit_Edit       setITGVoteVotes()   Sets the current record's "ITG_Vote_Votes" collection
+ * @method integer       getUserId()        Returns the current record's "user_id" value
+ * @method integer       getSongId()        Returns the current record's "song_id" value
+ * @method string        getTitle()         Returns the current record's "title" value
+ * @method boolean       getIsSingle()      Returns the current record's "is_single" value
+ * @method integer       getDiff()          Returns the current record's "diff" value
+ * @method integer       getSteps()         Returns the current record's "steps" value
+ * @method integer       getJumps()         Returns the current record's "jumps" value
+ * @method integer       getHolds()         Returns the current record's "holds" value
+ * @method integer       getMines()         Returns the current record's "mines" value
+ * @method integer       getTrips()         Returns the current record's "trips" value
+ * @method integer       getRolls()         Returns the current record's "rolls" value
+ * @method boolean       getIsProblem()     Returns the current record's "is_problem" value
+ * @method ITG_User_User getITGUserUser()   Returns the current record's "ITG_User_User" value
+ * @method ITG_Song_Song getITGSongSong()   Returns the current record's "ITG_Song_Song" value
+ * @method ITG_Edit_Edit setUserId()        Sets the current record's "user_id" value
+ * @method ITG_Edit_Edit setSongId()        Sets the current record's "song_id" value
+ * @method ITG_Edit_Edit setTitle()         Sets the current record's "title" value
+ * @method ITG_Edit_Edit setIsSingle()      Sets the current record's "is_single" value
+ * @method ITG_Edit_Edit setDiff()          Sets the current record's "diff" value
+ * @method ITG_Edit_Edit setSteps()         Sets the current record's "steps" value
+ * @method ITG_Edit_Edit setJumps()         Sets the current record's "jumps" value
+ * @method ITG_Edit_Edit setHolds()         Sets the current record's "holds" value
+ * @method ITG_Edit_Edit setMines()         Sets the current record's "mines" value
+ * @method ITG_Edit_Edit setTrips()         Sets the current record's "trips" value
+ * @method ITG_Edit_Edit setRolls()         Sets the current record's "rolls" value
+ * @method ITG_Edit_Edit setIsProblem()     Sets the current record's "is_problem" value
+ * @method ITG_Edit_Edit setITGUserUser()   Sets the current record's "ITG_User_User" value
+ * @method ITG_Edit_Edit setITGSongSong()   Sets the current record's "ITG_Song_Song" value
  * 
  * @package    itgedits
  * @subpackage model
@@ -157,12 +154,6 @@ abstract class BaseITG_Edit_Edit extends sfDoctrineRecord
              'foreign' => 'id',
              'foreignKeyName' => 'edit_song_fk'));
 
-        $this->hasMany('ITG_Vote_Vote as ITG_Vote_Votes', array(
-             'local' => 'id',
-             'foreign' => 'edit_id'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $softdelete0 = new Doctrine_Template_SoftDelete();
         $countcache0 = new CountCache(array(
              'relations' => 
              array(
@@ -178,8 +169,6 @@ abstract class BaseITG_Edit_Edit extends sfDoctrineRecord
               ),
              ),
              ));
-        $this->actAs($timestampable0);
-        $this->actAs($softdelete0);
         $this->actAs($countcache0);
     }
 }

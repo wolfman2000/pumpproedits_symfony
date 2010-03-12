@@ -8,25 +8,16 @@
  * @property string $name
  * @property string $email
  * @property boolean $is_confirmed
- * @property Doctrine_Collection $ITG_User_Powers
- * @property Doctrine_Collection $ITG_User_Condiments
  * @property Doctrine_Collection $ITG_Edit_Edits
- * @property Doctrine_Collection $ITG_Vote_Votes
  * 
- * @method string              getName()                Returns the current record's "name" value
- * @method string              getEmail()               Returns the current record's "email" value
- * @method boolean             getIsConfirmed()         Returns the current record's "is_confirmed" value
- * @method Doctrine_Collection getITGUserPowers()       Returns the current record's "ITG_User_Powers" collection
- * @method Doctrine_Collection getITGUserCondiments()   Returns the current record's "ITG_User_Condiments" collection
- * @method Doctrine_Collection getITGEditEdits()        Returns the current record's "ITG_Edit_Edits" collection
- * @method Doctrine_Collection getITGVoteVotes()        Returns the current record's "ITG_Vote_Votes" collection
- * @method ITG_User_User       setName()                Sets the current record's "name" value
- * @method ITG_User_User       setEmail()               Sets the current record's "email" value
- * @method ITG_User_User       setIsConfirmed()         Sets the current record's "is_confirmed" value
- * @method ITG_User_User       setITGUserPowers()       Sets the current record's "ITG_User_Powers" collection
- * @method ITG_User_User       setITGUserCondiments()   Sets the current record's "ITG_User_Condiments" collection
- * @method ITG_User_User       setITGEditEdits()        Sets the current record's "ITG_Edit_Edits" collection
- * @method ITG_User_User       setITGVoteVotes()        Sets the current record's "ITG_Vote_Votes" collection
+ * @method string              getName()           Returns the current record's "name" value
+ * @method string              getEmail()          Returns the current record's "email" value
+ * @method boolean             getIsConfirmed()    Returns the current record's "is_confirmed" value
+ * @method Doctrine_Collection getITGEditEdits()   Returns the current record's "ITG_Edit_Edits" collection
+ * @method ITG_User_User       setName()           Sets the current record's "name" value
+ * @method ITG_User_User       setEmail()          Sets the current record's "email" value
+ * @method ITG_User_User       setIsConfirmed()    Sets the current record's "is_confirmed" value
+ * @method ITG_User_User       setITGEditEdits()   Sets the current record's "ITG_Edit_Edits" collection
  * 
  * @package    itgedits
  * @subpackage model
@@ -38,9 +29,9 @@ abstract class BaseITG_User_User extends sfDoctrineRecord
     public function setTableDefinition()
     {
         $this->setTableName('i_t_g__user__user');
-        $this->hasColumn('name', 'string', 12, array(
+        $this->hasColumn('name', 'string', 64, array(
              'type' => 'string',
-             'length' => 12,
+             'length' => 64,
              'notnull' => true,
              ));
         $this->hasColumn('email', 'string', 320, array(
@@ -70,23 +61,10 @@ abstract class BaseITG_User_User extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('ITG_User_Power as ITG_User_Powers', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $this->hasMany('ITG_User_Condiment as ITG_User_Condiments', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
         $this->hasMany('ITG_Edit_Edit as ITG_Edit_Edits', array(
              'local' => 'id',
              'foreign' => 'user_id'));
 
-        $this->hasMany('ITG_Vote_Vote as ITG_Vote_Votes', array(
-             'local' => 'id',
-             'foreign' => 'user_id'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
         $lowercase0 = new Lowercase(array(
              'columns' => 
              array(
@@ -100,7 +78,6 @@ abstract class BaseITG_User_User extends sfDoctrineRecord
               ),
              ),
              ));
-        $this->actAs($timestampable0);
         $this->actAs($lowercase0);
     }
 }

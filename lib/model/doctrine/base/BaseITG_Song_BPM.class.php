@@ -73,8 +73,5 @@ abstract class BaseITG_Song_BPM extends sfDoctrineRecord
              'local' => 'song_id',
              'foreign' => 'id',
              'foreignKeyName' => 'bpm_song_fk'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($timestampable0);
     }
 }

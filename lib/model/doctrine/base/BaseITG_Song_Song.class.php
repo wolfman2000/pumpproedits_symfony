@@ -89,7 +89,6 @@ abstract class BaseITG_Song_Song extends sfDoctrineRecord
              'local' => 'id',
              'foreign' => 'song_id'));
 
-        $timestampable0 = new Doctrine_Template_Timestampable();
         $lowercase0 = new Lowercase(array(
              'columns' => 
              array(
@@ -99,7 +98,6 @@ abstract class BaseITG_Song_Song extends sfDoctrineRecord
               ),
              ),
              ));
-        $this->actAs($timestampable0);
         $this->actAs($lowercase0);
     }
 }

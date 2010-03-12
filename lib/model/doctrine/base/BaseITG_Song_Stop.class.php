@@ -73,8 +73,5 @@ abstract class BaseITG_Song_Stop extends sfDoctrineRecord
              'local' => 'song_id',
              'foreign' => 'id',
              'foreignKeyName' => 'stop_song_fk'));
-
-        $timestampable0 = new Doctrine_Template_Timestampable();
-        $this->actAs($timestampable0);
     }
 }
