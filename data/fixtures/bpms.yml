@@ -314,7 +314,7 @@ ITG_Song_BPM:
   bpm_313: { ITG_Song_Song: Little_Kitty_Mine, bpm: 139 }
   bpm_314: { ITG_Song_Song: Monolith, bpm: 49 }
   bpm_315: { ITG_Song_Song: Monolith, beat: 8, bpm: 196 }
-  bpm_316: { ITG_Song_Song: Monolith, bpm: 65.333 }
+  bpm_316: { ITG_Song_Song: Monolith, beat: 315, bpm: 65.333 }
   bpm_317: { ITG_Song_Song: Music_Pleeze, bpm: 124 }
   bpm_318: { ITG_Song_Song: My_Life_Is_So_Crazy, bpm: 140 }
   bpm_319: { ITG_Song_Song: No_Princess, bpm: 141 }
@@ -380,8 +380,8 @@ ITG_Song_BPM:
   bpm_378: { ITG_Song_Song: Sweet_World, bpm: 132 }
   bpm_379: { ITG_Song_Song: Temple_of_Boom, bpm: 146.056 }
   bpm_380: { ITG_Song_Song: The_Message, bpm: 133 }
-  bpm_381: { ITG_Song_Song: The_Message, bpm: 66.5 }
-  bpm_382: { ITG_Song_Song: The_Message, bpm: 133 }
+  bpm_381: { ITG_Song_Song: The_Message, beat: 132, bpm: 66.5 }
+  bpm_382: { ITG_Song_Song: The_Message, beat: 140, bpm: 133 }
   bpm_383: { ITG_Song_Song: This_is_Rock_and_Roll, bpm: 140 }
   bpm_384: { ITG_Song_Song: Tribal_Style, bpm: 140 }
   bpm_385: { ITG_Song_Song: Twilight, bpm: 136 }
