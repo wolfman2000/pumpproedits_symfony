@@ -21,7 +21,7 @@ class ChartOfficialForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
-    $choices = array('single' => 'Single', 'double' => 'Double');
+    $choices = array('Single' => 'Single', 'Double' => 'Double');
     $pieces['style'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Style'));
     
     $tmp1['choices'] = array_keys($choices);
