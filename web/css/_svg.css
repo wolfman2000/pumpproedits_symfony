@@ -38,6 +38,10 @@ radialGradient#grad_064 > stop
 {
   stop-color: lime;
 }
+radialGradient#grad_192 > stop
+{
+  stop-color: #808080;
+}
 g#beat1 > rect:first-child
 {
   fill:#ffffff;
