@@ -181,7 +181,7 @@ class EditParser
       $state = 2;
       break;
     }
-    case 2: /* Confirm this is pump-single, pump-double, or pump-halfdouble. */
+    case 2: /* Confirm this is dance-single or dance-double. */
     {
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
@@ -193,8 +193,16 @@ class EditParser
       $style = substr($line, 0, $pos - strlen($line));
       if (!in_array($style, array("dance-single", "dance-double")))
       {
-        $s = "The style %s is invalid. Use dance-single or dance-double.";
-        throw new sfParseException(sprintf($s, $style));
+        if ($params['arcade'])
+        {
+          $state = 10; // don't deal with extraneous modes.
+          break;
+        }
+        else
+        {
+          $s = "The style %s is invalid. Use dance-single or dance-double.";
+          throw new sfParseException(sprintf($s, $style));
+        }
       }
       $state = 3;
       break;
