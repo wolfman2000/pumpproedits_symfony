@@ -250,82 +250,159 @@ ITG_Song_BPM:
   bpm_249: { ITG_Song_Song: While_Tha_Rekkid_Spinz, bpm: 140 }
   bpm_250: { ITG_Song_Song: Xuxa, bpm: 160 }
   bpm_251: { ITG_Song_Song: Zodiac, bpm: 107 }
-  bpm_252: { ITG_Song_Song: song_128, bpm: 168 }
-  bpm_253: { ITG_Song_Song: song_129, bpm: 122 }
-  bpm_254: { ITG_Song_Song: song_129, beat: 100, bpm: 61 }
-  bpm_255: { ITG_Song_Song: song_129, beat: 109, bpm: 122 }
-  bpm_256: { ITG_Song_Song: song_130, bpm: 195 }
-  bpm_257: { ITG_Song_Song: song_130, beat: 145.5, bpm: 73 }
-  bpm_258: { ITG_Song_Song: song_130, beat: 152.5, bpm: 195 }
-  bpm_259: { ITG_Song_Song: song_131, bpm: 150 }
-  bpm_260: { ITG_Song_Song: song_132, bpm: 303 }
-  bpm_261: { ITG_Song_Song: song_132, beat: 264, bpm: 151.5 }
-  bpm_262: { ITG_Song_Song: song_132, beat: 268, bpm: 75.75 }
-  bpm_263: { ITG_Song_Song: song_132, beat: 284, bpm: 303 }
-  bpm_264: { ITG_Song_Song: song_133, bpm: 162 }
-  bpm_265: { ITG_Song_Song: song_134, bpm: 160 }
-  bpm_266: { ITG_Song_Song: song_135, bpm: 162 }
-  bpm_267: { ITG_Song_Song: song_136, bpm: 107 }
-  bpm_268: { ITG_Song_Song: song_137, bpm: 49 }
-  bpm_269: { ITG_Song_Song: song_137, beat: 8, bpm: 196 }
-  bpm_270: { ITG_Song_Song: song_137, beat: 315, bpm: 65.333 }
-  bpm_271: { ITG_Song_Song: song_138, bpm: 180 }
-  bpm_272: { ITG_Song_Song: song_138, beat: 128, bpm: 45 }
-  bpm_273: { ITG_Song_Song: song_138, beat: 146, bpm: 90 }
-  bpm_274: { ITG_Song_Song: song_138, beat: 150, bpm: 180 }
-  bpm_275: { ITG_Song_Song: song_139, bpm: 106 }
-  bpm_276: { ITG_Song_Song: song_140, bpm: 158 }
-  bpm_277: { ITG_Song_Song: song_140, beat: 132, bpm: 79 }
-  bpm_278: { ITG_Song_Song: song_140, beat: 144, bpm: 158 }
-  bpm_279: { ITG_Song_Song: song_141, bpm: 190 }
-  bpm_280: { ITG_Song_Song: song_142, bpm: 127 }
-  bpm_281: { ITG_Song_Song: song_143, bpm: 135.5 }
-  bpm_282: { ITG_Song_Song: song_144, bpm: 128 }
-  bpm_283: { ITG_Song_Song: song_145, bpm: 130 }
-  bpm_284: { ITG_Song_Song: song_146, bpm: 145 }
-  bpm_285: { ITG_Song_Song: song_147, bpm: 148 }
-  bpm_286: { ITG_Song_Song: song_148, bpm: 145 }
-  bpm_287: { ITG_Song_Song: song_149, bpm: 136 }
-  bpm_288: { ITG_Song_Song: song_149, beat: 48, bpm: 68 } 
-  bpm_289: { ITG_Song_Song: song_149, beat: 64, bpm: 136 }
-  bpm_290: { ITG_Song_Song: song_150, bpm: 170 }
-  bpm_291: { ITG_Song_Song: song_151, bpm: 135 }
-  bpm_292: { ITG_Song_Song: song_152, bpm: 111 }
-  bpm_293: { ITG_Song_Song: song_153, bpm: 140 }
-  bpm_294: { ITG_Song_Song: song_154, bpm: 142 }
-  bpm_295: { ITG_Song_Song: song_154, beat: 168, bpm: 130 }
-  bpm_296: { ITG_Song_Song: song_154, beat: 169, bpm: 110 }
-  bpm_297: { ITG_Song_Song: song_154, beat: 170, bpm: 90 }
-  bpm_298: { ITG_Song_Song: song_154, beat: 171, bpm: 76 }
-  bpm_299: { ITG_Song_Song: song_154, beat: 174, bpm: 78.9 }
-  bpm_300: { ITG_Song_Song: song_154, beat: 176, bpm: 84.22 }
-  bpm_301: { ITG_Song_Song: song_154, beat: 179, bpm: 86.89 }
-  bpm_302: { ITG_Song_Song: song_154, beat: 182, bpm: 89.55 }
-  bpm_303: { ITG_Song_Song: song_154, beat: 184, bpm: 92.88 }
-  bpm_304: { ITG_Song_Song: song_154, beat: 185, bpm: 96.54 }
-  bpm_305: { ITG_Song_Song: song_154, beat: 187, bpm: 101.53 }
-  bpm_306: { ITG_Song_Song: song_154, beat: 188, bpm: 105.52 }
-  bpm_307: { ITG_Song_Song: song_154, beat: 190, bpm: 108.18 }
-  bpm_308: { ITG_Song_Song: song_154, beat: 191.5, bpm: 112.18 }
-  bpm_309: { ITG_Song_Song: song_154, beat: 193, bpm: 117.5 }
-  bpm_310: { ITG_Song_Song: song_154, beat: 195, bpm: 123.49 }
-  bpm_311: { ITG_Song_Song: song_154, beat: 197, bpm: 126.49 }
-  bpm_312: { ITG_Song_Song: song_154, beat: 199, bpm: 131.81 }
-  bpm_313: { ITG_Song_Song: song_154, beat: 201, bpm: 135.80 }
-  bpm_314: { ITG_Song_Song: song_154, beat: 103, bpm: 138.13 }
-  bpm_315: { ITG_Song_Song: song_154, beat: 107, bpm: 142 }
-  bpm_316: { ITG_Song_Song: song_155, bpm: 128 }
-  bpm_317: { ITG_Song_Song: song_156, bpm: 140 }
-  bpm_318: { ITG_Song_Song: song_156, beat: 136, bpm: 70 }
-  bpm_319: { ITG_Song_Song: song_156, beat: 168, bpm: 140 }
-  bpm_320: { ITG_Song_Song: song_157, bpm: 180 }
-  bpm_321: { ITG_Song_Song: song_157, beat: 120, bpm: 90 }
-  bpm_322: { ITG_Song_Song: song_157, beat: 124, bpm: 180 }
-  bpm_323: { ITG_Song_Song: song_157, beat: 236, bpm: 90 }
-  bpm_324: { ITG_Song_Song: song_157, beat: 240, bpm: 180 }
-  bpm_325: { ITG_Song_Song: song_158, bpm: 197 }
-  bpm_326: { ITG_Song_Song: song_159, bpm: 128 }
-  bpm_327: { ITG_Song_Song: song_160, bpm: 133 }
-  bpm_328: { ITG_Song_Song: song_161, bpm: 112 }
-  bpm_329: { ITG_Song_Song: song_162, bpm: 134 }
-  bpm_330: { ITG_Song_Song: song_163, bpm: 136 }
+  bpm_252: { ITG_Song_Song: Bang, bpm: 155 }
+  bpm_253: { ITG_Song_Song: Agent_Blatant, bpm: 162 } # Really 161.993
+  bpm_254: { ITG_Song_Song: Agent_Blatant, beat: 112, bpm: 81 } # Really 80.996
+  bpm_255: { ITG_Song_Song: Agent_Blatant, beat: 144, bpm: 162 } # Really 161.993
+  bpm_256: { ITG_Song_Song: Amore, bpm: 143 }
+  bpm_257: { ITG_Song_Song: Amore, beat: 100, bpm: 71.5 }
+  bpm_258: { ITG_Song_Song: Amore, beat: 116, bpm: 143 }
+  bpm_259: { ITG_Song_Song: Baby_Baby, bpm: 134 }
+  bpm_260: { ITG_Song_Song: Baby_Dont_You_Want_Me, bpm: 135 }
+  bpm_261: { ITG_Song_Song: Birdie, bpm: 136 }
+  bpm_262: { ITG_Song_Song: Birdie, beat: 148, bpm: 68 }
+  bpm_263: { ITG_Song_Song: Birdie, beat: 154, bpm: 136 }
+  bpm_264: { ITG_Song_Song: Bloodrush, bpm: 158 }
+  bpm_265: { ITG_Song_Song: Bloodrush, beat: 77, bpm: 79 }
+  bpm_266: { ITG_Song_Song: Bloodrush, beat: 109, bpm: 158 }
+  bpm_267: { ITG_Song_Song: Bumble_Bee, bpm: 138 }
+  bpm_268: { ITG_Song_Song: Clockwork_Genesis, bpm: 175 }
+  bpm_269: { ITG_Song_Song: Cryosleep, bpm: 137 }
+  bpm_270: { ITG_Song_Song: Cryosleep, beat: 76, bpm: 68.5 }
+  bpm_271: { ITG_Song_Song: Cryosleep, beat: 92, bpm: 137 }
+  bpm_272: { ITG_Song_Song: Cryosleep, beat: 156, bpm: 68.5 }
+  bpm_273: { ITG_Song_Song: Cryosleep, beat: 164, bpm: 137 }
+  bpm_274: { ITG_Song_Song: DCode, bpm: 100 }
+  bpm_275: { ITG_Song_Song: Destiny, bpm: 175 }
+  bpm_276: { ITG_Song_Song: Determinator, bpm: 147 }
+  bpm_277: { ITG_Song_Song: Disconnected_Disco, bpm: 139.379 }
+  bpm_278: { ITG_Song_Song: Energizer, bpm: 303 }
+  bpm_279: { ITG_Song_Song: Energizer, beat: 258.5, bpm: 295 }
+  bpm_280: { ITG_Song_Song: Energizer, beat: 263, bpm: 204 }
+  bpm_281: { ITG_Song_Song: Energizer, beat: 265, bpm: 180.5 }
+  bpm_282: { ITG_Song_Song: Energizer, beat: 266.5, bpm: 134 }
+  bpm_283: { ITG_Song_Song: Energizer, beat: 268, bpm: 75.75 }
+  bpm_284: { ITG_Song_Song: Energizer, beat: 283, bpm: 75.91 }
+  bpm_285: { ITG_Song_Song: Energizer, beat: 284, bpm: 303 }
+  bpm_286: { ITG_Song_Song: Fleadh_Uncut, bpm: 132 }
+  bpm_287: { ITG_Song_Song: Funk_Factory, bpm: 130 }
+  bpm_288: { ITG_Song_Song: Get_Happy, bpm: 133 } 
+  bpm_289: { ITG_Song_Song: Get_Happy, beat: 88, bpm: 66.5 }
+  bpm_290: { ITG_Song_Song: Get_Happy, beat: 90, bpm: 133 }
+  bpm_291: { ITG_Song_Song: Go_60_Go, bpm: 160 }
+  bpm_292: { ITG_Song_Song: Habanera_1, bpm: 158 }
+  bpm_293: { ITG_Song_Song: Habanera_1, beat: 244, bpm: 81.272 }
+  bpm_294: { ITG_Song_Song: Habanera_1, beat: 253, bpm: 158 }
+  bpm_295: { ITG_Song_Song: Hardcore_Symfony, bpm: 174 }
+  bpm_296: { ITG_Song_Song: High, bpm: 137.511 }
+  bpm_297: { ITG_Song_Song: Hillbilly_Hardcore, bpm: 136 }
+  bpm_298: { ITG_Song_Song: Hispanic_Panic, bpm: 139.92 }
+  bpm_299: { ITG_Song_Song: Holy_Guacamole, bpm: 140 }
+  bpm_300: { ITG_Song_Song: Hustle_Beach, bpm: 128 } # Really 127.992
+  bpm_301: { ITG_Song_Song: Incognito, bpm: 150 }
+  bpm_302: { ITG_Song_Song: Ize_Pie, bpm: 136 }
+  bpm_303: { ITG_Song_Song: Ize_Pie, beat: 112, bpm: 68 }
+  bpm_304: { ITG_Song_Song: Ize_Pie, beat: 144, bpm: 136 }
+  bpm_305: { ITG_Song_Song: July_Euromix, bpm: 145 }
+  bpm_306: { ITG_Song_Song: Know_Your_Enemy, bpm: 130.03 }
+  bpm_307: { ITG_Song_Song: Life_of_a_Butterfly, bpm: 136 }
+  bpm_308: { ITG_Song_Song: Life_of_a_Butterfly, beat: 167, bpm: 68 }
+  bpm_309: { ITG_Song_Song: Life_of_a_Butterfly, beat: 183, bpm: 136 }
+  bpm_310: { ITG_Song_Song: Life_of_a_Butterfly, beat: 214, bpm: 135.98 } # Is this needed?
+  bpm_311: { ITG_Song_Song: Lipstick_Kiss, bpm: 165 }
+  bpm_312: { ITG_Song_Song: Liquid_Moon, bpm: 160.087 }
+  bpm_313: { ITG_Song_Song: Little_Kitty_Mine, bpm: 139 }
+  bpm_314: { ITG_Song_Song: Monolith, bpm: 49 }
+  bpm_315: { ITG_Song_Song: Monolith, beat: 8, bpm: 196 }
+  bpm_316: { ITG_Song_Song: Monolith, bpm: 65.333 }
+  bpm_317: { ITG_Song_Song: Music_Pleeze, bpm: 124 }
+  bpm_318: { ITG_Song_Song: My_Life_Is_So_Crazy, bpm: 140 }
+  bpm_319: { ITG_Song_Song: No_Princess, bpm: 141 }
+  bpm_320: { ITG_Song_Song: One_False_Move, bpm: 105 }
+  bpm_321: { ITG_Song_Song: One_False_Move, beat: 140, bpm: 52.5 }
+  bpm_322: { ITG_Song_Song: One_False_Move, beat: 148, bpm: 140 }
+  bpm_323: { ITG_Song_Song: One_False_Move, beat: 172, bpm: 52.5 }
+  bpm_324: { ITG_Song_Song: Out_of_the_Dark, bpm: 136 }
+  bpm_325: { ITG_Song_Song: Pick_Me_Up_And_Tango, bpm: 133 }
+  bpm_326: { ITG_Song_Song: Psalm_Pilot, bpm: 130 }
+  bpm_327: { ITG_Song_Song: Reactor, bpm: 125 }
+  bpm_328: { ITG_Song_Song: Renaissance, bpm: 160 }
+  bpm_329: { ITG_Song_Song: Ride_the_Bass, bpm: 138 }
+  bpm_330: { ITG_Song_Song: Robotix, bpm: 150 }
+  bpm_331: { ITG_Song_Song: Robotix, beat: 144, bpm: 170.001 }
+  bpm_332: { ITG_Song_Song: Robotix, beat: 147, bpm: 200.002 }
+  bpm_333: { ITG_Song_Song: Robotix, beat: 148.5, bpm: 230.024 }
+  bpm_334: { ITG_Song_Song: Robotix, beat: 149.5, bpm: 244.264 }
+  bpm_335: { ITG_Song_Song: Robotix, beat: 151, bpm: 245.884 }
+  bpm_336: { ITG_Song_Song: Robotix, beat: 152, bpm: 260.824 }
+  bpm_337: { ITG_Song_Song: Robotix, beat: 154, bpm: 275.005 }
+  bpm_338: { ITG_Song_Song: Robotix, beat: 156, bpm: 300.005 }
+  bpm_339: { ITG_Song_Song: Robotix, beat: 158, bpm: 325.006 }
+  bpm_340: { ITG_Song_Song: Robotix, beat: 160, bpm: 350.007 }
+  bpm_341: { ITG_Song_Song: Robotix, beat: 162, bpm: 390.008 }
+  bpm_342: { ITG_Song_Song: Robotix, beat: 164, bpm: 420.011 }
+  bpm_343: { ITG_Song_Song: Robotix, beat: 166, bpm: 460.014 }
+  bpm_344: { ITG_Song_Song: Robotix, beat: 168, bpm: 519.995 }
+  bpm_345: { ITG_Song_Song: Robotix, beat: 172, bpm: 549.998 }
+  bpm_346: { ITG_Song_Song: Robotix, beat: 176, bpm: 650.002 }
+  bpm_347: { ITG_Song_Song: Robotix, beat: 180, bpm: 700.006 }
+  bpm_348: { ITG_Song_Song: Robotix, beat: 184, bpm: 801.631 }
+  bpm_349: { ITG_Song_Song: Robotix, beat: 188, bpm: 899.999 }
+  bpm_350: { ITG_Song_Song: Robotix, beat: 192, bpm: 1000.008 }
+  bpm_351: { ITG_Song_Song: Robotix, beat: 232, bpm: 1006.921 }
+  bpm_352: { ITG_Song_Song: Robotix, beat: 236, bpm: 1013.951 }
+  bpm_353: { ITG_Song_Song: Robotix, beat: 240, bpm: 1050.003 }
+  bpm_354: { ITG_Song_Song: Robotix, beat: 244, bpm: 1200 }
+  bpm_355: { ITG_Song_Song: Robotix, beat: 256, bpm: 1010 }
+  bpm_356: { ITG_Song_Song: Robotix, beat: 264, bpm: 973.476 }
+  bpm_357: { ITG_Song_Song: Robotix, beat: 268, bpm: 829.447 }
+  bpm_358: { ITG_Song_Song: Robotix, beat: 272, bpm: 620.002 }
+  bpm_359: { ITG_Song_Song: Robotix, beat: 274, bpm: 539.008 }
+  bpm_360: { ITG_Song_Song: Robotix, beat: 276, bpm: 489.995 }
+  bpm_361: { ITG_Song_Song: Robotix, beat: 278, bpm: 399.996 }
+  bpm_362: { ITG_Song_Song: Robotix, beat: 280, bpm: 232.002 }
+  bpm_363: { ITG_Song_Song: Robotix, beat: 281, bpm: 210.004 }
+  bpm_364: { ITG_Song_Song: Robotix, beat: 282, bpm: 166.002 }
+  bpm_365: { ITG_Song_Song: Robotix, beat: 283, bpm: 150 }
+  # Above is really 149.999, and I question the other Robotix ones below.
+  #bpm_366: { ITG_Song_Song: Robotix, beat: 313, bpm: 149.959 }
+  #bpm_367: { ITG_Song_Song: Robotix, beat: 330, bpm: 149.999 }
+  #bpm_368: { ITG_Song_Song: Robotix, beat: 344, bpm: 150.039 }
+  #bpm_369: { ITG_Song_Song: Robotix, beat: 360, bpm: 149.959 }
+  #bpm_370: { ITG_Song_Song: Robotix, beat: 377, bpm: 149.999 }
+  bpm_371: { ITG_Song_Song: Soapy_Bubble, bpm: 141 }
+  bpm_372: { ITG_Song_Song: Spaceman, bpm: 137 }
+  bpm_373: { ITG_Song_Song: Spacy_Crazy_Girl, bpm: 135 }
+  bpm_374: { ITG_Song_Song: Spin_Chicken, bpm: 132 }
+  bpm_375: { ITG_Song_Song: Summer_in_Belize, bpm: 137.48 }
+  bpm_376: { ITG_Song_Song: Summer_Speedy, bpm: 185 }
+  bpm_377: { ITG_Song_Song: Sunshine, bpm: 170.103 }
+  bpm_378: { ITG_Song_Song: Sweet_World, bpm: 132 }
+  bpm_379: { ITG_Song_Song: Temple_of_Boom, bpm: 146.056 }
+  bpm_380: { ITG_Song_Song: The_Message, bpm: 133 }
+  bpm_381: { ITG_Song_Song: The_Message, bpm: 66.5 }
+  bpm_382: { ITG_Song_Song: The_Message, bpm: 133 }
+  bpm_383: { ITG_Song_Song: This_is_Rock_and_Roll, bpm: 140 }
+  bpm_384: { ITG_Song_Song: Tribal_Style, bpm: 140 }
+  bpm_385: { ITG_Song_Song: Twilight, bpm: 136 }
+  bpm_386: { ITG_Song_Song: Typical_Tropical, bpm: 137 }
+  bpm_387: { ITG_Song_Song: Vertex_2, bpm: 280 }
+  bpm_388: { ITG_Song_Song: Vertex_2, beat: 156, bpm: 196 }
+  bpm_389: { ITG_Song_Song: Vertex_2, beat: 157, bpm: 140 }
+  bpm_390: { ITG_Song_Song: Vertex_2, beat: 161.5, bpm: 140.02 }
+  bpm_391: { ITG_Song_Song: Vertex_2, beat: 189, bpm: 296 }
+  bpm_392: { ITG_Song_Song: Vertex_2, beat: 222, bpm: 316.979 }
+  bpm_393: { ITG_Song_Song: Vertex_2, beat: 254, bpm: 335.498 }
+  bpm_394: { ITG_Song_Song: Vertex_2, beat: 286, bpm: 350.078 }
+  bpm_395: { ITG_Song_Song: Vertex_2, beat: 318, bpm: 87.719 }
+  bpm_396: { ITG_Song_Song: Vertex_2, beat: 330, bpm: 97.599 }
+  bpm_397: { ITG_Song_Song: Vertex_2, beat: 331, bpm: 137.999 }
+  bpm_398: { ITG_Song_Song: Vertex_2, beat: 332, bpm: 175.459 }
+  bpm_399: { ITG_Song_Song: Vertex_2, beat: 343, bpm: 350.918 }
+  bpm_400: { ITG_Song_Song: Vertex_2, beat: 406, bpm: 555.015 }
+  bpm_401: { ITG_Song_Song: Visible_Noise, bpm: 132 }
+  bpm_402: { ITG_Song_Song: Vorsprung_Durch_Techno, bpm: 132 }
+  bpm_403: { ITG_Song_Song: Vorsprung_Durch_Techno, beat: 222, bpm: 100 }
+  bpm_404: { ITG_Song_Song: Wake_Up, bpm: 135.036 }
+  bpm_405: { ITG_Song_Song: Wanna_Do_Hardhouse, bpm: 149.25 }
+  bpm_406: { ITG_Song_Song: We_Know_What_To_Do, bpm: 140 }
