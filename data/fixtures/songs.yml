@@ -45,7 +45,7 @@ ITG_Song_Song:
   Go_60_Go: { name: Go 60 Go, abbr: G60GO, measures: 73 }
   Habanera_1: { name: Habanera 1, abbr: HABA1, measures: 67 }
   Hand_of_Time: { name: Hand of Time, abbr: HTIME, measures: 67 }
-  Hardcore_of_the_North: { name: Hardcore of the North, abbr: HCOTN, measure: 80 }
+  Hardcore_of_the_North: { name: Hardcore of the North, abbr: HCOTN, measures: 80 }
   Hardcore_Symfony: { name: Hardcore Symphony, abbr: HSYMP, measures: 73 }
   High: { name: High, abbr: HIGH!, measures: 57 }
   Hillbilly_Hardcore: { name: Hillbilly Hardcore, abbr: HILLB, measures: 60 }
@@ -73,7 +73,7 @@ ITG_Song_Song:
   Liquid_Moon: { name: Liquid Moon, abbr: LMOON, measures: 73 }
   Little_Kitty_Mine: { name: Little Kitty Mine, abbr: LKMIN, measures: 62 }
   Mellow: { name: Mellow, abbr: MELLO, measures: 83 }
-  Monolith: { name: Monolith, abbr: MONOL, meausres: 80 }
+  Monolith: { name: Monolith, abbr: MONOL, measures: 80 }
   Mouth: { name: Mouth, abbr: MOUTH, measures: 69 }
   Music_Pleeze: { name: Music Pleeze, abbr: MUSIC, measures: 55 }
   My_Favourite_Game: { name: My Favourite Game, abbr: MGAME, measures: 63 }
@@ -104,7 +104,7 @@ ITG_Song_Song:
   Spaceman: { name: Spaceman, abbr: SPACE, measures: 57 }
   Spacy_Crazy_Girl: { name: Spacy Crazy Girl, abbr: SGIRL, measures: 57 }
   Spin_Chicken: { name: Spin Chicken, abbr: SPINC, measures: 59 }
-  Summer_in_Belize: { name: Summer in Belize, abbr: SIBEL, measure: 61 }
+  Summer_in_Belize: { name: Summer in Belize, abbr: SIBEL, measures: 61 }
   Summer_Speedy: { name: Summer ~Speedy Mix~, abbr: SUMSP, measures: 81 }
   Sunshine: { name: Sunshine, abbr: SUNSH, measures: 72 }
   Sweet_World: { name: Sweet World, abbr: SWEET, measures: 60 }
