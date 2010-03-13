@@ -10,4 +10,16 @@ class ITG_User_UserTable extends Doctrine_Table
       ->groupBy('a.name, b.user_id')
       ->execute();
   }
+  
+  public function getNameByID($id)
+  {
+    $q = $this->createQuery('a')->select('name')->where('id = ?', $id)
+      ->fetchOne(array(), Doctrine::HYDRATE_ARRAY);
+    return $q['name'];
+  }
+  
+  public function getUserByID($id)
+  {
+    return $this->getNameByID($id);
+  }
 }

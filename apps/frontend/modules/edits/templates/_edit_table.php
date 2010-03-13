@@ -51,25 +51,12 @@ if ($z->trips): ?>
 <?php endif;
 if ($z->rolls): ?>
 <dt>Rolls</dt><dd><?php echo $z->rolls ?></dd>
-<?php endif;
-if ($z->lifts): ?>
-<dt>Lifts</dt><dd><?php echo $z->lifts ?></dd>
-<?php endif;
-if ($z->fakes): ?>
-<dt>Fakes</dt><dd><?php echo $z->fakes ?></dd>
-<?php endif;
-if ($z->num_votes): ?>
-<dt>Avg Score</dt><dd><?php echo $z->tot_votes / $z->num_votes ?></dd>
 <?php endif; ?>
 </dl>
 </td>
 <td><ul>
 <li><?php echo link_to("Download", "@edit_download?id=$z->id") ?></li>
-<?php if ($z->num_votes): ?>
-<li><?php echo link_to("View Ratings", "@ratings?eid=$z->id") ?></li>
-<?php endif; ?>
-<li><?php echo link_to("Classic Chart", "@chart_quick?id={$z->id}&kind=classic") ?></li>
-<li><?php echo link_to("Rhythm Chart", "@chart_quick?id={$z->id}&kind=rhythm") ?></li>
+<li><?php echo link_to("View Chart", "@chart_quick?id={$z->id}&kind=rhythm") ?></li>
 </ul></td>
 </tr>
 <?php endforeach; ?>
