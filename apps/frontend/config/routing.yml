@@ -8,74 +8,6 @@ homepage:
     module: ppehome
     action: index
 
-# Upload an edit
-upload_get:
-  url: /upload
-  class: sfRequestRoute
-  param:
-    module: upload
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# The actual processing
-upload_post:
-  url: /upload
-  class: sfRequestRoute
-  param:
-    module: upload
-    action: validate
-  requirements:
-    sf_method: [POST]
-
-# temp xml page
-xmltest:
-  url: /xmltest
-  param:
-    module: xmltest
-    action: index
-
-# see the ratings of an edit.
-ratings:
-  url: /votes/:eid
-  param:
-    module: votes
-    action: index
-  requirements:
-    eid: \d+
-
-ratings_404:
-  url: /votes
-  param:
-    module: votes
-    action: none
-  
-# Add/change a vote for an edit.
-rate_add_get:
-  url: /rate/:eid
-  class: sfRequestRoute
-  param:
-    module: votes
-    action: add
-  requirements:
-    sf_method: [GET]
-
-rate_add_post:
-  url: /rate/:eid
-  class: sfRequestRoute
-  param:
-    module: votes
-    action: added
-  requirements:
-    sf_method: [POST]
-
-# You can't vote for your own edit.
-rate_subtract:
-  url: /rate
-  param:
-    module: votes
-    action: subtract
-
 # credits / thanks page
 thanks:
   url: /thanks
@@ -169,7 +101,7 @@ chart_off_post:
 
 # Quickly generate a chart.
 chart_quick:
-  url: /chart/quick/:id/:kind
+  url: /chart/quick/:id/
   param:
     module: chart
     action: quick
@@ -196,33 +128,6 @@ edit_stat_post:
   requirements:
     sf_method: [POST]
 
-# Login page
-login_get:
-  url: /login
-  class: sfRequestRoute
-  param:
-    module: login
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Login after submitting
-login_post:
-  url: /login
-  class: sfRequestRoute
-  param:
-    module: login
-    action: validate
-  requirements:
-    sf_method: [POST]
-
-# Log the user out.
-logout:
-  url: /logout
-  param:
-    module: logout
-    action: index
-
 # Contact page: fill out the form
 contact_get:
   url: /contact
@@ -239,86 +144,6 @@ contact_post:
   class: sfRequestRoute
   param:
     module: contact
-    action: validate
-  requirements:
-    sf_method: [POST]
-
-# Confirm someone's account
-confirm_get_code:
-  url: /confirm/:code
-  class: sfRequestRoute
-  param:
-    module: confirm
-    action: index
-  requirements:
-    sf_method: [GET]
-
-confirm_get:
-  # Can I get the URL to work with optional parameters?
-  url: /confirm
-  class: sfRequestRoute
-  param:
-    module: confirm
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Process confirmation request
-confirm_post:
-  url: /confirm
-  class: sfRequestRoute
-  param:
-    module: confirm
-    action: validate
-  requirements:
-    sf_method: [POST]
-
-# Help getting your account to work
-help:
-  url: /help
-  class: sfRequestRoute
-  param:
-    module: help
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Help has been given (hopefully)
-help_post:
-  url: /help
-  class: sfRequestRoute
-  param:
-    module: help
-    action: validate
-  requirements:
-    sf_method: [POST]
-
-# Reset your password here (hopefully)
-reset_get:
-  url: /reset
-  class: sfRequestRoute
-  param:
-    module: reset
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Reset + confirmation code
-reset_get_code:
-  url: /reset/:code
-  class: sfRequestRoute
-  param:
-    module: reset
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Actual processing of above
-reset_post:
-  url: /reset
-  class: sfRequestRoute
-  param:
-    module: reset
     action: validate
   requirements:
     sf_method: [POST]
@@ -354,26 +179,6 @@ edit_user:
     module: edits
     action: user
 
-# Edits made by Andamiro / Official Charts.
-edit_official:
-  url: /andamiro/:page
-  param:
-    module: edits
-    action: official
-    page: 1
-  requirements:
-    page: \d+
-
-# Edits with no known author.
-edit_unknown:
-  url: /unknown/:page
-  param:
-    module: edits
-    action: unknown
-    page: 1
-  requirements:
-    page: \d+
-
 # The chosen user (unsure if I'll use the pager)
 edit_cuser:
   url: /users/:id/:page
@@ -399,23 +204,3 @@ edit_download_404:
   param:
     module: edits
     action: download
-
-# Registration page
-register_get:
-  url: /register
-  class: sfRequestRoute
-  param:
-    module: register
-    action: index
-  requirements:
-    sf_method: [GET]
-
-# Once you register:
-register_post:
-  url: /register
-  class: sfRequestRoute
-  param:
-    module: register
-    action: validate
-  requirements:
-    sf_method: [POST]
