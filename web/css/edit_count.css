@@ -1,5 +1,32 @@
 @import "main.css";
 
+#multiCol > p
+{
+	line-height: 1em;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+}
+#multiCol > p > span
+{
+	display: inline-block;
+	width: 15em;
+	padding-right: 2em;
+}
+
+#multiCol
+{
+	margin: 0 auto;
+	-moz-column-count: 3;
+	-moz-column-gap: 10px;
+	-moz-column-rule: 1px solid black;
+	-webkit-column-count: 3;
+	-webkit-column-gap: 10px;
+	-webkit-column-rule: 1px solid black;
+	column-count: 3;
+	column-gap: 10px;
+	column-rule: 1px solid black;
+}
+
 #count_table
 {
     margin: 0 auto;
