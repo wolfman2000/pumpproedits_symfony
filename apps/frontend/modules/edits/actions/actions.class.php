@@ -23,28 +23,28 @@ class editsActions extends sfActions
   // Viewing songs
   public function executeSong(sfWebRequest $request)
   {
-    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithEdits();
+    $this->songs = Doctrine::getTable('ITG_Song_Song')->getSongsWithEdits();
   }
   
   // View edits of the chosen song
   public function executeChosenSong(sfWebRequest $request)
   {
     $sid = $request->getParameter('id');
-    $this->song = Doctrine::getTable('PPE_Song_Song')->getSongByID($sid);
-    $this->songs = Doctrine::getTable('PPE_Edit_Edit')->getEditsBySong($sid);
+    $this->song = Doctrine::getTable('ITG_Song_Song')->getSongByID($sid);
+    $this->songs = Doctrine::getTable('ITG_Edit_Edit')->getEditsBySong($sid);
   }
   
   // View edits of the chosen user
   public function executeChosenUser(sfWebRequest $request)
   {
     $uid = $request->getParameter('id');
-    $this->user = Doctrine::getTable('PPE_User_User')->getUserByID($uid);
-    $this->users = Doctrine::getTable('PPE_Edit_Edit')->getEditsByUser($uid);
+    $this->user = Doctrine::getTable('ITG_User_User')->getUserByID($uid);
+    $this->users = Doctrine::getTable('ITG_Edit_Edit')->getEditsByUser($uid);
   }
   
   public function executeUser(sfWebRequest $request)
   {
-    $this->users = Doctrine::getTable('PPE_User_User')->getUsersWithEdits();
+    $this->users = Doctrine::getTable('ITG_User_User')->getUsersWithEdits();
   }
   
   // Download the edit
