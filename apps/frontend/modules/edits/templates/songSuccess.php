@@ -1,4 +1,4 @@
-<?php slot('title', 'Edit List by Song — Pump Pro Edits');
+<?php slot('title', 'Edit List by Song — ITG Edits');
 slot('h2', "<h2>Edits by Song</h2>"); ?>
 
 <p>Below are all of the songs that have edits available.
