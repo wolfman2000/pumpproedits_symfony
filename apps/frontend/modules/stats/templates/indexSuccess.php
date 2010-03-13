@@ -1,4 +1,4 @@
-<?php slot('title', 'Edit Stat Getter — Pump Pro Edits');
+<?php slot('title', 'Edit Stat Getter — ITG Edits');
 slot('h2', "<h2>Get Edit's Stats</h2>"); ?>
 <p>
     Do you need to quickly get stats on an edit without uploading
@@ -11,21 +11,21 @@ slot('h2', "<h2>Get Edit's Stats</h2>"); ?>
 <pre>
 #SONG:<var>Song Name</var>;
 #NOTES:
-<var>pump-single OR pump-double</var>:
+<var>dance-single OR dance-double</var>:
 <var>EditNameHere</var>:
 Edit:
 <var>1-99</var>:
 <var>Comma separated list of 5, 11, or 22 numbers on a single line</var>:
 
-00100
-00000
-00000
-00000
+0010
+0000
+0100
+0000
 ,
-10101
-00000
-01110
-00000
+1001
+0000
+0110
+0000
 ;
 </pre>
 
