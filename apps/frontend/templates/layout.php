@@ -59,6 +59,7 @@ echo $sf_content ?>
 </li>
 </ul>
 </nav>
-<footer>This website is © 2010 <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a></footer>
+<footer>This website is © 2010 <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a>.
+This page is rated for teens and up due to language.</footer>
 </body>
 </html>
