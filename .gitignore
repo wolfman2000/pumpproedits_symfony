@@ -1,12 +1,12 @@
 config/factories.yml
 data/fixtures/condiments.yml
-data/fixtures/edits.yml
+data/fixtures/edits.*
 data/fixtures/users.yml
 data/fixtures/powers.yml
 data/fixtures/votes.yml
 data/sql/schema.sql
 data/official
-data/itgedits.db
+data/*.db
 dbreload.sh
 .DS_Store
 cache/*

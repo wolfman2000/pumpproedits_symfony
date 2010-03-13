@@ -203,49 +203,49 @@ ITG_Song_BPM:
   bpm_202: { ITG_Song_Song: Utopia, beat: 326.5, bpm: 110 }
   bpm_203: { ITG_Song_Song: Utopia, beat: 327, bpm: 98.6 }
   bpm_204: { ITG_Song_Song: Utopia, beat: 327.5, bpm: 88 }
-  bpm_205: { ITG_Song_Song: Vertex, bpm: 250 }
-  bpm_206: { ITG_Song_Song: Vertex, beat: 160, bpm: 118.98 }
-  bpm_207: { ITG_Song_Song: Vertex, beat: 168, bpm: 250 }
-  bpm_208: { ITG_Song_Song: Vertex, beat: 176, bpm: 118.98 }
-  bpm_209: { ITG_Song_Song: Vertex, beat: 184, bpm: 250 }
-  bpm_210: { ITG_Song_Song: Vertex, beat: 193, bpm: 214.5 }
-  bpm_211: { ITG_Song_Song: Vertex, beat: 195, bpm: 172.5 }
-  bpm_212: { ITG_Song_Song: Vertex, beat: 198, bpm: 138 }
-  bpm_213: { ITG_Song_Song: Vertex, beat: 200, bpm: 126.62 }
-  bpm_214: { ITG_Song_Song: Vertex, beat: 201, bpm: 85.5 } # Really 85.499
-  bpm_215: { ITG_Song_Song: Vertex, beat: 201.5, bpm: 60.5 } # Really 60.499
-  bpm_216: { ITG_Song_Song: Vertex, beat: 202, bpm: 257.92 }
-  bpm_217: { ITG_Song_Song: Vertex, beat: 204, bpm: 250 }
-  bpm_218: { ITG_Song_Song: Vertex, beat: 302, bpm: 239.96 }
-  bpm_219: { ITG_Song_Song: Vertex, beat: 302.5, bpm: 237.72 }
-  bpm_220: { ITG_Song_Song: Vertex, beat: 303, bpm: 249.5 }
-  bpm_221: { ITG_Song_Song: Vertex, beat: 304, bpm: 112 } # Really 112.001
-  bpm_222: { ITG_Song_Song: Vertex, beat: 312, bpm: 112 } # Repeat of above
-  bpm_223: { ITG_Song_Song: Vertex, beat: 336, bpm: 254.002 }
-  bpm_224: { ITG_Song_Song: Vertex, beat: 340, bpm: 254.422 }
-  bpm_225: { ITG_Song_Song: Vertex, beat: 344, bpm: 255.022 }
-  bpm_226: { ITG_Song_Song: Vertex, beat: 346, bpm: 256.002 }
-  bpm_227: { ITG_Song_Song: Vertex, beat: 349, bpm: 255.002 }
-  bpm_228: { ITG_Song_Song: Vertex, beat: 352, bpm: 265.502 }
-  bpm_229: { ITG_Song_Song: Vertex, beat: 354, bpm: 267 } # Really 267.001
-  bpm_230: { ITG_Song_Song: Vertex, beat: 356, bpm: 268 } # Really 268.001
-  bpm_231: { ITG_Song_Song: Vertex, beat: 360, bpm: 268.502 }
-  bpm_232: { ITG_Song_Song: Vertex, beat: 361, bpm: 269.502 }
-  bpm_233: { ITG_Song_Song: Vertex, beat: 362, bpm: 271.602 }
-  bpm_234: { ITG_Song_Song: Vertex, beat: 364, bpm: 273.5 } # Really 273.501
-  bpm_235: { ITG_Song_Song: Vertex, beat: 366, bpm: 275.002 }
-  bpm_236: { ITG_Song_Song: Vertex, beat: 368, bpm: 278.002 }
-  bpm_237: { ITG_Song_Song: Vertex, beat: 372, bpm: 281.503 }
-  bpm_238: { ITG_Song_Song: Vertex, beat: 376, bpm: 283.503 }
-  bpm_239: { ITG_Song_Song: Vertex, beat: 380, bpm: 284.003 }
-  bpm_240: { ITG_Song_Song: Vertex, beat: 382, bpm: 285.003 }
-  bpm_241: { ITG_Song_Song: Vertex, beat: 384, bpm: 291.502 }
-  bpm_242: { ITG_Song_Song: Vertex, beat: 388, bpm: 296.002 }
-  bpm_243: { ITG_Song_Song: Vertex, beat: 392, bpm: 299.502 }
-  bpm_244: { ITG_Song_Song: Vertex, beat: 396, bpm: 301.502 }
-  bpm_245: { ITG_Song_Song: Vertex, beat: 404, bpm: 302 } # Really 302.001
-  bpm_246: { ITG_Song_Song: Vertex, beat: 416, bpm: 306 } # Really 306.001
-  bpm_247: { ITG_Song_Song: Vertex, beat: 432, bpm: 612 } # Really 611.999
+  bpm_205: { ITG_Song_Song: VerTex, bpm: 250 }
+  bpm_206: { ITG_Song_Song: VerTex, beat: 160, bpm: 118.98 }
+  bpm_207: { ITG_Song_Song: VerTex, beat: 168, bpm: 250 }
+  bpm_208: { ITG_Song_Song: VerTex, beat: 176, bpm: 118.98 }
+  bpm_209: { ITG_Song_Song: VerTex, beat: 184, bpm: 250 }
+  bpm_210: { ITG_Song_Song: VerTex, beat: 193, bpm: 214.5 }
+  bpm_211: { ITG_Song_Song: VerTex, beat: 195, bpm: 172.5 }
+  bpm_212: { ITG_Song_Song: VerTex, beat: 198, bpm: 138 }
+  bpm_213: { ITG_Song_Song: VerTex, beat: 200, bpm: 126.62 }
+  bpm_214: { ITG_Song_Song: VerTex, beat: 201, bpm: 85.5 } # Really 85.499
+  bpm_215: { ITG_Song_Song: VerTex, beat: 201.5, bpm: 60.5 } # Really 60.499
+  bpm_216: { ITG_Song_Song: VerTex, beat: 202, bpm: 257.92 }
+  bpm_217: { ITG_Song_Song: VerTex, beat: 204, bpm: 250 }
+  bpm_218: { ITG_Song_Song: VerTex, beat: 302, bpm: 239.96 }
+  bpm_219: { ITG_Song_Song: VerTex, beat: 302.5, bpm: 237.72 }
+  bpm_220: { ITG_Song_Song: VerTex, beat: 303, bpm: 249.5 }
+  bpm_221: { ITG_Song_Song: VerTex, beat: 304, bpm: 112 } # Really 112.001
+  bpm_222: { ITG_Song_Song: VerTex, beat: 312, bpm: 112 } # Repeat of above
+  bpm_223: { ITG_Song_Song: VerTex, beat: 336, bpm: 254.002 }
+  bpm_224: { ITG_Song_Song: VerTex, beat: 340, bpm: 254.422 }
+  bpm_225: { ITG_Song_Song: VerTex, beat: 344, bpm: 255.022 }
+  bpm_226: { ITG_Song_Song: VerTex, beat: 346, bpm: 256.002 }
+  bpm_227: { ITG_Song_Song: VerTex, beat: 349, bpm: 255.002 }
+  bpm_228: { ITG_Song_Song: VerTex, beat: 352, bpm: 265.502 }
+  bpm_229: { ITG_Song_Song: VerTex, beat: 354, bpm: 267 } # Really 267.001
+  bpm_230: { ITG_Song_Song: VerTex, beat: 356, bpm: 268 } # Really 268.001
+  bpm_231: { ITG_Song_Song: VerTex, beat: 360, bpm: 268.502 }
+  bpm_232: { ITG_Song_Song: VerTex, beat: 361, bpm: 269.502 }
+  bpm_233: { ITG_Song_Song: VerTex, beat: 362, bpm: 271.602 }
+  bpm_234: { ITG_Song_Song: VerTex, beat: 364, bpm: 273.5 } # Really 273.501
+  bpm_235: { ITG_Song_Song: VerTex, beat: 366, bpm: 275.002 }
+  bpm_236: { ITG_Song_Song: VerTex, beat: 368, bpm: 278.002 }
+  bpm_237: { ITG_Song_Song: VerTex, beat: 372, bpm: 281.503 }
+  bpm_238: { ITG_Song_Song: VerTex, beat: 376, bpm: 283.503 }
+  bpm_239: { ITG_Song_Song: VerTex, beat: 380, bpm: 284.003 }
+  bpm_240: { ITG_Song_Song: VerTex, beat: 382, bpm: 285.003 }
+  bpm_241: { ITG_Song_Song: VerTex, beat: 384, bpm: 291.502 }
+  bpm_242: { ITG_Song_Song: VerTex, beat: 388, bpm: 296.002 }
+  bpm_243: { ITG_Song_Song: VerTex, beat: 392, bpm: 299.502 }
+  bpm_244: { ITG_Song_Song: VerTex, beat: 396, bpm: 301.502 }
+  bpm_245: { ITG_Song_Song: VerTex, beat: 404, bpm: 302 } # Really 302.001
+  bpm_246: { ITG_Song_Song: VerTex, beat: 416, bpm: 306 } # Really 306.001
+  bpm_247: { ITG_Song_Song: VerTex, beat: 432, bpm: 612 } # Really 611.999
   bpm_248: { ITG_Song_Song: Walking_on_Fire, bpm: 138 }
   bpm_249: { ITG_Song_Song: While_Tha_Rekkid_Spinz, bpm: 140 }
   bpm_250: { ITG_Song_Song: Xuxa, bpm: 160 }
@@ -293,7 +293,7 @@ ITG_Song_BPM:
   bpm_292: { ITG_Song_Song: Habanera_1, bpm: 158 }
   bpm_293: { ITG_Song_Song: Habanera_1, beat: 244, bpm: 81.272 }
   bpm_294: { ITG_Song_Song: Habanera_1, beat: 253, bpm: 158 }
-  bpm_295: { ITG_Song_Song: Hardcore_Symfony, bpm: 174 }
+  bpm_295: { ITG_Song_Song: Hardcore_Symphony, bpm: 174 }
   bpm_296: { ITG_Song_Song: High, bpm: 137.511 }
   bpm_297: { ITG_Song_Song: Hillbilly_Hardcore, bpm: 136 }
   bpm_298: { ITG_Song_Song: Hispanic_Panic, bpm: 139.92 }
@@ -386,20 +386,20 @@ ITG_Song_BPM:
   bpm_384: { ITG_Song_Song: Tribal_Style, bpm: 140 }
   bpm_385: { ITG_Song_Song: Twilight, bpm: 136 }
   bpm_386: { ITG_Song_Song: Typical_Tropical, bpm: 137 }
-  bpm_387: { ITG_Song_Song: Vertex_2, bpm: 280 }
-  bpm_388: { ITG_Song_Song: Vertex_2, beat: 156, bpm: 196 }
-  bpm_389: { ITG_Song_Song: Vertex_2, beat: 157, bpm: 140 }
-  bpm_390: { ITG_Song_Song: Vertex_2, beat: 161.5, bpm: 140.02 }
-  bpm_391: { ITG_Song_Song: Vertex_2, beat: 189, bpm: 296 }
-  bpm_392: { ITG_Song_Song: Vertex_2, beat: 222, bpm: 316.979 }
-  bpm_393: { ITG_Song_Song: Vertex_2, beat: 254, bpm: 335.498 }
-  bpm_394: { ITG_Song_Song: Vertex_2, beat: 286, bpm: 350.078 }
-  bpm_395: { ITG_Song_Song: Vertex_2, beat: 318, bpm: 87.719 }
-  bpm_396: { ITG_Song_Song: Vertex_2, beat: 330, bpm: 97.599 }
-  bpm_397: { ITG_Song_Song: Vertex_2, beat: 331, bpm: 137.999 }
-  bpm_398: { ITG_Song_Song: Vertex_2, beat: 332, bpm: 175.459 }
-  bpm_399: { ITG_Song_Song: Vertex_2, beat: 343, bpm: 350.918 }
-  bpm_400: { ITG_Song_Song: Vertex_2, beat: 406, bpm: 555.015 }
+  bpm_387: { ITG_Song_Song: VerTex_2, bpm: 280 }
+  bpm_388: { ITG_Song_Song: VerTex_2, beat: 156, bpm: 196 }
+  bpm_389: { ITG_Song_Song: VerTex_2, beat: 157, bpm: 140 }
+  bpm_390: { ITG_Song_Song: VerTex_2, beat: 161.5, bpm: 140.02 }
+  bpm_391: { ITG_Song_Song: VerTex_2, beat: 189, bpm: 296 }
+  bpm_392: { ITG_Song_Song: VerTex_2, beat: 222, bpm: 316.979 }
+  bpm_393: { ITG_Song_Song: VerTex_2, beat: 254, bpm: 335.498 }
+  bpm_394: { ITG_Song_Song: VerTex_2, beat: 286, bpm: 350.078 }
+  bpm_395: { ITG_Song_Song: VerTex_2, beat: 318, bpm: 87.719 }
+  bpm_396: { ITG_Song_Song: VerTex_2, beat: 330, bpm: 97.599 }
+  bpm_397: { ITG_Song_Song: VerTex_2, beat: 331, bpm: 137.999 }
+  bpm_398: { ITG_Song_Song: VerTex_2, beat: 332, bpm: 175.459 }
+  bpm_399: { ITG_Song_Song: VerTex_2, beat: 343, bpm: 350.918 }
+  bpm_400: { ITG_Song_Song: VerTex_2, beat: 406, bpm: 555.015 }
   bpm_401: { ITG_Song_Song: Visible_Noise, bpm: 132 }
   bpm_402: { ITG_Song_Song: Vorsprung_Durch_Techno, bpm: 132 }
   bpm_403: { ITG_Song_Song: Vorsprung_Durch_Techno, beat: 222, bpm: 100 }

@@ -17,7 +17,7 @@ ITG_Song_Stop:
   stop_016: { ITG_Song_Song: No_1_Nation, beat: 160, break: 2 }
   stop_017: { ITG_Song_Song: Pandemonium, beat: 124, break: 2 }
   stop_018: { ITG_Song_Song: Tell, beat: 16, break: 3 }
-  stop_019: { ITG_Song_Song: Vertex, beat: 202, break: 2 }
+  stop_019: { ITG_Song_Song: VerTex, beat: 202, break: 2 }
   stop_020: { ITG_Song_Song: Xuxa, beat: 96, break: 1 }
   stop_021: { ITG_Song_Song: Xuxa, beat: 97, break: 1 }
   stop_022: { ITG_Song_Song: Xuxa, beat: 310, break: 1 }
@@ -55,10 +55,10 @@ ITG_Song_Stop:
   stop_054: { ITG_Song_Song: Summer_Speedy, beat: 123, break: 1 }
   stop_055: { ITG_Song_Song: Summer_Speedy, beat: 124, break: 1 }
   stop_056: { ITG_Song_Song: Sunshine, beat: 237.5, break: 2 }
-  stop_057: { ITG_Song_Song: Vertex_2, beat: 156, break: 1 }
-  stop_058: { ITG_Song_Song: Vertex_2, beat: 189, break: 9 } # Hits 296 BPM
-  stop_059: { ITG_Song_Song: Vertex_2, beat: 343, break: 4 }
-  stop_060: { ITG_Song_Song: Vertex_2, beat: 404, break: 2 }
-  stop_061: { ITG_Song_Song: Vertex_2, beat: 443.5, break: 2 }
-  stop_062: { ITG_Song_Song: Vertex_2, beat: 445.5, break: 2 }
+  stop_057: { ITG_Song_Song: VerTex_2, beat: 156, break: 1 }
+  stop_058: { ITG_Song_Song: VerTex_2, beat: 189, break: 9 } # Hits 296 BPM
+  stop_059: { ITG_Song_Song: VerTex_2, beat: 343, break: 4 }
+  stop_060: { ITG_Song_Song: VerTex_2, beat: 404, break: 2 }
+  stop_061: { ITG_Song_Song: VerTex_2, beat: 443.5, break: 2 }
+  stop_062: { ITG_Song_Song: VerTex_2, beat: 445.5, break: 2 }
   stop_063: { ITG_Song_Song: Wanna_Do_Hardhouse, beat: 215.5, break: 4 }
