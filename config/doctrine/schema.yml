@@ -151,6 +151,12 @@ ITG_Edit_Edit:
     user_id:
       type: integer
       notnull: true
+    old_user_id:
+      type: integer
+      notnull: true
+    old_edit_id:
+      type: integer
+      notnull: true
     song_id:
       type: integer
       notnull: true
@@ -207,6 +213,9 @@ ITG_Edit_Edit:
   indexes:
     author_index:
       fields: [user_id, song_id, title, is_single]
+      type: unique
+    old_edit_index:
+      fields: [old_edit_id]
       type: unique
   checks:
     diff_check: diff > 0
