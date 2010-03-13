@@ -56,7 +56,7 @@ if ($z->rolls): ?>
 </td>
 <td><ul>
 <li><?php echo link_to("Download", "@edit_download?id=$z->id") ?></li>
-<li><?php echo link_to("View Chart", "@chart_quick?id={$z->id}&kind=rhythm") ?></li>
+<li><?php echo link_to("View Chart", "@chart_quick?id={$z->id}") ?></li>
 </ul></td>
 </tr>
 <?php endforeach; ?>

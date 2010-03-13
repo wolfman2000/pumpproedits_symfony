@@ -218,13 +218,11 @@ class chartActions extends sfActions
   public function executeQuick(sfWebRequest $request)
   {
     $id = $request->getParameter('id');
-    $kind = $request->getParameter('kind');
-    if (!(is_numeric($id) and ($kind === "classic" or $kind === "rhythm")))
+    if (!(is_numeric($id)))
     {
       $response = $this->getResponse();
       $response->setStatusCode(409);
       $this->id = $request->getParameter('id');
-      $this->kind = $kind;
       return sfView::ERROR;
     }
     
@@ -238,7 +236,7 @@ class chartActions extends sfActions
     try
     {
       $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1));
-      $p = array('cols' => $notedata['cols'], 'kind' => $kind);
+      $p = array('cols' => $notedata['cols']);
       $tmp = new EditCharter($p);
       $xml = $tmp->genChart($notedata);
       
