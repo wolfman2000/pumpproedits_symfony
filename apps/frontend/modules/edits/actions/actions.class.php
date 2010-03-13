@@ -58,11 +58,21 @@ class editsActions extends sfActions
       $this->id = $request->getParameter('id');
       return sfView::ERROR;
     }
+    
+    # Get the filename here.
+    $r = Doctrine::getTable('ITG_Edit_Edit')->getFileName($id);
+    
     $id = sprintf("%06d", $id);
     $name = sprintf("itg_%s.edit", $id);
     $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $name);
     $file = file_get_contents($path);
-
+    
+    $s = ($r->style == 1 ? "S" : "D");
+    
+    $name = sprintf("%s_%s_%s_%s%02d.edit", $id, #$r->uname,
+      $r->sabbr, $r->t, $s, $r->d);
+    $name = urlencode($name);
+    
     $response = $this->getResponse();
     $response->clearHttpHeaders();
     $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);

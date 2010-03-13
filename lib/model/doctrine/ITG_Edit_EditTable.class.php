@@ -14,4 +14,14 @@ class ITG_Edit_EditTable extends Doctrine_Table
       ->orderBy('b.lc_name, a.title')
       ->execute();
   }
+  
+  public function getFileName($eid)
+  {
+    return $this->createQuery('e')
+      ->select('e.is_single style, e.diff d, e.title t, s.abbr sabbr, u.name uname')
+      ->innerJoin('e.ITG_Song_Song s')
+      ->innerJoin('e.ITG_User_User u')
+      ->where('e.old_edit_id = ?', $eid)
+      ->fetchOne();
+  }
 }
