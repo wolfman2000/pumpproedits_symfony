@@ -187,7 +187,7 @@ class EditCharter
     else
     {
       $this->genTxtNode($lbuff, 16, sprintf("%s %s Edit: %s - %d",
-        $nd['song'], ucfirst(substr($nd['style'], 5)), $nd['title'], $nd['diff']));
+        $nd['song'], ucfirst(substr($nd['style'], 6)), $nd['title'], $nd['diff']));
     }
     $this->genTxtNode($lbuff, 32, $nd['author']);
     /*
