@@ -22,4 +22,13 @@ class ITG_Song_SongTable extends Doctrine_Table
   {
     return $this->createQuery('a')->select('name, id, abbr')->orderBy('lc_name');
   }
+  
+  public function getSongsWithEdits()
+  {
+    return $this->createQuery('a')->select('a.name core, a.id, COUNT(b.id) AS num_edits')
+      ->innerJoin('a.ITG_Edit_Edits b')
+      ->orderBy('a.lc_name')
+      ->groupBy('a.name, b.user_id')
+      ->execute();
+  }
 }
