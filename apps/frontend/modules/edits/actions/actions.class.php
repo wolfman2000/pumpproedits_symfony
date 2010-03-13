@@ -47,16 +47,6 @@ class editsActions extends sfActions
     $this->users = Doctrine::getTable('PPE_User_User')->getUsersWithEdits();
   }
   
-  public function executeOfficial(sfWebRequest $request)
-  {
-    $this->users = Doctrine::getTable('PPE_Edit_Edit')->getEditsByUser(2);
-  }
-  
-  public function executeUnknown(sfWebRequest $request)
-  {
-    $this->users = Doctrine::getTable('PPE_Edit_Edit')->getEditsByUser(95);
-  }
-  
   // Download the edit
   public function executeDownload(sfWebRequest $request)
   {
@@ -69,7 +59,7 @@ class editsActions extends sfActions
       return sfView::ERROR;
     }
     $id = sprintf("%06d", $id);
-    $name = sprintf("edit_%s.edit", $id);
+    $name = sprintf("itg_%s.edit", $id);
     $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $name);
     $file = file_get_contents($path);
 
