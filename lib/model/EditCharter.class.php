@@ -154,7 +154,7 @@ class EditCharter
     $breather = $this->lb + $this->rb;
     for ($i = 0; $i < $numcols; $i++)
     {
-      $x = ($this->aw * $this->cols + $breather) * $i + $breather;
+      $x = ($this->aw * $this->cols + $breather) * $i + $this->lb;
       $sx = $this->cols;
       for ($j = 0; $j < $this->mpcol * $spd; $j++)
       {
