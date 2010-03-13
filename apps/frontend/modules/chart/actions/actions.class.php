@@ -228,7 +228,7 @@ class chartActions extends sfActions
     
     $id = sprintf("%06d", $id);
     $root = sfConfig::get('sf_root_dir');
-    $name = sprintf("edit_%s.edit", $id);
+    $name = sprintf("itg_%s.edit", $id);
     $path = sprintf("%s/data/user_edits/%s", $root, $name);
     
     /* File validation takes place here. */
