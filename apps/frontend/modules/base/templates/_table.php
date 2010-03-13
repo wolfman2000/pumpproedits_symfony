@@ -2,8 +2,8 @@
   <caption>Download the Base Edit Files</caption>
   <thead><tr>
     <th>Song Name</th>
-    <th>pump-single</th>
-    <th>pump-double</th>
+    <th>dance-single</th>
+    <th>dance-double</th>
   </tr></thead>
   <tbody>
     <?php foreach ($base_songs as $b): ?>

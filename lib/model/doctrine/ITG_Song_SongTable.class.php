@@ -17,4 +17,9 @@ class ITG_Song_SongTable extends Doctrine_Table
       ->where('is_problem = ?', false)
       ->orderBy('lc_name')->execute();
   }
+  
+  public function getBaseEdits()
+  {
+    return $this->createQuery('a')->select('name, id, abbr')->orderBy('lc_name');
+  }
 }

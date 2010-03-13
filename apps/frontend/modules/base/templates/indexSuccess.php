@@ -1,11 +1,11 @@
 <?php
-  slot('title', "Base Edit Files Page $page — Pump Pro Edits");
+  slot('title', "Base Edit Files Page $page — ITG Edits");
   slot('h2', "<h2>Base Edits</h2>");
 ?> 
 <p>
 	Edit files are made with a .edit extension, and placed in
 	the appropriate folder on your USB drive when you go play
-	Pump It Up Pro.
+	In The Groove.
 </p>
 <p>
 	At times you may want to edit a song's steps, but don't
