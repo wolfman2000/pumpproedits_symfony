@@ -283,17 +283,14 @@ class EditCharter
   private function prepArrows()
   {
     $ret = array();
-    $div = array('4th', '8th', '12th', '16th',
+    $div = array('8th', '4th', '12th', '16th',
       '24th', '32nd', '48th', '64th', '192nd');
     foreach ($div as $f)
     {
-      if (array_key_exists('red4', $this))
-      {
-        if (intval($f) == 4) $g = 'note_008';
-        elseif (intval($f) == 8) $g = 'note_004';
-        else $g = sprintf('note_%03d', intval($f));
-      }
+      if (intval($f) == 4) $g = 'note_008';
+      elseif (intval($f) == 8) $g = 'note_004';
       else $g = sprintf('note_%03d', intval($f));
+      
       $l = array('a' => 'L', 'c' => $g);
       $d = array('a' => 'D', 'c' => $g);
       $u = array('a' => 'U', 'c' => $g);
