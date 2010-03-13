@@ -1,4 +1,4 @@
-<?php slot('title', "Edits by $user — Pump Pro Edits");
+<?php slot('title', "Edits by $user — ITG Edits");
 slot('h2', "<h2>Edits by $user</h2>"); ?>
 
 <p>All of the edits created by the chosen person are available below.
