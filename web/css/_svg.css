@@ -92,12 +92,12 @@ g#mine > circle:first-child + circle
 
 g#hold_bdy > rect, g#hold_end > path
 {
-  fill:blue;
+  fill:#000080;
 }
 
 g#roll_bdy > rect, g#roll_end > path
 {
-  fill:purple;
+  fill:#400040;
 }
 
 g#hold_bdy > rect, g#roll_bdy > rect
