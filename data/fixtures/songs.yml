@@ -46,7 +46,7 @@ ITG_Song_Song:
   Habanera_1: { name: Habanera 1, abbr: HABA1, measures: 67 }
   Hand_of_Time: { name: Hand of Time, abbr: HTIME, measures: 67 }
   Hardcore_of_the_North: { name: Hardcore of the North, abbr: HCOTN, measures: 80 }
-  Hardcore_Symfony: { name: Hardcore Symphony, abbr: HSYMP, measures: 73 }
+  Hardcore_Symphony: { name: Hardcore Symphony, abbr: HSYMP, measures: 73 }
   High: { name: High, abbr: HIGH!, measures: 57 }
   Hillbilly_Hardcore: { name: Hillbilly Hardcore, abbr: HILLB, measures: 60 }
   Hip_Hop_Jam: { name: Hip Hop Jam, abbr: HHJAM, measures: 99 }
@@ -123,8 +123,8 @@ ITG_Song_Song:
   Twilight: { name: Twilight, abbr: TWILI, measures: 61 }
   Typical_Tropical: { name: Typical Tropical, abbr: TYPIC, measures: 57 }
   Utopia: { name: Utopia, abbr: UTOPI, measures: 81 }
-  Vertex: { name: Vertex, abbr: VRTX1, measures: 127 }
-  Vertex_2: { name: Vertex^2, abbr: VRTX2, measures: 130 }
+  VerTex: { name: VerTex, abbr: VRTX1, measures: 127 }
+  VerTex_2: { name: VerTex^2, abbr: VRTX2, measures: 130 }
   Visible_Noise: { name: Visible Noise, abbr: NOISE, measures: 57 }
   Vorsprung_Durch_Techno: { name: Vorsprung Durch Techno, abbr: VORSP, measures: 57 }
   Wake_Up: { name: Wake Up, abbr: WAKUP, measures: 59 }
