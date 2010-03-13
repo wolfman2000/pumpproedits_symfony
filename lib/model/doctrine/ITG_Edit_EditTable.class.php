@@ -14,6 +14,18 @@ class ITG_Edit_EditTable extends Doctrine_Table
       ->orderBy('b.lc_name, a.title')
       ->execute();
   }
+  public function getEditsBySong($songid)
+  {
+    $cols = 'diff, steps, jumps, holds, mines, trips, rolls';
+    $cols .= ', user_id, b.name uname, title, is_single, old_edit_id';
+    return $this->createQuery('a')
+      ->select($cols)
+      ->innerJoin('a.ITG_User_User b')
+      ->where('song_id = ?', $songid)
+      ->andWhere('a.is_problem = ?', 0)
+      ->orderBy('b.lc_name, a.title')
+      ->execute();
+  }
   
   public function getFileName($eid)
   {
