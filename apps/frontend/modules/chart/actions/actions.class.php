@@ -226,6 +226,7 @@ class chartActions extends sfActions
       return sfView::ERROR;
     }
     
+    $author = Doctrine::getTable('ITG_User_User')->getNameByOldEditID($id);
     $id = sprintf("%06d", $id);
     $root = sfConfig::get('sf_root_dir');
     $name = sprintf("itg_%s.edit", $id);
@@ -236,7 +237,9 @@ class chartActions extends sfActions
     try
     {
       $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1));
+      $notedata['author'] = $author;
       $p = array('cols' => $notedata['cols']);
+      
       $tmp = new EditCharter($p);
       $xml = $tmp->genChart($notedata);
       

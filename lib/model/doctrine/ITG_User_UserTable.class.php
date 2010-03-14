@@ -11,6 +11,14 @@ class ITG_User_UserTable extends Doctrine_Table
       ->execute();
   }
   
+  public function getNameByOldEditID($oid)
+  {
+    return $this->createQuery('a')->select('a.name aname')
+      ->innerJoin('a.ITG_Edit_Edits b')
+      ->where('b.old_edit_id = ?', $oid)
+      ->fetchOne()->aname;
+  }
+  
   public function getNameByID($id)
   {
     $q = $this->createQuery('a')->select('name')->where('id = ?', $id)
