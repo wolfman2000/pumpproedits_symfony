@@ -145,6 +145,12 @@ class EditParser
       
       $song = substr($line, strlen($key));
       
+      $slash = strpos($song, "//");
+      if ($slash !== false)
+      {
+        $song = substr($song, 0, $slash);
+      }
+      
       $slash = strpos($song, "/");
       while ($slash !== false)
       {
