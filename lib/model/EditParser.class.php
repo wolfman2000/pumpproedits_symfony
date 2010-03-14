@@ -2,7 +2,7 @@
 
 class EditParser
 {
-  protected function gen_measure($cols, $step = false)
+  private function gen_measure($cols, $step = false)
   {
     $line = str_repeat("0", $cols) . "\r\n";
     $measure = str_repeat($line, 4);
@@ -25,7 +25,6 @@ class EditParser
     fwrite($fh, sprintf("     %s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
-    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
 
     $cols = $this->getCols($kind);
@@ -46,7 +45,7 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('ITG_Song_Song')->getSongRow($songid);
-    foreach (array("single", "double") as $kind)
+    foreach (array("dance-single", "dance-double") as $kind)
     {
       $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
     }
