@@ -127,6 +127,7 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
+      if (substr($line, 0, 2) == "//") { break; }
       $key = $params['arcade'] ? "#TITLE:" : "#SONG:";
       $pos = strpos($line, $key, 0);
       if ($pos !== 0)
