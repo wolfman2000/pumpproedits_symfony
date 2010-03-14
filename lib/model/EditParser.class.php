@@ -142,7 +142,9 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $line = rtrim($line, ";");
+      
       $song = substr($line, strlen($key));
+      $song = substr($song, 0, strpos($song, ";"));
       
       $songid = $base->getIDBySong($song);
       
