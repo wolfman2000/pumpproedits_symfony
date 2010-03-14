@@ -144,7 +144,11 @@ class EditParser
       $line = rtrim($line, ";");
       
       $song = substr($line, strlen($key));
-      $song = substr($song, 0, strpos($song, ";"));
+      
+      if (strpos($song, ";") !== false)
+      {
+        $song = substr($song, 0, strpos($song, ";"));
+      }
       
       $songid = $base->getIDBySong($song);
       
