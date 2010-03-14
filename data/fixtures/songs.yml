@@ -55,7 +55,7 @@ ITG_Song_Song:
   Hustle_Beach: { name: Hustle Beach, abbr: HUSTL, measures: 57 }
   Hybrid: { name: Hybrid, abbr: HYBRI, measures: 86 }
   Ill_Get_There_Anyway: { name: "I'll Get There Anyway", abbr: IGTAW, measures: 50 }
-  Incognito: { name: Incognio, abbr: INCOG, measures: 65 }
+  Incognito: { name: Incognito, abbr: INCOG, measures: 65 }
   Infection: { name: Infection, abbr: INFEC, measures: 83 }
   I_Think_I_Like_That_Sound: { name: I Think I Like That Sound, abbr: SOUND, measures: 67 }
   Ize_Pie: { name: Ize Pie, abbr: IZEPI, measures: 53 }
@@ -114,7 +114,7 @@ ITG_Song_Song:
   The_Beginning: { name: The Beginning, abbr: BEGIN, measures: 66 }
   The_Game: { name: The Game, abbr: TGAME, measures: 69 }
   The_Message: { name: The Message, abbr: TMESS, measures: 55 }
-  This_is_Rock_and_Roll: { name: This is Rock and Roll, abbr: TIRAR, measures: 64 }
+  This_is_Rock_and_Roll: { name: "This is Rock & Roll", abbr: TIRAR, measures: 64 }
   Torn: { name: Torn, abbr: TORN!, measures: 68 }
   Touch_Me: { name: Touch Me, abbr: TOUCH, measures: 74 }
   Tough_Enough: { name: Tough Enough, abbr: TOUGH, measures: 80 }
@@ -129,7 +129,7 @@ ITG_Song_Song:
   Vorsprung_Durch_Techno: { name: Vorsprung Durch Techno, abbr: VORSP, measures: 57 }
   Wake_Up: { name: Wake Up, abbr: WAKUP, measures: 59 }
   Walking_on_Fire: { name: Walking on Fire, abbr: WFIRE, measures: 68 }
-  Wanna_Do_Hardhouse: { name: Wanna Do Hardhouse, abbr: WANDO, measures: 67 }
+  Wanna_Do_Hardhouse: { name: Wanna Do ~Hardhouse Mix~, abbr: WANDO, measures: 67 }
   We_Know_What_To_Do: { name: We Know What To Do, abbr: WKWTD, measures: 62 }
   Which_MC_Was_That: { name: Which MC Was That, abbr: WMCWT, measures: 56 }
   While_Tha_Rekkid_Spinz: { name: While Tha Rekkid Spinz, abbr: WTRKS, measures: 69 }
