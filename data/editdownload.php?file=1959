@@ -1,8 +1,0 @@
-<br />
-<b>Warning</b>:  filesize() [<a href='function.filesize'>function.filesize</a>]: Stat failed for edits/Kagami - BarX - BarX - S10 U2094.edit (errno=2 - No such file or directory) in <b>/home/itgfreak/itgfreak.com/editdownload.php</b> on line <b>5</b><br />
-<br />
-<b>Warning</b>:  Cannot modify header information - headers already sent by (output started at /home/itgfreak/itgfreak.com/editdownload.php:5) in <b>/home/itgfreak/itgfreak.com/editdownload.php</b> on line <b>5</b><br />
-<br />
-<b>Warning</b>:  Cannot modify header information - headers already sent by (output started at /home/itgfreak/itgfreak.com/editdownload.php:5) in <b>/home/itgfreak/itgfreak.com/editdownload.php</b> on line <b>6</b><br />
-<br />
-<b>Warning</b>:  readfile(edits/Kagami - BarX - BarX - S10 U2094.edit) [<a href='function.readfile'>function.readfile</a>]: failed to open stream: No such file or directory in <b>/home/itgfreak/itgfreak.com/editdownload.php</b> on line <b>7</b><br />
