@@ -15,7 +15,8 @@ class ITG_Song_SongTable extends Doctrine_Table
   }
   public function getSongRow($songid)
   {
-    return $this->createQuery('a')->find($songid)->execute();
+    return $this->createQuery('a')
+      ->where('id = ?', $songid)->fetchOne();
   }
   public function getSongs()
   {
