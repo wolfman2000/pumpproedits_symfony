@@ -42,9 +42,16 @@ class baseActions extends sfActions
       $this->type = $request->getParameter('type');
       return sfView::ERROR;
     }
-    $id = sprintf("%06d", $id);
-    $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
+    $nid = sprintf("%06d", $id);
+    $name = sprintf("base_%s_%s.edit", $nid, ucfirst($type));
     $path = sprintf("%s/data/base_edits/%s", sfConfig::get('sf_root_dir'), $name);
+    
+    if (!file_exists($path)) # Generate the new base edits.
+    {
+      $p = new EditParser();
+      $p->generate_base($id);
+    }
+    
     $file = file_get_contents($path);
 
     $response = $this->getResponse();
