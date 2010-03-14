@@ -10,24 +10,25 @@ class EditParser
     {
       $measure = substr_replace($measure, "1", 2, 1);
     }
+    return $measure;
   }
 
   protected function gen_edit_file($kind, $name, $abbr, $measures)
   {
-    $fname = sprintf("base_%s_%s.edit", $abbr, $kind);
+    $fname = sprintf("base_%06d_%s.edit", $abbr, ucfirst($kind));
     $eol = "\r\n";
     $loc = sfConfig::get('sf_data_dir') . '/base_edits';
     $fh = fopen($loc . '/' . $fname, 'w');
 
     /* File is opened: now write the headers. */
 
-    fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
-    fwrite($fh, sprintf("     %s:%s", $kind, $eol));
+    fwrite($fh, sprintf("#SONG:%s;%s#NOTES:%s", $name, $eol, $eol));
+    fwrite($fh, sprintf("     dance-%s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
-    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
+    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0:%s%s", $measures - 1, $eol, $eol));
 
-    $cols = $this->getCols($kind);
+    $cols = $this->getCols("dance-" . $kind);
 
     fwrite($fh, $this->gen_measure($cols));
 
@@ -45,9 +46,9 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('ITG_Song_Song')->getSongRow($songid);
-    foreach (array("dance-single", "dance-double") as $kind)
+    foreach (array("single", "double") as $kind)
     {
-      $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
+      $this->gen_edit_file($kind, $base->getName(), $base->getID(), $base->getMeasures());
     }
 
   }
