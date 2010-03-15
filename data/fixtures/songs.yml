@@ -30,7 +30,7 @@ ITG_Song_Song:
   DJ_Party: { name: DJ Party, abbr: DJPRT, measures: 67 }
   Do_U_Love_Me: { name: Do U Love Me, abbr: DULME, measures: 66 }
   Dont_Promise_Me: { name: Don't Promise Me, abbr: DPME_, measures: 64 }
-  Dont_Promise_Me_Happiness: { name: Don't Promise Me -Happiness-, abbr: DPMEH, measures: 65 }
+  Dont_Promise_Me_Happiness: { name: Don't Promise Me ~Happiness~, abbr: DPMEH, measures: 65 }
   Dreams_of_Passion: { name: Dreams of Passion, abbr: DREAM, measures: 48 }
   Drifting_Away: { name: Drifting Away, abbr: DAWAY, measures: 71 }
   Driving_Force_Classical: { name: Driving Force Classical, abbr: DRIVE, measures: 85 }
