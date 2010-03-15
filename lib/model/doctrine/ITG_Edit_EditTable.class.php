@@ -45,6 +45,6 @@ class ITG_Edit_EditTable extends Doctrine_Table
       ->innerJoin('a.ITG_Song_Song c')
       ->where('a.is_problem = ?', false)
       ->orderBy('b.lc_name, c.lc_name, title, is_single')
-      ->execute();
+      ->fetchArray();
   }
 }

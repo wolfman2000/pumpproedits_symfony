@@ -18,14 +18,14 @@ class ChartGeneratorForm extends sfForm
     $oname = "無"; // Start with no match.
     
     foreach ($rows as $r):
-      $nname = $r->uname;
+      $nname = $r['uname'];
       if ($oname !== $nname)
       {
         $choices[$nname] = array();
         $oname = $nname;
       }
-      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . "$r->diff)";
-      $possible[] = $r->id;
+      $choices[$oname][$r['id']] = sprintf("%s → %s (%s%d)", $r['sname'], $r['title'], $r['is_single']? "S" : "D", $r['diff']);
+      $possible[] = $r['id'];
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
