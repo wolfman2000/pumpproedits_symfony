@@ -23,6 +23,9 @@ ITG_User_User:
     user_index:
       fields: [name]
       type: unique
+    user_lc_index:
+      fields: [lc_name]
+      type: unique
 #    email_index:
 #      fields: [email]
 #      type: unique
@@ -57,6 +60,9 @@ ITG_Song_Song:
   indexes:
     song_index:
       fields: [name]
+      type: unique
+    song_lc_index:
+      fields: [lc_name]
       type: unique
     abbr_index:
       fields: [abbr]
@@ -217,6 +223,10 @@ ITG_Edit_Edit:
     old_edit_index:
       fields: [old_edit_id]
       type: unique
+    edit_title_index:
+      fields: [title]
+    edit_single_index:
+      fields: [is_single]
   checks:
     diff_check: diff > 0
     steps_check: steps > 0
