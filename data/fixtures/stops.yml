@@ -30,7 +30,7 @@ ITG_Song_Stop:
   stop_029: { ITG_Song_Song: Clockwork_Genesis, beat: 160, break: 3 }
   stop_030: { ITG_Song_Song: Clockwork_Genesis, beat: 173, break: 3 }
   stop_031: { ITG_Song_Song: Clockwork_Genesis, beat: 234, break: 3 }
-  stop_032: { ITG_Song_Song: Cryosleep, beat: 164, break: 3 }
+  stop_032: { ITG_Song_Song: Cryosleep, beat: 168, break: 3 }
   stop_033: { ITG_Song_Song: Disconnected_Disco, beat: 155, break: 0.5 }
   stop_034: { ITG_Song_Song: Disconnected_Disco, beat: 162.5, break: 0.5 }
   stop_035: { ITG_Song_Song: Disconnected_Disco, beat: 170, break: 0.5 }

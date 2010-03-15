@@ -268,10 +268,10 @@ ITG_Song_BPM:
   bpm_267: { ITG_Song_Song: Bumble_Bee, bpm: 138 }
   bpm_268: { ITG_Song_Song: Clockwork_Genesis, bpm: 175 }
   bpm_269: { ITG_Song_Song: Cryosleep, bpm: 137 }
-  bpm_270: { ITG_Song_Song: Cryosleep, beat: 76, bpm: 68.5 }
-  bpm_271: { ITG_Song_Song: Cryosleep, beat: 92, bpm: 137 }
-  bpm_272: { ITG_Song_Song: Cryosleep, beat: 156, bpm: 68.5 }
-  bpm_273: { ITG_Song_Song: Cryosleep, beat: 164, bpm: 137 }
+  bpm_270: { ITG_Song_Song: Cryosleep, beat: 80, bpm: 68.5 }
+  bpm_271: { ITG_Song_Song: Cryosleep, beat: 96, bpm: 137 }
+  bpm_272: { ITG_Song_Song: Cryosleep, beat: 160, bpm: 68.5 }
+  bpm_273: { ITG_Song_Song: Cryosleep, beat: 168, bpm: 137 }
   bpm_274: { ITG_Song_Song: DCode, bpm: 100 }
   bpm_275: { ITG_Song_Song: Destiny, bpm: 175 }
   bpm_276: { ITG_Song_Song: Determinator, bpm: 147 }
