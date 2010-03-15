@@ -236,6 +236,13 @@ class chartActions extends sfActions
     $name = sprintf("edit_%s.edit", $id);
     $path = sprintf("%s/data/user_edits/%s", $root, $name);
     
+    if (!file_exists($path))
+    {
+      $this->data = "The edit file does not exist!";
+      $this->getResponse()->setStatusCode(409);
+      return sfView::ERROR;
+    }
+
     /* File validation takes place here. */
     $tmp = new EditParser();
     try
