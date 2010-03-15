@@ -91,8 +91,8 @@ class chartActions extends sfActions
       $eid = $this->form->getValue('edits');
       if ($eid > 0)
       {
-        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
-        $author = Doctrine::getTable('PPE_User_User')->getUserByEditID($eid);
+        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/itg_%06d.edit", $eid);
+        $author = Doctrine::getTable('ITG_User_User')->getNameByOldEditID($eid);
       }
       else
       {
@@ -117,8 +117,7 @@ class chartActions extends sfActions
           @unlink($path);
         }
         // The others can be gotten later.
-        $p = array('cols' => $notedata['cols'], 'kind' => $this->form->getValue('kind'), 
-        'red4' => $this->form->getValue('red4'), 'speed_mod' => $this->form->getValue('speed'),
+        $p = array('cols' => $notedata['cols'], 'speed_mod' => $this->form->getValue('speed'),
         'mpcol' => $this->form->getValue('mpcol'), 'scale' => $this->form->getValue('scale'));
 
         $tmp = new EditCharter($p);

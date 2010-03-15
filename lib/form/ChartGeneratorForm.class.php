@@ -24,8 +24,10 @@ class ChartGeneratorForm extends sfForm
         $choices[$nname] = array();
         $oname = $nname;
       }
-      $choices[$oname][$r['id']] = sprintf("%s → %s (%s%d)", $r['sname'], $r['title'], $r['is_single']? "S" : "D", $r['diff']);
-      $possible[] = $r['id'];
+      $title = $r['title'];
+      if (strlen($title) > 30) { $title = substr($title, 0, 30) . "…"; }
+      $choices[$oname][$r['old_edit_id']] = sprintf("%s → %s (%s%d)", $r['sname'], $title, $r['is_single']? "S" : "D", $r['diff']);
+      $possible[] = $r['old_edit_id'];
     endforeach;
     
     $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
@@ -36,22 +38,6 @@ class ChartGeneratorForm extends sfForm
     
     $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
     
-    $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
-    $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
-    $this->setDefault('kind', 'classic');
-    
-    $tmp1['required'] = true;
-    $tmp1['choices'] = array_keys($choices);
-    $val['kind'] = new sfValidatorChoice($tmp1, array('required' => 'A noteskin must be chosen.'));
-    
-    $choices = array(0 => 'blue', 1 => 'red');
-    $pieces['red4'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => '4th Note Color'));
-    $this->setDefault('red4', 0);
-
-    $tmp1['required'] = false;
-    $tmp1['choices'] = array_keys($choices);
-    $val['red4'] = new sfValidatorChoice($tmp1, array());
-
     $choices = array(1 => 1, 2 => 2, 3 => 3, 4 => 4, 6 => 6, 8 => 8);
     $pieces['speed'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Speed Mod'));
     $this->setDefault('speed', 2);
@@ -61,7 +47,7 @@ class ChartGeneratorForm extends sfForm
     $val['speed'] = new sfValidatorChoice($tmp1, array('required' => "A speed mod must be chosen."));
 
 
-    $choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16);
+    $choices = array(4 => 4, 6 => 6, 8 => 8, 12 => 12, 16 => 16, 24 => 24, 32 => 32);
     $pieces['mpcol'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Measures per column'));
     $this->setDefault('mpcol', 6);
 
@@ -69,7 +55,8 @@ class ChartGeneratorForm extends sfForm
     $tmp1['choices'] = array_keys($choices);
     $val['mpcol'] = new sfValidatorChoice($tmp1, array('required' => "You must choose how many measures appear in each column."));
     
-    $choices = array('0.5' => 0.5, '0.75' => 0.75, 1 => 1, '1.25' => 1.25, '1.5' => 1.5, '1.75' => 1.75, 2 => 2);
+    $choices = array('0.5' => 0.5, '0.75' => 0.75, 1 => 1, '1.25' => 1.25, '1.5' => 1.5,
+      '1.75' => 1.75, 2 => 2, '2.5' => 2.5, 3 => 3, '3.5' => 3.5, 4 => 4);
     $pieces['scale'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Scale Factor'));
     $this->setDefault('scale', 1);
     
@@ -89,10 +76,8 @@ class ChartGeneratorForm extends sfForm
     
     $this->setValidators($val);
     
-    $one = new sfValidatorCallback(array('callback' => array($this, 'ensureOne')));
-    $rhy = new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm')));
-    
-    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array($one, $rhy)));
+    $this->validatorSchema->setPostValidator(new
+      sfValidatorCallback(array('callback' => array($this, 'ensureOne'))));
   }
   
   public function ensureOne($validator, $values)
@@ -102,25 +87,5 @@ class ChartGeneratorForm extends sfForm
       return $values;
     }
     throw new sfValidatorError($validator, "Select either an author's edit or your own file.");
-  }
-  
-  public function ensureRhythm($validator, $values)
-  {
-    if ($values['kind'] === 'classic')
-    {
-      return $values;
-    }
-    if ($values['kind'] === 'rhythm')
-    {
-      if ($values['red4'] == 0 or $values['red4'] == 1)
-      {
-        return $values;
-      }
-      else
-      {
-            throw new sfValidatorError($validator, "If using Rhythm, you must select the quarter note color.");
-      }
-    }
-    return $values;
   }
 }
