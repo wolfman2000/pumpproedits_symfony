@@ -92,6 +92,19 @@ class EditParser
       default: return "Undefined";
     }
   }
+  
+  /**
+   * Check if this line is really blank or is a line comment.
+   */
+  private function checkCommentLine($line)
+  {
+    $line = ltrim($line);
+    if (strlen($line) === 0 or strpos($line, "//") === 0)
+    {
+      return true;
+    }
+    return false;
+  }
 
  /**
   * Pass a file handle, get the note data.
@@ -127,7 +140,7 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
-      if (substr($line, 0, 2) == "//") { break; }
+      if ($this->checkCommentLine($line)) { break; }
       $key = $params['arcade'] ? "#TITLE:" : "#SONG:";
       $pos = strpos($line, $key, 0);
       if ($pos !== 0)
@@ -193,7 +206,7 @@ class EditParser
     }
     case 1: /* Verify NOTES tag is present next. */
     {
-      if ($line === "" or strpos($line, "//", 0) === 0) { continue; }
+      if ($this->checkCommentLine($line)) { continue; }
       if (strpos($line, "#NOTES:", 0) !== 0)
       {
         $s = "The #NOTES: tag must be on line 2.";
@@ -204,6 +217,7 @@ class EditParser
     }
     case 2: /* Confirm this is dance-single or dance-double. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -230,6 +244,7 @@ class EditParser
     }
     case 3: /* Get the title / author of the edit. No blank names Dread. ☻ */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -281,6 +296,7 @@ class EditParser
     }
     case 4: /* Arcade mode: get title here. Otherwise, ensure the "Edit:" line is in place. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -309,6 +325,7 @@ class EditParser
     }
     case 5: /* Get the difficulty level of the edit. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -335,6 +352,7 @@ class EditParser
     }
     case 6: /* Radar line: use this time to prep other variables. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $cols = $this->getCols($style);
 
       for ($dummy = 0; $dummy < $cols; $dummy++)
@@ -361,7 +379,7 @@ class EditParser
         $state = 8;
         
       }
-      elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
+      elseif (!$this->checkCommentLine($line)) // Parse.
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
