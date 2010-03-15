@@ -7,7 +7,7 @@ class ChartGeneratorForm extends sfForm
     parent::configure();
     
     $size = sfConfig::get('app_max_edit_file_size');
-    $editT = Doctrine::getTable('PPE_Edit_Edit');
+    $editT = Doctrine::getTable('ITG_Edit_Edit');
     $rows = $editT->getNonProblemEdits();
     
     $choices = array();

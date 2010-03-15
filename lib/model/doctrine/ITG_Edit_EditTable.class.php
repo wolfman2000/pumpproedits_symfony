@@ -36,4 +36,15 @@ class ITG_Edit_EditTable extends Doctrine_Table
       ->where('e.old_edit_id = ?', $eid)
       ->fetchOne();
   }
+  
+  public function getNonProblemEdits()
+  {
+    return $this->createQuery('a')
+      ->select('id, b.name uname, is_single, title, diff, c.name sname')
+      ->innerJoin('a.ITG_User_User b')
+      ->innerJoin('a.ITG_Song_Song c')
+      ->where('a.is_problem = ?', false)
+      ->orderBy('b.lc_name, c.lc_name, title, is_single')
+      ->execute();
+  }
 }

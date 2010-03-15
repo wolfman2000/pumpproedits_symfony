@@ -45,6 +45,7 @@ echo $sf_content ?>
     <ul>
     <li><?php echo link_to("Base Edit Files", '@base_edit') ?></li>
     <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
+    <li><?php echo link_to('Edit Charter', '@chart_adv_get') ?></li>
     <li><?php echo link_to("Edit List by Song", '@edit_song') ?></li>
     <li><?php echo link_to("Edit List by User", '@edit_user') ?></li>
     </ul>
