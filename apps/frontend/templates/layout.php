@@ -12,8 +12,9 @@ function is_naked_day($d) {
 $naked = 9;
 ?><html lang="en">
 <head>
-<?php include_http_metas();
-include_metas();
+<?php include_http_metas(); ?>
+<meta charset="UTF-8" />
+<?php include_metas();
 include(sfConfig::get('sf_lib_dir') . "/browser_detect.php"); ?>
 <title><?php include_slot('title', 'Pump Pro Edits') ?></title>
 <link rel="shortcut icon" href="/favicon.ico" />
