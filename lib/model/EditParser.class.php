@@ -2,7 +2,7 @@
 
 class EditParser
 {
-  protected function gen_measure($cols, $step = false)
+  private function gen_measure($cols, $step = false)
   {
     $line = str_repeat("0", $cols) . "\r\n";
     $measure = str_repeat($line, 4);
@@ -10,6 +10,7 @@ class EditParser
     {
       $measure = substr_replace($measure, "1", 2, 1);
     }
+    return $measure;
   }
 
   protected function gen_edit_file($kind, $name, $abbr, $measures)
@@ -87,6 +88,19 @@ class EditParser
     }
   }
   
+  /**
+   * Check if this line is really blank or is a line comment.
+   */
+  private function checkCommentLine($line)
+  {
+    $line = ltrim($line);
+    if (strlen($line) === 0 or strpos($line, "//") === 0)
+    {
+      return true;
+    }
+    return false;
+  }
+  
   protected function getOfficialAbbr($diff)
   {
     switch ($diff)
@@ -134,6 +148,7 @@ class EditParser
 
     case 0: /* Initial state: verify first line and song title.*/
     {
+      if ($this->checkCommentLine($line)) { break; }
       $key = $params['arcade'] ? "#TITLE:" : "#SONG:";
       $pos = strpos($line, $key, 0);
       if ($pos !== 0)
@@ -148,7 +163,27 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $line = rtrim($line, ";");
+      
       $song = substr($line, strlen($key));
+      
+      $slash = strpos($song, "//");
+      if ($slash !== false)
+      {
+        $song = substr($song, 0, $slash);
+      }
+      
+      $slash = strpos($song, "/");
+      while ($slash !== false)
+      {
+      
+        $song = substr($song, $slash + 1);
+        $slash = strpos($song, "/");
+      }
+      
+      if (strpos($song, ";") !== false)
+      {
+        $song = substr($song, 0, strpos($song, ";"));
+      }
       
       $songid = $base->getIDBySong($song);
       
@@ -179,7 +214,7 @@ class EditParser
     }
     case 1: /* Verify NOTES tag is present next. */
     {
-      if ($line === "" or strpos($line, "//", 0) === 0) { continue; }
+      if ($this->checkCommentLine($line)) { continue; }
       if (strpos($line, "#NOTES:", 0) !== 0)
       {
         $s = "The #NOTES: tag must be on line 2.";
@@ -190,6 +225,7 @@ class EditParser
     }
     case 2: /* Confirm this is pump-single, pump-double, or pump-halfdouble. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -216,6 +252,7 @@ class EditParser
     }
     case 3: /* Get the title / author of the edit. No blank names Dread. ☻ */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -267,6 +304,7 @@ class EditParser
     }
     case 4: /* Arcade mode: get title here. Otherwise, ensure the "Edit:" line is in place. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -294,6 +332,7 @@ class EditParser
     }
     case 5: /* Get the difficulty level of the edit. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
       $pos = strpos($line, ":", 0);
       if ($pos === false)
@@ -320,6 +359,7 @@ class EditParser
     }
     case 6: /* Radar line: use this time to prep other variables. */
     {
+      if ($this->checkCommentLine($line)) { continue; }
       $cols = $this->getCols($style);
 
       for ($dummy = 0; $dummy < $cols; $dummy++)
@@ -346,7 +386,7 @@ class EditParser
         $state = 8;
         
       }
-      elseif (!($line === "" or strpos($line, "//", 0) === 0)) // Parse.
+      elseif (!$this->checkCommentLine($line)) // Parse.
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
