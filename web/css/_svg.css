@@ -38,6 +38,10 @@ radialGradient#grad_064 > stop
 {
   stop-color: lime;
 }
+radialGradient#grad_192 > stop
+{
+  stop-color: #808080;
+}
 g#beat1 > rect:first-child
 {
   fill:#ffffff;
@@ -139,6 +143,10 @@ g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
 .note_064
 {
   fill: lime; /* url('/svg/arrowdef.svg#grad_064'); */
+}
+.note_192
+{
+  fill: #808080;
 }
 text
 {

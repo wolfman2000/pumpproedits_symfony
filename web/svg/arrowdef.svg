@@ -34,6 +34,10 @@
       <stop offset="0" />
       <stop offset="1" />
     </radialGradient>
+    <radialGradient id="grad_192" cx="8.5" cy="8.5" fx="8.5" fy="8.5" r="6.5625" gradientUnits="userSpaceOnUse">
+      <stop offset="0" />
+      <stop offset="1" />
+    </radialGradient>
     <g id="beat1">
       <rect x="0" y="0" height="16" width="16" />
       <rect x="0" y="16" height="16" width="16" />
