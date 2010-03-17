@@ -100,7 +100,7 @@ class EditCharter
     $use = $this->xml->createElement('use');
     if ($x > 0) $use->setAttribute('x', $x);
     if ($y > 0) $use->setAttribute('y', $y);
-    $use->setAttribute('xlink:href', "#$id");
+    $use->setAttribute('xlink:href', "$base#$id");
     if (strlen($class) > 1) $use->setAttribute('class', "$class");
     if (!($sx === 1 and $sy === 1))
     {
@@ -143,7 +143,7 @@ class EditCharter
     $svg->setAttribute('height', $height * $this->scale);
     $this->svgheight = $height;
     
-    $svg->appendChild($this->genDefs());
+    #$svg->appendChild($this->genDefs());
     
     $this->xml->appendChild($svg);
     
