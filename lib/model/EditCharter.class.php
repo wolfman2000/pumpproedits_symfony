@@ -551,151 +551,74 @@ class EditCharter
     }
     $def->appendChild($g);
     
-    // Now the arrows get defined.
+    // Now the arrows get defined.  Here: left arrow
     
     $g = $this->xml->createElement('g');
-    $g->setAttribute('id', 'DLarrow');
+    $g->setAttribute('id', 'Larrow');
     $p = $this->xml->createElement('path');
-    $p->setAttribute('d', 'm 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 0,0 0,-1 -1,-1 '
-      . 'H 7 L 15,5 V 2 C 15,2 15,1 14,1 H 11 L 3,9 V 2 C 3,2 3,1 2,1 2,1 1,1 1,2');
+    $p->setAttribute('d', 'm 1,8 7,7 2,-2 -3,-3 8,0 -2,-2 2,-2 -8,0 3,-3 -2,-2 z');
     $g->appendChild($p);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 15);
-    $l->setAttribute('x2', 11);
-    $l->setAttribute('y1', 5);
-    $l->setAttribute('y2', 1);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 11,10 -2,-2 2,-2');
     $g->appendChild($l);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 11);
-    $l->setAttribute('x2', 7);
-    $l->setAttribute('y1', 9);
-    $l->setAttribute('y2', 5);
-    $g->appendChild($l);
-    
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 7);
-    $l->setAttribute('x2', 3);
-    $l->setAttribute('y1', 13);
-    $l->setAttribute('y2', 9);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 7,10 -2,-2 2,-2');
     $g->appendChild($l);
     
     $def->appendChild($g);
     
-    // up left arrow
+    // down arrow
     
     $g = $this->xml->createElement('g');
-    $g->setAttribute('id', 'ULarrow');
+    $g->setAttribute('id', 'Darrow');
     $p = $this->xml->createElement('path');
-    $p->setAttribute('d', 'M 1,14 V 2 C 1,2 1,1 2,1 h 12 c 0,0 1,0 1,1 0,0 0,1 -1,1 '
-      . 'H 7 l 8,8 v 3 c 0,0 0,1 -1,1 H 11 L 3,6 v 8 c 0,0 0,1 -1,1 0,0 -1,0 -1,-1');
+    $p->setAttribute('d', 'm 8,15 7,-7 -2,-2 -3,3 0,-8 -2,2 -2,-2 0,8 -3,-3 -2,2 z');
     $g->appendChild($p);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 15);
-    $l->setAttribute('x2', 11);
-    $l->setAttribute('y1', 11);
-    $l->setAttribute('y2', 15);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 10,5 -2,2 -2,-2');
     $g->appendChild($l);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 11);
-    $l->setAttribute('x2', 7);
-    $l->setAttribute('y1', 7);
-    $l->setAttribute('y2', 11);
-    $g->appendChild($l);
-    
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 7);
-    $l->setAttribute('x2', 3);
-    $l->setAttribute('y1', 3);
-    $l->setAttribute('y2', 7);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 10,9 -2,2 -2,-2');
     $g->appendChild($l);
     
     $def->appendChild($g);
     
-    // center arrow
+    // up arrow
     
     $g = $this->xml->createElement('g');
-    $g->setAttribute('id', 'CNarrow');
+    $g->setAttribute('id', 'Uarrow');
     $p = $this->xml->createElement('path');
-    $p->setAttribute('d', 'm 1,2 v 12 l 1,1 h 12 l 1,-1 V 2 L 14,1 H 2 z');
+    $p->setAttribute('d', 'm 8,1 -7,7 2,2 3,-3 0,8 2,-2 2,2 0,-8 3,3 2,-2 z');
     $g->appendChild($p);
     
-    foreach (array(4, 10) as $x)
-    {
-    
-      $l = $this->xml->createElement('rect');
-      $l->setAttribute('x', $x);
-      $l->setAttribute('y', 6);
-      $l->setAttribute('height', 4);
-      $l->setAttribute('width', 2);
-      $l->setAttribute('rx', 0.5);
-      $g->appendChild($l);
-    }
-    $def->appendChild($g);
-    
-    // up right arrow
-    
-    $g = $this->xml->createElement('g');
-    $g->setAttribute('id', 'URarrow');
-    $p = $this->xml->createElement('path');
-    $p->setAttribute('d', 'M 15,14 V 2 C 15,2 15,1 14,1 H 2 C 2,1 1,1 1,2 1,2 1,3 2,3 '
-      . 'h 7 l -8,8 v 3 c 0,0 0,1 1,1 h 3 l 8,-8 v 7 c 0,0 0,1 1,1 0,0 1,0 1,-1');
-    $g->appendChild($p);
-    
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 1);
-    $l->setAttribute('x2', 5);
-    $l->setAttribute('y1', 11);
-    $l->setAttribute('y2', 15);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 6,11 2,-2 2,2');
     $g->appendChild($l);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 5);
-    $l->setAttribute('x2', 9);
-    $l->setAttribute('y1', 7);
-    $l->setAttribute('y2', 11);
-    $g->appendChild($l);
-    
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 9);
-    $l->setAttribute('x2', 13);
-    $l->setAttribute('y1', 3);
-    $l->setAttribute('y2', 7);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 6,7 2,-2 2,2');
     $g->appendChild($l);
     
     $def->appendChild($g);
     
-    // down right arrow
+    // right arrow
     
     $g = $this->xml->createElement('g');
-    $g->setAttribute('id', 'DRarrow');
+    $g->setAttribute('id', 'Rarrow');
     $p = $this->xml->createElement('path');
-    $p->setAttribute('d', 'm 15,2 v 12 c 0,0 0,1 -1,1 H 2 c 0,0 -1,0 -1,-1 0,0 0,-1 1,-1 '
-      . 'H 9 L 1,5 V 2 C 1,2 1,1 2,1 h 3 l 8,8 V 2 c 0,0 0,-1 1,-1 0,0 1,0 1,1');
+    $p->setAttribute('d', 'm 15,8 -7,-7 -2,2 3,3 -8,0 2,2 -2,2 8,0 -3,3 2,2 z');
     $g->appendChild($p);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 1);
-    $l->setAttribute('x2', 5);
-    $l->setAttribute('y1', 5);
-    $l->setAttribute('y2', 1);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 5,6 2,2 -2,2');
     $g->appendChild($l);
     
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 5);
-    $l->setAttribute('x2', 9);
-    $l->setAttribute('y1', 9);
-    $l->setAttribute('y2', 5);
-    $g->appendChild($l);
-    
-    $l = $this->xml->createElement('line');
-    $l->setAttribute('x1', 9);
-    $l->setAttribute('x2', 13);
-    $l->setAttribute('y1', 13);
-    $l->setAttribute('y2', 9);
+    $l = $this->xml->createElement('path');
+    $l->setAttribute('d', 'm 9,6 2,2 -2,2');
     $g->appendChild($l);
     
     $def->appendChild($g);
