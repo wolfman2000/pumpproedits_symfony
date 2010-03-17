@@ -1,4 +1,4 @@
-<?php slot('title', 'Contact Failure — Pump Pro Edits');
+<?php slot('title', 'Contact Failure — ITG Edits');
 slot('h2', '<h2 class="error_list">Contact Error!</h2>');
 if (isset($data)): ?>
 <p>There was a problem with processing the data.</p>

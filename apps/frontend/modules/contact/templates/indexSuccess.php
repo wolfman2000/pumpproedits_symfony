@@ -1,4 +1,4 @@
-<?php slot('title', 'Contact the Webmaster — Pump Pro Edits');
+<?php slot('title', 'Contact the Webmaster — ITG Edits');
 slot('h2', '<h2>Contact the Webmaster</h2>'); ?>
 
 <p>If you need to reach the web master for any reason, you have
