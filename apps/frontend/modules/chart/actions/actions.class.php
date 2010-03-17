@@ -247,7 +247,7 @@ class chartActions extends sfActions
     $tmp = new EditParser();
     try
     {
-      $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1));
+      $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1, 'strict_edit' => 0));
       $p = array('cols' => $notedata['cols'], 'kind' => $kind);
       $tmp = new EditCharter($p);
       $xml = $tmp->genChart($notedata);
@@ -260,6 +260,7 @@ class chartActions extends sfActions
     }
     catch (sfParseException $e)
     {
+      echo $e;
       $this->data = $e;
       $this->getResponse()->setStatusCode(409);
       return sfView::ERROR;
