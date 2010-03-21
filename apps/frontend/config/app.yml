@@ -4,7 +4,7 @@
 # default values
 all:
   base_edits_per_page: 30
-  max_edit_file_size: 30720
+  max_edit_file_size: 61440
   max_edit_name_length: 12
   max_difficulty_rating: 99
   min_difficulty_rating: 1
