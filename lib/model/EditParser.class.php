@@ -71,6 +71,7 @@ class EditParser
     {
       case "pump-single": return 5;
       case "pump-double": return 10;
+      case "pump-routine": return 10;
       case "pump-halfdouble": return 6;
       default: return 5; // Lazy right now.
     }
@@ -95,6 +96,7 @@ class EditParser
         return $title == "Hard" ? "Nightmare" : "Freestyle";
       }
       case "pump-halfdouble": return "Halfdouble";
+      case "pump-routine": return "Routine";
       default: return "Undefined"; // Lazy right now.
     }
   }
@@ -123,6 +125,7 @@ class EditParser
       case "Halfdouble": return "hd";
       case "Freestyle": return "fs";
       case "Nightmare": return "nm";
+      case "Routine": return "rt";
       default: return "xx";
     }
   }
@@ -234,7 +237,7 @@ class EditParser
       $state = 2;
       break;
     }
-    case 2: /* Confirm this is pump-single, pump-double, or pump-halfdouble. */
+    case 2: /* Confirm this is pump-single, double, halfdouble, or routine. */
     {
       if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
@@ -245,7 +248,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $style = substr($line, 0, $pos - strlen($line));
-      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble")))
+      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble", "pump-routine")))
       {
         if ($params['arcade'])
         {
@@ -254,7 +257,7 @@ class EditParser
         }
         else
         {
-          $s = "The style %s is invalid. Use pump-single or pump-double.";
+          $s = "The style %s is invalid. Use pump-single, double, halfdouble, or routine.";
           throw new sfParseException(sprintf($s, $style));
         }
       }
