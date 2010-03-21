@@ -2,13 +2,13 @@
 
 class EditParser
 {
-  private function gen_measure($cols, $step = false)
+  private function gen_measure($cols, $step = false, $routine = false)
   {
     $line = str_repeat("0", $cols) . "\r\n";
     $measure = str_repeat($line, 4);
     if ($step)
     {
-      $measure = substr_replace($measure, "1", 2, 1);
+      $measure = substr_replace($measure, "1", ($routine ? 7 : 2), 1);
     }
     return $measure;
   }
@@ -23,23 +23,34 @@ class EditParser
     /* File is opened: now write the headers. */
 
     fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
-    fwrite($fh, sprintf("     %s:%s", $kind, $eol));
+    fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
 
     $cols = $this->getCols($kind);
-
-    fwrite($fh, $this->gen_measure($cols));
-
+    
+    $allM = $this->gen_measure($cols);
     for ($i = 2; $i <= $measures; $i++)
     {
-      fwrite($fh, sprintf(",  // measure %s%s", $i, $eol));
-      fwrite($fh, $this->gen_measure($cols, true));
+      $allM .= sprintf(",  // measure %s%s", $i, $eol);
+      $allM .= $this->gen_measure($cols, true);
     }
-
-    fwrite($fh, sprintf(";%s", $eol));
+    
+    if ($kind === "routine")
+    {
+      $allM .= sprintf("&%s", $eol, $allM);
+      $allM .= $this->gen_measure($cols);
+      for ($i = 2; $i <= $measures; $i++)
+      {
+        $allM .= sprintf(",  // measure %s%s", $i, $eol);
+        $allM .= $this->gen_measure($cols, true, true);
+      }
+    }
+    
+    $allM .= sprintf(";%s", $eol);
+    fwrite($fh, $allM);
     fclose($fh);
     return true;
   }
@@ -47,7 +58,7 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
-    foreach (array("single", "double", "halfdouble") as $kind)
+    foreach (array("single", "double", "halfdouble", "routine") as $kind)
     {
       $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
     }
