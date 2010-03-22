@@ -67,14 +67,16 @@ class PPE_Edit_EditTable extends Doctrine_Table
   {
     $cols = 'diff, y.steps ysteps, y.jumps yjumps, y.holds yholds, y.mines ymines';
     $cols .= ', y.trips ytrips, y.rolls yrolls, y.fakes yfakes, y.lifts ylifts';
+    $cols .= ', m.steps msteps, m.jumps mjumps, m.holds mholds, m.mines mmines';
+    $cols .= ', m.trips mtrips, m.rolls mrolls, m.fakes mfakes, m.lifts mlifts';
     $cols .= ', user_id, b.name uname, title, style, num_votes, tot_votes';
     return $this->createQuery('a')
       ->select($cols)
       ->innerJoin('a.PPE_User_User b')
-      ->innerJoin('a.PPE_Edit_Players y')
+      ->innerJoin('a.PPE_Edit_Players y WITH y.player = 1')
+      ->leftJoin('a.PPE_Edit_Players m WITH m.player = 2') // routine check.
       ->where('song_id = ?', $songid)
       ->andWhere('a.is_problem = ?', 0)
-      ->andWhere('y.player = ?', 1)
       ->orderBy('b.lc_name, a.title')
       ->execute();
       
