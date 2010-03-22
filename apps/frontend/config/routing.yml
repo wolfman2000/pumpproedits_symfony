@@ -8,6 +8,13 @@ homepage:
     module: ppehome
     action: index
 
+# create an edit on the website.
+edit_creater:
+  url: /create
+  param:
+    module: create
+    action: index
+
 # Upload an edit
 upload_get:
   url: /upload
