@@ -15,28 +15,28 @@ class PPE_Edit_EditTable extends Doctrine_Table
 
     $player = new PPE_Edit_Player();
     $player->setPlayer(1);
-    $player->setSteps($row[0]['steps']);
-    $player->setJumps($row[0]['jumps']);
-    $player->setHolds($row[0]['holds']);
-    $player->setMines($row[0]['mines']);
-    $player->setTrips($row[0]['trips']);
-    $player->setRolls($row[0]['rolls']);
-    $player->setLifts($row[0]['lifts']);
-    $player->setFakes($row[0]['fakes']);
+    $player->setSteps($row['steps']);
+    $player->setJumps($row['jumps'][0]);
+    $player->setHolds($row['holds'][0]);
+    $player->setMines($row['mines'][0]);
+    $player->setTrips($row['trips'][0]);
+    $player->setRolls($row['rolls'][0]);
+    $player->setLifts($row['lifts'][0]);
+    $player->setFakes($row['fakes'][0]);
     $edit->PPE_Edit_Players[] = $player;
 
     if ($style === "routine")
     {
       $player = new PPE_Edit_Player();
       $player->setPlayer(2);
-      $player->setSteps($row[1]['steps']);
-      $player->setJumps($row[1]['jumps']);
-      $player->setHolds($row[1]['holds']);
-      $player->setMines($row[1]['mines']);
-      $player->setTrips($row[1]['trips']);
-      $player->setRolls($row[1]['rolls']);
-      $player->setLifts($row[1]['lifts']);
-      $player->setFakes($row[1]['fakes']);
+      $player->setSteps($row['steps'][1]);
+      $player->setJumps($row['jumps'][1]);
+      $player->setHolds($row['holds'][1]);
+      $player->setMines($row['mines'][1]);
+      $player->setTrips($row['trips'][1]);
+      $player->setRolls($row['rolls'][1]);
+      $player->setLifts($row['lifts'][1]);
+      $player->setFakes($row['fakes'][1]);
       $edit->PPE_Edit_Players[] = $player;
     }
 
