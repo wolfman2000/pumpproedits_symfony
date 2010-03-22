@@ -5,39 +5,43 @@ class PPE_Edit_EditTable extends Doctrine_Table
   // Insert data based on EditParser::get_stats
   public function addEdit($row)
   {
+    $style = substr($row['style'], 5);
     $edit = new PPE_Edit_Edit();
     $edit->setSongID($row['id']);
     $edit->setUserID($row['uid']);
     $edit->setTitle($row['title']);
-    $edit->setIsSingle($row['style'] == "pump-single" ? 1 : 0);
+    $edit->setStyle($style);
     $edit->setDiff($row['diff']);
-    $edit->setSteps($row['steps']);
-    $edit->setJumps($row['jumps']);
-    $edit->setHolds($row['holds']);
-    $edit->setMines($row['mines']);
-    $edit->setTrips($row['trips']);
-    $edit->setRolls($row['rolls']);
-    $edit->setLifts($row['lifts']);
-    $edit->setFakes($row['fakes']);
-    
+
+    $player = new PPE_Edit_Player();
+    $player->setPlayer(1);
+    $player->setSteps($row[0]['steps']);
+    $player->setJumps($row[0]['jumps']);
+    $player->setHolds($row[0]['holds']);
+    $player->setMines($row[0]['mines']);
+    $player->setTrips($row[0]['trips']);
+    $player->setRolls($row[0]['rolls']);
+    $player->setLifts($row[0]['lifts']);
+    $player->setFakes($row[0]['fakes']);
+    $edit->PPE_Edit_Players[] = $player;
+
+    if ($style === "routine")
+    {
+      $player = new PPE_Edit_Player();
+      $player->setPlayer(2);
+      $player->setSteps($row[1]['steps']);
+      $player->setJumps($row[1]['jumps']);
+      $player->setHolds($row[1]['holds']);
+      $player->setMines($row[1]['mines']);
+      $player->setTrips($row[1]['trips']);
+      $player->setRolls($row[1]['rolls']);
+      $player->setLifts($row[1]['lifts']);
+      $player->setFakes($row[1]['fakes']);
+      $edit->PPE_Edit_Players[] = $player;
+    }
+
     $edit->save();
     return $edit->id;
-  }
-  
-  // Update data based on EditParser::get_stats
-  public function updateEdit($id, $row)
-  {
-    return $this->createQuery('a')->update()
-      ->set('diff', $row['diff'])
-      ->set('steps', $row['steps'])
-      ->set('jumps', $row['jumps'])
-      ->set('holds', $row['holds'])
-      ->set('mines', $row['mines'])
-      ->set('trips', $row['trips'])
-      ->set('rolls', $row['rolls'])
-      ->set('lifts', $row['lifts'])
-      ->set('fakes', $row['fakes'])
-      ->where('id = ?', $id)->execute();
   }
   
   public function getNonProblemEdits()

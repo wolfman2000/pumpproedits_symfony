@@ -81,54 +81,16 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
              'length' => 12,
              'notnull' => true,
              ));
-        $this->hasColumn('is_single', 'boolean', null, array(
-             'type' => 'boolean',
+        $this->hasColumn('style', 'boolean', null, array(
+             'type' => 'string',
+             'length' => 10,
              'notnull' => true,
-             'default' => 1,
+             'default' => 'single',
              ));
         $this->hasColumn('diff', 'integer', null, array(
              'type' => 'integer',
              'notnull' => true,
              'default' => 10,
-             ));
-        $this->hasColumn('steps', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             ));
-        $this->hasColumn('jumps', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('holds', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('mines', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('trips', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('rolls', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('lifts', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
-             ));
-        $this->hasColumn('fakes', 'integer', null, array(
-             'type' => 'integer',
-             'notnull' => true,
-             'default' => 0,
              ));
         $this->hasColumn('is_problem', 'boolean', null, array(
              'type' => 'boolean',
@@ -138,12 +100,12 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
 
 
         $this->index('author_index', array(
-             'fields' => 
+             'fields' =>
              array(
               0 => 'user_id',
               1 => 'song_id',
               2 => 'title',
-              3 => 'is_single',
+              3 => 'style',
              ),
              'type' => 'unique',
              ));
@@ -152,14 +114,6 @@ abstract class BasePPE_Edit_Edit extends sfDoctrineRecord
         $this->option('charset', 'utf8');
 
         $this->check('diff > 0');
-        $this->check('steps > 0');
-        $this->check('jumps >= 0');
-        $this->check('holds >= 0');
-        $this->check('mines >= 0');
-        $this->check('trips >= 0');
-        $this->check('rolls >= 0');
-        $this->check('lifts >= 0');
-        $this->check('fakes >= 0');
     }
 
     public function setUp()
