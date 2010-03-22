@@ -508,6 +508,11 @@ class EditParser
       }
       break;
     }
+    
+    default: /* Don't throw an error at this point. */
+    {
+      break;
+    }
     endswitch;
     endwhile;
     
