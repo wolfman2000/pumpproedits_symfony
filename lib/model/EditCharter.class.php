@@ -97,6 +97,12 @@ class EditCharter
   private function genUseNode($x, $y, $id, $class = '', $sx = 1, $sy = 1)
   {
     $base = sfConfig::get('app_chart_def_file');
+
+    if (strpos($_SERVER['HTTP_USER_AGENT'], "WebKit") !== false)
+    {
+      $base = "";
+    }
+
     $use = $this->xml->createElement('use');
     if ($x > 0) $use->setAttribute('x', $x);
     if ($y > 0) $use->setAttribute('y', $y);
@@ -143,7 +149,10 @@ class EditCharter
     $svg->setAttribute('height', $height * $this->scale);
     $this->svgheight = $height;
     
-    #$svg->appendChild($this->genDefs());
+    if (strpos($_SERVER['HTTP_USER_AGENT'], "WebKit") !== false)
+    {
+      $svg->appendChild($this->genDefs());
+    }
     
     $this->xml->appendChild($svg);
     
@@ -207,17 +216,25 @@ class EditCharter
     );
     */
     
-    $this->genTxtNode($lbuff, 64, "Steps: " . $nd['steps']);
-    $this->genTxtNode($lbuff, 80, "Jumps: " . $nd['jumps']);
+    $this->genTxtNode($lbuff, 64,
+      "Steps: " . $nd['steps'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['steps'][1] : ""));
+    $this->genTxtNode($lbuff, 80,
+      "Jumps: " . $nd['jumps'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['jumps'][1] : ""));
     
     $w = $this->cw + $lbuff + $this->rb;
     
-    $this->genTxtNode($lbuff + $w * 1, 64, "Holds: " .$nd['holds']);
-    $this->genTxtNode($lbuff + $w * 1, 80, "Mines: " .$nd['mines']);
-    $this->genTxtNode($lbuff + $w * 2, 64, "Trips: " .$nd['trips']);
-    $this->genTxtNode($lbuff + $w * 2, 80, "Rolls: " .$nd['rolls']);
-    $this->genTxtNode($lbuff + $w * 3, 64, "Lifts: " .$nd['lifts']);
-    $this->genTxtNode($lbuff + $w * 3, 80, "Fakes: " .$nd['fakes']);
+    $this->genTxtNode($lbuff + $w * 1, 64,
+      "Holds: " . $nd['holds'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['holds'][1] : ""));
+    $this->genTxtNode($lbuff + $w * 1, 80,
+      "Mines: " . $nd['mines'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['mines'][1] : ""));
+    $this->genTxtNode($lbuff + $w * 2, 64,
+      "Trips: " . $nd['trips'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['trips'][1] : ""));
+    $this->genTxtNode($lbuff + $w * 2, 80,
+      "Rolls: " . $nd['rolls'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['rolls'][1] : ""));
+    $this->genTxtNode($lbuff + $w * 3, 64,
+      "Lifts: " . $nd['lifts'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['lifts'][1] : ""));
+    $this->genTxtNode($lbuff + $w * 3, 80,
+      "Fakes: " . $nd['fakes'][0] . ($nd['style'] === "pump-routine" ? "/" .$nd['fakes'][1] : ""));
   }
   
   private function genBPM($id)
@@ -291,15 +308,16 @@ class EditCharter
     }
   }
   
-  private function prepArrows()
+  private function prepArrows($counter = 0)
   {
+    $pre = ($counter ? "p" . $counter : "note");
     if ($this->kind == "classic")
     {
-      $dl = array('a' => 'DL', 'c' => 'note_004');
-      $ul = array('a' => 'UL', 'c' => 'note_008');
-      $cn = array('a' => 'CN', 'c' => 'note_016');
-      $ur = array('a' => 'UR', 'c' => 'note_008');
-      $dr = array('a' => 'DR', 'c' => 'note_004');
+      $dl = array('a' => 'DL', 'c' => $pre . '_004');
+      $ul = array('a' => 'UL', 'c' => $pre . '_008');
+      $cn = array('a' => 'CN', 'c' => $pre . '_016');
+      $ur = array('a' => 'UR', 'c' => $pre . '_008');
+      $dr = array('a' => 'DR', 'c' => $pre . '_004');
       $ret = array($dl, $ul, $cn, $ur, $dr);
       if ($this->cols == $this->double)
       {
@@ -320,11 +338,11 @@ class EditCharter
       {
         if (array_key_exists('red4', $this))
         {
-          if (intval($d) == 4) $g = 'note_008';
-          elseif (intval($d) == 8) $g = 'note_004';
-          else $g = sprintf('note_%03d', intval($d));
+          if (intval($d) == 4) $g = $pre . '_008';
+          elseif (intval($d) == 8) $g = $pre . '_004';
+          else $g = sprintf('%s_%03d', $pre, intval($d));
         }
-        else $g = sprintf('note_%03d', intval($d));
+        else $g = sprintf('%s_%03d', $pre, intval($d));
         $dl = array('a' => 'DL', 'c' => $g);
         $ul = array('a' => 'UL', 'c' => $g);
         $cn = array('a' => 'CN', 'c' => $g);
@@ -361,9 +379,8 @@ class EditCharter
     }
   }
   
-  private function genArrows($notes)
+  private function genArrows($notes, $style = "pump-single")
   {
-    $arrows = $this->prepArrows();
     for ($i = 0; $i < $this->cols; $i++)
     {
       $holds[] = array('on' => false, 'hold' => true, 'x' => 0, 'y' => 0, 'beat' => 0);
@@ -371,8 +388,13 @@ class EditCharter
     $w = $this->cw + $this->lb + $this->rb; # width + buffers.
     $m = $this->aw * $this->bm * $this->speedmod; # height of measure block
     
+    $ucounter = 1;
+    foreach ($notes as $player):
+    
+    $arrows = $this->prepArrows($style === "pump-routine" ? $ucounter : 0);
+
     $mcounter = 0;    
-    foreach ($notes as $measure):
+    foreach ($player as $measure):
     
     $rcounter = 0;
     foreach ($measure as $row):
@@ -502,6 +524,9 @@ class EditCharter
     
     $mcounter++;
     endforeach;
+    
+    $ucounter++;
+    endforeach;
   }
   
   /**
@@ -581,7 +606,7 @@ class EditCharter
     }
     $def->appendChild($g);
     
-    // Now the arrows get defined.
+    // Now the arrows get defined.  Here: down left arrow
     
     $g = $this->xml->createElement('g');
     $g->setAttribute('id', 'DLarrow');
@@ -779,13 +804,13 @@ class EditCharter
   
   public function genChart($notedata)
   {
-    $measures = count($notedata['notes']);
+    $measures = count($notedata['notes'][0]);
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
     if ($this->showbpm) $this->genBPM($notedata['id']);
     if ($this->showstop) $this->genStop($notedata['id']);
-    $this->genArrows($notedata['notes']);
+    $this->genArrows($notedata['notes'], $notedata['style']);
     return $this->xml;
   }
 }

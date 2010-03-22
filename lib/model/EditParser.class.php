@@ -2,13 +2,13 @@
 
 class EditParser
 {
-  private function gen_measure($cols, $step = false)
+  private function gen_measure($cols, $step = false, $routine = false)
   {
     $line = str_repeat("0", $cols) . "\r\n";
     $measure = str_repeat($line, 4);
     if ($step)
     {
-      $measure = substr_replace($measure, "1", 2, 1);
+      $measure = substr_replace($measure, "1", ($routine ? 7 : 2), 1);
     }
     return $measure;
   }
@@ -23,23 +23,34 @@ class EditParser
     /* File is opened: now write the headers. */
 
     fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
-    fwrite($fh, sprintf("     %s:%s", $kind, $eol));
+    fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
 
     $cols = $this->getCols($kind);
-
-    fwrite($fh, $this->gen_measure($cols));
-
+    
+    $allM = $this->gen_measure($cols);
     for ($i = 2; $i <= $measures; $i++)
     {
-      fwrite($fh, sprintf(",  // measure %s%s", $i, $eol));
-      fwrite($fh, $this->gen_measure($cols, true));
+      $allM .= sprintf(",  // measure %s%s", $i, $eol);
+      $allM .= $this->gen_measure($cols, true);
     }
-
-    fwrite($fh, sprintf(";%s", $eol));
+    
+    if ($kind === "routine")
+    {
+      $allM .= sprintf("&%s", $eol, $allM);
+      $allM .= $this->gen_measure($cols);
+      for ($i = 2; $i <= $measures; $i++)
+      {
+        $allM .= sprintf(",  // measure %s%s", $i, $eol);
+        $allM .= $this->gen_measure($cols, true, true);
+      }
+    }
+    
+    $allM .= sprintf(";%s", $eol);
+    fwrite($fh, $allM);
     fclose($fh);
     return true;
   }
@@ -47,7 +58,7 @@ class EditParser
   public function generate_base($songid)
   {
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
-    foreach (array("single", "double", "halfdouble") as $kind)
+    foreach (array("single", "double", "halfdouble", "routine") as $kind)
     {
       $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
     }
@@ -60,6 +71,7 @@ class EditParser
     {
       case "pump-single": return 5;
       case "pump-double": return 10;
+      case "pump-routine": return 10;
       case "pump-halfdouble": return 6;
       default: return 5; // Lazy right now.
     }
@@ -84,6 +96,7 @@ class EditParser
         return $title == "Hard" ? "Nightmare" : "Freestyle";
       }
       case "pump-halfdouble": return "Halfdouble";
+      case "pump-routine": return "Routine";
       default: return "Undefined"; // Lazy right now.
     }
   }
@@ -112,6 +125,7 @@ class EditParser
       case "Halfdouble": return "hd";
       case "Freestyle": return "fs";
       case "Nightmare": return "nm";
+      case "Routine": return "rt";
       default: return "xx";
     }
   }
@@ -125,11 +139,20 @@ class EditParser
   public function get_stats($fh, $params = array())
   {
     $res = array(); # Return variables go in here.
-    $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
+    # Make all of these an array to allow for routine steps.
+    $steps = array(0 => 0, 1 => 0);
+    $jumps = array(0 => 0, 1 => 0);
+    $holds = array(0 => 0, 1 => 0);
+    $mines = array(0 => 0, 1 => 0);
+    $trips = array(0 => 0, 1 => 0);
+    $rolls = array(0 => 0, 1 => 0);
+    $lifts = array(0 => 0, 1 => 0);
+    $fakes = array(0 => 0, 1 => 0);
+
     $steps_on = array();
     $holds_on = array();
     $actve_on = array();
-    $notes = array();
+    $notes = array(0 => array(), 1 => array());
     $state = $diff = $cols = $measure = $songid = 0;
     $title = $song = $style = "";
     $base = Doctrine::getTable('PPE_Song_Song');
@@ -223,7 +246,7 @@ class EditParser
       $state = 2;
       break;
     }
-    case 2: /* Confirm this is pump-single, pump-double, or pump-halfdouble. */
+    case 2: /* Confirm this is pump-single, double, halfdouble, or routine. */
     {
       if ($this->checkCommentLine($line)) { continue; }
       $line = ltrim($line);
@@ -234,7 +257,7 @@ class EditParser
         throw new sfParseException(sprintf($s, $line));
       }
       $style = substr($line, 0, $pos - strlen($line));
-      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble")))
+      if (!in_array($style, array("pump-single", "pump-double", "pump-halfdouble", "pump-routine")))
       {
         if ($params['arcade'])
         {
@@ -243,7 +266,7 @@ class EditParser
         }
         else
         {
-          $s = "The style %s is invalid. Use pump-single or pump-double.";
+          $s = "The style %s is invalid. Use pump-single, double, halfdouble, or routine.";
           throw new sfParseException(sprintf($s, $style));
         }
       }
@@ -370,6 +393,7 @@ class EditParser
       }
       $notes[] = array();
       $state = 7;
+      $side = 0; // routine compatible switch.
       break;
     }
     case 7: /* Finally at step content. Read until ; is first. */
@@ -378,7 +402,12 @@ class EditParser
       if (substr($line, 0, 1) === ",") /* New measure upcoming. */
       {
         $measure++;
-        $notes[] = array();
+        $notes[$side][] = array();
+      }
+      elseif (substr($line, 0, 1) === "&") /* New routine step partner. */
+      {
+        $side = 1;
+        $measure = 0;
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
@@ -390,7 +419,7 @@ class EditParser
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
-        $notes[$measure][] = $row;
+        $notes[$side][$measure][] = $row;
 
         for ($i = 0; $i < $cols; $i++)
         {
@@ -414,7 +443,7 @@ class EditParser
             $holds_on[$i] = 1;
             $steps_on[$i] = 1;
             $steps_per_row++;
-            $holds++;
+            $holds[$side]++;
             break;
           }
           case "3": // End of hold/roll note
@@ -428,25 +457,25 @@ class EditParser
             $holds_on[$i] = 1;
             $steps_on[$i] = 1;
             $steps_per_row++;
-            $rolls++;
+            $rolls[$side]++;
             break;
           }
           case "M": // Mine
           {
             $holds_on[$i] = 0;
-            $mines++;
+            $mines[$side]++;
             break;
           }
           case "L": // Lift note (not fully implemented)
           {
             $holds_on[$i] = 0;
-            $lifts++;
+            $lifts[$side]++;
             break;
           }
           case "F": // Fake note (will be in future builds)
           {
             $holds_on[$i] = 0;
-            $fakes;
+            $fakes[$side]++;
             break;
           }
           default: // Invalid data found.
@@ -462,9 +491,9 @@ class EditParser
         {
           $actve_on[$i] = ($holds_on[$i] === 1 or $steps_on[$i] === 1 ? 1 : 0);
         }
-        if ($steps_per_row > 0 and array_sum($actve_on) >= 3) { $trips++; }
-        if ($steps_per_row >= 2) { $jumps++; }
-        if ($steps_per_row) { $steps++; }
+        if ($steps_per_row > 0 and array_sum($actve_on) >= 3) { $trips[$side]++; }
+        if ($steps_per_row >= 2) { $jumps[$side]++; }
+        if ($steps_per_row) { $steps[$side]++; }
       }
       break;
     }

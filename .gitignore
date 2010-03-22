@@ -6,6 +6,7 @@ data/fixtures/powers.yml
 data/fixtures/votes.yml
 data/sql/schema.sql
 data/official
+data/*.db
 dbreload.sh
 .DS_Store
 cache/*
