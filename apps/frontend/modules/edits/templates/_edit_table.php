@@ -35,28 +35,29 @@ if (isset($showsong)): ?>
 <td><?php echo $z->title ?></td>
 <td>
 <dl>
-<dt>Style</dt><dd><?php echo substr(ucfirst($z->style), 0, 1) . $z->diff ?></dd>
-<dt>Steps</dt><dd><?php echo $z->ysteps ?></dd>
-<?php if ($z->yjumps): ?>
-<dt>Jumps</dt><dd><?php echo $z->yjumps ?></dd>
+<?php $l = substr(ucfirst($z->style), 0, 1); ?>
+<dt>Style</dt><dd><?php echo $l . $z->diff ?></dd>
+<dt>Steps</dt><dd><?php echo $z->ysteps . ($l === "R" ? "/$z->msteps" : "") ?></dd>
+<?php if ($z->yjumps or $z->mjumps): ?>
+<dt>Jumps</dt><dd><?php echo $z->yjumps . ($l === "R" ? "/$z->mjumps" : "") ?></dd>
 <?php endif;
-if ($z->yholds): ?>
-<dt>Holds</dt><dd><?php echo $z->yholds ?></dd>
+if ($z->yholds or $z->mholds): ?>
+<dt>Holds</dt><dd><?php echo $z->yholds . ($l === "R" ? "/$z->mholds" : "") ?></dd>
 <?php endif;
-if ($z->ymines): ?>
-<dt>Mines</dt><dd><?php echo $z->ymines ?></dd>
+if ($z->ymines or $z->mmines): ?>
+<dt>Mines</dt><dd><?php echo $z->ymines . ($l === "R" ? "/$z->mmines" : "") ?></dd>
 <?php endif;
-if ($z->ytrips): ?>
-<dt>Trips</dt><dd><?php echo $z->ytrips ?></dd>
+if ($z->ytrips or $z->mtrips): ?>
+<dt>Trips</dt><dd><?php echo $z->ytrips . ($l === "R" ? "/$z->mtrips" : "") ?></dd>
 <?php endif;
-if ($z->yrolls): ?>
-<dt>Rolls</dt><dd><?php echo $z->yrolls ?></dd>
+if ($z->yrolls or $z->mrolls): ?>
+<dt>Rolls</dt><dd><?php echo $z->yrolls . ($l === "R" ? "/$z->mrolls" : "") ?></dd>
 <?php endif;
-if ($z->ylifts): ?>
-<dt>Lifts</dt><dd><?php echo $z->ylifts ?></dd>
+if ($z->ylifts or $z->mlifts): ?>
+<dt>Lifts</dt><dd><?php echo $z->ylifts . ($l === "R" ? "/$z->mlifts" : "") ?></dd>
 <?php endif;
-if ($z->yfakes): ?>
-<dt>Fakes</dt><dd><?php echo $z->yfakes ?></dd>
+if ($z->yfakes or $z->mfakes): ?>
+<dt>Fakes</dt><dd><?php echo $z->yfakes . ($l === "R" ? "/$z->mfakes" : "") ?></dd>
 <?php endif;
 if ($z->num_votes): ?>
 <dt>Avg Score</dt><dd><?php echo $z->tot_votes / $z->num_votes ?></dd>
