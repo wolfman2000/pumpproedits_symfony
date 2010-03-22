@@ -1,44 +1,66 @@
-radialGradient > stop:first-child + stop
-{
-  stop-opacity: 0.5;
-}
-radialGradient > stop:first-child
+radialGradient > stop
 {
   stop-opacity: 1;
 }
-radialGradient#grad_004 > stop
+#p1_004 > stop:first-child,
+#p1_008 > stop:first-child,
+#p1_012 > stop:first-child,
+#p1_016 > stop:first-child,
+#p1_024 > stop:first-child,
+#p1_032 > stop:first-child,
+#p1_048 > stop:first-child,
+#p1_064 > stop:first-child,
+#p1_192 > stop:first-child
 {
-  stop-color: blue;
+  /* stop-color: #9D976B; */
 }
-radialGradient#grad_008 > stop
+#p2_004 > stop:first-child,
+#p2_008 > stop:first-child,
+#p2_012 > stop:first-child,
+#p2_016 > stop:first-child,
+#p2_024 > stop:first-child,
+#p2_032 > stop:first-child,
+#p2_048 > stop:first-child,
+#p2_064 > stop:first-child,
+#p2_192 > stop:first-child
+{
+	stop-color: #9D986B; /* green; */
+}
+
+#p1_004 > stop, #p2_004 > stop
+{
+	stop-color: blue;
+}
+
+#p1_008 > stop, #p2_008 > stop
 {
   stop-color: red;
 }
-radialGradient#grad_012 > stop
+#p1_012 > stop, #p2_012 > stop
 {
   stop-color: purple;
 }
-radialGradient#grad_016 > stop
+#p1_016 > stop, #p2_016 > stop
 {
   stop-color: yellow;
 }
-radialGradient#grad_024 > stop
+#p1_024 > stop, #p2_024 > stop
 {
   stop-color: pink;
 }
-radialGradient#grad_032 > stop
+#p1_032 > stop, #p2_032 > stop
 {
   stop-color: brown;
 }
-radialGradient#grad_048 > stop
+#p1_048 > stop, #p2_048 > stop
 {
   stop-color: aqua;
 }
-radialGradient#grad_064 > stop
+#p1_064 > stop, #p2_064 > stop
 {
   stop-color: lime;
 }
-radialGradient#grad_192 > stop
+#p1_192 > stop, #p2_192 > stop
 {
   stop-color: #808080;
 }
@@ -111,6 +133,79 @@ g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
 {
   stroke:black;
   stroke-width: 0.3;
+}
+
+.p1_004
+{
+	fill: url('/svg/arrowdef.svg#p1_004');
+}
+.p1_008
+{
+	fill: url('/svg/arrowdef.svg#p1_008');
+}
+.p1_012
+{
+	fill: url('/svg/arrowdef.svg#p1_012');
+}
+.p1_016
+{
+	fill: url('/svg/arrowdef.svg#p1_016');
+}
+.p1_024
+{
+	fill: url('/svg/arrowdef.svg#p1_024');
+}
+.p1_032
+{
+	fill: url('/svg/arrowdef.svg#p1_032');
+}
+.p1_048
+{
+	fill: url('/svg/arrowdef.svg#p1_048');
+}
+.p1_064
+{
+	fill: url('/svg/arrowdef.svg#p1_064');
+}
+.p1_192
+{
+	fill: url('/svg/arrowdef.svg#p1_192');
+}
+.p2_004
+{
+	fill: url('/svg/arrowdef.svg#p2_004');
+}
+.p2_008
+{
+	fill: url('/svg/arrowdef.svg#p2_008');
+}
+.p2_012
+{
+	fill: url('/svg/arrowdef.svg#p2_012');
+}
+.p2_016
+{
+	fill: url('/svg/arrowdef.svg#p2_016');
+}
+.p2_024
+{
+	fill: url('/svg/arrowdef.svg#p2_024');
+}
+.p2_032
+{
+	fill: url('/svg/arrowdef.svg#p2_032');
+}
+.p2_048
+{
+	fill: url('/svg/arrowdef.svg#p2_048');
+}
+.p2_064
+{
+	fill: url('/svg/arrowdef.svg#p2_064');
+}
+.p2_192
+{
+	fill: url('/svg/arrowdef.svg#p2_192');
 }
 .note_004
 {
