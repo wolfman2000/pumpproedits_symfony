@@ -17,6 +17,11 @@ class createActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false)
+    {
+      $this->getResponse()->setStatusCode(415);
+      return sfView::ERROR;
+    }
+    $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
 }
