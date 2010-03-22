@@ -59,7 +59,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
   {
     return $this->createQuery('a')->select('id')
       ->where('title = ?', $row['title'])
-      ->andWhere('is_single = ?', $row['style'] == "pump-single" ? true : false)
+      ->andWhere('style = ?', substr($row['style'], 5))
       ->andWhere('user_id = ?', $row['uid'])->fetchOne();
   }
 
