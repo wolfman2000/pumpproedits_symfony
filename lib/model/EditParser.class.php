@@ -407,6 +407,7 @@ class EditParser
       elseif (substr($line, 0, 1) === "&") /* New routine step partner. */
       {
         $side = 1;
+        $measure = 0;
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
