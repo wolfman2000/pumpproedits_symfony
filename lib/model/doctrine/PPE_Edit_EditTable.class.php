@@ -15,7 +15,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
 
     $player = new PPE_Edit_Player();
     $player->setPlayer(1);
-    $player->setSteps($row['steps']);
+    $player->setSteps($row['steps'][0]);
     $player->setJumps($row['jumps'][0]);
     $player->setHolds($row['holds'][0]);
     $player->setMines($row['mines'][0]);
@@ -42,6 +42,21 @@ class PPE_Edit_EditTable extends Doctrine_Table
 
     $edit->save();
     return $edit->id;
+  }
+  
+  public function updateEdit($id, $row, $player = 1)
+  {
+    $this->createQuery('a')->update()
+      ->set('diff', $row['diff'])
+      ->where('id = ?', $id)->execute();
+    
+    $pT = Doctrine::getTable('PPE_Edit_Player');
+    $pT->updateEdit($id, 1, $row);
+    if ($row['style'] === "pump-routine")
+    {
+      $pT->updateEdit($id, 2, $row);
+    }
+    return true;
   }
   
   public function getNonProblemEdits()
