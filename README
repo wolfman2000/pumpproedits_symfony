@@ -19,6 +19,10 @@ cache and log folders. Give 777 permissions to
 both of them. Windows users, you'll have to discover
 the equivalent commands on your own.
 
+4) Some of the core data files, such as the edits and
+stepcharts themselves, are not included. Those have to
+be gotten separately.
+
 As far as coding standards go, keep it legible. Using
 unicode/utf-8 is alright if it's for a decent reason.
 Tabs versus spaces, where braces go, etc, is not something
