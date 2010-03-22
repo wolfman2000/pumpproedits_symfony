@@ -24,7 +24,7 @@ class ChartGeneratorForm extends sfForm
         $choices[$nname] = array();
         $oname = $nname;
       }
-      $choices[$oname][$r->id] = "$r->sname → $r->title (" . ($r->is_single ? "S" : "D") . "$r->diff)";
+      $choices[$oname][$r->id] = "$r->sname → $r->title (" . (ucfirst(substr($r->style, 0, 1))) . "$r->diff)";
       $possible[] = $r->id;
     endforeach;
     

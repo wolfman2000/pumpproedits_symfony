@@ -47,11 +47,11 @@ class PPE_Edit_EditTable extends Doctrine_Table
   public function getNonProblemEdits()
   {
     return $this->createQuery('a')
-      ->select('id, b.name uname, is_single, title, diff, c.name sname')
+      ->select('id, b.name uname, style, title, diff, c.name sname')
       ->innerJoin('a.PPE_User_User b')
       ->innerJoin('a.PPE_Song_Song c')
       ->where('a.is_problem = ?', false)
-      ->orderBy('b.lc_name, c.lc_name, title, is_single')
+      ->orderBy('b.lc_name, c.lc_name, title, style')
       ->execute();
   }
 
