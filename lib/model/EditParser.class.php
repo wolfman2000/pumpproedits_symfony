@@ -15,21 +15,21 @@ class EditParser
 
   protected function gen_edit_file($kind, $name, $abbr, $measures)
   {
-    $fname = sprintf("base_%s_%s.edit", $abbr, $kind);
+    $fname = sprintf("base_%06d_%s.edit", $abbr, ucfirst($kind));
     $eol = "\r\n";
     $loc = sfConfig::get('sf_data_dir') . '/base_edits';
     $fh = fopen($loc . '/' . $fname, 'w');
 
     /* File is opened: now write the headers. */
 
-    fwrite($fh, sprintf("#SONG:%s%s#NOTES:%s", $name, $eol, $eol));
+    fwrite($fh, sprintf("#SONG:%s;%s#NOTES:%s", $name, $eol, $eol));
     fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
     fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
-    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0%s%s", $measures - 1, $eol, $eol));
+    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0:%s%s", $measures - 1, $eol, $eol));
 
-    $cols = $this->getCols($kind);
+    $cols = $this->getCols("pump-" . $kind);
     
     $allM = $this->gen_measure($cols);
     for ($i = 2; $i <= $measures; $i++)
@@ -40,7 +40,7 @@ class EditParser
     
     if ($kind === "routine")
     {
-      $allM .= sprintf("&%s", $eol, $allM);
+      $allM .= sprintf("&  // measures 1%s", $eol, $allM);
       $allM .= $this->gen_measure($cols);
       for ($i = 2; $i <= $measures; $i++)
       {
@@ -60,7 +60,7 @@ class EditParser
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
     foreach (array("single", "double", "halfdouble", "routine") as $kind)
     {
-      $this->gen_edit_file($kind, $base->getName(), $base->getAbbr(), $base->getMeasures());
+      $this->gen_edit_file($kind, $base->getName(), $base->getID(), $base->getMeasures());
     }
 
   }

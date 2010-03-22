@@ -34,7 +34,8 @@ class baseActions extends sfActions
   {
     $id = $request->getParameter('id');
     $type = $request->getParameter('type');
-    if (!(is_numeric($id) and ($type === "single" or $type === "double")))
+    $styles = array("single", "double", "halfdouble", "routine");
+    if (!(is_numeric($id) and in_array($type, $styles)))
     {
       $response = $this->getResponse();
       $response->setStatusCode(409);
@@ -42,9 +43,16 @@ class baseActions extends sfActions
       $this->type = $request->getParameter('type');
       return sfView::ERROR;
     }
-    $id = sprintf("%06d", $id);
-    $name = sprintf("base_%s_%s.edit", $id, ucfirst($type));
+    $nid = sprintf("%06d", $id);
+    $name = sprintf("base_%s_%s.edit", $nid, ucfirst($type));
     $path = sprintf("%s/data/base_edits/%s", sfConfig::get('sf_root_dir'), $name);
+    
+    if (!file_exists($path)) # Generate the new base edits.
+    {
+      $p = new EditParser();
+      $p->generate_base($id);
+    }
+    
     $file = file_get_contents($path);
 
     $response = $this->getResponse();

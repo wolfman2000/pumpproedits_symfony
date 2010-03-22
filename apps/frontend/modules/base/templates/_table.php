@@ -1,17 +1,20 @@
+<?php $style = array('single', 'double', 'halfdouble', 'routine'); ?>
 <table id="base" summary="Base edit files for users to download.">
   <caption>Download the Base Edit Files</caption>
   <thead><tr>
     <th>Song Name</th>
-    <th>pump-single</th>
-    <th>pump-double</th>
+    <?php foreach ($style as $st): ?>
+    <th>pump-<?php echo $st; ?></th>
+    <?php endforeach; ?>
   </tr></thead>
   <tbody>
     <?php foreach ($base_songs as $b): ?>
     <tr>
       <td><?php echo $b->getName() ?></td>
       <?php $s = '@download_base_edit?id=%d&type=%s'; ?>
-      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), 'single')) ?>"><?php echo $b->getAbbr() ?> Single</a></td>
-      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), 'double')) ?>"><?php echo $b->getAbbr() ?> Double</a></td>
+      <?php foreach ($style as $st): ?>
+      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), $st)) ?>"><?php echo $b->getAbbr() . " " . ucfirst($st) ?></a></td>
+      <?php endforeach; ?>
     </tr>
     <?php endforeach; ?>
   </tbody>
