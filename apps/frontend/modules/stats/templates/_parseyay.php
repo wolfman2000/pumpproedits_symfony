@@ -1,4 +1,13 @@
-<?php slot('title', "Stats on your {$result['title']} edit — Pump Pro Edits"); ?>
+<?php slot('title', "Stats on your {$result['title']} edit — Pump Pro Edits");
+$style = $result['style'];
+function statRow($dt, $dd, $style)
+{
+  echo "<dt>$dt</dt><dd>${dd[0]}";
+  if ($style === "pump-routine") { echo "/${dd[1]}"; }
+  echo "</dd>\r\n";
+}
+
+?>
 
 <h2>Successful Parse!</h2>
 
@@ -6,14 +15,16 @@
 
 <dl>
 <dt>Title</dt><dd><?php echo $result['title'] ?></dd>
-<dt>Style</dt><dd><?php echo $result['style'] ?></dd>
+<dt>Style</dt><dd><?php echo $style ?></dd>
 <dt>Difficulty</dt><dd><?php echo $result['diff'] ?></dd>
-<dt>Steps</dt><dd><?php echo $result['steps'] ?></dd>
-<dt>Jumps</dt><dd><?php echo $result['jumps'] ?></dd>
-<dt>Holds</dt><dd><?php echo $result['holds'] ?></dd>
-<dt>Mines</dt><dd><?php echo $result['mines'] ?></dd>
-<dt>Trips</dt><dd><?php echo $result['trips'] ?></dd>
-<dt>Rolls</dt><dd><?php echo $result['rolls'] ?></dd>
+<?php statRow("Steps", $result['steps'], $style);
+statRow("Jumps", $result['jumps'], $style);
+statRow("Holds", $result['holds'], $style);
+statRow("Mines", $result['mines'], $style);
+statRow("Trips", $result['trips'], $style);
+statRow("Rolls", $result['rolls'], $style);
+statRow("Lifts", $result['lifts'], $style);
+statRow("Fakes", $result['fakes'], $style); ?>
 </dl>
 
 <p>Feel free to submit another edit to get its stats too!</p>
