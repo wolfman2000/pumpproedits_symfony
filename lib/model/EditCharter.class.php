@@ -371,8 +371,10 @@ class EditCharter
     $w = $this->cw + $this->lb + $this->rb; # width + buffers.
     $m = $this->aw * $this->bm * $this->speedmod; # height of measure block
     
+    foreach ($notes as $player):
+    
     $mcounter = 0;    
-    foreach ($notes as $measure):
+    foreach ($player as $measure):
     
     $rcounter = 0;
     foreach ($measure as $row):
@@ -501,6 +503,7 @@ class EditCharter
     endforeach;
     
     $mcounter++;
+    endforeach;
     endforeach;
   }
   
@@ -779,7 +782,7 @@ class EditCharter
   
   public function genChart($notedata)
   {
-    $measures = count($notedata['notes']);
+    $measures = count($notedata['notes'][0]);
     $this->genXMLHeader($measures);
     $this->genEditHeader($notedata);
     $this->genMeasures($measures);
