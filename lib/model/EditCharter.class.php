@@ -308,15 +308,16 @@ class EditCharter
     }
   }
   
-  private function prepArrows()
+  private function prepArrows($counter = 0)
   {
+    $pre = ($counter ? "p" . $counter : "note");
     if ($this->kind == "classic")
     {
-      $dl = array('a' => 'DL', 'c' => 'note_004');
-      $ul = array('a' => 'UL', 'c' => 'note_008');
-      $cn = array('a' => 'CN', 'c' => 'note_016');
-      $ur = array('a' => 'UR', 'c' => 'note_008');
-      $dr = array('a' => 'DR', 'c' => 'note_004');
+      $dl = array('a' => 'DL', 'c' => $pre . '_004');
+      $ul = array('a' => 'UL', 'c' => $pre . '_008');
+      $cn = array('a' => 'CN', 'c' => $pre . '_016');
+      $ur = array('a' => 'UR', 'c' => $pre . '_008');
+      $dr = array('a' => 'DR', 'c' => $pre . '_004');
       $ret = array($dl, $ul, $cn, $ur, $dr);
       if ($this->cols == $this->double)
       {
@@ -337,11 +338,11 @@ class EditCharter
       {
         if (array_key_exists('red4', $this))
         {
-          if (intval($d) == 4) $g = 'note_008';
-          elseif (intval($d) == 8) $g = 'note_004';
-          else $g = sprintf('note_%03d', intval($d));
+          if (intval($d) == 4) $g = $pre . '_008';
+          elseif (intval($d) == 8) $g = $pre . '_004';
+          else $g = sprintf('%s_%03d', $pre, intval($d));
         }
-        else $g = sprintf('note_%03d', intval($d));
+        else $g = sprintf('%s_%03d', $pre, intval($d));
         $dl = array('a' => 'DL', 'c' => $g);
         $ul = array('a' => 'UL', 'c' => $g);
         $cn = array('a' => 'CN', 'c' => $g);
@@ -378,9 +379,8 @@ class EditCharter
     }
   }
   
-  private function genArrows($notes)
+  private function genArrows($notes, $style = "pump-single")
   {
-    $arrows = $this->prepArrows();
     for ($i = 0; $i < $this->cols; $i++)
     {
       $holds[] = array('on' => false, 'hold' => true, 'x' => 0, 'y' => 0, 'beat' => 0);
@@ -388,8 +388,11 @@ class EditCharter
     $w = $this->cw + $this->lb + $this->rb; # width + buffers.
     $m = $this->aw * $this->bm * $this->speedmod; # height of measure block
     
+    $ucounter = 1;
     foreach ($notes as $player):
     
+    $arrows = $this->prepArrows($style === "pump-routine" ? $ucounter : 0);
+
     $mcounter = 0;    
     foreach ($player as $measure):
     
@@ -521,6 +524,8 @@ class EditCharter
     
     $mcounter++;
     endforeach;
+    
+    $ucounter++;
     endforeach;
   }
   
@@ -805,7 +810,7 @@ class EditCharter
     $this->genMeasures($measures);
     if ($this->showbpm) $this->genBPM($notedata['id']);
     if ($this->showstop) $this->genStop($notedata['id']);
-    $this->genArrows($notedata['notes']);
+    $this->genArrows($notedata['notes'], $notedata['style']);
     return $this->xml;
   }
 }
