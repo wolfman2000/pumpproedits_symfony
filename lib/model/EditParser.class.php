@@ -139,11 +139,20 @@ class EditParser
   public function get_stats($fh, $params = array())
   {
     $res = array(); # Return variables go in here.
-    $steps = $jumps = $holds = $mines = $trips = $rolls = $lifts = $fakes = 0;
+    # Make all of these an array to allow for routine steps.
+    $steps = array(0 => 0, 1 => 0);
+    $jumps = array(0 => 0, 1 => 0);
+    $holds = array(0 => 0, 1 => 0);
+    $mines = array(0 => 0, 1 => 0);
+    $trips = array(0 => 0, 1 => 0);
+    $rolls = array(0 => 0, 1 => 0);
+    $lifts = array(0 => 0, 1 => 0);
+    $fakes = array(0 => 0, 1 => 0);
+
     $steps_on = array();
     $holds_on = array();
     $actve_on = array();
-    $notes = array();
+    $notes = array(0 => array(), 1 => array());
     $state = $diff = $cols = $measure = $songid = 0;
     $title = $song = $style = "";
     $base = Doctrine::getTable('PPE_Song_Song');
@@ -384,6 +393,7 @@ class EditParser
       }
       $notes[] = array();
       $state = 7;
+      $side = 0; // routine compatible switch.
       break;
     }
     case 7: /* Finally at step content. Read until ; is first. */
@@ -392,7 +402,11 @@ class EditParser
       if (substr($line, 0, 1) === ",") /* New measure upcoming. */
       {
         $measure++;
-        $notes[] = array();
+        $notes[$side][] = array();
+      }
+      elseif (substr($line, 0, 1) === "&") /* New routine step partner. */
+      {
+        $side = 1;
       }
       elseif (substr($line, 0, 1) === ";") /* Should be EOF */
       {
@@ -404,7 +418,7 @@ class EditParser
       {
         $steps_per_row = 0;
         $row = substr($line, 0, $cols);
-        $notes[$measure][] = $row;
+        $notes[$side][$measure][] = $row;
 
         for ($i = 0; $i < $cols; $i++)
         {
@@ -428,7 +442,7 @@ class EditParser
             $holds_on[$i] = 1;
             $steps_on[$i] = 1;
             $steps_per_row++;
-            $holds++;
+            $holds[$side]++;
             break;
           }
           case "3": // End of hold/roll note
@@ -442,25 +456,25 @@ class EditParser
             $holds_on[$i] = 1;
             $steps_on[$i] = 1;
             $steps_per_row++;
-            $rolls++;
+            $rolls[$side]++;
             break;
           }
           case "M": // Mine
           {
             $holds_on[$i] = 0;
-            $mines++;
+            $mines[$side]++;
             break;
           }
           case "L": // Lift note (not fully implemented)
           {
             $holds_on[$i] = 0;
-            $lifts++;
+            $lifts[$side]++;
             break;
           }
           case "F": // Fake note (will be in future builds)
           {
             $holds_on[$i] = 0;
-            $fakes;
+            $fakes[$side]++;
             break;
           }
           default: // Invalid data found.
@@ -476,9 +490,9 @@ class EditParser
         {
           $actve_on[$i] = ($holds_on[$i] === 1 or $steps_on[$i] === 1 ? 1 : 0);
         }
-        if ($steps_per_row > 0 and array_sum($actve_on) >= 3) { $trips++; }
-        if ($steps_per_row >= 2) { $jumps++; }
-        if ($steps_per_row) { $steps++; }
+        if ($steps_per_row > 0 and array_sum($actve_on) >= 3) { $trips[$side]++; }
+        if ($steps_per_row >= 2) { $jumps[$side]++; }
+        if ($steps_per_row) { $steps[$side]++; }
       }
       break;
     }
