@@ -35,28 +35,28 @@ if (isset($showsong)): ?>
 <td><?php echo $z->title ?></td>
 <td>
 <dl>
-<dt>Style</dt><dd><?php echo ($z->is_single ? "S" : "D") . $z->diff ?></dd>
-<dt>Steps</dt><dd><?php echo $z->steps ?></dd>
-<?php if ($z->jumps): ?>
-<dt>Jumps</dt><dd><?php echo $z->jumps ?></dd>
+<dt>Style</dt><dd><?php echo substr(ucfirst($z->style), 0, 1) . $z->diff ?></dd>
+<dt>Steps</dt><dd><?php echo $z->ysteps ?></dd>
+<?php if ($z->yjumps): ?>
+<dt>Jumps</dt><dd><?php echo $z->yjumps ?></dd>
 <?php endif;
-if ($z->holds): ?>
-<dt>Holds</dt><dd><?php echo $z->holds ?></dd>
+if ($z->yholds): ?>
+<dt>Holds</dt><dd><?php echo $z->yholds ?></dd>
 <?php endif;
-if ($z->mines): ?>
-<dt>Mines</dt><dd><?php echo $z->mines ?></dd>
+if ($z->ymines): ?>
+<dt>Mines</dt><dd><?php echo $z->ymines ?></dd>
 <?php endif;
-if ($z->trips): ?>
-<dt>Trips</dt><dd><?php echo $z->trips ?></dd>
+if ($z->ytrips): ?>
+<dt>Trips</dt><dd><?php echo $z->ytrips ?></dd>
 <?php endif;
-if ($z->rolls): ?>
-<dt>Rolls</dt><dd><?php echo $z->rolls ?></dd>
+if ($z->yrolls): ?>
+<dt>Rolls</dt><dd><?php echo $z->yrolls ?></dd>
 <?php endif;
-if ($z->lifts): ?>
-<dt>Lifts</dt><dd><?php echo $z->lifts ?></dd>
+if ($z->ylifts): ?>
+<dt>Lifts</dt><dd><?php echo $z->ylifts ?></dd>
 <?php endif;
-if ($z->fakes): ?>
-<dt>Fakes</dt><dd><?php echo $z->fakes ?></dd>
+if ($z->yfakes): ?>
+<dt>Fakes</dt><dd><?php echo $z->yfakes ?></dd>
 <?php endif;
 if ($z->num_votes): ?>
 <dt>Avg Score</dt><dd><?php echo $z->tot_votes / $z->num_votes ?></dd>

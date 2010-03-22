@@ -65,13 +65,16 @@ class PPE_Edit_EditTable extends Doctrine_Table
 
   public function getEditsBySong($songid)
   {
-    $cols = 'diff, steps, jumps, holds, mines, trips, rolls, fakes, lifts';
-    $cols .= ', user_id, b.name uname, title, is_single, num_votes, tot_votes';
+    $cols = 'diff, y.steps ysteps, y.jumps yjumps, y.holds yholds, y.mines ymines';
+    $cols .= ', y.trips ytrips, y.rolls yrolls, y.fakes yfakes, y.lifts ylifts';
+    $cols .= ', user_id, b.name uname, title, style, num_votes, tot_votes';
     return $this->createQuery('a')
       ->select($cols)
       ->innerJoin('a.PPE_User_User b')
+      ->innerJoin('a.PPE_Edit_Players y')
       ->where('song_id = ?', $songid)
       ->andWhere('a.is_problem = ?', 0)
+      ->andWhere('y.player = ?', 1)
       ->orderBy('b.lc_name, a.title')
       ->execute();
       
