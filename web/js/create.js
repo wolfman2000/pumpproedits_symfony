@@ -8,6 +8,7 @@ var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 2; // scale everything by 2 for now.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
+const BUFF_TOP = ARR_HEIGHT * SCALE;
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const SVG_BG = "white"; // background of the SVG element and other key things.
 
@@ -100,14 +101,14 @@ function editMode()
   $.getJSON("/create/song/" + songID, function(data)
   {
     songData = data;
-    $("article > svg").attr("height", MEASURE_HEIGHT * songData.measures + MEASURE_HEIGHT);
+    $("article > svg").attr("height", MEASURE_HEIGHT * songData.measures + BUFF_TOP * 2);
     columns = getCols();
     $("article > svg").attr("width", (columns + 2) * ARR_HEIGHT * SCALE);
     
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
     {
-      $("g#notes").append(genMeasure(ARR_HEIGHT * SCALE, ARR_HEIGHT * BEATS_PER_MEASURE + MEASURE_HEIGHT * i));
+      $("g#notes").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i));
     }
     
   });
