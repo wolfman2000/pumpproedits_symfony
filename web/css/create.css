@@ -48,4 +48,16 @@
 	{
 		stroke-width: 1;
 	}
+	svg.measure > rect:nth-of-type(odd)
+	{
+		fill: white;
+	}
+	svg.measure > rect:nth-of-type(2)
+	{
+		fill: #dcdcdc;
+	}
+	svg.measure > rect:nth-of-type(4)
+	{
+		fill: #bebebe;
+	}
 }

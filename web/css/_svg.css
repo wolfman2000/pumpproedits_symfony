@@ -251,6 +251,7 @@ text
 .bpm
 {
   font-size: 8px;
+  fill: blue;
 }
 line.bpm
 {
@@ -260,6 +261,7 @@ line.bpm
 .stop
 {
   font-size: 8px;
+  fill: red;
 }
 line.stop
 {
