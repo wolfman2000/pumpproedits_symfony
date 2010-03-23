@@ -7,6 +7,7 @@
 		position: fixed;
 		width: 20em;
 		background-color: #9999ff;
+		top: 3.6em;
 	}
 	nav ul
 	{
@@ -30,11 +31,17 @@
 		padding-bottom: 0;
 	}
 	
+	article
+	{
+		min-height: 50em;
+	}
+	
 	article > svg
 	{
 		margin: 2em auto;
 		background-color: white;
 		min-height: 448px;
+		position: absolute;
 	}
 	#svgMeas line
 	{

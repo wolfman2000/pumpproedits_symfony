@@ -186,6 +186,16 @@ function editMode()
   });
 }
 
+function round10(n)
+{
+  n = Math.round(n);
+  while (n % 10)
+  {
+    n = n + 1;
+  }
+  return n;
+}
+
 function init()
 {
   $("nav *.edit").hide();
@@ -193,7 +203,7 @@ function init()
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
   $("article > svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
-  $("article > svg").attr("height", MEASURE_HEIGHT * 4 + BUFF_TOP + BUFF_BOT);
+  $("article > svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
 
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');

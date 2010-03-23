@@ -66,7 +66,7 @@
     body
     {
     	width: 98%;
-    	margin: 10px auto;
+    	margin: 1em auto;
     	background-color: #AAAAAA;
     	color: #333;
     	border: 1px solid gray;
@@ -78,6 +78,7 @@
     	padding: .5em;
     	background-color: #ddd;
     	border-bottom: 1px solid gray;
+		height: 1.5em;
     }
     
     header > h1
@@ -114,7 +115,7 @@
     nav
     {
         left: 1em;
-        top: 3.2em;
+        top: 3em;
         position: absolute;
     	padding: 1em;
         width: 13em;
