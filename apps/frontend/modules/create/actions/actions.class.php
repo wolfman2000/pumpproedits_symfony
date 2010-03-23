@@ -33,24 +33,15 @@ class createActions extends sfActions
   public function executeAjax(sfWebRequest $request)
   {
     $id = $request->getParameter('id');
-    $this->getResponse()->setHttpHeader("Content-type", "application/xml");
-    $xml = new DomDocument("1.0", "UTF-8");
-    $xml->preserveWhiteSpace = false;
-    $xml->formatOutput = false;
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
     
-    $song = $xml->createElement('song');
-    $xml->appendChild($song);
+    $ret = array();
     
     $sRow = Doctrine::getTable('PPE_Song_Song')->getSongRow($id);
     
-    $name = $xml->createElement('name');
-    $name->appendChild($xml->createTextNode($sRow->name));
-    $song->appendChild($name);
-    
-    $meas = $xml->createElement('measures');
-    $meas->appendChild($xml->createTextNode($sRow->measures));
-    $song->appendChild($meas);
-    
-    return $this->renderText($xml->saveXML());
+    $ret['name'] = $sRow->name;
+    $ret['measures'] = $sRow->measures;
+
+    return $this->renderText(json_encode($ret));
   }
 }

@@ -7,15 +7,7 @@ var songData;
 
 function editMode()
 {
-  $.ajax({
-    url: "/create/song/" + songID, cache: true,
-    contentType: "application/xml",
-    dataType: "xml", success: function(data)
-    {
-      songData = data;
-      alert(data);
-    },
-  });
+  $.getJSON("/create/song/" + songID, function(data){songData = data;});
   $("nav *.edit").show();
   $("nav *.choose").hide();
 }
