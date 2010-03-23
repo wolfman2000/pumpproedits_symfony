@@ -154,6 +154,7 @@ function init()
   $("nav *.edit").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
+  $("#stylelist").val('');
   $("article > svg").attr("width", "224px");
   $("article > svg").attr("height", "448px");
   $("#notes > g").empty(); // remove what's there.
@@ -167,27 +168,9 @@ function init()
 
 $(document).ready(function()
 {
-
-  var g = document.createElementNS(SVG_NS, 'g');
-  g.setAttribute('id', 'notes');
-  $("article > svg").append(g);
-  
-  var g1 = document.createElementNS(SVG_NS, 'g');
-  g1.setAttribute('id', 'svgMeas');
-  $("#notes").append(g1);
-  
-  var g2 = document.createElementNS(SVG_NS, 'g');
-  g2.setAttribute('id', 'svgSync');
-  $("#notes").append(g2);
-  
-  var g3 = document.createElementNS(SVG_NS, 'g');
-  g3.setAttribute('id', 'svgNote');
-  $("#notes").append(g3);
-  
   init();
   
   $("#songlist").val('');
-  $("#stylelist").val('');
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
     $("#stylelist").removeAttr("disabled");
