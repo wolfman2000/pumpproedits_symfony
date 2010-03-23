@@ -1,22 +1,29 @@
 var isDirty; // has the work changed? Should a prompt for saving take place?
 var measures; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
+var width; // compliment to columns
 var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
 var note; // which note are we using right now?
 var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
+var mX; // mouse position at X.
+var mY; // mouse position at Y.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.
+const ADJUST_SIZE = ARR_HEIGHT * SCALE; // 
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
-const BUFF_TOP = ARR_HEIGHT * SCALE;
-const BUFF_LFT = ARR_HEIGHT * SCALE;
-const BUFF_RHT = ARR_HEIGHT * SCALE;
-const BUFF_BOT = ARR_HEIGHT * SCALE;
+
+// These constants may change later, depending on how much spacing is wanted.
+const BUFF_TOP = ADJUST_SIZE;
+const BUFF_LFT = ADJUST_SIZE;
+const BUFF_RHT = ADJUST_SIZE;
+const BUFF_BOT = ADJUST_SIZE;
+
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const SVG_BG = "white"; // background of the SVG element and other key things.
 
-const MEASURE_HEIGHT = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE; // the height of our measure.
+const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
 
 /*
  * Generate the measures that will hold the arrows.
@@ -30,8 +37,8 @@ function genMeasure(x, y, c)
   var r1 = document.createElementNS(SVG_NS, "rect");
   r1.setAttribute("x", 0);
   r1.setAttribute("y", 0);
-  r1.setAttribute("height", ARR_HEIGHT * SCALE);
-  r1.setAttribute("width", columns * ARR_HEIGHT * SCALE);
+  r1.setAttribute("height", ADJUST_SIZE);
+  r1.setAttribute("width", columns * ADJUST_SIZE);
   s.appendChild(r1);
   
   var t = document.createElementNS(SVG_NS, "text");
@@ -42,29 +49,29 @@ function genMeasure(x, y, c)
   
   var r2 = document.createElementNS(SVG_NS, "rect");
   r2.setAttribute("x", 0);
-  r2.setAttribute("y", ARR_HEIGHT * SCALE);
-  r2.setAttribute("height", ARR_HEIGHT * SCALE);
-  r2.setAttribute("width", columns * ARR_HEIGHT * SCALE);
+  r2.setAttribute("y", ADJUST_SIZE);
+  r2.setAttribute("height", ADJUST_SIZE);
+  r2.setAttribute("width", columns * ADJUST_SIZE);
   s.appendChild(r2);
   
   var r3 = document.createElementNS(SVG_NS, "rect");
   r3.setAttribute("x", 0);
-  r3.setAttribute("y", ARR_HEIGHT * SCALE * 2);
-  r3.setAttribute("height", ARR_HEIGHT * SCALE);
-  r3.setAttribute("width", columns * ARR_HEIGHT * SCALE);
+  r3.setAttribute("y", ADJUST_SIZE * 2);
+  r3.setAttribute("height", ADJUST_SIZE);
+  r3.setAttribute("width", columns * ADJUST_SIZE);
   s.appendChild(r3);
   
   var r4 = document.createElementNS(SVG_NS, "rect");
   r4.setAttribute("x", 0);
-  r4.setAttribute("y", ARR_HEIGHT * SCALE * 3);
-  r4.setAttribute("height", ARR_HEIGHT * SCALE);
-  r4.setAttribute("width", columns * ARR_HEIGHT * SCALE);
+  r4.setAttribute("y", ADJUST_SIZE * 3);
+  r4.setAttribute("height", ADJUST_SIZE);
+  r4.setAttribute("width", columns * ADJUST_SIZE);
   s.appendChild(r4);
   
   var l1 = document.createElementNS(SVG_NS, "line");
   l1.setAttribute("x1", 0);
   l1.setAttribute("y1", 0.1);
-  l1.setAttribute("x2", columns * ARR_HEIGHT * SCALE);
+  l1.setAttribute("x2", columns * ADJUST_SIZE);
   l1.setAttribute("y2", 0.1);
   s.appendChild(l1);
   
@@ -76,9 +83,9 @@ function genMeasure(x, y, c)
   s.appendChild(l2);
   
   var l3 = document.createElementNS(SVG_NS, "line");
-  l3.setAttribute("x1", columns * ARR_HEIGHT * SCALE - 0.05);
+  l3.setAttribute("x1", columns * ADJUST_SIZE - 0.05);
   l3.setAttribute("y1", 0);
-  l3.setAttribute("x2", columns * ARR_HEIGHT * SCALE - 0.05);
+  l3.setAttribute("x2", columns * ADJUST_SIZE - 0.05);
   l3.setAttribute("y2", MEASURE_HEIGHT);
   s.appendChild(l3);
   
@@ -106,7 +113,7 @@ function genLine(x, y, css)
   var s = document.createElementNS(SVG_NS, "line");
   s.setAttribute("x1", x);
   s.setAttribute("y1", y);
-  s.setAttribute("x2", x + columns * ARR_HEIGHT * SCALE / 2);
+  s.setAttribute("x2", x + columns * ADJUST_SIZE / 2);
   s.setAttribute("y2", y);
   s.setAttribute("class", css);
   return s;
@@ -131,7 +138,9 @@ function getCols()
  */
 function hideRect()
 {
-  $("#notes > rect").attr('x', 0).attr('y', 0).hide();
+  $("#shadow").attr('x', 0).attr('y', 0).hide();
+  mX = 0;
+  mY = 0;
 }
 
 function showRect(x, y)
@@ -146,36 +155,35 @@ function editMode()
     songData = data;
     $("article > svg").attr("height", MEASURE_HEIGHT * songData.measures + BUFF_TOP * 2);
     columns = getCols();
-    $("article > svg").attr("width", (columns + 2) * ARR_HEIGHT * SCALE);
+    width = BUFF_LFT + BUFF_RHT + columns * SCALE * ARR_HEIGHT;
+    $("article > svg").attr("width", width);
     
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
     {
-      $("g#svgMeas").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
+      $("g#svgMeas").append(genMeasure(ADJUST_SIZE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
     }
     
     // place the BPM data.
     var bpms = songData.bpms;
     for (var i = 0; i < bpms.length; i++)
     {
-      $("#svgSync").append(genText($("article > svg").attr("width") - ARR_HEIGHT * SCALE + 2 * SCALE,
-          BUFF_TOP + bpms[i].beat * ARR_HEIGHT * SCALE + 2 * SCALE, bpms[i].bpm, 'bpm'));
-      $("#svgSync").append(genLine(columns * ARR_HEIGHT * SCALE / 2 + ARR_HEIGHT * SCALE,
-          BUFF_TOP + bpms[i].beat * ARR_HEIGHT * SCALE, 'bpm'));
+      $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
+          BUFF_TOP + bpms[i].beat * ADJUST_SIZE + 2 * SCALE, bpms[i].bpm, 'bpm'));
+      $("#svgSync").append(genLine(width / 2,
+          BUFF_TOP + bpms[i].beat * ADJUST_SIZE, 'bpm'));
     }
     
     var stps = songData.stps;
     for (var i = 0; i < stps.length; i++)
     {
-      $("#svgSync").append(genText(0, BUFF_TOP + stps[i].beat * ARR_HEIGHT * SCALE + 2 * SCALE,
+      $("#svgSync").append(genText(0, BUFF_TOP + stps[i].beat * ADJUST_SIZE + 2 * SCALE,
           stps[i].time, 'stop'));
-      $("#svgSync").append(genLine(ARR_HEIGHT * SCALE, BUFF_TOP + stps[i].beat * ARR_HEIGHT * SCALE, 'stop'));
+      $("#svgSync").append(genLine(BUFF_LFT, BUFF_TOP + stps[i].beat * ADJUST_SIZE, 'stop'));
     }
-    
+    $("nav *.edit").show();
+    $("nav *.choose").hide();
   });
-  $("nav *.edit").show();
-  $("nav *.choose").hide();
-  
 }
 
 function init()
@@ -184,8 +192,8 @@ function init()
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
-  $("article > svg").attr("width", "224px");
-  $("article > svg").attr("height", "448px");
+  $("article > svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
+  $("article > svg").attr("height", MEASURE_HEIGHT * 4 + BUFF_TOP + BUFF_BOT);
 
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');
@@ -210,14 +218,18 @@ $(document).ready(function()
 {
   init();
   
-  $("#notes > rect").attr('width', ARR_HEIGHT * SCALE).attr('height', ARR_HEIGHT * SCALE);
+  $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
   
   /*
    * The various action functions are set here.
    */
   $("article > svg").mouseout(function(){ hideRect(); });
-  $("article > svg").mouseover(function(){
+  $("article > svg").mouseover(function(e){
+    // convert as required.
+    mX = e.pageX;// - $("article > svg").offset().left;
+    mY = e.pageY;// - $("article > svg").offset().top;
+    
     
   });
   
