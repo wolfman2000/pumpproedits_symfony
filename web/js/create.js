@@ -3,10 +3,10 @@ var measures; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
 var songID; // the song ID.
 var songData; // the song data in JSON format.
-var gNote; // the group of note data.
+var sync; // how much syncing are we dealing with?
 var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
-const SCALE = 2; // scale everything by 2 for now.
+const SCALE = 3; // scale everything by 2 for now.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
 const BUFF_TOP = ARR_HEIGHT * SCALE;
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
@@ -14,6 +14,9 @@ const SVG_BG = "white"; // background of the SVG element and other key things.
 
 const MEASURE_HEIGHT = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE; // the height of our measure.
 
+/*
+ * Generate the measures that will hold the arrows.
+ */
 function genMeasure(x, y, c)
 {
   var s = document.createElementNS(SVG_NS, "svg");
@@ -78,6 +81,9 @@ function genMeasure(x, y, c)
   return s;
 }
 
+/*
+ * Generate the text that indicates the BPM or beat pause.
+ */
 function genText(x, y, st, css)
 {
   var s = document.createElementNS(SVG_NS, "text");
@@ -88,6 +94,9 @@ function genText(x, y, st, css)
   return s;
 }
 
+/*
+ * Generate the BPM Change / Stop line.
+ */
 function genLine(x, y, css)
 {
   var s = document.createElementNS(SVG_NS, "line");
@@ -99,6 +108,9 @@ function genLine(x, y, css)
   return s;
 }
 
+/*
+ * Retrieve the number of columns we'll be using today.
+ */
 function getCols()
 {
   switch ($("#stylelist").val())
@@ -108,6 +120,19 @@ function getCols()
     case "d": case "r": return 10;
     default: return 0;
   }
+}
+
+/*
+ * Hide the shadow rectangle from others.
+ */
+function hideRect()
+{
+  $("#notes > rect").attr('x', 0).attr('y', 0).hide();
+}
+
+function showRect(x, y)
+{
+  return;
 }
 
 function editMode()
@@ -158,7 +183,9 @@ function init()
   $("#stylelist").val('');
   $("article > svg").attr("width", "224px");
   $("article > svg").attr("height", "448px");
-  $("#notes > g").empty(); // remove what's there.
+  
+  $("#svgMeas").empty();
+  $("#svgSync").empty();
   
   isDirty = false;
   measures = new Array({}, {}); // routine compatible.
@@ -171,6 +198,7 @@ $(document).ready(function()
 {
   init();
   
+  $("#notes > rect").attr('width', ARR_HEIGHT * SCALE).attr('height', ARR_HEIGHT * SCALE);
   $("#songlist").val('');
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
