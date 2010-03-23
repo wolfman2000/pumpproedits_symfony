@@ -1,4 +1,10 @@
-<!DOCTYPE html><?php
+<?php
+include_slot('xhtml', '');
+if (isset($xhtml)):
+echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n";
+endif; ?>
+<!DOCTYPE html>
+<?php
 function is_naked_day($d) {
   $start = date('U', mktime(-12, 0, 0, 04, $d, date('Y')));
   $end = date('U', mktime(36, 0, 0, 04, $d, date('Y')));
@@ -10,7 +16,7 @@ function is_naked_day($d) {
   return false;
 }
 $naked = 9;
-?><html lang="en">
+?><html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 <head>
 <?php include_http_metas(); ?>
 <meta charset="UTF-8" />
