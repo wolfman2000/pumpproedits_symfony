@@ -7,15 +7,17 @@ var songData;
 
 function editMode()
 {
-  songID = 7;
   $.ajax({
     url: "/create/song/" + songID, cache: true,
     contentType: "application/xml",
     dataType: "xml", success: function(data)
     {
       songData = data;
+      alert(data);
     },
   });
+  $("nav *.edit").show();
+  $("nav *.choose").hide();
 }
 
 function init()
@@ -40,9 +42,11 @@ $(document).ready(function()
 {
   init();
   $("#songlist").val('');
+  $("#stylelist").val('');
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
     $("#stylelist").removeAttr("disabled");
   });
+  $("#stylelist").change(function(){ editMode(); });
   
 });
