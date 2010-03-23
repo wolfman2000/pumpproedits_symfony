@@ -49,6 +49,17 @@ menus to select your various options, and have fun!</p>
 <dt>Select your player!</dt>
 <dd><label>Player 1 <input type="radio" name="playerL" id="p1" value="1" checked="checked" /></label>
 <label>Player 2 <input type="radio" name="playerL" id="p2" value="2" /></label></dd>
+<dt>Step Stats</dt>
+<dd><ul>
+<li>Steps: <span id="statS">0</span></li>
+<li>Jumps: <span id="statJ">0</span></li>
+<li>Holds: <span id="statH">0</span></li>
+<li>Mines: <span id="statM">0</span></li>
+<li>Trips: <span id="statT">0</span></li>
+<li>Rolls: <span id="statR">0</span></li>
+<li>Lifts: <span id="statL">0</span></li>
+<li>Fakes: <span id="statF">0</span></li>
+</ul></dd>
 </dl>
 </form>
 </nav>
