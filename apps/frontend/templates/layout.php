@@ -39,36 +39,8 @@ official website</a> for more information.</p>
 <?php endif;
 echo $sf_content ?>
 </article>
-<?php $nav = (strlen($xhtml) === 0 ? "norm" : "chrt"); ?>
-<nav>
-<?php $authin = $sf_user->isAuthenticated() ? "in" : "out";
-include_partial("global/mess_$authin", array()) ?>
-<ul>
-<li>
-<h4>Members</h4>
-<?php include_partial("global/memb_$authin", array()) ?>
-</li>
-<li>
-    <h4>Edits</h4>
-    <ul>
-    <li><?php echo link_to("Base Edit Files", '@base_edit') ?></li>
-    <li><?php echo link_to("Edit Stat Getter", '@edit_stat_get') ?></li>
-    <li><?php echo link_to("Edit List by Song", '@edit_song') ?></li>
-    <li><?php echo link_to("Edit List by User", '@edit_user') ?></li>
-    <li><?php echo link_to("Official Chart Edits", '@edit_official') ?></li>
-    <li><?php echo link_to("Unknown Author Edits", '@edit_unknown') ?></li>
-    </ul>
-</li>
-<li>
-    <h4>Everyone</h4>
-    <ul>
-    <li><a href="/news">Previous Updates</a></li>
-    <li><?php echo link_to("Contact", '@contact_get') ?></li>
-    <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
-    </ul>
-</li>
-</ul>
-</nav>
+<?php $nav = (strlen($xhtml) === 0 ? "norm" : "chrt");
+include_partial("global/nav_$nav", array()) ?>
 <footer>This website is ©2009-2010 <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a>.<br />
 This website works best in <a href="http://www.firefox.com">Firefox</a>.</footer>
 </body>
