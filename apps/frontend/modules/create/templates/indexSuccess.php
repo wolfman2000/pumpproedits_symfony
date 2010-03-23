@@ -5,6 +5,15 @@ slot('h2', "<h2>Edit Creater</h2>"); ?>
 web interface to make your own edit. Use the drop down
 menus to select your various options, and have fun!</p>
 
+<?php # Attempt to read the arrow defs file and port that.
+$adef = file(sfConfig::get('sf_web_dir') . "/svg/arrowdef.svg");
+array_shift($adef);
+array_shift($adef);
+foreach ($adef as $r):
+echo $r;
+endforeach;
+?>
+
 <nav id="svg_nav">
 <?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; # Will I need this? ?>
 <p>Javascript required!</p>
