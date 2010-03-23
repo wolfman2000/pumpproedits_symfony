@@ -23,7 +23,7 @@ endforeach;
 <dd class="choose"><select id="songlist">
 <option value="" selected="selected">Choose</option>
 <?php foreach ($songs as $s): ?>
-<option value="<?php echo $s->id ?>"><?php echo strlen($s->name) > 30 ? substr($s->name, 0, 29) . "…" : $s->name ?></option>
+<option value="<?php echo $s->id ?>"><?php echo $s->name ?></option>
 <?php endforeach; ?></select></dd>
 <dt class="choose"><label for="stylelist">Select your style!</label></dt>
 <dd class="choose"><select id="stylelist">

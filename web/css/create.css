@@ -5,13 +5,13 @@
 	nav
 	{
 		position: fixed;
-		width: 18em;
+		width: 20em;
 		background-color: #9999ff;
 	}
 	nav ul
 	{
 		float: left;
-		width: 16em;
+		width: 18em;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -19,13 +19,13 @@
 	nav ul li
 	{
 		float: left;
-		width: 8em;
+		width: 9em;
 		margin: 0;
 		padding: 0;
 	}
 	article
 	{
-		margin-left: 20em;
+		margin-left: 22em;
 		min-height: 40em;
 	}
 	
