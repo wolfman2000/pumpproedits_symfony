@@ -38,4 +38,14 @@
 		max-width: 384px;
 		min-height: 448px;
 	}
+	svg.measure > line
+	{
+		fill: black;
+		stroke: black;
+		stroke-width: 0.5;
+	}
+	svg.measure > line:nth-of-type(1)
+	{
+		stroke-width: 1;
+	}
 }

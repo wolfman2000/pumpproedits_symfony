@@ -19,6 +19,7 @@ function genMeasure(x, y)
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
   s.setAttribute("y", y);
+  s.setAttribute("class", "measure");
   
   var r1 = document.createElementNS(SVG_NS, "rect");
   r1.setAttribute("x", 0);
@@ -57,9 +58,6 @@ function genMeasure(x, y)
   l1.setAttribute("y1", 0.1);
   l1.setAttribute("x2", columns * ARR_HEIGHT * SCALE);
   l1.setAttribute("y2", 0.1);
-  l1.setAttribute("fill", "black");
-  l1.setAttribute("stroke", "black");
-  l1.setAttribute("stroke-width", 0.1);
   s.appendChild(l1);
   
   var l2 = document.createElementNS(SVG_NS, "line");
@@ -67,9 +65,6 @@ function genMeasure(x, y)
   l2.setAttribute("y1", 0);
   l2.setAttribute("x2", 0.05);
   l2.setAttribute("y2", MEASURE_HEIGHT);
-  l2.setAttribute("fill", "black");
-  l2.setAttribute("stroke", "black");
-  l2.setAttribute("stroke-width", 0.1);
   s.appendChild(l2);
   
   var l3 = document.createElementNS(SVG_NS, "line");
@@ -77,9 +72,6 @@ function genMeasure(x, y)
   l3.setAttribute("y1", 0);
   l3.setAttribute("x2", columns * ARR_HEIGHT * SCALE - 0.05);
   l3.setAttribute("y2", MEASURE_HEIGHT);
-  l3.setAttribute("fill", "black");
-  l3.setAttribute("stroke", "black");
-  l3.setAttribute("stroke-width", 0.1);
   s.appendChild(l3);
   
   return s;
