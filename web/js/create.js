@@ -26,7 +26,6 @@ function genMeasure(x, y)
   r1.setAttribute("y", 0);
   r1.setAttribute("height", ARR_HEIGHT * SCALE);
   r1.setAttribute("width", columns * ARR_HEIGHT * SCALE);
-  r1.setAttribute("fill", SVG_BG);
   s.appendChild(r1);
   
   var r2 = document.createElementNS(SVG_NS, "rect");
@@ -34,7 +33,6 @@ function genMeasure(x, y)
   r2.setAttribute("y", ARR_HEIGHT * SCALE);
   r2.setAttribute("height", ARR_HEIGHT * SCALE);
   r2.setAttribute("width", columns * ARR_HEIGHT * SCALE);
-  r2.setAttribute("fill", "#dcdcdc");
   s.appendChild(r2);
   
   var r3 = document.createElementNS(SVG_NS, "rect");
@@ -42,7 +40,6 @@ function genMeasure(x, y)
   r3.setAttribute("y", ARR_HEIGHT * SCALE * 2);
   r3.setAttribute("height", ARR_HEIGHT * SCALE);
   r3.setAttribute("width", columns * ARR_HEIGHT * SCALE);
-  r3.setAttribute("fill", SVG_BG);
   s.appendChild(r3);
   
   var r4 = document.createElementNS(SVG_NS, "rect");
@@ -50,7 +47,6 @@ function genMeasure(x, y)
   r4.setAttribute("y", ARR_HEIGHT * SCALE * 3);
   r4.setAttribute("height", ARR_HEIGHT * SCALE);
   r4.setAttribute("width", columns * ARR_HEIGHT * SCALE);
-  r4.setAttribute("fill", "#bebebe");
   s.appendChild(r4);
   
   var l1 = document.createElementNS(SVG_NS, "line");
@@ -74,6 +70,16 @@ function genMeasure(x, y)
   l3.setAttribute("y2", MEASURE_HEIGHT);
   s.appendChild(l3);
   
+  return s;
+}
+
+function genText(x, y, st, css)
+{
+  var s = document.createElementNS(SVG_NS, "text");
+  s.setAttribute('x', x);
+  s.setAttribute('y', y);
+  if (css) { s.setAttribute('class', css); }
+  s.appendChild(document.createTextNode(st));
   return s;
 }
 
@@ -101,6 +107,15 @@ function editMode()
     for (var i = 0; i < songData.measures; i++)
     {
       $("g#notes").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i));
+    }
+    
+    // place the BPM data.
+    var bpms = songData.bpms;
+    for (var i = 0; i < bpms.length; i++)
+    {
+      $("#notes").append(genText($("article > svg").attr("width") - ARR_HEIGHT * SCALE + 2 * SCALE,
+          BUFF_TOP + bpms[i].beat * ARR_HEIGHT * SCALE + 2 * SCALE, bpms[i].bpm, 'bpm'));
+      
     }
     
   });
