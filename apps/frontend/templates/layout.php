@@ -1,4 +1,4 @@
-<?php include_slot('xhtml', ''); ?>
+<?php $xhtml = get_slot('xhtml', ''); echo $xhtml; ?>
 <!DOCTYPE html>
 <?php
 function is_naked_day($d) {
@@ -39,6 +39,7 @@ official website</a> for more information.</p>
 <?php endif;
 echo $sf_content ?>
 </article>
+<?php $nav = (strlen($xhtml) === 0 ? "norm" : "chrt"); ?>
 <nav>
 <?php $authin = $sf_user->isAuthenticated() ? "in" : "out";
 include_partial("global/mess_$authin", array()) ?>
