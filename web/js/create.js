@@ -14,7 +14,7 @@ const SVG_BG = "white"; // background of the SVG element and other key things.
 
 const MEASURE_HEIGHT = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE; // the height of our measure.
 
-function genMeasure(x, y)
+function genMeasure(x, y, c)
 {
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
@@ -26,6 +26,12 @@ function genMeasure(x, y)
   r1.setAttribute("height", ARR_HEIGHT * SCALE);
   r1.setAttribute("width", columns * ARR_HEIGHT * SCALE);
   s.appendChild(r1);
+  
+  var t = document.createElementNS(SVG_NS, "text");
+  t.setAttribute("x", BEATS_PER_MEASURE);
+  t.setAttribute("y", ARR_HEIGHT);
+  t.appendChild(document.createTextNode("" + c + ")"));
+  s.appendChild(t);
   
   var r2 = document.createElementNS(SVG_NS, "rect");
   r2.setAttribute("x", 0);
@@ -116,7 +122,7 @@ function editMode()
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
     {
-      $("g#svgMeas").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i));
+      $("g#svgMeas").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
     }
     
     // place the BPM data.

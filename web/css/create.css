@@ -60,4 +60,9 @@
 	{
 		fill: #bebebe;
 	}
+	#svgMeas text
+	{
+		fill: black;
+		font-size: 1em;
+	}
 }
