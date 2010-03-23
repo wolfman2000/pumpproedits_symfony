@@ -4,6 +4,7 @@ var columns; // How many columns are we working with?
 var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
+var note; // which note are we using right now?
 var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.
@@ -180,10 +181,18 @@ function init()
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
-  $("#stylelist").val('');
   $("article > svg").attr("width", "224px");
   $("article > svg").attr("height", "448px");
-  
+
+  // reset the drop downs (and corresponding variables) to default values.
+  $("#songlist").val('');
+  $("#stylelist").val('');
+  $("#quanlist").val(4);
+  $("#typelist").val(1);
+  sync = 4;
+  note = 1;
+
+
   $("#svgMeas").empty();
   $("#svgSync").empty();
   
@@ -200,10 +209,20 @@ $(document).ready(function()
   
   $("#notes > rect").attr('width', ARR_HEIGHT * SCALE).attr('height', ARR_HEIGHT * SCALE);
   $("#songlist").val('');
+  
+  /*
+   * The various action functions are set here.
+   */
+  $("article > svg").mouseout(function(){ hideRect(); });
+  
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
-    $("#stylelist").removeAttr("disabled");
+    if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
+    else { $("#stylelist").attr("disabled", "disabled"); }
   });
   $("#stylelist").change(function(){ editMode(); });
+  
+  $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val(); };
+  $("#typelist").change(function() { note = $("#typelist > option:selected").val(); };
   
 });
