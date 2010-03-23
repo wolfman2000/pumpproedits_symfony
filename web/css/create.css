@@ -28,4 +28,13 @@
 		margin-left: 20em;
 		min-height: 40em;
 	}
+	
+	article > svg
+	{
+		margin: 2em auto;
+		background-color: white;
+		min-width: 224px;
+		max-width: 384px;
+		min-height: 448px;
+	}
 }
