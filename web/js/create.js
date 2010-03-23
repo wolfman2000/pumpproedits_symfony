@@ -4,12 +4,22 @@ var columns; // How many columns are we working with?
 var songID;
 var gNote;
 var songData;
+const ARR_HEIGHT = 16;
+const SCALE = 2;
+const BEATS_PER_MEASURE = 4;
+
+const MEASURE_HEIGHT = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
 
 function editMode()
 {
-  $.getJSON("/create/song/" + songID, function(data){songData = data;});
+  $.getJSON("/create/song/" + songID, function(data)
+  {
+    songData = data;
+    $("article > svg").attr("height", MEASURE_HEIGHT * songData.measures + MEASURE_HEIGHT / 2);
+  });
   $("nav *.edit").show();
   $("nav *.choose").hide();
+  
 }
 
 function init()
