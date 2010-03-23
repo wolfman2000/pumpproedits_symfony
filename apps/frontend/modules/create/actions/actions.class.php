@@ -25,4 +25,32 @@ class createActions extends sfActions
     $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongs();
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
+  
+  /**
+   * Call this on AJAX requests to load the svg
+   * properly.
+   */
+  public function executeAjax(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id');
+    $this->getResponse()->setHttpHeader("Content-type: application/xml");
+    $xml = new DomDocument("1.0", "UTF-8");
+    $xml->preserveWhiteSpace = false;
+    $xml->formatOutput = false;
+    
+    $song = $xml->createElement('song');
+    $xml->appendChild($song);
+    
+    $sRow = Doctrine::getTable('PPE_Song_Song')->getSongRow($id);
+    
+    $name = $xml->createElement('name');
+    $name->createTextNode($sRow->name);
+    $song->appendChild($name);
+    
+    $meas = $xml->createElement('measures');
+    $meas->createTextNode($sRow->measures);
+    $song->appendChild($meas);
+    
+    return $xml;
+  }
 }

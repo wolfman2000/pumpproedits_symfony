@@ -15,6 +15,15 @@ edit_creater:
     module: create
     action: index
 
+# use ajax to get the needed data.
+edit_creater_song:
+  url: /create/song/:id
+  param:
+    module: create
+    action: ajax
+  requirements:
+    id: \d+
+
 # Upload an edit
 upload_get:
   url: /upload
