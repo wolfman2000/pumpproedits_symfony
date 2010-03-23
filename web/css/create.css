@@ -2,5 +2,14 @@
 
 @media screen
 {
-
+	nav
+	{
+		position: fixed;
+		width: 18em;
+	}
+	article
+	{
+		margin-left: 20em;
+		min-height: 40em;
+	}
 }
