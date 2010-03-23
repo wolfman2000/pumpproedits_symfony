@@ -65,4 +65,10 @@
 		fill: black;
 		font-size: 1em;
 	}
+	
+	#notes > rect
+	{
+		fill: aqua;
+		opacity: 0.5;
+	}
 }

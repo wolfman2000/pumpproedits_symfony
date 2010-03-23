@@ -152,6 +152,7 @@ function editMode()
 function init()
 {
   $("nav *.edit").hide();
+  $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
   $("#stylelist").val('');

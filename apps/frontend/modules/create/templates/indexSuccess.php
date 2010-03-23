@@ -7,6 +7,7 @@ menus to select your various options, and have fun!</p>
 
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <g id="notes">
+<rect x="0" y="0" width="32" height="32" />
 <g id="svgMeas" />
 <g id="svgSync" />
 <g id="svgNote" />
