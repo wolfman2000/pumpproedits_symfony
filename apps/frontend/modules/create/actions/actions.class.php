@@ -54,7 +54,7 @@ class createActions extends sfActions
     $sArr = array();
     foreach ($stps as $s)
     {
-      $sArr[] = array('beat' => $s->beat, 'break' => $s->break . "B");
+      $sArr[] = array('beat' => $s->beat, 'time' => $s->break . "B");
     }
     $ret['stps'] = $sArr;
 
