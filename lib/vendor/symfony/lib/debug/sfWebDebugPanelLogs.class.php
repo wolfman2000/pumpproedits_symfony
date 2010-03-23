@@ -51,7 +51,7 @@ class sfWebDebugPanelLogs extends sfWebDebugPanel
       }
 
       ++$line_nb;
-      $html .= sprintf("<tr class='sfWebDebugLogLine sfWebDebug%s %s'><td class=\"sfWebDebugLogNumber\">%s</td><td class=\"sfWebDebugLogType\">%s&nbsp;%s</td><td>%s %s</td></tr>\n",
+      $html .= sprintf("<tr class='sfWebDebugLogLine sfWebDebug%s %s'><td class=\"sfWebDebugLogNumber\">%s</td><td class=\"sfWebDebugLogType\">%s %s</td><td>%s %s</td></tr>\n",
         ucfirst($priority),
         $log['type'],
         $line_nb,

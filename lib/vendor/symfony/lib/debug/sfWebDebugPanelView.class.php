@@ -319,7 +319,8 @@ class sfWebDebugPanelView extends sfWebDebugPanel
     $sep = preg_quote(DIRECTORY_SEPARATOR);
     if (preg_match('#modules'.$sep.'(\w+)'.$sep.'templates'.$sep.'(.*)$#', $path, $match))
     {
-      return $match[1].'&nbsp;&hellip;&nbsp;'.$match[2];
+      # Was nbsp;hellip;nbsp;
+      return $match[1].' … '.$match[2];
     }
 
     return str_replace('SF_ROOT_DIR'.DIRECTORY_SEPARATOR, '', sfDebug::shortenFilePath($path));
