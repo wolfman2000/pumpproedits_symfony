@@ -19,7 +19,6 @@ function genMeasure(x, y)
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
   s.setAttribute("y", y);
-  s.setAttribute("class", "measure");
   
   var r1 = document.createElementNS(SVG_NS, "rect");
   r1.setAttribute("x", 0);
@@ -83,6 +82,17 @@ function genText(x, y, st, css)
   return s;
 }
 
+function genLine(x, y, css)
+{
+  var s = document.createElementNS(SVG_NS, "line");
+  s.setAttribute("x1", x);
+  s.setAttribute("y1", y);
+  s.setAttribute("x2", x + columns * ARR_HEIGHT * SCALE / 2);
+  s.setAttribute("y2", y);
+  s.setAttribute("class", css);
+  return s;
+}
+
 function getCols()
 {
   switch ($("#stylelist").val())
@@ -106,16 +116,25 @@ function editMode()
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
     {
-      $("g#notes").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i));
+      $("g#svgMeas").append(genMeasure(ARR_HEIGHT * SCALE, BUFF_TOP + MEASURE_HEIGHT * i));
     }
     
     // place the BPM data.
     var bpms = songData.bpms;
     for (var i = 0; i < bpms.length; i++)
     {
-      $("#notes").append(genText($("article > svg").attr("width") - ARR_HEIGHT * SCALE + 2 * SCALE,
+      $("#svgSync").append(genText($("article > svg").attr("width") - ARR_HEIGHT * SCALE + 2 * SCALE,
           BUFF_TOP + bpms[i].beat * ARR_HEIGHT * SCALE + 2 * SCALE, bpms[i].bpm, 'bpm'));
-      
+      $("#svgSync").append(genLine(columns * ARR_HEIGHT * SCALE / 2 + ARR_HEIGHT * SCALE,
+          BUFF_TOP + bpms[i].beat * ARR_HEIGHT * SCALE, 'bpm'));
+    }
+    
+    var stps = songData.stps;
+    for (var i = 0; i < stps.length; i++)
+    {
+      $("#svgSync").append(genText(0, BUFF_TOP + stps[i].beat * ARR_HEIGHT * SCALE + 2 * SCALE,
+          stps[i].time, 'stop'));
+      $("#svgSync").append(genLine(ARR_HEIGHT * SCALE, BUFF_TOP + stps[i].beat * ARR_HEIGHT * SCALE, 'stop'));
     }
     
   });
@@ -131,7 +150,7 @@ function init()
   $("#stylelist").attr("disabled", "disabled");
   $("article > svg").attr("width", "224px");
   $("article > svg").attr("height", "448px");
-  $("#notes").empty(); // remove what's there.
+  $("#notes > g").empty(); // remove what's there.
   
   isDirty = false;
   measures = new Array({}, {}); // routine compatible.
@@ -142,13 +161,24 @@ function init()
 
 $(document).ready(function()
 {
-  $("svg > g");
-  
-  init();
 
   var g = document.createElementNS(SVG_NS, 'g');
   g.setAttribute('id', 'notes');
   $("article > svg").append(g);
+  
+  var g1 = document.createElementNS(SVG_NS, 'g');
+  g1.setAttribute('id', 'svgMeas');
+  $("#notes").append(g1);
+  
+  var g2 = document.createElementNS(SVG_NS, 'g');
+  g2.setAttribute('id', 'svgSync');
+  $("#notes").append(g2);
+  
+  var g3 = document.createElementNS(SVG_NS, 'g');
+  g3.setAttribute('id', 'svgNote');
+  $("#notes").append(g3);
+  
+  init();
   
   $("#songlist").val('');
   $("#stylelist").val('');
