@@ -10,6 +10,9 @@ const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
 const BUFF_TOP = ARR_HEIGHT * SCALE;
+const BUFF_LFT = ARR_HEIGHT * SCALE;
+const BUFF_RHT = ARR_HEIGHT * SCALE;
+const BUFF_BOT = ARR_HEIGHT * SCALE;
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const SVG_BG = "white"; // background of the SVG element and other key things.
 
@@ -214,6 +217,9 @@ $(document).ready(function()
    * The various action functions are set here.
    */
   $("article > svg").mouseout(function(){ hideRect(); });
+  $("article > svg").mouseover(function(){
+    
+  });
   
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
@@ -222,7 +228,7 @@ $(document).ready(function()
   });
   $("#stylelist").change(function(){ editMode(); });
   
-  $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val(); };
-  $("#typelist").change(function() { note = $("#typelist > option:selected").val(); };
+  $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val();});
+  $("#typelist").change(function() { note = $("#typelist > option:selected").val();});
   
 });

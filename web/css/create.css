@@ -34,8 +34,6 @@
 	{
 		margin: 2em auto;
 		background-color: white;
-		min-width: 224px;
-		max-width: 384px;
 		min-height: 448px;
 	}
 	#svgMeas line
@@ -64,6 +62,10 @@
 	{
 		fill: black;
 		font-size: 1em;
+	}
+	text.stop, text.bpm
+	{
+		font-size: 0.8em;
 	}
 	
 	#notes > rect
