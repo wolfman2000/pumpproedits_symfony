@@ -33,7 +33,7 @@ class createActions extends sfActions
   public function executeAjax(sfWebRequest $request)
   {
     $id = $request->getParameter('id');
-    $this->getResponse()->setHttpHeader("Content-type: application/xml");
+    $this->getResponse()->setHttpHeader("Content-type", "application/xml");
     $xml = new DomDocument("1.0", "UTF-8");
     $xml->preserveWhiteSpace = false;
     $xml->formatOutput = false;
@@ -44,13 +44,13 @@ class createActions extends sfActions
     $sRow = Doctrine::getTable('PPE_Song_Song')->getSongRow($id);
     
     $name = $xml->createElement('name');
-    $name->createTextNode($sRow->name);
+    $name->appendChild($xml->createTextNode($sRow->name));
     $song->appendChild($name);
     
     $meas = $xml->createElement('measures');
-    $meas->createTextNode($sRow->measures);
+    $meas->appendChild($xml->createTextNode($sRow->measures));
     $song->appendChild($meas);
     
-    return $xml;
+    return $this->renderText($xml->saveXML());
   }
 }
