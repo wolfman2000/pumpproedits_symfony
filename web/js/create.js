@@ -2,7 +2,6 @@ var isDirty; // has the work changed? Should a prompt for saving take place?
 var measures; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
 var songID;
-var songs;
 var gNote;
 var songData;
 
@@ -40,12 +39,10 @@ function init()
 $(document).ready(function()
 {
   init();
+  $("#songlist").val('');
+  $('#songlist').change(function(){
+    songID = $("#songlist > option:selected").val();
+    $("#stylelist").removeAttr("disabled");
+  });
   
-  songs = {};
-  $('#songlist > option:not(:first-child)').each(
-    function(){
-      //songs[$(this).attr('value')] = $(this).text();
-      songs[$(this).val()]  = $(this).text();
-    }
-  );
 });
