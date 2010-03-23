@@ -34,9 +34,9 @@ endforeach;
 <option value="r">pump-routine</option>
 </select></dd>
 <dt class="edit"><label for="editName">Name your edit!</label></dt>
-<dd class="edit"><input type="text" id="editName" maxlength="12" />
+<dd class="edit"><input type="text" id="editName" maxlength="12" /></dd>
 <dt class="edit"><label for="editDiff">How hard is your edit?</label></dt>
-<dd class="edit"><input type="text" id="editDiff" maxlength="2" />
+<dd class="edit"><input type="text" id="editDiff" maxlength="2" /></dd>
 <dt class="edit"><label for="quanlist">Select your sync!</label></dt>
 <dd class="edit"><select id="quanlist">
 <option value="4" selected="selected">4th</option>
