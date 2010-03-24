@@ -256,7 +256,9 @@ function shadow(e)
 function changeArrow()
 {
   var r = $("#shadow");
-  if (!(r.attr('x') && r.attr('y'))) return;
+  var rX = r.attr('x') / SCALE;
+  var rY = r.attr('y') / SCALE;
+  if (!(rX && rY)) return;
   
   // see if a node exists in this area.
   
@@ -264,18 +266,53 @@ function changeArrow()
   
   // add if empty
   
-  var collection = $("#svgNote");
-  for (var n in collection.children())
+  var coll = $("#svgNote");
+  var l = coll.children().length;
+  
+  var n = coll.children().first();
+  var nX = n.attr('x');
+  var nY = n.attr('y');
+  
+  if (nY > rY || nY == rY && nX > rX)
   {
-    ;
+    n.before(selectArrow(getNote()));
+    return;
   }
+  
+  while (n.length)
+  {
+    n = n.next();
+    nX = n.attr('x');
+    nY = n.attr('y');
+    
+    if (nY > rY || nY == rY && nX > rX)
+    {
+      n.before(selectArrow(getNote()));
+      return;
+    }
+  }
+  
+  /*
+  for (var i = 1; i <= l; i++)
+  {
+    var n = $("#svgNote > svg:nth-child(i)");
+    var nX = n.attr('x');
+    var nY = n.attr('y');
+    
+    if (nY > rY || (nY == rY && nX > rX)) // we went too far.
+    {
+      n.before(selectArrow(getNote()));
+      return;
+    }
+    
+  }*/
   
   /*
    * If it hits here, then this is the last note to add.
    * A simple create and append will do.
    */
   
-  collection.append(selectArrow(getNote()));
+  coll.append(selectArrow(getNote()));
 }
 
 $(document).ready(function()
