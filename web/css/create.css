@@ -83,4 +83,9 @@
 		  stroke-width:0.1;
 		  stroke-opacity:1;
 	}
+	
+	svg.end > g > path:first-child
+	{
+		fill: #8A2BE2;
+	}
 }

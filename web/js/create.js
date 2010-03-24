@@ -153,6 +153,14 @@ function genMine(x, y, css)
 function genEnd(x, y, css)
 {
   var s = genArrow(x, y, css);
+  var p1 = document.createElementNS(SVG_NS, "path");
+  p1.setAttribute("d", "m 1,1 l 7,14 7,-14");
+  s.firstChild.appendChild(p1);
+  
+  var p2 = document.createElementNS(SVG_NS, "path");
+  p2.setAttribute("d", "m 4,1 l 4,8 4,-8");
+  s.firstChild.appendChild(p2);
+  
   return s;
 }
 
@@ -198,7 +206,7 @@ function selectArrow(css)
   var rY = $("#shadow").attr('y') / SCALE;
   var x = rX / ADJUST_SIZE - 1;
   rX = rX / SCALE;
-  if (style == "r") { x = x + 2; }
+  if (style == "h") { x = x + 2; }
   
   if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
   if (css.indexOf("end")  >= 0) { return genEnd(rX, rY, css);  }
