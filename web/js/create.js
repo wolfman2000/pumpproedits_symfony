@@ -40,12 +40,42 @@ function genLine(x1, y1, x2, y2, css)
   return l;
 }
 
-function genDLArrow(x, y, css)
+/*
+ * Generate the rect required. Apply the class if one exists.
+ */
+function genRect(x, y, w, h, rx, ry, css)
+{
+  var r = document.createElementNS(SVG_NS, "rect");
+  r.setAttribute("x", x);
+  r.setAttribute("y", y);
+  r.setAttribute("width", w);
+  r.setAttribute("height", h);
+  if (rx) { r.setAttribute("rx", rx); }
+  if (ry) { r.setAttribute("ry", ry); }
+  if (css) { r.setAttribute("class", css); }
+  return r;
+}
+
+/*
+ * Create the base arrow dimenions. It goes inside
+ * the SVG.
+ */
+function genArrow(x, y, css)
 {
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
   s.setAttribute("y", y);
-  s.setAttribute("transform", "scale(" + SCALE + ")");
+  if (css) { s.setAttribute("class", css); }
+  return s;
+}
+
+/*
+ * Generate the basic arrow.
+ * Hopefully I can just rotate this sucker and make it happy.
+ */
+function genDLArrow(x, y, css)
+{
+  var s = genArrow(x, y, css);
   
   var p = document.createElementNS(SVG_NS, "path");
   p.setAttribute("d", "m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 v -1 c 0,0 0,-1 -1,-1 "
@@ -58,6 +88,39 @@ function genDLArrow(x, y, css)
   return s;
 }
 
+function genULArrow(x, y, css)
+{
+  var s = genDLArrow(x, y, css);
+  s.setAttribute("transform", "rotate(90 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  return s;
+}
+
+/*
+ * The center arrow works differently. It relies more on rectangles.
+ */
+function genCNArrow(x, y, css)
+{
+  var s = genArrow(x, y, css);
+  var p = document.createElementNS(SVG_NS, "path");
+  p.setAttribute("d", "m 1,2 v 12 l 1,1 h 12 l 1,-1 V 2 L 14,1 H 2 z");
+  s.appendChild(p);
+  return s;
+}
+
+function genURArrow(x, y, css)
+{
+  var s = genDLArrow(x, y, css);
+  s.setAttribute("transform", "rotate(180 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  return s;
+}
+
+function genDRArrow(x, y, css)
+{
+  var s = genDLArrow(x, y, css);
+  s.setAttribute("transform", "rotate(270 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  return s;
+}
+
 /*
  * Generate the measures that will hold the arrows.
  */
@@ -67,39 +130,12 @@ function genMeasure(x, y, c)
   s.setAttribute("x", x);
   s.setAttribute("y", y);
   
-  var r1 = document.createElementNS(SVG_NS, "rect");
-  r1.setAttribute("x", 0);
-  r1.setAttribute("y", 0);
-  r1.setAttribute("height", ADJUST_SIZE);
-  r1.setAttribute("width", columns * ADJUST_SIZE);
-  s.appendChild(r1);
+  s.appendChild(genRect(0, 0, columns * ADJUST_SIZE, ADJUST_SIZE));
+  s.appendChild(genRect(0, ADJUST_SIZE, columns * ADJUST_SIZE, ADJUST_SIZE));
+  s.appendChild(genRect(0, ADJUST_SIZE * 2, columns * ADJUST_SIZE, ADJUST_SIZE));
+  s.appendChild(genRect(0, ADJUST_SIZE * 3, columns * ADJUST_SIZE, ADJUST_SIZE));
   
-  var t = document.createElementNS(SVG_NS, "text");
-  t.setAttribute("x", BEATS_PER_MEASURE);
-  t.setAttribute("y", ARR_HEIGHT);
-  t.appendChild(document.createTextNode("" + c + ")"));
-  s.appendChild(t);
-  
-  var r2 = document.createElementNS(SVG_NS, "rect");
-  r2.setAttribute("x", 0);
-  r2.setAttribute("y", ADJUST_SIZE);
-  r2.setAttribute("height", ADJUST_SIZE);
-  r2.setAttribute("width", columns * ADJUST_SIZE);
-  s.appendChild(r2);
-  
-  var r3 = document.createElementNS(SVG_NS, "rect");
-  r3.setAttribute("x", 0);
-  r3.setAttribute("y", ADJUST_SIZE * 2);
-  r3.setAttribute("height", ADJUST_SIZE);
-  r3.setAttribute("width", columns * ADJUST_SIZE);
-  s.appendChild(r3);
-  
-  var r4 = document.createElementNS(SVG_NS, "rect");
-  r4.setAttribute("x", 0);
-  r4.setAttribute("y", ADJUST_SIZE * 3);
-  r4.setAttribute("height", ADJUST_SIZE);
-  r4.setAttribute("width", columns * ADJUST_SIZE);
-  s.appendChild(r4);
+  s.appendChild(genText(BEATS_PER_MEASURE, ARR_HEIGHT, "" + c + ")"));
   
   s.appendChild(genLine(0, 0.1, columns * ADJUST_SIZE, 0.1));
   s.appendChild(genLine(0.05, 0, 0.05, MEASURE_HEIGHT));
