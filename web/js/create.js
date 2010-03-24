@@ -202,6 +202,8 @@ function init()
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
+  $("article > svg").css('left', round10($("nav").first().width()) + 70);
+  $("article > svg").css('top', round10($("header").first().height()) * 8 + 20);
   $("article > svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
   $("article > svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
 
@@ -224,6 +226,14 @@ function init()
   
 }
 
+function shadow(e)
+{
+  mX = e.pageX;
+  mY = e.pageY;
+  $("#mX").text(mX);
+  $("#mY").text(mY);
+}
+
 $(document).ready(function()
 {
   init();
@@ -234,14 +244,14 @@ $(document).ready(function()
   /*
    * The various action functions are set here.
    */
-  $("article > svg").mouseout(function(){ hideRect(); });
-  $("article > svg").mouseover(function(e){
-    // convert as required.
-    mX = e.pageX;// - $("article > svg").offset().left;
-    mY = e.pageY;// - $("article > svg").offset().top;
-    
-    
+  $("article > svg").mouseout(function(){
+    hideRect();
+    $("#mX").text(0);
+    $("#mY").text(0);
   });
+  $("article > svg").mouseover(function(e){ shadow(e); });
+  
+  $("article > svg").mousemove(function(e){ shadow(e); });
   
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
