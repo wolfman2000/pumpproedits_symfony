@@ -76,6 +76,11 @@ function genArrow(x, y, css)
   s.setAttribute("x", x);
   s.setAttribute("y", y);
   if (css) { s.setAttribute("class", css); }
+  
+  var g = document.createElementNS(SVG_NS, "g"); // needed for transforms
+  g.setAttribute("transform", "");
+  s.appendChild(g);
+  
   return s;
 }
 
@@ -90,10 +95,10 @@ function genDLArrow(x, y, css)
   var p = document.createElementNS(SVG_NS, "path");
   p.setAttribute("d", "m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 v -1 c 0,0 0,-1 -1,-1 "
       + "H 7 L 15,4 V 2 C 15,2 15,1 14,1 H 12 L 4,9 V 2 C 4,2 4,1 3,1 H 2 C 2,1 1,1 1,2");
-  s.appendChild(p);
-  s.appendChild(genLine(14.5, 4.5, 11.5, 1.5));
-  s.appendChild(genLine(10.75, 8.25, 7.75, 5.25));
-  s.appendChild(genLine(7, 12, 4, 9));
+  s.firstChild.appendChild(p);
+  s.firstChild.appendChild(genLine(14.5, 4.5, 11.5, 1.5));
+  s.firstChild.appendChild(genLine(10.75, 8.25, 7.75, 5.25));
+  s.firstChild.appendChild(genLine(7, 12, 4, 9));
   
   return s;
 }
@@ -101,7 +106,7 @@ function genDLArrow(x, y, css)
 function genULArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
-  s.setAttribute("transform", "rotate(90 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  s.firstChild.setAttribute("transform", "rotate(90 " + (ARR_HEIGHT / 2) + " " + (ARR_HEIGHT / 2) + ")");
   return s;
 }
 
@@ -113,21 +118,21 @@ function genCNArrow(x, y, css)
   var s = genArrow(x, y, css);
   var p = document.createElementNS(SVG_NS, "path");
   p.setAttribute("d", "m 1,2 v 12 l 1,1 h 12 l 1,-1 V 2 L 14,1 H 2 z");
-  s.appendChild(p);
+  s.firstChild.appendChild(p);
   return s;
 }
 
 function genURArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
-  s.setAttribute("transform", "rotate(180 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  s.firstChild.setAttribute("transform", "rotate(180 " + (ARR_HEIGHT / 2) + " " + (ARR_HEIGHT / 2) + ")");
   return s;
 }
 
 function genDRArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
-  s.setAttribute("transform", "rotate(270 " + (x + ADJUST_SIZE / 2) + " " + (y + ADJUST_SIZE / 2) + ")");
+  s.firstChild.setAttribute("transform", "rotate(270 " + (ARR_HEIGHT / 2) + " " + (ARR_HEIGHT / 2) + ")");
   return s;
 }
 
@@ -138,7 +143,7 @@ function genDRArrow(x, y, css)
 function getNote()
 {
   var rY = $("#shadow").attr('y');
-  var y = (rY - ADJUST_SYNC) % BEATS_MAX;
+  var y = (rY - ADJUST_SIZE) % BEATS_MAX;
   
   var k = "note";
   if (style == "r") { k = "p" + player; }
@@ -160,9 +165,10 @@ function getNote()
 function selectArrow(css)
 {
   var rX = $("#shadow").attr('x');
-  var rY = $("#shadow").attr('y');
+  var rY = $("#shadow").attr('y') / SCALE;
   var x = rX / ADJUST_SIZE - 1;
-  if (style = "r") { x = x + 2; }
+  rX = rX / SCALE;
+  if (style == "r") { x = x + 2; }
   switch (x % 5)
   {
     case 0: return genDLArrow(rX, rY, css);
@@ -389,6 +395,18 @@ function changeArrow()
   
   // add if empty
   
+  var collection = $("#svgNote");
+  for (var n in collection.children())
+  {
+    ;
+  }
+  
+  /*
+   * If it hits here, then this is the last note to add.
+   * A simple create and append will do.
+   */
+  
+  collection.append(selectArrow(getNote()));
 }
 
 $(document).ready(function()

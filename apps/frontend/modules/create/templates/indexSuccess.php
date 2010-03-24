@@ -9,7 +9,7 @@ menus to select your various options, and have fun!</p>
 <g id="notes">
 <g id="svgMeas" />
 <g id="svgSync" />
-<g id="svgNote" />
+<g id="svgNote" transform="scale(3)" />
 <rect id="shadow" x="0" y="0" width="32" height="32" />
 </g>
 </svg>
