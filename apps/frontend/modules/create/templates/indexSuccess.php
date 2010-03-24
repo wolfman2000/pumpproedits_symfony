@@ -5,6 +5,8 @@ slot('h2', "<h2>Edit Creater</h2>"); ?>
 web interface to make your own edit. Use the drop down
 menus to select your various options, and have fun!</p>
 
+<p>mX: <span id="mX">0</span> mY: <span id="mY">0</span></p>
+
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <g id="notes">
 <rect id="shadow" x="0" y="0" width="32" height="32" />
