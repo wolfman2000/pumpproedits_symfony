@@ -88,4 +88,16 @@
 	{
 		fill: #8A2BE2;
 	}
+	svg.mine
+	{
+		stroke-width: 0.2;
+	}
+	svg.mine > g > circle:nth-of-type(1)
+	{
+		fill: black;
+	}
+	svg.mine > g > circle:nth-of-type(2)
+	{
+		fill: red;
+	}
 }
