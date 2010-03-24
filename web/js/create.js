@@ -27,6 +27,38 @@ const SVG_BG = "white"; // background of the SVG element and other key things.
 const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
 
 /*
+ * Generate the line required. Apply the class if one exists.
+ */
+function genLine(x1, y1, x2, y2, css)
+{
+  var l = document.createElementNS(SVG_NS, "line");
+  l.setAttribute("x1", x1);
+  l.setAttribute("y1", y1);
+  l.setAttribute("x2", x2);
+  l.setAttribute("y2", y2);
+  if (css) { l.setAttribute("class", css); }
+  return l;
+}
+
+function genDLArrow(x, y, css)
+{
+  var s = document.createElementNS(SVG_NS, "svg");
+  s.setAttribute("x", x);
+  s.setAttribute("y", y);
+  s.setAttribute("transform", "scale(" + SCALE + ")");
+  
+  var p = document.createElementNS(SVG_NS, "path");
+  p.setAttribute("d", "m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 v -1 c 0,0 0,-1 -1,-1 "
+      + "H 7 L 15,4 V 2 C 15,2 15,1 14,1 H 12 L 4,9 V 2 C 4,2 4,1 3,1 H 2 C 2,1 1,1 1,2");
+  s.appendChild(p);
+  s.appendChild(genLine(14.5, 4.5, 11.5, 1.5));
+  s.appendChild(genLine(10.75, 8.25, 7.75, 5.25));
+  s.appendChild(genLine(7, 12, 4, 9));
+  
+  return s;
+}
+
+/*
  * Generate the measures that will hold the arrows.
  */
 function genMeasure(x, y, c)
@@ -69,26 +101,10 @@ function genMeasure(x, y, c)
   r4.setAttribute("width", columns * ADJUST_SIZE);
   s.appendChild(r4);
   
-  var l1 = document.createElementNS(SVG_NS, "line");
-  l1.setAttribute("x1", 0);
-  l1.setAttribute("y1", 0.1);
-  l1.setAttribute("x2", columns * ADJUST_SIZE);
-  l1.setAttribute("y2", 0.1);
-  s.appendChild(l1);
-  
-  var l2 = document.createElementNS(SVG_NS, "line");
-  l2.setAttribute("x1", 0.05);
-  l2.setAttribute("y1", 0);
-  l2.setAttribute("x2", 0.05);
-  l2.setAttribute("y2", MEASURE_HEIGHT);
-  s.appendChild(l2);
-  
-  var l3 = document.createElementNS(SVG_NS, "line");
-  l3.setAttribute("x1", columns * ADJUST_SIZE - 0.05);
-  l3.setAttribute("y1", 0);
-  l3.setAttribute("x2", columns * ADJUST_SIZE - 0.05);
-  l3.setAttribute("y2", MEASURE_HEIGHT);
-  s.appendChild(l3);
+  s.appendChild(genLine(0, 0.1, columns * ADJUST_SIZE, 0.1));
+  s.appendChild(genLine(0.05, 0, 0.05, MEASURE_HEIGHT));
+  var x = columns * ADJUST_SIZE - 0.05;
+  s.appendChild(genLine(x, 0, x, MEASURE_HEIGHT));
   
   return s;
 }
@@ -103,20 +119,6 @@ function genText(x, y, st, css)
   s.setAttribute('y', y);
   if (css) { s.setAttribute('class', css); }
   s.appendChild(document.createTextNode(st));
-  return s;
-}
-
-/*
- * Generate the BPM Change / Stop line.
- */
-function genLine(x, y, css)
-{
-  var s = document.createElementNS(SVG_NS, "line");
-  s.setAttribute("x1", x);
-  s.setAttribute("y1", y);
-  s.setAttribute("x2", x + columns * ADJUST_SIZE / 2);
-  s.setAttribute("y2", y);
-  s.setAttribute("class", css);
   return s;
 }
 
@@ -150,6 +152,9 @@ function showRect(x, y)
   $("#shadow#").attr('x', x).attr('y', y).show();
 }
 
+/**
+ * Enter this mode upon choosing a song and difficulty.
+ */
 function editMode()
 {
   $.getJSON("/create/song/" + songID, function(data)
@@ -170,26 +175,33 @@ function editMode()
     
     // place the BPM data.
     var bpms = songData.bpms;
-    for (var i = 0; i < bpms.length; i++)
+    var x = width / 2;
+    var y;
+    for (var i = 0; i < bpms.length; i++)    
     {
+      y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
       $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
-          BUFF_TOP + bpms[i].beat * ADJUST_SIZE + 2 * SCALE, bpms[i].bpm, 'bpm'));
-      $("#svgSync").append(genLine(width / 2,
-          BUFF_TOP + bpms[i].beat * ADJUST_SIZE, 'bpm'));
+          y + 2 * SCALE, bpms[i].bpm, 'bpm'));
+      $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
+//          BUFF_TOP + bpms[i].beat * ADJUST_SIZE, 'bpm'));
     }
     
     var stps = songData.stps;
     for (var i = 0; i < stps.length; i++)
     {
-      $("#svgSync").append(genText(0, BUFF_TOP + stps[i].beat * ADJUST_SIZE + 2 * SCALE,
+      y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
+      $("#svgSync").append(genText(0, y + 2 * SCALE,
           stps[i].time, 'stop'));
-      $("#svgSync").append(genLine(BUFF_LFT, BUFF_TOP + stps[i].beat * ADJUST_SIZE, 'stop'));
+      $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
     }
     $("nav *.edit").show();
     $("nav *.choose").hide();
   });
 }
 
+/**
+ * Round elements to the nearest 10 for easier calculations later.
+ */
 function round10(n)
 {
   n = Math.round(n);
@@ -200,6 +212,9 @@ function round10(n)
   return n;
 }
 
+/**
+ * Load up this data on new.
+ */
 function init()
 {
   $("nav *.edit").hide();
@@ -231,6 +246,9 @@ function init()
   
 }
 
+/**
+ * Trace the mouse to see where the shadow falls.
+ */
 function shadow(e)
 {
   var pnt = $("#svgMeas > svg:first-child > rect:first-child")
@@ -238,8 +256,6 @@ function shadow(e)
   {
     mX = e.pageX - pnt.offset().left;
     mY = e.pageY - pnt.offset().top;
-    $("#mX").text(mX);
-    $("#mY").text(mY);
     
     var hnt = $("#svgMeas > svg:last-child");
     if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > hnt.attr('y')))
@@ -262,7 +278,27 @@ function shadow(e)
       }
       showRect(nX + ADJUST_SIZE, nY + ADJUST_SIZE);
     }
+    else
+    {
+      hideRect(); // Best to be safe and explicit.
+    }
   }
+}
+
+/**
+ * Add the arrow in the appropriate position.
+ */
+function changeArrow()
+{
+  var r = $("#shadow");
+  if (!(r.attr('x') && r.attr('y'))) return;
+  
+  // see if a node exists in this area.
+  
+  // TODO
+  
+  // add if empty
+  
 }
 
 $(document).ready(function()
@@ -275,14 +311,12 @@ $(document).ready(function()
   /*
    * The various action functions are set here.
    */
-  $("article > svg").mouseout(function(){
-    hideRect();
-    $("#mX").text(0);
-    $("#mY").text(0);
-  });
+  $("article > svg").mouseout(function(){ hideRect(); });
   $("article > svg").mouseover(function(e){ shadow(e); });
   
   $("article > svg").mousemove(function(e){ shadow(e); });
+  
+  $("article > svg").click(function(){ changeArrow(); });
   
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
