@@ -2,6 +2,7 @@ var isDirty; // has the work changed? Should a prompt for saving take place?
 var measures; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
 var width; // compliment to columns
+var height; // compliment to measures
 var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
@@ -153,7 +154,9 @@ function editMode()
   $.getJSON("/create/song/" + songID, function(data)
   {
     songData = data;
-    $("article > svg").attr("height", MEASURE_HEIGHT * songData.measures + BUFF_TOP * 2);
+    height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
+    $("article > svg").attr("height", height);
+    $("article").css("height", height + 200);
     columns = getCols();
     width = BUFF_LFT + BUFF_RHT + columns * SCALE * ARR_HEIGHT;
     $("article > svg").attr("width", width);
@@ -204,6 +207,7 @@ function init()
   $("#stylelist").attr("disabled", "disabled");
   $("article > svg").css('left', round10($("nav").first().width()) + 70);
   $("article > svg").css('top', round10($("header").first().height()) * 8 + 20);
+  $("article").css('height', '50em');
   $("article > svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
   $("article > svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
 
@@ -228,10 +232,14 @@ function init()
 
 function shadow(e)
 {
-  mX = e.pageX - $("#svgMeas > svg:first-child > rect:first-child").offset().left
-  mY = e.pageY - $("#svgMeas > svg:first-child > rect:first-child").offset().top
-  $("#mX").text(mX);
-  $("#mY").text(mY);
+  var pnt = $("#svgMeas > svg:first-child > rect:first-child").offset();
+  if (pnt)
+  {
+    mX = e.pageX - pnt.left
+    mY = e.pageY - pnt.top
+    $("#mX").text(mX);
+    $("#mY").text(mY);
+  }
 }
 
 $(document).ready(function()

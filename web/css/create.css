@@ -29,13 +29,8 @@
 		margin-left: 22em;
 		min-height: 40em;
 		padding-bottom: 0;
-	}
-	
-	article
-	{
 		min-height: 50em;
-	}
-	
+	}	
 	article > svg
 	{
 		margin: 2em auto;
