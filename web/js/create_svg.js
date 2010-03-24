@@ -76,6 +76,14 @@ function genDLArrow(x, y, css)
   s.firstChild.appendChild(genLine(10.75, 8.25, 7.75, 5.25));
   s.firstChild.appendChild(genLine(7, 12, 4, 9));
   
+  if (css.indexOf("hold") >= 0 || css.indexOf("roll") >= 0 || css.indexOf("lift") >= 0)
+  {
+    p = document.createElementNS(SVG_NS, "path");
+    p.setAttribute("d", "m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 v -1 c 0,0 0,-1 -1,-1 "
+        + "H 7 L 4,9 V 2 C 4,2 4,1 3,1 H 2 C 2,1 1,1 1,2");
+    s.firstChild.appendChild(p);
+  }
+  
   return s;
 }
 
@@ -101,6 +109,13 @@ function genCNArrow(x, y, css)
   s.firstChild.appendChild(p);
   s.firstChild.appendChild(genRect(4, 6, 2, 4, 0.5));
   s.firstChild.appendChild(genRect(10, 6, 2, 4, 0.5));
+  
+  if (css.indexOf("hold") >= 0 || css.indexOf("roll") >= 0 || css.indexOf("lift") >= 0)
+  {
+    p = document.createElementNS(SVG_NS, "path");
+    p.setAttribute("d", "m 1,2 v 3 h 14 v -3 l -1,-1 h -12 l -1, 1");
+    s.firstChild.appendChild(p);
+  }
   return s;
 }
 

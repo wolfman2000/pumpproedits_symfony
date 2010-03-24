@@ -84,6 +84,19 @@
 		  stroke-opacity:1;
 	}
 	
+	svg.hold > g > path:last-child
+	{
+		fill: #000080;
+	}
+	svg.roll > g > path:last-child
+	{
+		fill: #600060;
+	}
+	svg.lift > g > path:last-child
+	{
+		fill: white;
+	}
+	
 	svg.end > g > path:first-child
 	{
 		fill: #8A2BE2;
