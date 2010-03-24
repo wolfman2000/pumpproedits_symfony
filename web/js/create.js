@@ -67,7 +67,8 @@ function selectArrow(css)
   if (style == "h") { x = x + 2; }
   
   if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
-  if (css.indexOf("end")  >= 0) { return genEnd(rX, rY, css);  }
+  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
+  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
   
   
   switch (x % 5)

@@ -169,6 +169,18 @@ function genMine(x, y, css)
 }
 
 /*
+ * Fake arrows may or may not be in Pro 2. Prepare for them.
+ */
+function genFake(x, y, css)
+{
+  var s = genArrow(x, y, css);
+  var p = document.createElementNS(SVG_NS, "path");
+  p.setAttribute("d", "m 1,3 l 5,5 -5,5 2,2 5,-5 5,5 2,-2 -5,-5 5,-5 -2,-2 -5,5 -5,-5 z");
+  s.firstChild.appendChild(p);
+  return s;
+}
+
+/*
  * Generate the end of the hold/roll.
  */
 function genEnd(x, y, css)
