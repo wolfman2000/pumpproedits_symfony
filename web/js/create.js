@@ -78,7 +78,6 @@ function genArrow(x, y, css)
   if (css) { s.setAttribute("class", css); }
   
   var g = document.createElementNS(SVG_NS, "g"); // needed for transforms
-  g.setAttribute("transform", "");
   s.appendChild(g);
   
   return s;
@@ -140,7 +139,7 @@ function genDRArrow(x, y, css)
 
 
 /*
- * Determine the proper note class to render based on sync.
+ * Determine the proper note classes to render based on sync.
  */
 function getNote()
 {
@@ -150,15 +149,26 @@ function getNote()
   var k = "note";
   if (style == "r") { k = "p" + player; }
   
-  if (!(y % 48)) { return k + "_004" };
-  if (!(y % 24)) { return k + "_008" };
-  if (!(y % 16)) { return k + "_012" };
-  if (!(y % 12)) { return k + "_016" };
-  if (!(y % 8))  { return k + "_024" };
-  if (!(y % 6))  { return k + "_032" };
-  if (!(y % 4))  { return k + "_048" };
-  if (!(y % 3))  { return k + "_064" };
-  return k + "_192";
+  if      (!(y % 48)) { k += "_004"; }
+  else if (!(y % 24)) { k += "_008"; }
+  else if (!(y % 16)) { k += "_012"; }
+  else if (!(y % 12)) { k += "_016"; }
+  else if (!(y % 8))  { k += "_024"; }
+  else if (!(y % 6))  { k += "_032"; }
+  else if (!(y % 4))  { k += "_048"; }
+  else if (!(y % 3))  { k += "_064"; }
+  else                { k += "_192"; }
+  
+  var t; // note type.
+  if      (note == "1") { t = "tap";  }
+  else if (note == "2") { t = "hold"; }
+  else if (note == "3") { t = "end";  }
+  else if (note == "4") { t = "roll"; }
+  else if (note == "M") { t = "mine"; }
+  else if (note == "L") { t = "lift"; }
+  else if (note == "F") { t = "fake"; }
+  else                  { t = "FIX";  }
+  return k + " " + t;
 }
 
 /*
@@ -330,7 +340,7 @@ function init()
   $("#quanlist").val(4);
   $("#typelist").val(1);
   sync = 4;
-  note = 1;
+  note = "1";
   player = 1;
 
   $("#svgMeas").empty();
