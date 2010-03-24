@@ -62,6 +62,11 @@ menus to select your various options, and have fun!</p>
 <dt class="edit routine">Select your player!</dt>
 <dd class="edit routine"><label>Player 1 <input type="radio" name="player" id="p1" value="1" checked="checked" /></label>
 <label>Player 2 <input type="radio" name="player" id="p2" value="2" /></label></dd>
+<dt class="edit">Present Location:</dt>
+<dd class="edit"><ul>
+<li>Measure <span id="mCheck">???</span></li>
+<li>Beat <span id="yCheck">???</span> / 192</li>
+</ul></dd>
 <dt class="edit">Step Stats</dt>
 <dd class="edit"><ul>
 <li>Steps: <span id="statS">0</span></li>

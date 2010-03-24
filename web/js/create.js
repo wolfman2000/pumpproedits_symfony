@@ -109,6 +109,8 @@ function getCols()
 function hideRect()
 {
   $("#shadow").attr('x', 0).attr('y', 0).hide();
+  $("#yCheck").text("???");
+  $("#mCheck").text("???");
 }
 
 /*
@@ -117,6 +119,9 @@ function hideRect()
 function showRect(x, y)
 {
   $("#shadow#").attr('x', x).attr('y', y).show();
+  y = y - ADJUST_SIZE;
+  $("#mCheck").text(Math.floor(y / BEATS_MAX) + 1);
+  $("#yCheck").text(y % BEATS_MAX);
 }
 
 /**
