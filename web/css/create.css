@@ -70,9 +70,17 @@
 		font-size: 0.8em;
 	}
 	
-	#notes > rect
+	#shadow
 	{
 		fill: aqua;
 		opacity: 0.5;
+	}
+	
+	#svgNote > svg
+	{
+		  fill-opacity:1;
+		  stroke:black;
+		  stroke-width:0.1;
+		  stroke-opacity:1;
 	}
 }

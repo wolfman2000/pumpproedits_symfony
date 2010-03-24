@@ -119,6 +119,8 @@ function genCNArrow(x, y, css)
   var p = document.createElementNS(SVG_NS, "path");
   p.setAttribute("d", "m 1,2 v 12 l 1,1 h 12 l 1,-1 V 2 L 14,1 H 2 z");
   s.firstChild.appendChild(p);
+  s.firstChild.appendChild(genRect(4, 6, 2, 4, 0.5));
+  s.firstChild.appendChild(genRect(10, 6, 2, 4, 0.5));
   return s;
 }
 
