@@ -260,22 +260,62 @@ function changeArrow()
   var rY = r.attr('y') / SCALE;
   if (!(rX && rY)) return;
   
+  var css = getNote();
+  
   // see if a node exists in this area.
   
-  // TODO
-  
-  // add if empty
-  
+  /*
+   * Mini rant time. SVG and jQuery don't fully get
+   * along right now. Until such a time comes when
+   * they do, I have to loop through each element
+   * manually until I hit it, and then figure out
+   * the rest from there.
+   */
+
   var coll = $("#svgNote");
-  var l = coll.children().length;
   
   var n = coll.children().first();
   var nX = n.attr('x');
   var nY = n.attr('y');
   
+  if (nX == rX && nY == rY)
+  {
+    var nStyle = n.attr('class');
+    nStyle = nStyle.substring(nStyle.charAt(' '));
+    n.remove();
+    if (nStyle == css.substring(css.charAt(' ')))
+    {
+      return; // No point in adding the same note type again.
+    }
+  }
+  else while (n.length)
+  {
+    n = n.next();
+    nX = n.attr('x');
+    nY = n.attr('y');
+    
+    if (nX == rX && nY == rY)
+    {
+      var nStyle = n.attr('class');
+      nStyle = nStyle.substring(nStyle.charAt(' '));
+      n.remove();
+      if (nStyle == css.substring(css.charAt(' ')))
+      {
+        return; // No point in adding the same note type again.
+      }
+      break; // replacing with a new note: start below.
+    }
+  }
+  
+  // add if empty
+  
+  n = coll.children().first();
+  nX = n.attr('x');
+  nY = n.attr('y');
+  
   if (nY > rY || nY == rY && nX > rX)
   {
-    n.before(selectArrow(getNote()));
+    n.before(selectArrow(css));
     return;
   }
   
@@ -287,32 +327,17 @@ function changeArrow()
     
     if (nY > rY || nY == rY && nX > rX)
     {
-      n.before(selectArrow(getNote()));
+      n.before(selectArrow(css));
       return;
     }
   }
-  
-  /*
-  for (var i = 1; i <= l; i++)
-  {
-    var n = $("#svgNote > svg:nth-child(i)");
-    var nX = n.attr('x');
-    var nY = n.attr('y');
-    
-    if (nY > rY || (nY == rY && nX > rX)) // we went too far.
-    {
-      n.before(selectArrow(getNote()));
-      return;
-    }
-    
-  }*/
   
   /*
    * If it hits here, then this is the last note to add.
    * A simple create and append will do.
    */
   
-  coll.append(selectArrow(getNote()));
+  coll.append(selectArrow(css));
 }
 
 $(document).ready(function()
