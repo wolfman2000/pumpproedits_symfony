@@ -23,6 +23,13 @@ var mY; // mouse position at Y.
 const SVG_BG = "white"; // background of the SVG element and other key things.
 
 /*
+ * Add a capitalize function for the first letter.
+ */
+String.prototype.capitalize = function(){
+   return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+  };
+
+/*
  * Determine the proper note classes to render based on sync.
  */
 function getNote()
@@ -31,7 +38,7 @@ function getNote()
   var y = (rY - ADJUST_SIZE) % BEATS_MAX;
   
   var k = "note";
-  if (style == "r") { k = "p" + player; }
+  if (style == "routine") { k = "p" + player; }
   
   if      (!(y % 48)) { k += "_004"; }
   else if (!(y % 24)) { k += "_008"; }
@@ -64,12 +71,11 @@ function selectArrow(css)
   var rY = $("#shadow").attr('y') / SCALE;
   var x = rX / ADJUST_SIZE - 1;
   rX = rX / SCALE;
-  if (style == "h") { x = x + 2; }
+  if (style == "halfdouble") { x = x + 2; }
   
   if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
   if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
   if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
-  
   
   switch (x % 5)
   {
@@ -86,7 +92,7 @@ function selectArrow(css)
  */
 function getCols()
 {
-  switch ($("#stylelist").val())
+  switch ($("#stylelist").val().substring(0, 1))
   {
     case "s": return 5;
     case "h": return 6;
@@ -155,7 +161,8 @@ function editMode()
     }
     $("nav *.edit").show();
     $("nav *.choose").hide();
-    if (style != "r") { $("nav .routine").hide(); }
+    if (style != "routine") { $("nav .routine").hide(); }
+    $("h2").first().text(songData.name + " " + style.capitalize());
   });
 }
 

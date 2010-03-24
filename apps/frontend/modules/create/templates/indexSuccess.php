@@ -28,10 +28,10 @@ menus to select your various options, and have fun!</p>
 <dt class="choose"><label for="stylelist">Select your style!</label></dt>
 <dd class="choose"><select id="stylelist">
 <option value="" selected="selected">Choose</option>
-<option value="s">pump-single</option>
-<option value="d">pump-double</option>
-<option value="h">pump-halfdouble</option>
-<option value="r">pump-routine</option>
+<option value="single">pump-single</option>
+<option value="double">pump-double</option>
+<option value="halfdouble">pump-halfdouble</option>
+<option value="routine">pump-routine</option>
 </select></dd>
 <dt class="edit"><label for="editName">Name your edit!</label></dt>
 <dd class="edit"><input type="text" id="editName" maxlength="12" /></dd>
