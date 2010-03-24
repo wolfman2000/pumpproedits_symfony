@@ -139,6 +139,24 @@ function genDRArrow(x, y, css)
 
 
 /*
+ * Generate circular mines for the steps one shouldn't hit.
+ */
+function genMine(x, y, css)
+{
+  var s = genArrow(x, y, css); // this still works surprisingly.
+  return s;
+}
+
+/*
+ * Generate the end of the hold/roll.
+ */
+function genEnd(x, y, css)
+{
+  var s = genArrow(x, y, css);
+  return s;
+}
+
+/*
  * Determine the proper note classes to render based on sync.
  */
 function getNote()
@@ -181,6 +199,11 @@ function selectArrow(css)
   var x = rX / ADJUST_SIZE - 1;
   rX = rX / SCALE;
   if (style == "r") { x = x + 2; }
+  
+  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
+  if (css.indexOf("end")  >= 0) { return genEnd(rX, rY, css);  }
+  
+  
   switch (x % 5)
   {
     case 0: return genDLArrow(rX, rY, css);
