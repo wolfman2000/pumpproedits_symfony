@@ -59,9 +59,9 @@ menus to select your various options, and have fun!</p>
 <option value="L">Lift</option>
 <option value="F">Fake</option>
 </select></dd>
-<dt class="edit">Select your player!</dt>
-<dd class="edit"><label>Player 1 <input type="radio" name="playerL" id="p1" value="1" checked="checked" /></label>
-<label>Player 2 <input type="radio" name="playerL" id="p2" value="2" /></label></dd>
+<dt class="edit routine">Select your player!</dt>
+<dd class="edit routine"><label>Player 1 <input type="radio" name="player" id="p1" value="1" checked="checked" /></label>
+<label>Player 2 <input type="radio" name="player" id="p2" value="2" /></label></dd>
 <dt class="edit">Step Stats</dt>
 <dd class="edit"><ul>
 <li>Steps: <span id="statS">0</span></li>
