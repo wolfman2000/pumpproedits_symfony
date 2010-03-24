@@ -8,13 +8,22 @@ var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
 var note; // which note are we using right now?
 var style; // which style are we playing with? single, double, halfdouble, routine
-var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
+var player; // Which player are we dealing with for routine steps?
+var steps; // How many steps?
+var jumps; // How many jumps?
+var holds; // How many holds?
+var mines; // How many mines?
+var trips; // How many trips? (or hands)
+var rolls; // How many rolls?
+var lifts; // How many lifts?
+var fakes; // How many fakes?
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.
 const ADJUST_SIZE = ARR_HEIGHT * SCALE; // 
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
+const BEATS_MAX = 192; // LCD of 48 and 64
 
 // These constants may change later, depending on how much spacing is wanted.
 const BUFF_TOP = ADJUST_SIZE;
@@ -122,6 +131,28 @@ function genDRArrow(x, y, css)
   return s;
 }
 
+
+/*
+ * Determine the proper note class to render based on sync.
+ */
+function getNote()
+{
+  var rY = $("#shadow").attr('y');
+  var y = (rY - ADJUST_SYNC) % BEATS_MAX;
+  
+  var k = "note";
+  if (style == "r") { k = "p" + player; }
+  
+  if (!(y % 48)) { return k + "_004" };
+  if (!(y % 24)) { return k + "_008" };
+  if (!(y % 16)) { return k + "_012" };
+  if (!(y % 12)) { return k + "_016" };
+  if (!(y % 8))  { return k + "_024" };
+  if (!(y % 6))  { return k + "_032" };
+  if (!(y % 4))  { return k + "_048" };
+  if (!(y % 3))  { return k + "_064" };
+  return k + "_192";
+}
 
 /*
  * Determine which arrow to return to the user.
@@ -253,6 +284,7 @@ function editMode()
     }
     $("nav *.edit").show();
     $("nav *.choose").hide();
+    if (style != "r") { $("nav .routine").hide(); }
   });
 }
 
@@ -291,7 +323,7 @@ function init()
   $("#typelist").val(1);
   sync = 4;
   note = 1;
-
+  player = 1;
 
   $("#svgMeas").empty();
   $("#svgSync").empty();
@@ -299,6 +331,7 @@ function init()
   isDirty = false;
   measures = new Array({}, {}); // routine compatible.
   columns = 5; // reasonable default.
+  steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
   
   
 }
@@ -328,7 +361,7 @@ function shadow(e)
       nY = MEASURE_HEIGHT * Math.floor(mY / MEASURE_HEIGHT);
       var rY = mY % MEASURE_HEIGHT;
       
-      var sY = 192 / sync;
+      var sY = BEATS_MAX / sync;
       while (nY + sY < mY)
       {
         nY += sY;
@@ -384,5 +417,8 @@ $(document).ready(function()
   
   $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val();});
   $("#typelist").change(function() { note = $("#typelist > option:selected").val();});
+  
+  $("#p1").change(function() { player = 1; });
+  $("#p2").change(function() { player = 2; });
   
 });
