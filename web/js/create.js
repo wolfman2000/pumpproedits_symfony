@@ -213,13 +213,12 @@ function editMode()
     var bpms = songData.bpms;
     var x = width / 2;
     var y;
-    for (var i = 0; i < bpms.length; i++)    
+    for (var i = 0; i < bpms.length; i++)
     {
       y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
       $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
           y + 2 * SCALE, bpms[i].bpm, 'bpm'));
       $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
-//          BUFF_TOP + bpms[i].beat * ADJUST_SIZE, 'bpm'));
     }
     
     var stps = songData.stps;
