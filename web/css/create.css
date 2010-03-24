@@ -9,6 +9,11 @@
 		background-color: #9999ff;
 		top: 3.6em;
 	}
+	nav > p
+	{
+		margin: 0;
+		padding: 0 0 10px 0;
+	}
 	nav ul
 	{
 		float: left;
