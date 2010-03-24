@@ -140,13 +140,14 @@ function getCols()
 function hideRect()
 {
   $("#shadow").attr('x', 0).attr('y', 0).hide();
-  mX = 0;
-  mY = 0;
 }
 
+/*
+ * Show where the rectangle gets placed.
+ */
 function showRect(x, y)
 {
-  return;
+  $("#shadow#").attr('x', x).attr('y', y).show();
 }
 
 function editMode()
@@ -232,13 +233,35 @@ function init()
 
 function shadow(e)
 {
-  var pnt = $("#svgMeas > svg:first-child > rect:first-child").offset();
-  if (pnt)
+  var pnt = $("#svgMeas > svg:first-child > rect:first-child")
+  if (pnt.offset())
   {
-    mX = e.pageX - pnt.left
-    mY = e.pageY - pnt.top
+    mX = e.pageX - pnt.offset().left;
+    mY = e.pageY - pnt.offset().top;
     $("#mX").text(mX);
     $("#mY").text(mY);
+    
+    var hnt = $("#svgMeas > svg:last-child");
+    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > hnt.attr('y')))
+    {
+      var nX = 0;
+      var nY = 0;
+      
+      while (nX + ADJUST_SIZE < mX)
+      {
+        nX += ADJUST_SIZE;
+      }
+      
+      nY = MEASURE_HEIGHT * Math.floor(mY / MEASURE_HEIGHT);
+      var rY = mY % MEASURE_HEIGHT;
+      
+      var sY = 192 / sync;
+      while (nY + sY < mY)
+      {
+        nY += sY;
+      }
+      showRect(nX + ADJUST_SIZE, nY + ADJUST_SIZE);
+    }
   }
 }
 
