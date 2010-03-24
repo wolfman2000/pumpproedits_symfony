@@ -7,6 +7,7 @@ var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
 var note; // which note are we using right now?
+var style; // which style are we playing with? single, double, halfdouble, routine
 var steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
@@ -121,6 +122,26 @@ function genDRArrow(x, y, css)
   return s;
 }
 
+
+/*
+ * Determine which arrow to return to the user.
+ */
+function selectArrow(css)
+{
+  var rX = $("#shadow").attr('x');
+  var rY = $("#shadow").attr('y');
+  var x = rX / ADJUST_SIZE - 1;
+  if (style = "r") { x = x + 2; }
+  switch (x % 5)
+  {
+    case 0: return genDLArrow(rX, rY, css);
+    case 1: return genULArrow(rX, rY, css);
+    case 2: return genCNArrow(rX, rY, css);
+    case 3: return genURArrow(rX, rY, css);
+    case 4: return genDRArrow(rX, rY, css);
+  }
+}
+
 /*
  * Generate the measures that will hold the arrows.
  */
@@ -196,6 +217,7 @@ function editMode()
   $.getJSON("/create/song/" + songID, function(data)
   {
     songData = data;
+    style = $("#stylelist > option:selected").val();
     height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
     $("article > svg").attr("height", height);
     $("article").css("height", height + 200);
