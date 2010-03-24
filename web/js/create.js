@@ -228,8 +228,8 @@ function init()
 
 function shadow(e)
 {
-  mX = e.pageX;
-  mY = e.pageY;
+  mX = e.pageX - $("#svgMeas > svg:first-child > rect:first-child").offset().left
+  mY = e.pageY - $("#svgMeas > svg:first-child > rect:first-child").offset().top
   $("#mX").text(mX);
   $("#mY").text(mY);
 }
