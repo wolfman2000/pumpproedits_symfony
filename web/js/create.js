@@ -120,11 +120,11 @@ function editMode()
     songData = data;
     style = $("#stylelist > option:selected").val();
     height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
-    $("article > svg").attr("height", height);
+    $("#svg").attr("height", height);
     $("article").css("height", height + 200);
     columns = getCols();
     width = BUFF_LFT + BUFF_RHT + columns * SCALE * ARR_HEIGHT;
-    $("article > svg").attr("width", width);
+    $("#svg").attr("width", width);
     
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
@@ -180,11 +180,11 @@ function init()
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", "disabled");
-  $("article > svg").css('left', round10($("nav").first().width()) + 70);
-  $("article > svg").css('top', round10($("header").first().height()) * 8 + 20);
+  $("#svg").css('left', round10($("nav").first().width()) + 70);
+  $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
   $("article").css('height', '50em');
-  $("article > svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
-  $("article > svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
+  $("#svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
+  $("#svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
 
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');
@@ -193,7 +193,7 @@ function init()
   $("#typelist").val(1);
   sync = 4;
   note = "1";
-  player = 1;
+  player = 0;
 
   $("#svgMeas").empty();
   $("#svgSync").empty();
@@ -201,9 +201,14 @@ function init()
   isDirty = false;
   measures = new Array({}, {}); // routine compatible.
   columns = 5; // reasonable default.
-  steps = jumps = holds = mines = trips = rolls = lifts = fakes = 0;
-  
-  
+  steps = new Array();
+  jumps = new Array();
+  holds = new Array();
+  mines = new Array();
+  trips = new Array();
+  rolls = new Array();
+  lifts = new Array();
+  fakes = new Array();
 }
 
 /**
@@ -283,12 +288,12 @@ $(document).ready(function()
   /*
    * The various action functions are set here.
    */
-  $("article > svg").mouseout(function(){ hideRect(); });
-  $("article > svg").mouseover(function(e){ shadow(e); });
+  $("#svg").mouseout(function(){ hideRect(); });
+  $("#svg").mouseover(function(e){ shadow(e); });
   
-  $("article > svg").mousemove(function(e){ shadow(e); });
+  $("#svg").mousemove(function(e){ shadow(e); });
   
-  $("article > svg").click(function(){ changeArrow(); });
+  $("#svg").click(function(){ changeArrow(); });
   
   $('#songlist').change(function(){
     songID = $("#songlist > option:selected").val();
@@ -300,7 +305,7 @@ $(document).ready(function()
   $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val();});
   $("#typelist").change(function() { note = $("#typelist > option:selected").val();});
   
-  $("#p1").change(function() { player = 1; });
-  $("#p2").change(function() { player = 2; });
+  $("#p1").change(function() { player = 0; });
+  $("#p2").change(function() { player = 1; });
   
 });

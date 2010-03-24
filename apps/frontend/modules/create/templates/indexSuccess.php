@@ -5,7 +5,7 @@ slot('h2', "<h2>Edit Creater</h2>"); ?>
 web interface to make your own edit. Use the drop down
 menus to select your various options, and have fun!</p>
 
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<svg id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <g id="notes">
 <g id="svgMeas" />
 <g id="svgSync" />
