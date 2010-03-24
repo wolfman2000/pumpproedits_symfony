@@ -84,8 +84,8 @@ function genArrow(x, y, css)
 }
 
 /*
- * Generate the basic arrow.
- * Hopefully I can just rotate this sucker and make it happy.
+ * The "base" arrow is down left. This is required for almost
+ * every other arrow. (the center arrow has different code)
  */
 function genDLArrow(x, y, css)
 {
@@ -102,6 +102,9 @@ function genDLArrow(x, y, css)
   return s;
 }
 
+/*
+ * Take the down left arrow, and rotate it to point up left.
+ */
 function genULArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
@@ -110,7 +113,8 @@ function genULArrow(x, y, css)
 }
 
 /*
- * The center arrow works differently. It relies more on rectangles.
+ * The center arrow works differently from the other four.
+ * It's more of a box with rectangles inside, almost like a face.
  */
 function genCNArrow(x, y, css)
 {
@@ -123,6 +127,9 @@ function genCNArrow(x, y, css)
   return s;
 }
 
+/*
+ * Take the down left arrow, and rotate it to point up right.
+ */
 function genURArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
@@ -130,6 +137,9 @@ function genURArrow(x, y, css)
   return s;
 }
 
+/*
+ * Take the down left arrow, and rotate it to point down right.
+ */
 function genDRArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
