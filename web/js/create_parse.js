@@ -29,7 +29,7 @@ function updateDetails()
   lifts = Array(0, 0);
   fakes = Array(0, 0);
 
-  var badds = Array(); // make a note of where the bad points are.
+  badds = Array(); // make a note of where the bad points are.
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
@@ -160,5 +160,4 @@ function updateDetails()
       if (iN) { badds.push(iN) }
     }
   }
-  return badds;
 }

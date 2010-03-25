@@ -144,14 +144,15 @@ function init()
   isDirty = false;
   notes = new Array({}, {}); // routine compatible.
   columns = 5; // reasonable default.
-  steps = new Array();
-  jumps = new Array();
-  holds = new Array();
-  mines = new Array();
-  trips = new Array();
-  rolls = new Array();
-  lifts = new Array();
-  fakes = new Array();
+  steps = new Array(0, 0);
+  jumps = new Array(0, 0);
+  holds = new Array(0, 0);
+  mines = new Array(0, 0);
+  trips = new Array(0, 0);
+  rolls = new Array(0, 0);
+  lifts = new Array(0, 0);
+  fakes = new Array(0, 0);
+  badds = new Array();
 }
 
 /**

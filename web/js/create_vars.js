@@ -19,6 +19,7 @@ var trips; // How many trips? (or hands)
 var rolls; // How many rolls?
 var lifts; // How many lifts?
 var fakes; // How many fakes?
+var badds; // Which are the problem notes?
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
