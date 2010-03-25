@@ -142,7 +142,7 @@ function init()
   $("#intro").text("Select your action.");
   
   isDirty = false;
-  notes = new Array({}, {}); // routine compatible.
+  notes = new Array(Array(), Array()); // routine compatible.
   columns = 5; // reasonable default.
   steps = new Array(0, 0);
   jumps = new Array(0, 0);
@@ -246,11 +246,11 @@ function changeArrow()
   {
     if (notes[player][mY] == null)
     {
-      notes[player][mY] = {};
+      notes[player][mY] = Array();
     }
     if (notes[player][mY][bY] == null)
     {
-      notes[player][mY][bY] = {};
+      notes[player][mY][bY] = Array();
     }
   }
   defineNote(); // unsure if this needs to be a function.
