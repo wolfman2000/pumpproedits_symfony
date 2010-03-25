@@ -1,27 +1,3 @@
-var isDirty; // has the work changed? Should a prompt for saving take place?
-var measures; // What does the internal note structure look like?
-var columns; // How many columns are we working with?
-var width; // compliment to columns
-var height; // compliment to measures
-var songID; // the song ID.
-var songData; // the song data in JSON format.
-var sync; // how much syncing are we dealing with?
-var note; // which note are we using right now?
-var style; // which style are we playing with? single, double, halfdouble, routine
-var player; // Which player are we dealing with for routine steps?
-var title; // what's the name of the edit?
-var diff; // What's the difficulty rating of this edit?
-var steps; // How many steps?
-var jumps; // How many jumps?
-var holds; // How many holds?
-var mines; // How many mines?
-var trips; // How many trips? (or hands)
-var rolls; // How many rolls?
-var lifts; // How many lifts?
-var fakes; // How many fakes?
-var mX; // mouse position at X.
-var mY; // mouse position at Y.
-
 /*
  * Add a capitalize function for the first letter.
  */
