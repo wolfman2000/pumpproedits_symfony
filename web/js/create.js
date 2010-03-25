@@ -22,8 +22,6 @@ var fakes; // How many fakes?
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
-const SVG_BG = "white"; // background of the SVG element and other key things.
-
 /*
  * Add a capitalize function for the first letter.
  */
@@ -31,38 +29,6 @@ String.prototype.capitalize = function(){
    return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
   };
 
-/*
- * Determine the proper note classes to render based on sync.
- */
-function getNote()
-{
-  var rY = $("#shadow").attr('y');
-  var y = (rY - ADJUST_SIZE) % BEATS_MAX;
-  
-  var k = "note";
-  if (style == "routine") { k = "p" + player; }
-  
-  if      (!(y % 48)) { k += "_004"; }
-  else if (!(y % 24)) { k += "_008"; }
-  else if (!(y % 16)) { k += "_012"; }
-  else if (!(y % 12)) { k += "_016"; }
-  else if (!(y % 8))  { k += "_024"; }
-  else if (!(y % 6))  { k += "_032"; }
-  else if (!(y % 4))  { k += "_048"; }
-  else if (!(y % 3))  { k += "_064"; }
-  else                { k += "_192"; }
-  
-  var t; // note type.
-  if      (note == "1") { t = "tap";  }
-  else if (note == "2") { t = "hold"; }
-  else if (note == "3") { t = "end";  }
-  else if (note == "4") { t = "roll"; }
-  else if (note == "M") { t = "mine"; }
-  else if (note == "L") { t = "lift"; }
-  else if (note == "F") { t = "fake"; }
-  else                  { t = "FIX";  }
-  return k + " " + t;
-}
 
 /*
  * Use the rectangle position and given note
@@ -146,8 +112,7 @@ function editMode()
     for (var i = 0; i < stps.length; i++)
     {
       y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
-      $("#svgSync").append(genText(0, y + 2 * SCALE,
-          stps[i].time, 'stop'));
+      $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
       $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
     }
     $("nav *.edit").show();
@@ -262,9 +227,41 @@ function changeArrow()
   var rX = r.attr('x');
   var rY = r.attr('y');
   if (!(rX && rY)) return;
+  
+  /*
+   * Determine the proper note classes to render based on sync.
+   */
+  function getNote()
+  {
+    var y = (rY - ADJUST_SIZE) % BEATS_MAX;
+    var k = "note";
+    if (style == "routine") { k = "p" + player; }
+    
+    if      (!(y % 48)) { k += "_004"; }
+    else if (!(y % 24)) { k += "_008"; }
+    else if (!(y % 16)) { k += "_012"; }
+    else if (!(y % 12)) { k += "_016"; }
+    else if (!(y % 8))  { k += "_024"; }
+    else if (!(y % 6))  { k += "_032"; }
+    else if (!(y % 4))  { k += "_048"; }
+    else if (!(y % 3))  { k += "_064"; }
+    else                { k += "_192"; }
+    
+    var t; // note type.
+    if      (note == "1") { t = "tap";  }
+    else if (note == "2") { t = "hold"; }
+    else if (note == "3") { t = "end";  }
+    else if (note == "4") { t = "roll"; }
+    else if (note == "M") { t = "mine"; }
+    else if (note == "L") { t = "lift"; }
+    else if (note == "F") { t = "fake"; }
+    else                  { t = "FIX";  }
+    return k + " " + t;
+  }
+
+  var css = getNote();
   rX /= SCALE;
   rY /= SCALE;
-  var css = getNote();
   
   /*
    * Determine which arrow to return to the user.
