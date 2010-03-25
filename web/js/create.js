@@ -142,7 +142,7 @@ function init()
   $("#intro").text("Select your action.");
   
   isDirty = false;
-  measures = new Array({}, {}); // routine compatible.
+  notes = new Array({}, {}); // routine compatible.
   columns = 5; // reasonable default.
   steps = new Array();
   jumps = new Array();
@@ -243,13 +243,13 @@ function changeArrow()
   
   function defineNote()
   {
-    if (measures[player][mY] == null)
+    if (notes[player][mY] == null)
     {
-      measures[player][mY] = {};
+      notes[player][mY] = {};
     }
-    if (measures[player][mY][bY] == null)
+    if (notes[player][mY][bY] == null)
     {
-      measures[player][mY][bY] = {};
+      notes[player][mY][bY] = {};
     }
   }
   defineNote(); // unsure if this needs to be a function.
@@ -316,7 +316,7 @@ function changeArrow()
       n.remove();
       if (nStyle == css.substring(css.charAt(' ')))
       {
-        measures[player][mY][bY][cX] = '0';
+        notes[player][mY][bY][cX] = '0';
         return; // No point in adding the same note type again.
       }
       break; // replacing with a new note: start below.
@@ -325,7 +325,7 @@ function changeArrow()
   
   // add if empty
   
-  measures[player][mY][bY][cX] = note;
+  notes[player][mY][bY][cX] = note;
   
   n = coll.children().first();
   nX = n.attr('x');
