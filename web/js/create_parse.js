@@ -18,7 +18,7 @@ function genObject(p, m, b, n)
  * Return whatever points are considered invalid for
  * the chart.
  */
-function updateDetails()
+function gatherStats()
 {
   steps = Array(0, 0);
   jumps = Array(0, 0);
@@ -52,7 +52,7 @@ function updateDetails()
         var numSteps = 0;
         var trueC = 0;
         LOOP_NOTE:
-        for (var iN in notes[iP][iM][iN]) // for each note
+        for (var iN in notes[iP][iM][iB]) // for each note
         {
           // again, don't think switch works on strings in JS.
           var n = notes[iP][iM][iB][iN];
@@ -67,7 +67,6 @@ function updateDetails()
             holdCheck[iN] = false;
             stepCheck[iN] = true;
             numSteps++;
-            trueC++;
             continue LOOP_NOTE;
           }
           if (n == '2')
@@ -79,7 +78,6 @@ function updateDetails()
             holdCheck[iN] = genObject(iP, iM, iB, iN);
             stepCheck[iN] = true;
             numSteps++;
-            trueC++;
             holds[iP]++;
             continue LOOP_NOTE;
           }
@@ -91,7 +89,6 @@ function updateDetails()
             }
             holdCheck[iN] = false;
             stepCheck[iN] = true;
-            trueC++;
             continue LOOP_NOTE;
           }
           if (n == '4')
@@ -103,7 +100,6 @@ function updateDetails()
             holdCheck[iN] = genObject(iP, iM, iB, iN);
             stepCheck[iN] = true;
             numSteps++;
-            trueC++;
             rolls[iP]++;
             continue LOOP_NOTE;
           }
@@ -141,6 +137,13 @@ function updateDetails()
             continue LOOP_NOTE;
           }
         }
+        for (var k = 0; k < columns; k++)
+        {
+          if ((stepCheck[k]) || (holdCheck[k]))
+          {
+            trueC++;
+          }
+        }
         if (numSteps > 0 && trueC >= 3)
         {
           trips[iP]++;
@@ -149,7 +152,7 @@ function updateDetails()
         {
           jumps[iP]++;
         }
-        if (numStpes > 0)
+        if (numSteps > 0)
         {
           steps[iP]++;
         }      

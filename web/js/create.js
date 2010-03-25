@@ -205,7 +205,7 @@ function changeArrow()
   if (!(rX && rY)) return;
   
   isDirty = true;
-  $("#but_save").removeAttr('disabled');
+  $("#but_val").attr('disabled', true);
   /*
    * Determine the proper note classes to render based on sync.
    */
@@ -290,6 +290,44 @@ function changeArrow()
 
   var coll = $("#svgNote");
   
+  /*
+   * This is meant to be an asyncronous function
+   * to get the step stats as close to live as
+   * possible without tying up the browser.
+   */
+  function updateStats()
+  {
+    gatherStats();
+    var S = steps[0];
+    var J = jumps[0];
+    var H = holds[0];
+    var M = mines[0];
+    var T = trips[0];
+    var R = rolls[0];
+    var L = lifts[0];
+    var F = fakes[0];
+    if (style == "routine")
+    {
+      S += "/" + steps[1];
+      J += "/" + jumps[1];
+      H += "/" + holds[1];
+      M += "/" + mines[1];
+      T += "/" + trips[1];
+      R += "/" + rolls[1];
+      L += "/" + lifts[1];
+      F += "/" + fakes[1];
+    }
+    $("#statS").text(S);
+    $("#statJ").text(J);
+    $("#statH").text(H);
+    $("#statM").text(M);
+    $("#statT").text(T);
+    $("#statR").text(R);
+    $("#statL").text(L);
+    $("#statF").text(F);
+    
+  }
+
   var n = coll.children().first();
   var nX = n.attr('x');
   var nY = n.attr('y');
@@ -301,6 +339,7 @@ function changeArrow()
     n.remove();
     if (nStyle == css.substring(css.charAt(' ')))
     {
+      updateStats();
       return; // No point in adding the same note type again.
     }
   }
@@ -318,6 +357,7 @@ function changeArrow()
       if (nStyle == css.substring(css.charAt(' ')))
       {
         notes[player][mY][bY][cX] = '0';
+        updateStats();
         return; // No point in adding the same note type again.
       }
       break; // replacing with a new note: start below.
@@ -347,6 +387,7 @@ function changeArrow()
     if (nY > rY || nY == rY && nX > rX)
     {
       n.before(selectArrow());
+      updateStats();
       return;
     }
   }
@@ -357,6 +398,8 @@ function changeArrow()
    */
   
   coll.append(selectArrow());
+  updateStats();
+  //$.ajax({ complete: function(data) { updateStats(); } });
 }
 
 
