@@ -29,17 +29,6 @@ String.prototype.capitalize = function(){
    return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
   };
 
-
-/*
- * Use the rectangle position and given note
- * selection to set a note in the current structure.
- * Normalize the thing later.
- */
-function addNote()
-{
-
-}
-
 /*
  * Hide the shadow rectangle from others.
  */
