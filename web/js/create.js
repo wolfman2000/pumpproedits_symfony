@@ -65,6 +65,16 @@ function getNote()
 }
 
 /*
+ * Use the rectangle position and given note
+ * selection to set a note in the current structure.
+ * Normalize the thing later.
+ */
+function addNote()
+{
+
+}
+
+/*
  * Determine which arrow to return to the user.
  */
 function selectArrow(css)
