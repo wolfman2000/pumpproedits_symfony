@@ -388,14 +388,14 @@ $(document).ready(function()
   $("#svg").click(function(){ changeArrow(); });
   
   $('#songlist').change(function(){
-    songID = $("#songlist > option:selected").val();
+    songID = $("#songlist").val();
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
   $("#stylelist").change(function(){ editMode(); });
   
-  $("#quanlist").change(function() { sync = $("#quanlist > option:selected").val();});
-  $("#typelist").change(function() { note = $("#typelist > option:selected").val();});
+  $("#quanlist").change(function() { sync = $("#quanlist").val();});
+  $("#typelist").change(function() { note = $("#typelist").val();});
   
   $("#editName").change(function(){
     var t = $("#editName").val();
