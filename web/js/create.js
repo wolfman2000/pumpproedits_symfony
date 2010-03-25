@@ -263,6 +263,20 @@ function changeArrow()
   var cX = rX / ADJUST_SIZE - 1; // which column are we using?
   var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
   var bY = (rY - ADJUST_SIZE) % BEATS_MAX; // which beat? (0'th based)
+  
+  function defineNote()
+  {
+    if (measures[player][mY] == null)
+    {
+      measures[player][mY] = {};
+    }
+    if (measures[player][mY][bY] == null)
+    {
+      measures[player][mY][bY] = {};
+    }
+  }
+  defineNote(); // unsure if this needs to be a function.
+  
   rX /= SCALE;
   rY /= SCALE;
   
@@ -325,6 +339,7 @@ function changeArrow()
       n.remove();
       if (nStyle == css.substring(css.charAt(' ')))
       {
+        measures[player][mY][bY][cX] = '0';
         return; // No point in adding the same note type again.
       }
       break; // replacing with a new note: start below.
@@ -332,6 +347,8 @@ function changeArrow()
   }
   
   // add if empty
+  
+  measures[player][mY][bY][cX] = note;
   
   n = coll.children().first();
   nX = n.attr('x');
