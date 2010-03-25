@@ -261,6 +261,8 @@ function changeArrow()
 
   var css = getNote();
   var cX = rX / ADJUST_SIZE - 1; // which column are we using?
+  var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
+  var bY = (rY - ADJUST_SIZE) % BEATS_MAX; // which beat? (0'th based)
   rX /= SCALE;
   rY /= SCALE;
   
