@@ -1,7 +1,7 @@
 <?php slot('xhtml', "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<?xml-stylesheet href=\"/css/_svg.css\" type=\"text/css\"?>\r\n");
 slot('title', 'Edit Creator — Pump Pro Edits');
 slot('h2', "<h2>Edit Creator</h2>"); ?>
-<p>Welcome to the edit creater. Here, you have a complete
+<p>Welcome to the edit creator. Here, you have a complete
 web interface to make your own edit. Use the drop down
 menus to select your various options, and have fun!</p>
 
@@ -15,7 +15,7 @@ menus to select your various options, and have fun!</p>
 </svg>
 
 <nav id="svg_nav">
-<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; # Will I need this? ?>
+<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; # Used to possibly limit the submit button. ?>
 <p id="intro">Javascript required!</p>
 <form id="svg_nav_form">
 <dl>
