@@ -9,6 +9,11 @@
 		background-color: #9999ff;
 		top: 3.6em;
 	}
+	nav button
+	{
+		width: 100%;
+		text-align: center;
+	}
 	nav > p
 	{
 		margin: 0;
@@ -17,7 +22,7 @@
 	nav ul
 	{
 		float: left;
-		width: 18em;
+		width: 20em;
 		margin: 0;
 		padding: 0;
 		list-style: none;
@@ -25,7 +30,7 @@
 	nav ul li
 	{
 		float: left;
-		width: 9em;
+		width: 10em;
 		margin: 0;
 		padding: 0;
 	}
