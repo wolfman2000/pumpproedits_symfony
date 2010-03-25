@@ -75,20 +75,6 @@ function addNote()
 }
 
 /*
- * Retrieve the number of columns we'll be using today.
- */
-function getCols()
-{
-  switch ($("#stylelist").val().substring(0, 1))
-  {
-    case "s": return 5;
-    case "h": return 6;
-    case "d": case "r": return 10;
-    default: return 0;
-  }
-}
-
-/*
  * Hide the shadow rectangle from others.
  */
 function hideRect()
@@ -116,8 +102,21 @@ function editMode()
 {
   $.getJSON("/create/song/" + songID, function(data)
   {
+    style = $("#stylelist").val();
+    /*
+     * Retrieve the number of columns we'll be using today.
+     */
+    function getCols()
+    {
+      switch (style.substring(0, 1))
+      {
+        case "s": return 5;
+        case "h": return 6;
+        case "d": case "r": return 10;
+        default: return 0; // I wonder if an exception should be thrown here.
+      }
+    }
     songData = data;
-    style = $("#stylelist > option:selected").val();
     height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
     $("#svg").attr("height", height);
     $("article").css("height", height + 200);
