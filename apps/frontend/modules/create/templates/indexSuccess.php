@@ -1,9 +1,8 @@
 <?php slot('xhtml', "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<?xml-stylesheet href=\"/css/_svg.css\" type=\"text/css\"?>\r\n");
 slot('title', 'Edit Creator — Pump Pro Edits');
 slot('h2', "<h2>Edit Creator</h2>"); ?>
-<p>Welcome to the edit creator. Here, you have a complete
-web interface to make your own edit. Use the drop down
-menus to select your various options, and have fun!</p>
+<p>Welcome to the edit creator. Use the options on the
+left to place arrows below. Have fun!</p>
 
 <svg id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <g id="notes">
