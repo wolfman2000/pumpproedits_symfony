@@ -359,6 +359,9 @@ function changeArrow()
   coll.append(selectArrow(css));
 }
 
+/*
+ * Load all of the following when the page is done loading.
+ */
 $(document).ready(function()
 {
   init();
