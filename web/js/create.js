@@ -75,31 +75,6 @@ function addNote()
 }
 
 /*
- * Determine which arrow to return to the user.
- */
-function selectArrow(css)
-{
-  var rX = $("#shadow").attr('x');
-  var rY = $("#shadow").attr('y') / SCALE;
-  var x = rX / ADJUST_SIZE - 1;
-  rX = rX / SCALE;
-  if (style == "halfdouble") { x = x + 2; }
-  
-  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
-  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
-  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
-  
-  switch (x % 5)
-  {
-    case 0: return genDLArrow(rX, rY, css);
-    case 1: return genULArrow(rX, rY, css);
-    case 2: return genCNArrow(rX, rY, css);
-    case 3: return genURArrow(rX, rY, css);
-    case 4: return genDRArrow(rX, rY, css);
-  }
-}
-
-/*
  * Retrieve the number of columns we'll be using today.
  */
 function getCols()
@@ -285,11 +260,35 @@ function shadow(e)
 function changeArrow()
 {
   var r = $("#shadow");
-  var rX = r.attr('x') / SCALE;
-  var rY = r.attr('y') / SCALE;
+  var rX = r.attr('x');
+  var rY = r.attr('y');
   if (!(rX && rY)) return;
-  
+  rX /= SCALE;
+  rY /= SCALE;
   var css = getNote();
+  
+  /*
+   * Determine which arrow to return to the user.
+   */
+  function selectArrow()
+  {
+    var x = rX * SCALE / ADJUST_SIZE - 1;
+    if (style == "halfdouble") { x = x + 2; }
+    
+    // Take care of the special shaped arrows first.
+    if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
+    if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
+    if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
+    
+    switch (x % 5)
+    {
+      case 0: return genDLArrow(rX, rY, css);
+      case 1: return genULArrow(rX, rY, css);
+      case 2: return genCNArrow(rX, rY, css);
+      case 3: return genURArrow(rX, rY, css);
+      case 4: return genDRArrow(rX, rY, css);
+    }
+  }
   
   // see if a node exists in this area.
   
@@ -344,7 +343,7 @@ function changeArrow()
   
   if (nY > rY || nY == rY && nX > rX)
   {
-    n.before(selectArrow(css));
+    n.before(selectArrow());
     return;
   }
   
@@ -356,7 +355,7 @@ function changeArrow()
     
     if (nY > rY || nY == rY && nX > rX)
     {
-      n.before(selectArrow(css));
+      n.before(selectArrow());
       return;
     }
   }
@@ -366,7 +365,7 @@ function changeArrow()
    * A simple create and append will do.
    */
   
-  coll.append(selectArrow(css));
+  coll.append(selectArrow());
 }
 
 /*
