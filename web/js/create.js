@@ -3,7 +3,7 @@
  */
 String.prototype.capitalize = function(){
    return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
-  };
+};
 
 /*
  * Hide the shadow rectangle from others.
@@ -419,7 +419,8 @@ function updateStats()
   $("#statR").text(R);
   $("#statL").text(L);
   $("#statF").text(F);
-  
+
+  $("#but_val").removeAttr('disabled');  
 }
 
 /*
