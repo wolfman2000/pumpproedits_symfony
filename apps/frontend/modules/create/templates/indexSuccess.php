@@ -21,12 +21,12 @@ menus to select your various options, and have fun!</p>
 <dl>
 <dt></dt>
 <dd><ul>
-<li><button id="but_new">New</button></li>
-<li><button id="but_help">Help</button></li>
-<li><button id="but_load">Load</button></li>
-<li><button id="but_val">Validate</button></li>
-<li><button id="but_save">Save</button></li>
-<li><button id="but_sub">Submit</button></li>
+<li><button id="but_new" type="button">New</button></li>
+<li><button id="but_help" type="button">Help</button></li>
+<li><button id="but_load" type="button">Load</button></li>
+<li><button id="but_val" type="button">Validate</button></li>
+<li><button id="but_save" type="button">Save</button></li>
+<li><button id="but_sub" type="button">Submit</button></li>
 </ul></dd>
 <dt class="choose"><label for="songlist">Select your song!</label></dt>
 <dd class="choose"><select id="songlist">

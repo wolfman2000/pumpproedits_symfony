@@ -145,7 +145,11 @@ function init()
   $("nav *.edit").hide();
   $("#notes > rect").hide();
   $("nav *.choose").show();
-  $("#stylelist").attr("disabled", "disabled");
+  $("#stylelist").attr("disabled", true);
+  $("#but_sub").attr("disabled", true);
+  $("#but_save").attr("disabled", true);
+  $("#but_val").attr("disabled", true);
+  $("#but_new").attr("disabled", true);
   $("#svg").css('left', round10($("nav").first().width()) + 70);
   $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
   $("article").css('height', '50em');
@@ -384,6 +388,8 @@ function changeArrow()
   
   coll.append(selectArrow());
 }
+
+
 
 /*
  * Load all of the following when the page is done loading.
