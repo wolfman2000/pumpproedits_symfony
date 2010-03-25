@@ -161,6 +161,7 @@ function init()
 
   $("#svgMeas").empty();
   $("#svgSync").empty();
+  $("#svgNote").empty();
   
   $("#intro").text("Select your action.");
   
@@ -226,6 +227,8 @@ function changeArrow()
   var rY = r.attr('y');
   if (!(rX && rY)) return;
   
+  isDirty = true;
+  $("#but_save").removeAttr('disabled');
   /*
    * Determine the proper note classes to render based on sync.
    */
@@ -427,9 +430,14 @@ $(document).ready(function()
   $("#but_save").click(function(){
     if (isDirty) // implement later.
     {
-    
+      alert("Saving doesn't work yet. The dirty variable is clean in the meantime.");
+      isDirty = false;
+      $("#but_save").attr('disabled', true);
     }
-    alert("This function is not yet available.");
+    else
+    {
+      alert("Saving doesn't work yet. The dirty variable...wasn't dirty.");
+    }
   });
   
   $("#but_sub").click(function(){
