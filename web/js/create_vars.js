@@ -36,3 +36,12 @@ const BUFF_RHT = ADJUST_SIZE;
 const BUFF_BOT = ADJUST_SIZE;
 
 const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
+
+function isEmpty(obj)
+{
+  for(var prop in obj)
+  {
+    if(obj.hasOwnProperty(prop)) return false;
+  }
+  return true;
+}
