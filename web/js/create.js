@@ -260,6 +260,7 @@ function changeArrow()
   }
 
   var css = getNote();
+  var cX = rX / ADJUST_SIZE - 1; // which column are we using?
   rX /= SCALE;
   rY /= SCALE;
   
@@ -268,15 +269,12 @@ function changeArrow()
    */
   function selectArrow()
   {
-    var x = rX * SCALE / ADJUST_SIZE - 1;
-    if (style == "halfdouble") { x = x + 2; }
-    
     // Take care of the special shaped arrows first.
     if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
     if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
     if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
     
-    switch (x % 5)
+    switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
     {
       case 0: return genDLArrow(rX, rY, css);
       case 1: return genULArrow(rX, rY, css);
