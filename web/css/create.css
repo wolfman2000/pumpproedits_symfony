@@ -19,6 +19,10 @@
 		margin: 0;
 		padding: 0 0 10px 0;
 	}
+	#intro
+	{
+		font-weight: bold;
+	}
 	nav ul
 	{
 		float: left;

@@ -66,6 +66,7 @@ function showRect(x, y)
  */
 function editMode()
 {
+  $("#intro").text("Loading... Loading...");
   $.getJSON("/create/song/" + songID, function(data)
   {
     style = $("#stylelist").val();
@@ -119,6 +120,7 @@ function editMode()
     $("nav *.choose").hide();
     if (style != "routine") { $("nav .routine").hide(); }
     $("h2").first().text(songData.name + " " + style.capitalize());
+    $("#intro").text("Have fun editing!");
   });
 }
 
@@ -165,6 +167,8 @@ function init()
 
   $("#svgMeas").empty();
   $("#svgSync").empty();
+  
+  $("#intro").text("Select your action.");
   
   isDirty = false;
   measures = new Array({}, {}); // routine compatible.
