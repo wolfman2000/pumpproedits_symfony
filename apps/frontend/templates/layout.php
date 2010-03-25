@@ -24,8 +24,14 @@ include(sfConfig::get('sf_lib_dir') . "/browser_detect.php"); ?>
 if (browser_detection(7) == "ie"): ?>
 <script type="text/javascript" src="js/IE8.js"></script>
 <script type="text/javascript" src="js/ie_html5.js"></script>
-<?php endif;
-include_javascripts(); ?>
+<?php endif; ?>
+<script type="text/javascript">
+//<![CDATA[
+<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
+var authed = "<?php echo $authin; ?>";
+//]]>
+</script>
+<?php include_javascripts(); ?>
 </head>
 <body>
 <header><h1><?php echo link_to('Pump Pro Edits', '@homepage') ?></h1></header>
@@ -40,7 +46,7 @@ official website</a> for more information.</p>
 echo $sf_content ?>
 </article>
 <?php $nav = (strlen($xhtml) === 0 ? "norm" : "chrt");
-include_partial("global/nav_$nav", array()) ?>
+include_partial("global/nav_$nav", array('authin' => $authin)) ?>
 <footer>This website is ©2009-2010 <a href="mailto:jafelds@gmail.com">Jason “Wolfman2000” Felds</a>.<br />
 This website works best in <a href="http://www.firefox.com">Firefox</a>.</footer>
 </body>

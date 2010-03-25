@@ -15,7 +15,6 @@ menus to select your various options, and have fun!</p>
 </svg>
 
 <nav id="svg_nav">
-<?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; # Used to possibly limit the submit button. ?>
 <p id="intro">Javascript required!</p>
 <form id="svg_nav_form">
 <dl>

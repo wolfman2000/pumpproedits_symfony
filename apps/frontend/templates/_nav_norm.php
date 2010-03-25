@@ -1,6 +1,5 @@
 <nav>
-<?php $authin = $sf_user->isAuthenticated() ? "in" : "out";
-include_partial("global/mess_$authin", array()) ?>
+<?php include_partial("global/mess_$authin", array()) ?>
 <ul>
 <li>
 <h4>Members</h4>
