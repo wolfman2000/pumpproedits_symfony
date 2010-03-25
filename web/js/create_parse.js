@@ -41,7 +41,6 @@ function gatherStats()
     for (var i = 0; i < columns; i++)
     {
       holdCheck[i] = false;
-      stepCheck[i] = false;
     }
     LOOP_MEASURE:
     for (var iM in notes[iP]) // for each measure
@@ -51,6 +50,11 @@ function gatherStats()
       {
         var numSteps = 0;
         var trueC = 0;
+        for (var i = 0; i < columns; i++)
+        {
+          stepCheck[i] = false;
+        }
+        
         LOOP_NOTE:
         for (var iN in notes[iP][iM][iB]) // for each note
         {
