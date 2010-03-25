@@ -410,6 +410,43 @@ $(document).ready(function()
   $("#svg").mousemove(function(e){ shadow(e); });
   $("#svg").click(function(){ changeArrow(); });
   
+  $("#but_new").click(function(){
+    $("#intro").text("Working... Working...");
+    if (isDirty) // implement later.
+    {
+      
+    }
+    init();
+  });
+  
+  $("#but_load").click(function(){
+    if (isDirty) // implement later.
+    {
+    
+    }
+    alert("This function is not yet available.");
+  });
+  
+  $("#but_help").click(function(){
+    alert("This function is not yet available.");
+  });
+  
+  $("#but_val").click(function(){
+    alert("This function is not yet available.");
+  });
+  
+  $("#but_save").click(function(){
+    if (isDirty) // implement later.
+    {
+    
+    }
+    alert("This function is not yet available.");
+  });
+  
+  $("#but_sub").click(function(){
+    alert("This function is not yet available.");
+  });
+  
   $('#songlist').change(function(){
     songID = $("#songlist").val();
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
