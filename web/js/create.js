@@ -382,9 +382,7 @@ $(document).ready(function()
    */
   $("#svg").mouseout(function(){ hideRect(); });
   $("#svg").mouseover(function(e){ shadow(e); });
-  
   $("#svg").mousemove(function(e){ shadow(e); });
-  
   $("#svg").click(function(){ changeArrow(); });
   
   $('#songlist').change(function(){
