@@ -120,6 +120,8 @@ function editMode()
     $("nav *.choose").hide();
     if (style != "routine") { $("nav .routine").hide(); }
     $("h2").first().text(songData.name + " " + style.capitalize());
+    $("#but_new").removeAttr('disabled');
+    if (authed == "in") { $("#but_sub").removeAttr('disabled'); }
     $("#intro").text("Have fun editing!");
   });
 }
