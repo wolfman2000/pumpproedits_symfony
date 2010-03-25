@@ -125,19 +125,6 @@ function editMode()
 }
 
 /**
- * Round elements to the nearest 10 for easier calculations later.
- */
-function round10(n)
-{
-  n = Math.round(n);
-  while (n % 10)
-  {
-    n = n + 1;
-  }
-  return n;
-}
-
-/**
  * Load up this data on new.
  */
 function init()
@@ -150,6 +137,18 @@ function init()
   $("#but_save").attr("disabled", true);
   $("#but_val").attr("disabled", true);
   $("#but_new").attr("disabled", true);
+  /**
+   * Round elements to the nearest 10 for easier calculations later.
+   */
+  function round10(n)
+  {
+    n = Math.round(n);
+    while (n % 10)
+    {
+      n = n + 1;
+    }
+    return n;
+  }
   $("#svg").css('left', round10($("nav").first().width()) + 70);
   $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
   $("article").css('height', '50em');
