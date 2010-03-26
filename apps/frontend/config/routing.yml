@@ -9,14 +9,14 @@ homepage:
     action: index
 
 # create an edit on the website.
-edit_creater:
+edit_creator:
   url: /create
   param:
     module: create
     action: index
 
 # use ajax to get the needed data.
-edit_creater_song:
+edit_creator_song:
   url: /create/song/:id
   param:
     module: create
