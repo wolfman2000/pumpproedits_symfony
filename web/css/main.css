@@ -65,8 +65,7 @@
     
     body
     {
-    	width: 98%;
-    	margin: 1em auto;
+    	margin: 1em;
     	background-color: #AAAAAA;
     	color: #333;
     	border: 1px solid gray;
