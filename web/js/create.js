@@ -84,7 +84,9 @@ function editMode()
     $("nav *.edit").show();
     $("nav *.choose").hide();
     if (style != "routine") { $("nav .routine").hide(); }
-    $("h2").first().text(songData.name + " " + style.capitalize());
+    var phrase = songData.name + " " + style.capitalize();
+    $("h2").first().text(phrase);
+    $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
     if (authed == "in") { $("#but_sub").removeAttr('disabled'); }
     $("#intro").text("Have fun editing!");
@@ -96,6 +98,8 @@ function editMode()
  */
 function init()
 {
+  $("title").text("Edit Creator — Pump Pro Edits");
+  $("h2").first().text("Edit Creator");
   $("nav *.edit").hide();
   $("#notes > rect").hide();
   $("nav *.choose").show();
