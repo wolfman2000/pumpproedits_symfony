@@ -15,15 +15,21 @@ left to place arrows below. Have fun!</p>
 
 <nav id="svg_nav">
 <p id="intro">Javascript required!</p>
-<form id="svg_nav_form">
+<form id="svg_nav_form" method="post" enctype="multipart/form-data" action="<?php echo url_for("@edit_creator_download"); ?>">
 <dl>
-<dt></dt>
+<dt>
+<input type="hidden" id="abbr" name="abbr" value="BOGUS" />
+<input type="hidden" id="b64" name="b64" value="longvalue" />
+<input type="hidden" id="style" name="style" value="none" />
+<input type="hidden" id="diff" name="diff" value="π" />
+<input type="hidden" id="title" name="title" value="not empty" />
+</dt>
 <dd><ul>
 <li><button id="but_new" type="button">New</button></li>
 <li><button id="but_help" type="button">Help</button></li>
 <li><button id="but_load" type="button">Load</button></li>
 <li><button id="but_val" type="button">Validate</button></li>
-<li><button id="but_save" type="button">Save</button></li>
+<li><button id="but_save" type="submit">Save</button></li>
 <li><button id="but_sub" type="button">Submit</button></li>
 </ul></dd>
 <dt class="choose"><label for="songlist">Select your song!</label></dt>

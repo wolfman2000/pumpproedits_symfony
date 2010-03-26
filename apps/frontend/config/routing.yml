@@ -24,6 +24,16 @@ edit_creater_song:
   requirements:
     id: \d+
 
+# download the file the user made.
+edit_creator_download:
+  url: /create/download
+  class: sfRequestRoute
+  param:
+    module: create
+    action: download
+  requirements:
+    sf_method: [POST]
+
 # Upload an edit
 upload_get:
   url: /upload
