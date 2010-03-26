@@ -81,7 +81,8 @@ function editMode()
       $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
       $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
     }
-    $("nav *.edit").show();
+    $("nav dt.edit").show();
+    $("nav dd.edit").show();
     $("nav *.choose").hide();
     if (style != "routine") { $("nav .routine").hide(); }
     var phrase = songData.name + " " + style.capitalize();
@@ -100,7 +101,8 @@ function init()
 {
   $("title").text("Edit Creator — Pump Pro Edits");
   $("h2").first().text("Edit Creator");
-  $("nav *.edit").hide();
+  $("nav dt.edit").hide();
+  $("nav dd.edit").hide();
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", true);
@@ -108,6 +110,15 @@ function init()
   $("#but_save").attr("disabled", true);
   $("#but_val").attr("disabled", true);
   $("#but_new").attr("disabled", true);
+  $("#cho_file").removeAttr('disabled');
+  if (authed === "in")
+  {
+    $("#cho_site").removeAttr('disabled');
+  }
+  else
+  {
+    $("#cho_site").attr('disabled', true);
+  }
   /**
    * Round elements to the nearest 10 for easier calculations later.
    */

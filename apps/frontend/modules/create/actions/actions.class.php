@@ -62,6 +62,11 @@ class createActions extends sfActions
     return $this->renderText(json_encode($ret));
   }
   
+  public function executeLoadInput(sfWebRequest $request)
+  {
+    $file = $request->getParameter('file');
+  }
+  
   /**
    * Download the file the user made.
    */

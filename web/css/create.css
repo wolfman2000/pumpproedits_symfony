@@ -38,6 +38,10 @@
 		margin: 0;
 		padding: 0;
 	}
+	li.reset
+	{
+		clear: both;
+	}
 	#editName
 	{
 		width: 12em;

@@ -29,8 +29,13 @@ left to place arrows below. Have fun!</p>
 <li><button id="but_help" type="button">Help</button></li>
 <li><button id="but_load" type="button">Load</button></li>
 <li><button id="but_val" type="button">Validate</button></li>
-<li><button id="but_save" type="submit">Save</button></li>
-<li><button id="but_sub" type="button">Submit</button></li>
+<li class="loadChoose"><button id="cho_file" type="button">Hard Drive</button></li>
+<li class="loadChoose"><button id="cho_site" type="button">Web Site</button></li>
+<li class="loadFile"><input type="file" id="file" name="file" size="18" /></li>
+<li class="loadFile reset"><button id="but_file" type="submit">Load File</button></li>
+<li class="loadFile"><button id="rem_file" type="button">Nevermind</button></li>
+<li class="edit"><button id="but_save" type="submit">Save</button></li>
+<li class="edit"><button id="but_sub" type="button">Submit</button></li>
 </ul></dd>
 <dt class="choose"><label for="songlist">Select your song!</label></dt>
 <dd class="choose"><select id="songlist">
