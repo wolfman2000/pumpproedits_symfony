@@ -101,8 +101,11 @@ function init()
 {
   $("title").text("Edit Creator — Pump Pro Edits");
   $("h2").first().text("Edit Creator");
+  
   $("nav dt.edit").hide();
   $("nav dd.edit").hide();
+  $("nav li.loadChoose").hide();
+  $("nav li.loadFile").hide();
   $("#notes > rect").hide();
   $("nav *.choose").show();
   $("#stylelist").attr("disabled", true);
@@ -486,11 +489,25 @@ $(document).ready(function()
   });
   
   $("#but_load").click(function(){
+    $("#intro").text("Working... Working...");
+    var checking = true;
     if (isDirty) // implement later.
     {
-    
+      checking = confirm("You have work not validated/saved.\nAre you sure you want to load a new edit?");
     }
-    alert("This function is not yet available.");
+    if (checking)
+    {
+      $("li.edit").hide();
+      if (authed === "in")
+      {
+        $("li.loadChoose").show();
+      }
+      else
+      {
+        $("li.loadFile").show();
+        $("li.loadFile > *").removeAttr('disabled');
+      }
+    }
   });
   
   $("#but_help").click(function(){
@@ -520,6 +537,12 @@ $(document).ready(function()
       }
       alert(ouch);
     }
+  });
+  
+  $("#rem_file").click(function(){
+    $("#file").val('');
+    $(".loadFile").hide();
+    $("li.edit").show();
   });
   
   $("#but_save").click(function(){
