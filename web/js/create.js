@@ -542,6 +542,17 @@ $(document).ready(function()
   
   $("#fCont").change(function() { tarea = $("#fCont").val(); });
   
+  $("#but_file").click(function(){
+    tarea = $("#fCont").val();
+    $.post(window.location.href + "/loadFile", Base64.encode(tarea), function(data, status)
+    {
+      if (isDirty)
+      {
+      
+      }
+    }, "json");
+  });
+  
   /*
   var bFile = $("#file");
   var fAjax = new AjaxUpload(bFile,
