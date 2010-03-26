@@ -488,6 +488,7 @@ $(document).ready(function()
   $("#but_val").click(function(){
     if (!badds.length)
     {
+      saveChart();
       $("#intro").text("You can save your work!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', true);
@@ -510,8 +511,7 @@ $(document).ready(function()
   });
   
   $("#but_save").click(function(){
-    $("#intro").text("Generating the file...");
-    saveChart();
+    $("#intro").text("Here it comes!");
   });
   
   $("#but_sub").click(function(){

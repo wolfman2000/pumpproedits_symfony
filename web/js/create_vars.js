@@ -23,6 +23,8 @@ var badds; // Which are the problem notes?
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
+var b64; // The encoded string for the end.
+
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.

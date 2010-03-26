@@ -40,6 +40,7 @@ class createActions extends sfActions
     $sRow = Doctrine::getTable('PPE_Song_Song')->getSongRow($id);
     
     $ret['name'] = $sRow->name;
+    $ret['abbr'] = $sRow->abbr;
     $ret['measures'] = $sRow->measures;
     
     $bpms = Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id);
@@ -59,5 +60,29 @@ class createActions extends sfActions
     $ret['stps'] = $sArr;
 
     return $this->renderText(json_encode($ret));
+  }
+  
+  /**
+   * Download the file the user made.
+   */
+  public function executeDownload(sfWebRequest $request)
+  {
+    $b64 = $request->getParameter('b64');
+    $abbr = $request->getParameter('abbr');
+    $style = $request->getParameter('style');
+    $diff = $request->getParameter('diff');
+    $title = $request->getParameter('title');
+    $name = sprintf("svg_%s_%s%d_%s.edit", $abbr, strtoupper(substr($style, 0, 1)), $diff, $title);
+    
+    $d64 = base64_decode($b64);
+    $response = $this->getResponse();
+    $response->clearHttpHeaders();
+    $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
+    $response->setHttpHeader('Content-Length', strlen($d64));
+    $response->setHttpHeader('Content-Type', 'application/edit');
+    $response->sendHttpHeaders();
+    $response->setContent($d64);
+
+    return sfView::NONE;
   }
 }

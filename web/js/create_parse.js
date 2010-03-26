@@ -94,10 +94,18 @@ function saveChart()
   
   file += EOL + EOL;
   
-  var b64 = Base64.encode(file);
-  var href = "data:;base64," + b64;
+  b64 = Base64.encode(file);
+  //var href = "data:;base64," + b64;
+  $("#b64").val(b64);
+  $("#abbr").val(songData.abbr);
+  $("#style").val(style);
+  $("#diff").val(diff);
+  $("#title").val(title);
   
-  window.location.href = href;
+  /*
+  window.location.href = "/create/download/" + b64 + "/" + songData.abbr + "/"
+    + style + "/" + diff + "/" + title;
+  */
 }
 
 function genObject(p, m, b, n)
