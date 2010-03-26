@@ -552,9 +552,11 @@ $(document).ready(function()
       title = data.title;
       $("#editName").val(title);
       editMode();
+      loadChart(data);
       $(".loadFile").hide();
       $("#fCont").val('');
       $("li.edit").show();
+      
     }, "json");
   });
   

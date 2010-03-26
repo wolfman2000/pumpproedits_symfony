@@ -1,4 +1,60 @@
 /*
+ * Replicate the data from JSON into both my JS format
+ * and SVG.
+ */
+function loadChart(nd)
+{
+  steps = nd.steps;
+  jumps = nd.steps;
+  holds = nd.holds;
+  mines = nd.mines;
+  trips = nd.trips;
+  rolls = nd.rolls;
+  fakes = nd.fakes;
+  lifts = nd.lifts;
+  
+  notes = Array(Array(), Array());
+  
+  var eRow = stringMul("0", columns); // completely empty row.
+  
+  LOOP_PLAYER:
+  for (var iP = 0; iP < 2; iP++)
+  {
+    if (iP && style !== "routine") { break LOOP_PLAYER; }
+    
+    LOOP_MEASURE:
+    for (var iM = 0; iM < songData.measures; iM++)
+    {
+      // NONE of these start off empty in nd.
+      var rows = nd.notes[iP][iM].length;
+      
+      LOOP_BEAT:
+      for (var iB = 0; iB < rows; iB++)
+      {
+        if (nd.notes[iP][iM][iB] === eRow) { continue LOOP_BEAT; }
+        
+        var tmp = notes[iP][iM];
+        if (isEmpty(tmp))
+        {
+          notes[iP][iM] = Array();
+        }
+        var mul = (BEATS_MAX / rows) * iB;
+        notes[iP][iM][mul] = Array(); // has to be something inside.
+        LOOP_ROW:
+        for (var iR = 0; iR < columns; iR++)
+        {
+          var ch = nd.notes[iP][iM][iB].charAt(iR);
+          if (ch === "0") { continue LOOP_ROW; }
+          notes[iP][iM][mul][iR] = ch;
+        }
+      }
+      
+    }
+  }
+  
+}
+
+/*
  * Determine how much to increment a loop in saveChart.
  */
 function getMultiplier(iP, iM)
