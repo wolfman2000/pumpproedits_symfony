@@ -1,4 +1,25 @@
 /*
+ * Determine how much to increment a loop in saveChart.
+ */
+function getMultiplier(iP, iM)
+{
+  var mul = Array(1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 192);
+  
+  MULTIPLIER:
+  for (var m = 0; m < mul.length; m++)
+  {
+    NOTE:
+    for (var i = 0; i < BEATS_MAX; i++)
+    {
+      if (isEmpty(notes[iP][iM][i])) { continue NOTE; }
+      if (i % (BEATS_MAX / mul[m]) > 0) { continue MULTIPLIER; }
+    }
+    return BEATS_MAX / mul[m];
+  }
+  return BEATS_MAX; // just in case it doesn't catch it up there.
+}
+
+/*
  * Call this function for when the user wants to save the chart.
  */
 function saveChart()
@@ -36,6 +57,39 @@ function saveChart()
       if (style !== "routine") { break LOOP_PLAYER; }
       file += "&" + EOL;
     }
+    
+    LOOP_MEASURE:
+    for (var iM = 0; iM < songData.measures; iM++)
+    {
+      file += (iM ? "," : " ") + " // measure " + (iM + 1) + EOL;
+      
+      if (isEmpty(notes[iP][iM]))
+      {
+        file += stringMul("0", columns) + EOL;
+        continue LOOP_MEASURE;
+      }
+      
+      var mul = getMultiplier(iP, iM);
+      LOOP_BEAT:
+      for (var iB = 0; iB < BEATS_MAX; iB = iB + mul)
+      {
+        if (isEmpty(notes[iP][iM][iB]))
+        {
+          file += stringMul("0", columns) + EOL;
+          continue LOOP_BEAT;
+        }
+        
+        LOOP_ROW:
+        for (var iR = 0; iR < columns; iR++)
+        {
+          var tmp = notes[iP][iM][iB][iR];
+          file += (isEmpty(tmp) ? "0" : tmp);
+        }
+        
+        file += EOL;
+      }
+    }
+    file += ";"
   }
   
   file += EOL + EOL;

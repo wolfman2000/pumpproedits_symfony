@@ -40,6 +40,9 @@ const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our mea
 
 const EOL = "\r\n"; // mainly for file parsing/saving.
 
+/*
+ * Test that an object is empty.
+ */
 function isEmpty(obj)
 {
   for(var prop in obj)
@@ -47,4 +50,21 @@ function isEmpty(obj)
     if(obj.hasOwnProperty(prop)) return false;
   }
   return true;
+}
+
+/*
+ * Repeat a string the specified number of times.
+ * Takes advantage of Kris Kowal's bit manipulation.
+ * http://blog.stevenlevithan.com/archives/fast-string-multiply
+ */
+function stringMul(str, num)
+{
+  var acc = [];
+  for (var i = 0; (1 << i) <= num; i++)
+  {
+		if ((1 << i) & num) {acc.push(str); }
+		str += str;
+	}
+	return acc.join("");
+
 }
