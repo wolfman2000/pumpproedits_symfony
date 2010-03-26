@@ -162,9 +162,9 @@ function gatherStats()
         }      
       } 
     }
-    for (var iN in holdCheck) // if hold heads are still active
+    for (var i = 0; i < columns; i++) // if hold heads are still active
     {
-      if (iN) { badds.push(iN) }
+      if (holdCheck[i]) { badds.push(holdCheck[i]) }
     }
   }
 }
