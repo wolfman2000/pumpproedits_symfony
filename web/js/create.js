@@ -466,11 +466,12 @@ $(document).ready(function()
   
   $("#but_new").click(function(){
     $("#intro").text("Working... Working...");
+    var checking = true;
     if (isDirty) // implement later.
     {
-      
+      checking = confirm("You have work not validated/saved.\nAre you sure you want to start over?");
     }
-    init();
+    if (checking) { init(); }
   });
   
   $("#but_load").click(function(){
