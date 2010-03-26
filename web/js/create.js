@@ -506,6 +506,7 @@ $(document).ready(function()
       {
         $("li.loadFile").show();
         $("li.loadFile > *").removeAttr('disabled');
+        $("#svg_nav_form").attr('action', '/create/loadFile');
       }
     }
   });
@@ -543,6 +544,7 @@ $(document).ready(function()
     $("#file").val('');
     $(".loadFile").hide();
     $("li.edit").show();
+    $("#svg_nav_form").attr('action', '/create/download');
   });
   
   $("#but_save").click(function(){
