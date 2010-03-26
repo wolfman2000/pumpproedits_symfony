@@ -510,16 +510,8 @@ $(document).ready(function()
   });
   
   $("#but_save").click(function(){
-    if (isDirty) // implement later.
-    {
-      alert("Saving doesn't work yet. The dirty variable is clean in the meantime.");
-      isDirty = false;
-      $("#but_save").attr('disabled', true);
-    }
-    else
-    {
-      alert("Saving doesn't work yet. The dirty variable...wasn't dirty.");
-    }
+    $("#intro").text("Generating the file...");
+    saveChart();
   });
   
   $("#but_sub").click(function(){

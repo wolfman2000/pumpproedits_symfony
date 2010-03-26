@@ -93,6 +93,22 @@ function saveChart()
   }
   
   file += EOL + EOL;
+  
+  var b64 = Base64.encode(file);
+  var href = "data:;base64," + b64;
+  
+  window.location.href = href;
+  /*
+  $("#dl").remove();
+  
+  var a = "<a id=\"dl\" href=\"data:;base64," + b64 + "\">Get!</a>";
+  $("#svg_nav").append(a);
+  $("#intro").text("Here it comes!");
+  $("#dl").click(function(){
+    window.location.href = $(this).attr("href");
+  });
+  */
+  
 }
 
 function genObject(p, m, b, n)
