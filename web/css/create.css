@@ -38,6 +38,14 @@
 		margin: 0;
 		padding: 0;
 	}
+	#editName
+	{
+		width: 12em;
+	}
+	#editDiff
+	{
+		width: 2em;
+	}
 	article
 	{
 		margin-left: 22em;
