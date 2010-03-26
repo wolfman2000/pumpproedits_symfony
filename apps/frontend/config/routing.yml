@@ -15,7 +15,7 @@ edit_creator:
     module: create
     action: index
 
-# use ajax to get the needed data.
+# use ajaj to get the needed data.
 edit_creator_song:
   url: /create/song/:id
   param:
@@ -23,6 +23,16 @@ edit_creator_song:
     action: ajax
   requirements:
     id: \d+
+
+# use ajaj to load the file.
+edit_creator_loadFile:
+  url: /create/loadFile
+  class: sfRequestRoute
+  param:
+    module: create
+    action: loadInput
+  requirements:
+    sf_method: [POST]
 
 # download the file the user made.
 edit_creator_download:
