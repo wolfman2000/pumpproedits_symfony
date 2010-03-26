@@ -503,8 +503,11 @@ $(document).ready(function()
       }
       else
       {
+        $("#fCont").val('');
         $("li.loadFile").show();
         $("li.loadFile > *").removeAttr('disabled');
+        $("#but_file").attr('disabled', true);
+        
       }
     }
   });
@@ -538,7 +541,17 @@ $(document).ready(function()
     }
   });
   
-  $("#fCont").change(function() { tarea = $("#fCont").val(); });
+  $("#fCont").keyup(function(){
+    tarea = $("#fCont").val();
+    if (tarea.length)
+    {
+      $("#but_file").removeAttr('disabled');
+    }
+    else
+    {
+      $("#but_file").attr('disabled', true);
+    }
+  });
   
   $("#but_file").click(function(){
     
@@ -587,7 +600,7 @@ $(document).ready(function()
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
   
-  $("#editName").change(function(){
+  $("#editName").keyup(function(){
     var t = $("#editName").val();
     if (t.length > 0 && t.length <= 12)
     {
@@ -604,7 +617,7 @@ $(document).ready(function()
       $("#intro").text("Provide an edit title and difficulty.");
     }
   });
-  $("#editDiff").change(function(){
+  $("#editDiff").keyup(function(){
     var t = parseInt($("#editDiff").val());
     if (t > 0 && t < 100)
     {
