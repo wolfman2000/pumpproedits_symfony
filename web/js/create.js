@@ -424,7 +424,10 @@ function updateStats()
   $("#statL").text(L);
   $("#statF").text(F);
 
-  $("#but_val").removeAttr('disabled');  
+  $("#but_val").removeAttr('disabled');
+  $("#but_save").attr('disabled', true);
+  $("#but_sub").attr('disabled', true);
+  $("#intro").text("Validate your edit before saving.");
 }
 
 /*
@@ -467,7 +470,27 @@ $(document).ready(function()
   });
   
   $("#but_val").click(function(){
-    alert("This function is not yet available.");
+    if (!badds.length)
+    {
+      $("#intro").text("You can save your work!");
+      $("#but_save").removeAttr('disabled');
+      $("#but_val").attr('disabled', true);
+      if (authed === "in")
+      {
+        $("#but_sub").removeAttr('disabled');
+      }
+    }
+    else
+    {
+      $("#intro").text("Please fix your errors.");
+      var ouch = "Errors were found here:\n\n";
+      for (var i = 0; i < badds.length; i++)
+      {
+        ouch += "Player " + badds[i]['player'] + " Measure " + badds[i]['measure']
+          + " Beat " + badds[i]['beat'] + " Note " + badds[i]['note'] + "\n";
+      }
+      alert(ouch);
+    }
   });
   
   $("#but_save").click(function(){
