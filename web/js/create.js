@@ -540,6 +540,21 @@ $(document).ready(function()
     }
   });
   
+  $("#fCont").change(function() { tarea = $("#fCont").val(); });
+  
+  /*
+  var bFile = $("#file");
+  var fAjax = new AjaxUpload(bFile,
+  {
+    action: '/create/loadFile',
+    name: 'but_file',
+    autoSubmit: true,
+    responseType: 'json',
+    //onChange: function(file, ext) { $("li.reset").removeAttr('disabled'); },
+    onComplete: function(file, ext) { $("#intro").text("Testing"); },
+  });
+  */
+  
   $("#rem_file").click(function(){
     $("#file").val('');
     $(".loadFile").hide();

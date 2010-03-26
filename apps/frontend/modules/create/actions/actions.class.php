@@ -65,6 +65,10 @@ class createActions extends sfActions
   public function executeLoadInput(sfWebRequest $request)
   {
     $file = $request->getParameter('file');
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    $ret = array();
+    $ret['testing'] = "Good so far!";
+    return $this->renderText(json_encode($ret));
   }
   
   /**

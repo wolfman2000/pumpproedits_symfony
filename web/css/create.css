@@ -38,6 +38,10 @@
 		margin: 0;
 		padding: 0;
 	}
+	li.long, li.long textarea
+	{
+		width: 20em;
+	}
 	li.reset
 	{
 		clear: both;
