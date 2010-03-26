@@ -67,8 +67,29 @@ class createActions extends sfActions
     $file = base64_decode($request->getParameter('file'));
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
+    
+    // write the string out temporarily.
+    
+    $fp = null;
+    $time = date('YmdHis');
+    $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit";
+    
+    try
+    {
+      $fp = fopen($fn, "w");
+      $tmp = new EditParser();
+      
+      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $ret['stats'] = $st;
+    }
+    catch (sfParseException $e)
+    {
+      $ret['exception'] = $e->getMessage();
+    }
+    
+    //@unlink($fn);
+    
     $ret['testing'] = "Good so far!";
-    $ret['file'] = $file; // like this will work.
     return $this->renderText(json_encode($ret));
   }
   
