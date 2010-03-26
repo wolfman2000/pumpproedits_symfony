@@ -34,7 +34,6 @@ function editMode()
   $("#intro").text("Loading... Loading...");
   $.getJSON("/create/song/" + songID, function(data)
   {
-    style = $("#stylelist").val();
     /*
      * Retrieve the number of columns we'll be using today.
      */
@@ -506,7 +505,6 @@ $(document).ready(function()
       {
         $("li.loadFile").show();
         $("li.loadFile > *").removeAttr('disabled');
-        $("#svg_nav_form").attr('action', '/create/loadFile');
       }
     }
   });
@@ -543,34 +541,27 @@ $(document).ready(function()
   $("#fCont").change(function() { tarea = $("#fCont").val(); });
   
   $("#but_file").click(function(){
+    
     tarea = $("#fCont").val();
     $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
-      if (isDirty)
-      {
-      
-      }
+      songID = data.id;
+      style = data.style;
+      diff = data.diff;
+      $("#editDiff").val(diff);
+      title = data.title;
+      $("#editName").val(title);
+      editMode();
+      $(".loadFile").hide();
+      $("#fCont").val('');
+      $("li.edit").show();
     }, "json");
   });
-  
-  /*
-  var bFile = $("#file");
-  var fAjax = new AjaxUpload(bFile,
-  {
-    action: '/create/loadFile',
-    name: 'but_file',
-    autoSubmit: true,
-    responseType: 'json',
-    //onChange: function(file, ext) { $("li.reset").removeAttr('disabled'); },
-    onComplete: function(file, ext) { $("#intro").text("Testing"); },
-  });
-  */
   
   $("#rem_file").click(function(){
     $("#file").val('');
     $(".loadFile").hide();
     $("li.edit").show();
-    $("#svg_nav_form").attr('action', '/create/download');
   });
   
   $("#but_save").click(function(){
@@ -586,7 +577,10 @@ $(document).ready(function()
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
-  $("#stylelist").change(function(){ editMode(); });
+  $("#stylelist").change(function(){
+    style = $("#stylelist").val();
+    editMode();
+  });
   
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
