@@ -68,8 +68,6 @@ class createActions extends sfActions
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
     
-    // write the string out temporarily.
-    
     $fp = null;
     $time = date('YmdHis');
     $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit";
@@ -83,16 +81,29 @@ class createActions extends sfActions
       $tmp = new EditParser();
       
       $st = $tmp->get_stats($fp, array('notes' => 1));
-      $ret['stats'] = $st;
+      $ret['id'] = $st['id'];
+      $ret['diff'] = $st['diff'];
+      $ret['style'] = substr($st['style'], 5);
+      $ret['title'] = $st['title'];
+      $ret['steps'] = $st['steps'];
+      $ret['jumps'] = $st['jumps'];
+      $ret['holds'] = $st['holds'];
+      $ret['mines'] = $st['mines'];
+      $ret['trips'] = $st['trips'];
+      $ret['rolls'] = $st['rolls'];
+      $ret['lifts'] = $st['lifts'];
+      $ret['fakes'] = $st['fakes'];
+      $ret['notes'][0] = $st['notes'][0];
+      if ($ret['style'] === "routine")
+      {
+        $ret['notes'][1] = $st['notes'][1];
+      }
     }
     catch (sfParseException $e)
     {
       $ret['exception'] = $e->getMessage();
     }
-    
-    //@unlink($fn);
-    
-    $ret['testing'] = "Good so far!";
+    @unlink($fn);
     return $this->renderText(json_encode($ret));
   }
   
