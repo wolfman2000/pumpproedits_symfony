@@ -544,7 +544,7 @@ $(document).ready(function()
   
   $("#but_file").click(function(){
     tarea = $("#fCont").val();
-    $.post(window.location.href + "/loadFile", Base64.encode(tarea), function(data, status)
+    $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
       if (isDirty)
       {

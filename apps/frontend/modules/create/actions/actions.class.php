@@ -64,10 +64,11 @@ class createActions extends sfActions
   
   public function executeLoadInput(sfWebRequest $request)
   {
-    $file = $request->getParameter('file');
+    $file = base64_decode($request->getParameter('file'));
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
     $ret['testing'] = "Good so far!";
+    $ret['file'] = $file; // like this will work.
     return $this->renderText(json_encode($ret));
   }
   
