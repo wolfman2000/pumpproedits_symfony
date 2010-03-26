@@ -127,4 +127,14 @@
 	{
 		fill: red;
 	}
+	svg.p0 > g > *:first-child
+	{
+		stroke-width: 1;
+		stroke: #483D8B;
+	}
+	svg.p1 > g > *:first-child
+	{
+		stroke-width: 1;
+		stroke: #b22222;
+	}
 }

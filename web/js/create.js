@@ -135,6 +135,7 @@ function init()
   $("#editDiff").val('');
   sync = 4;
   note = "1";
+  $("#p1").click();
   player = 0;
   title = "";
   diff = 0;
@@ -217,7 +218,7 @@ function changeArrow()
   {
     var y = (rY - ADJUST_SIZE) % BEATS_MAX;
     var k = "note";
-    if (style == "routine") { k = "p" + player; }
+    if (style == "routine") { k = "p" + player + " " + k; }
     
     if      (!(y % 48)) { k += "_004"; }
     else if (!(y % 24)) { k += "_008"; }
