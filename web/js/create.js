@@ -425,10 +425,25 @@ function updateStats()
   $("#statL").text(L);
   $("#statF").text(F);
 
-  $("#but_val").removeAttr('disabled');
   $("#but_save").attr('disabled', true);
   $("#but_sub").attr('disabled', true);
-  $("#intro").text("Validate your edit before saving.");
+  if (title && diff > 0)
+  {
+    if (steps[0] || steps[1] || mines[0] || mines[1] || lifts[0] || lifts[1] || fakes[0] || fakes[1])
+    {
+      $("#but_val").removeAttr('disabled');
+      $("#intro").text("Validate your edit before saving.");
+    }
+    else
+    {
+      isDirty = false;
+      $("#intro").text("You can't save empty files.");
+    }
+  }
+  else
+  {
+    $("#intro").text("Provide an edit title and difficulty.");
+  }
 }
 
 /*
@@ -526,6 +541,16 @@ $(document).ready(function()
     if (t.length > 0 && t.length <= 12)
     {
       title = t;
+      if (diff > 0 && isDirty)
+      {
+        $("#but_val").removeAttr('disabled');
+        $("#intro").text("Validate your edit before saving.");
+      }
+    }
+    else
+    {
+      $("#but_val").attr('disabled', true);
+      $("#intro").text("Provide an edit title and difficulty.");
     }
   });
   $("#editDiff").change(function(){
@@ -533,6 +558,16 @@ $(document).ready(function()
     if (t > 0 && t < 100)
     {
       diff = t;
+      if (title && isDirty)
+      {
+        $("#but_val").removeAttr('disabled');
+        $("#intro").text("Validate your edit before saving.");
+      }
+    }
+    else
+    {
+      $("#but_val").attr('disabled', true);
+      $("#intro").text("Provide an edit title and difficulty.");
     }
   });
   
