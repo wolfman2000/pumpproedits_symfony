@@ -469,6 +469,13 @@ $(document).ready(function()
   $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
   
+  $("#svg_nav_form").submit(function(){
+    if ($("#svg_nav_form").attr('action') == "/create/loadFile")
+    {
+    
+    }
+  });
+  
   /*
    * The various action functions are set here.
    */
@@ -540,6 +547,27 @@ $(document).ready(function()
       alert(ouch);
     }
   });
+  /*
+  new AjaxUpload('file', {
+    action: '/create/loadFile',
+    name: 'file',
+    autoSubmit: true,
+    responseType: 'json',
+    onComplete: function(file, data) {
+    songID = data.id;
+      style = data.style;
+      diff = data.diff;
+      $("#editDiff").val(diff);
+      title = data.title;
+      $("#editName").val(title);
+      editMode();
+      loadChart(data);
+      $(".loadFile").hide();
+      $("#fCont").val('');
+      $("li.edit").show();
+    }
+  });
+  */
   
   $("#fCont").keyup(function(){
     tarea = $("#fCont").val();
@@ -556,6 +584,11 @@ $(document).ready(function()
   $("#but_file").click(function(){
     
     tarea = $("#fCont").val();
+    // access the object tag.
+    
+    //var obj = document.getElementById("fileHelper").contentDocument;
+    //obj.getElementById("frameFile").value = $("#file").val();
+    
     $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
       songID = data.id;
@@ -571,6 +604,7 @@ $(document).ready(function()
       $("li.edit").show();
       
     }, "json");
+    
   });
   
   $("#rem_file").click(function(){
@@ -579,20 +613,20 @@ $(document).ready(function()
     $("li.edit").show();
   });
   
-  $("#but_save").click(function(){
+  $("#but_save").click(function(){ // save to your local hard drive
     $("#intro").text("Here it comes!");
   });
   
-  $("#but_sub").click(function(){
+  $("#but_sub").click(function(){ // submit online directly
     alert("This function is not yet available.");
   });
   
-  $('#songlist').change(function(){
+  $('#songlist').change(function(){ // choose the song you want
     songID = $("#songlist").val();
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
-  $("#stylelist").change(function(){
+  $("#stylelist").change(function(){ // choose the style: single, double, etc
     style = $("#stylelist").val();
     editMode();
   });
@@ -600,7 +634,7 @@ $(document).ready(function()
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
   
-  $("#editName").keyup(function(){
+  $("#editName").keyup(function(){ // what will the edit be called?
     var t = $("#editName").val();
     if (t.length > 0 && t.length <= 12)
     {
@@ -617,7 +651,7 @@ $(document).ready(function()
       $("#intro").text("Provide an edit title and difficulty.");
     }
   });
-  $("#editDiff").keyup(function(){
+  $("#editDiff").keyup(function(){ // how hard is the edit?
     var t = parseInt($("#editDiff").val());
     if (t > 0 && t < 100)
     {
