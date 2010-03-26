@@ -76,7 +76,10 @@ class createActions extends sfActions
     
     try
     {
-      $fp = fopen($fn, "w");
+      $fp = fopen($fn, "w+");
+      fwrite($fp, $file);
+      fseek($fp, 0);
+      
       $tmp = new EditParser();
       
       $st = $tmp->get_stats($fp, array('notes' => 1));
