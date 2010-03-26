@@ -31,7 +31,7 @@ left to place arrows below. Have fun!</p>
 <li><button id="but_val" type="button">Validate</button></li>
 <li class="loadChoose"><button id="cho_file" type="button">Hard Drive</button></li>
 <li class="loadChoose"><button id="cho_site" type="button">Web Site</button></li>
-<li class="loadFile long reset">Paste the file contents below.</li>
+<li class="loadFile long reset">Paste the edit contents below.</li>
 <li class="loadFile long reset"><textarea id="fCont" name="fCont"></textarea></li>
 <li class="loadFile reset"><button id="but_file" type="button">Load File</button></li>
 <li class="loadFile"><button id="rem_file" type="button">Nevermind</button></li>
