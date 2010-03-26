@@ -1,6 +1,44 @@
+/*
+ * Call this function for when the user wants to save the chart.
+ */
 function saveChart()
 {
-
+  var file = "#SONG:" + songData.name + ";" + EOL;
+  file += "#NOTES:" + EOL;
+  file += "   pump-" + style + ":" + EOL;
+  file += "   " + title + ":" + EOL;
+  file += "   Edit:" + EOL;
+  file += "   " + diff + ":" + EOL;
+  /*
+   * I'm sure the radar line will not be exactly right for Pro 2.
+   * Still, until someone actually can let me know what the radar line
+   * LOOKS like for a Pro 2 file, I have to stick with the old fashioned way.
+   */
+  file += "   0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
+    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',';
+  if (style !== "routine")
+  {
+    file += "0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
+    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ':' + EOL + EOL;
+  }
+  else
+  {
+    file += "0,0,0,0,0," + steps[1] + ',' + jumps[1] + ',' + holds[1] + ','
+    + mines[1] + ',' + trips[1] + ',' + rolls[1] + ':' + EOL + EOL;
+  }
+  
+  // And now, we're at measure data.
+  LOOP_PLAYER:
+  for (var iP = 0; iP < 2; iP++) // for each player
+  {
+    if (iP)
+    {
+      if (style !== "routine") { break LOOP_PLAYER; }
+      file += "&" + EOL;
+    }
+  }
+  
+  file += EOL + EOL;
 }
 
 function genObject(p, m, b, n)

@@ -38,6 +38,8 @@ const BUFF_BOT = ADJUST_SIZE;
 
 const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
 
+const EOL = "\r\n"; // mainly for file parsing/saving.
+
 function isEmpty(obj)
 {
   for(var prop in obj)
