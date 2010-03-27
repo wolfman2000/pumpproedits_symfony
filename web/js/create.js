@@ -469,13 +469,6 @@ $(document).ready(function()
   $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
   
-  $("#svg_nav_form").submit(function(){
-    if ($("#svg_nav_form").attr('action') == "/create/loadFile")
-    {
-    
-    }
-  });
-  
   /*
    * The various action functions are set here.
    */
@@ -484,16 +477,22 @@ $(document).ready(function()
   $("#svg").mousemove(function(e){ shadow(e); });
   $("#svg").click(function(){ changeArrow(); updateStats(); });
   
+  /*
+   * When you ant to work on a new file, make sure you saved recently.
+   */
   $("#but_new").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
-    if (isDirty) // implement later.
+    if (isDirty)
     {
       checking = confirm("You have work not validated/saved.\nAre you sure you want to start over?");
     }
     if (checking) { init(); }
   });
   
+  /*
+   * Load a chart from either your hard drive (textarea) or your PPEdits account.
+   */
   $("#but_load").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
@@ -514,15 +513,21 @@ $(document).ready(function()
         $("li.loadFile").show();
         $("li.loadFile > *").removeAttr('disabled');
         $("#but_file").attr('disabled', true);
-        
       }
     }
   });
   
+  /*
+   * Provide help for those that require it.
+   */
   $("#but_help").click(function(){
-    alert("This function is not yet available.");
+    alert("Help will be available shortly.");
   });
   
+  /*
+   * All edits must be validated before the user can save their work.
+   * Allowing malformed edits would not be good.
+   */
   $("#but_val").click(function(){
     if (!badds.length)
     {
@@ -547,28 +552,11 @@ $(document).ready(function()
       alert(ouch);
     }
   });
-  /*
-  new AjaxUpload('file', {
-    action: '/create/loadFile',
-    name: 'file',
-    autoSubmit: true,
-    responseType: 'json',
-    onComplete: function(file, data) {
-    songID = data.id;
-      style = data.style;
-      diff = data.diff;
-      $("#editDiff").val(diff);
-      title = data.title;
-      $("#editName").val(title);
-      editMode();
-      loadChart(data);
-      $(".loadFile").hide();
-      $("#fCont").val('');
-      $("li.edit").show();
-    }
-  });
-  */
+
   
+  /*
+   * This text area is where the edit will be loaded from.
+   */
   $("#fCont").keyup(function(){
     tarea = $("#fCont").val();
     if (tarea.length)
@@ -581,14 +569,12 @@ $(document).ready(function()
     }
   });
   
+  /*
+   * Load the edit from the text area with this button.
+   */
   $("#but_file").click(function(){
     
     tarea = $("#fCont").val();
-    // access the object tag.
-    
-    //var obj = document.getElementById("fileHelper").contentDocument;
-    //obj.getElementById("frameFile").value = $("#file").val();
-    
     $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
       songID = data.id;
@@ -598,17 +584,16 @@ $(document).ready(function()
       title = data.title;
       $("#editName").val(title);
       editMode();
-      loadChart(data);
-      $(".loadFile").hide();
       $("#fCont").val('');
+      $(".loadFile").hide();
       $("li.edit").show();
-      
+      loadChart(data);
     }, "json");
     
   });
   
-  $("#rem_file").click(function(){
-    $("#file").val('');
+  $("#rem_file").click(function(){ // On second thought, don't deal with uploading.
+    $("#fCont").val('');
     $(".loadFile").hide();
     $("li.edit").show();
   });
