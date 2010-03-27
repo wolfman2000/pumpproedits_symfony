@@ -4,16 +4,39 @@
  */
 function loadChart(nd)
 {
-  steps = nd.steps;
-  jumps = nd.jumps;
-  holds = nd.holds;
-  mines = nd.mines;
-  trips = nd.trips;
-  rolls = nd.rolls;
-  fakes = nd.fakes;
-  lifts = nd.lifts;
-  
+  notes = null; // clear out what's there.
   notes = Array(Array(), Array());
+  $("#svgNote").empty();
+  $("#svg").attr('width', width);
+  $("#svgMeas").empty();
+  $("#svgSync").empty();
+  
+  
+  // append the measures.
+  for (var i = 0; i < songData.measures; i++)
+  {
+    $("#svgMeas").append(genMeasure(ADJUST_SIZE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
+  }
+  
+  // place the BPM data.
+  var bpms = songData.bpms;
+  var x = width / 2;
+  var y;
+  for (var i = 0; i < bpms.length; i++)
+  {
+    y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
+    $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
+        y + 2 * SCALE, bpms[i].bpm, 'bpm'));
+    $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
+  }
+  
+  var stps = songData.stps;
+  for (var i = 0; i < stps.length; i++)
+  {
+    y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
+    $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
+    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
+  }
   
   var eRow = stringMul("0", columns); // completely empty row.
   
@@ -26,12 +49,12 @@ function loadChart(nd)
     for (var iM = 0; iM < songData.measures; iM++)
     {
       // NONE of these start off empty in nd.
-      var rows = nd.notes[iP][iM].length;
+      var rows = nd[iP][iM].length;
       
       LOOP_BEAT:
       for (var iB = 0; iB < rows; iB++)
       {
-        if (nd.notes[iP][iM][iB] === eRow) { continue LOOP_BEAT; }
+        if (nd[iP][iM][iB] === eRow) { continue LOOP_BEAT; }
         
         var tmp = notes[iP][iM];
         if (isEmpty(tmp))
@@ -43,7 +66,7 @@ function loadChart(nd)
         LOOP_ROW:
         for (var iR = 0; iR < columns; iR++)
         {
-          var ch = nd.notes[iP][iM][iB].charAt(iR);
+          var ch = nd[iP][iM][iB].charAt(iR);
           if (ch === "0") { continue LOOP_ROW; }
           notes[iP][iM][mul][iR] = ch;
           var note = getNote(mul, ch, iP);
@@ -55,7 +78,6 @@ function loadChart(nd)
       
     }
   }
-  updateStats();
 }
 
 /*

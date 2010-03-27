@@ -76,8 +76,9 @@ function selectArrow(cX, rX, rY, css)
  */
 function editMode()
 {
-  $("#intro").text("Loading... Loading...");
-  $.getJSON("/create/song/" + songID, function(data)
+  $("#intro").text("Loading song data...");
+  $.ajax({ async: false, dataType: 'json', url: '/create/song/' + songID, success: function(data)
+  //$.getJSON("/create/song/" + songID, function(data)
   {
     /*
      * Retrieve the number of columns we'll be using today.
@@ -134,8 +135,10 @@ function editMode()
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
     if (authed == "in") { $("#but_sub").removeAttr('disabled'); }
-    $("#intro").text("Have fun editing!");
-  });
+    
+    return true;
+  }});
+  return false; // this is to ensure the asyncing is done right.
 }
 
 /**
@@ -384,11 +387,11 @@ function changeArrow()
   coll.append(sA);
 }
 
-  /*
-   * This is meant to be an asyncronous function
-   * to get the step stats as close to live as
-   * possible without tying up the browser.
-   */
+/*
+ * This is meant to be an asyncronous function
+ * to get the step stats as close to live as
+ * possible without tying up the browser.
+ */
 function updateStats()
 {
   var S = steps[0];
@@ -494,6 +497,7 @@ $(document).ready(function()
         $("li.loadFile").show();
         $("li.loadFile > *").removeAttr('disabled');
         $("#but_file").attr('disabled', true);
+        $("#intro").text("You can load your edit now.");
       }
     }
   });
@@ -556,19 +560,31 @@ $(document).ready(function()
   $("#but_file").click(function(){
     
     tarea = $("#fCont").val();
+    var done;
     $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
       songID = data.id;
       style = data.style;
       diff = data.diff;
-      $("#editDiff").val(diff);
       title = data.title;
+      steps = data.steps;
+      jumps = data.jumps;
+      holds = data.holds;
+      mines = data.mines;
+      trips = data.trips;
+      rolls = data.rolls;
+      fakes = data.fakes;
+      lifts = data.lifts;
+      updateStats();
+      $("#editDiff").val(diff);
       $("#editName").val(title);
-      editMode();
       $("#fCont").val('');
       $(".loadFile").hide();
       $("li.edit").show();
-      loadChart(data);
+      done = editMode();
+      $("#intro").text("Loading chart...");
+      loadChart(data.notes);
+      $("#intro").text("All loaded up!");
     }, "json");
     
   });
@@ -595,6 +611,7 @@ $(document).ready(function()
   $("#stylelist").change(function(){ // choose the style: single, double, etc
     style = $("#stylelist").val();
     editMode();
+    $("#intro").text("Have fun editing!");
   });
   
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
