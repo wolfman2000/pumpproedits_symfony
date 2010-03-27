@@ -1,11 +1,4 @@
 /*
- * Add a capitalize function for the first letter.
- */
-String.prototype.capitalize = function(){
-   return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
-};
-
-/*
  * Hide the shadow rectangle from others.
  */
 function hideRect()
@@ -24,6 +17,58 @@ function showRect(x, y)
   y = y - ADJUST_SIZE;
   $("#mCheck").text(Math.floor(y / BEATS_MAX) + 1);
   $("#yCheck").text(y % BEATS_MAX);
+}
+
+/*
+ * Determine the proper note classes to render based on sync.
+ */
+function getNote(y, nt, pl)
+{
+  var k = "note";
+  if (pl == null) { pl = player; }
+  if (style == "routine") { k = "p" + player + " " + k; }
+  
+  if      (!(y % 48)) { k += "_004"; }
+  else if (!(y % 24)) { k += "_008"; }
+  else if (!(y % 16)) { k += "_012"; }
+  else if (!(y % 12)) { k += "_016"; }
+  else if (!(y % 8))  { k += "_024"; }
+  else if (!(y % 6))  { k += "_032"; }
+  else if (!(y % 4))  { k += "_048"; }
+  else if (!(y % 3))  { k += "_064"; }
+  else                { k += "_192"; }
+  
+  if (nt == null) { nt = note; }
+  var t; // note type.
+  if      (nt == "1") { t = "tap";  }
+  else if (nt == "2") { t = "hold"; }
+  else if (nt == "3") { t = "end";  }
+  else if (nt == "4") { t = "roll"; }
+  else if (nt == "M") { t = "mine"; }
+  else if (nt == "L") { t = "lift"; }
+  else if (nt == "F") { t = "fake"; }
+  else                { t = "FIX";  }
+  return k + " " + t;
+}
+
+/*
+ * Determine which arrow to return to the user.
+ */
+function selectArrow(cX, rX, rY, css)
+{
+  // Take care of the special shaped arrows first.
+  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
+  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
+  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
+  
+  switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
+  {
+    case 0: return genDLArrow(rX, rY, css);
+    case 1: return genULArrow(rX, rY, css);
+    case 2: return genCNArrow(rX, rY, css);
+    case 3: return genURArrow(rX, rY, css);
+    case 4: return genDRArrow(rX, rY, css);
+  }
 }
 
 /**
@@ -224,38 +269,9 @@ function changeArrow()
   
   isDirty = true;
   $("#but_val").attr('disabled', true);
-  /*
-   * Determine the proper note classes to render based on sync.
-   */
-  function getNote()
-  {
-    var y = (rY - ADJUST_SIZE) % BEATS_MAX;
-    var k = "note";
-    if (style == "routine") { k = "p" + player + " " + k; }
-    
-    if      (!(y % 48)) { k += "_004"; }
-    else if (!(y % 24)) { k += "_008"; }
-    else if (!(y % 16)) { k += "_012"; }
-    else if (!(y % 12)) { k += "_016"; }
-    else if (!(y % 8))  { k += "_024"; }
-    else if (!(y % 6))  { k += "_032"; }
-    else if (!(y % 4))  { k += "_048"; }
-    else if (!(y % 3))  { k += "_064"; }
-    else                { k += "_192"; }
-    
-    var t; // note type.
-    if      (note == "1") { t = "tap";  }
-    else if (note == "2") { t = "hold"; }
-    else if (note == "3") { t = "end";  }
-    else if (note == "4") { t = "roll"; }
-    else if (note == "M") { t = "mine"; }
-    else if (note == "L") { t = "lift"; }
-    else if (note == "F") { t = "fake"; }
-    else                  { t = "FIX";  }
-    return k + " " + t;
-  }
 
-  var css = getNote();
+
+  var css = getNote((rY - ADJUST_SIZE) % BEATS_MAX);
   var cX = rX / ADJUST_SIZE - 1; // which column are we using?
   var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
   var bY = (rY - ADJUST_SIZE) % BEATS_MAX; // which beat? (0'th based)
@@ -276,36 +292,7 @@ function changeArrow()
   rX /= SCALE;
   rY /= SCALE;
   
-  /*
-   * Determine which arrow to return to the user.
-   */
-  function selectArrow()
-  {
-    // Take care of the special shaped arrows first.
-    if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
-    if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
-    if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
-    
-    switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
-    {
-      case 0: return genDLArrow(rX, rY, css);
-      case 1: return genULArrow(rX, rY, css);
-      case 2: return genCNArrow(rX, rY, css);
-      case 3: return genURArrow(rX, rY, css);
-      case 4: return genDRArrow(rX, rY, css);
-    }
-  }
-  
   // see if a node exists in this area.
-  
-  /*
-   * Mini rant time. SVG and jQuery don't fully get
-   * along right now. Until such a time comes when
-   * they do, I have to loop through each element
-   * manually until I hit it, and then figure out
-   * the rest from there.
-   */
-
   var coll = $("#svgNote");
   
   var n = coll.children().first();
@@ -368,7 +355,7 @@ function changeArrow()
   }
   
   // add if empty
-  
+  var sA = selectArrow(cX, rX, rY, css);
   notes[player][mY][bY][cX] = note;
   
   n = coll.children().first();
@@ -377,10 +364,10 @@ function changeArrow()
   
   if (nY > rY || nY == rY && nX > rX)
   {
-    n.before(selectArrow());
+    n.before(sA);
     return;
   }
-  
+  // insert the note somewhere in the middle.
   while (n.length)
   {
     n = n.next();
@@ -389,17 +376,12 @@ function changeArrow()
     
     if (nY > rY || nY == rY && nX > rX)
     {
-      n.before(selectArrow());
+      n.before(sA);
       return;
     }
   }
-  
-  /*
-   * If it hits here, then this is the last note to add.
-   * A simple create and append will do.
-   */
-  
-  coll.append(selectArrow());
+  // last note in the line: simple.
+  coll.append(sA);
 }
 
   /*
@@ -409,7 +391,6 @@ function changeArrow()
    */
 function updateStats()
 {
-  gatherStats();
   var S = steps[0];
   var J = jumps[0];
   var H = holds[0];
@@ -475,7 +456,7 @@ $(document).ready(function()
   $("#svg").mouseout(function(){ hideRect(); });
   $("#svg").mouseover(function(e){ shadow(e); });
   $("#svg").mousemove(function(e){ shadow(e); });
-  $("#svg").click(function(){ changeArrow(); updateStats(); });
+  $("#svg").click(function(){ changeArrow(); gatherStats(); updateStats(); });
   
   /*
    * When you ant to work on a new file, make sure you saved recently.

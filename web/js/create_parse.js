@@ -5,7 +5,7 @@
 function loadChart(nd)
 {
   steps = nd.steps;
-  jumps = nd.steps;
+  jumps = nd.jumps;
   holds = nd.holds;
   mines = nd.mines;
   trips = nd.trips;
@@ -46,12 +46,16 @@ function loadChart(nd)
           var ch = nd.notes[iP][iM][iB].charAt(iR);
           if (ch === "0") { continue LOOP_ROW; }
           notes[iP][iM][mul][iR] = ch;
+          var note = getNote(mul, ch, iP);
+          var x = (iR + 1) * ARR_HEIGHT;
+          var y = ((iM * BEATS_MAX) + mul + ADJUST_SIZE) / SCALE;
+          $("#svgNote").append(selectArrow(iR, x, y, note));
         }
       }
       
     }
   }
-  
+  updateStats();
 }
 
 /*

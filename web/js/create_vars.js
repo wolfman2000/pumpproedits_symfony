@@ -56,6 +56,13 @@ function isEmpty(obj)
 }
 
 /*
+ * Add a capitalize function for the first letter.
+ */
+String.prototype.capitalize = function(){
+   return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
+};
+
+/*
  * Repeat a string the specified number of times.
  * Takes advantage of Kris Kowal's bit manipulation.
  * http://blog.stevenlevithan.com/archives/fast-string-multiply
