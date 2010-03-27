@@ -43,6 +43,15 @@ edit_creator_loadSite:
   requirements:
     id: \d+
 
+# use ajaj to get the specific edit requested.
+edit_creator_loadSiteEdit:
+  url: /create/loadSiteEdit/:id
+  param:
+    module: create
+    action: loadSiteEdit
+  requirements:
+    id: \d+
+
 # download the file the user made.
 edit_creator_download:
   url: /create/download

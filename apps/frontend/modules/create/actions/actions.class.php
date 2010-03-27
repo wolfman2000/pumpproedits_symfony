@@ -25,7 +25,50 @@ class createActions extends sfActions
     $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongs();
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
-  
+
+  /**
+   * Load the specific edit ID data for the user.
+   */
+  public function executeLoadSiteEdit(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id');
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    $ret = array();
+    
+    $fp = null;
+    $fn = sprintf("%s/user_edits/edit_%06d.edit", sfConfig::get('sf_data_dir'), $id);
+    
+    try
+    {
+      $fp = fopen($fn, "r");
+      $tmp = new EditParser();
+      
+      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $ret['id'] = $st['id'];
+      $ret['diff'] = $st['diff'];
+      $ret['style'] = substr($st['style'], 5);
+      $ret['title'] = $st['title'];
+      $ret['steps'] = $st['steps'];
+      $ret['jumps'] = $st['jumps'];
+      $ret['holds'] = $st['holds'];
+      $ret['mines'] = $st['mines'];
+      $ret['trips'] = $st['trips'];
+      $ret['rolls'] = $st['rolls'];
+      $ret['lifts'] = $st['lifts'];
+      $ret['fakes'] = $st['fakes'];
+      $ret['notes'][0] = $st['notes'][0];
+      if ($ret['style'] === "routine")
+      {
+        $ret['notes'][1] = $st['notes'][1];
+      }
+    }
+    catch (sfParseException $e)
+    {
+      $ret['exception'] = $e->getMessage();
+    }
+    return $this->renderText(json_encode($ret));
+  }
+
   /**
    * Get the user's list of edits and other required data
    * for the person to work on it. AJAJ to the rescue!
