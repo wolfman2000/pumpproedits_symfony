@@ -585,6 +585,7 @@ $(document).ready(function()
       $("#intro").text("Loading chart...");
       loadChart(data.notes);
       $("#intro").text("All loaded up!");
+      isDirty = false;
     }, "json");
     
   });
