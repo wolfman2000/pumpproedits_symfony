@@ -28,7 +28,7 @@ if (browser_detection(7) == "ie"): ?>
 <script type="text/javascript">
 //<![CDATA[
 <?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
-const authed = "<?php echo $authin; ?>";
+const authed = "<?php echo $authin === "out" ? 0 : $sf_user->getAttribute('id'); ?>";
 //]]>
 </script>
 <?php include_javascripts(); ?>

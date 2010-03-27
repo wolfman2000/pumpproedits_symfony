@@ -78,7 +78,6 @@ function editMode()
 {
   $("#intro").text("Loading song data...");
   $.ajax({ async: false, dataType: 'json', url: '/create/song/' + songID, success: function(data)
-  //$.getJSON("/create/song/" + songID, function(data)
   {
     /*
      * Retrieve the number of columns we'll be using today.
@@ -134,7 +133,7 @@ function editMode()
     $("h2").first().text(phrase);
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
-    if (authed == "in") { $("#but_sub").removeAttr('disabled'); }
+    if (authed) { $("#but_sub").removeAttr('disabled'); }
     
     return true;
   }});
@@ -162,7 +161,7 @@ function init()
   $("#but_val").attr("disabled", true);
   $("#but_new").attr("disabled", true);
   $("#cho_file").removeAttr('disabled');
-  if (authed === "in")
+  if (authed)
   {
     $("#cho_site").removeAttr('disabled');
   }
@@ -488,7 +487,7 @@ $(document).ready(function()
     if (checking)
     {
       $("li.edit").hide();
-      if (authed === "in")
+      if (authed)
       {
         $("li.loadChoose").show();
         $("#intro").text("Computer or account?");
@@ -522,7 +521,7 @@ $(document).ready(function()
       $("#intro").text("You can save your work!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', true);
-      if (authed === "in")
+      if (authed)
       {
         $("#but_sub").removeAttr('disabled');
       }
@@ -555,7 +554,7 @@ $(document).ready(function()
   /*
    * An authed user wants to load one of his edits.
    */
-  $("#cho_site").flick(function(){
+  $("#cho_site").click(function(){
     $(".loadChoose").hide();
     $(".loadSite").show();
     // have to do another AJAX call.
