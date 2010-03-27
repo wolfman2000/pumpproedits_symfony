@@ -133,8 +133,7 @@ function editMode()
     $("h2").first().text(phrase);
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
-    if (authed) { $("#but_sub").removeAttr('disabled'); }
-    
+    $("#editName").removeAttr('disabled');
     return true;
   }});
   return false; // this is to ensure the asyncing is done right.
@@ -620,6 +619,8 @@ $(document).ready(function()
       $("#intro").text("Loading chart...");
       loadChart(data.notes);
       $("#intro").text("All loaded up!");
+      $("#but_save").removeAttr('disabled');
+      $("#but_val").attr('disabled', 'disabled');
       isDirty = false;
     }, "json");
   });
@@ -628,7 +629,8 @@ $(document).ready(function()
    */
   $("#mem_load").click(function(){
     $("#intro").text("Loading edit...");
-    $.getJSON("/create/loadSiteEdit/" + $("#mem_edit > option:selected").attr('id'), function(data) {
+    editID = $("#mem_edit > option:selected").attr('id');
+    $.getJSON("/create/loadSiteEdit/" + editID, function(data) {
       songID = data.id;
       style = data.style;
       diff = data.diff;
@@ -659,10 +661,6 @@ $(document).ready(function()
     });
   });
   
-  $("#mem_edit").change(function(){
-    editID = $("#mem_edit > option:selected").attr('id');
-  });
-  
   $("#mem_nogo").click(function(){ // On second thought, don't deal with choosing your edit.
     $("#fCont").val('');
     $(".loadSite").hide();
@@ -680,7 +678,36 @@ $(document).ready(function()
   });
   
   $("#but_sub").click(function(){ // submit online directly
-    alert("This function is not yet available.");
+    var data = {};
+    data['b64'] = b64;
+    data['title'] = title;
+    data['diff'] = diff;
+    data['style'] = style;
+    data['editID'] = editID;
+    data['songID'] = songID;
+    data['userID'] = authed;
+    data['steps1'] = steps[0];
+    data['steps2'] = steps[1];
+    data['jumps1'] = jumps[0];
+    data['jumps2'] = jumps[1];
+    data['holds1'] = holds[0];
+    data['holds2'] = holds[1];
+    data['mines1'] = mines[0];
+    data['mines2'] = mines[1];
+    data['rolls1'] = rolls[0];
+    data['rolls2'] = rolls[1];
+    data['trips1'] = trips[0];
+    data['trips2'] = trips[1];
+    data['fakes1'] = fakes[0];
+    data['fakes2'] = fakes[1];
+    data['lifts1'] = lifts[0];
+    data['lifts2'] = lifts[1];
+    
+    $("#intro").text("Uploading edit...");
+    $.post(window.location.href + "/upload", data, function(data, status)
+    {
+      $("#intro").text("Success!");
+    }, "json");
   });
   
   $('#songlist').change(function(){ // choose the song you want
@@ -698,11 +725,13 @@ $(document).ready(function()
   $("#typelist").change(function() { note = $("#typelist").val();});
   
   $("#editName").keyup(function(){ // what will the edit be called?
+    $("#but_save").attr('disabled', true);
+    $("#but_sub").attr('disabled', true);
     var t = $("#editName").val();
     if (t.length > 0 && t.length <= 12)
     {
       title = t;
-      if (diff > 0 && isDirty)
+      if (diff > 0)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");
@@ -715,11 +744,13 @@ $(document).ready(function()
     }
   });
   $("#editDiff").keyup(function(){ // how hard is the edit?
+    $("#but_save").attr('disabled', true);
+    $("#but_sub").attr('disabled', true);
     var t = parseInt($("#editDiff").val());
     if (t > 0 && t < 100)
     {
       diff = t;
-      if (title && isDirty)
+      if (title)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");

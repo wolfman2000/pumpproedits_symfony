@@ -217,6 +217,7 @@ class createActions extends sfActions
     
     $ret = array();
     $ret['result'] = "successful";
+    $ret['link'] = url_for("@edit_cuser&id=" . $this->getUser()->getAttribute('id'));
     return $this->renderText(json_encode($ret));
   }
   
@@ -235,7 +236,7 @@ class createActions extends sfActions
     $d64 = base64_decode($b64);
     $response = $this->getResponse();
     $response->clearHttpHeaders();
-    $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
+    $response->setHttpHeader('Content-Disposition', 'attachment; filename='.urlencode($name));
     $response->setHttpHeader('Content-Length', strlen($d64));
     $response->setHttpHeader('Content-Type', 'application/edit');
     $response->sendHttpHeaders();

@@ -183,11 +183,6 @@ function saveChart()
   $("#style").val(style);
   $("#diff").val(diff);
   $("#title").val(title);
-  
-  /*
-  window.location.href = "/create/download/" + b64 + "/" + songData.abbr + "/"
-    + style + "/" + diff + "/" + title;
-  */
 }
 
 function genObject(p, m, b, n)
