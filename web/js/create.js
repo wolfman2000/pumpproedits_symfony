@@ -200,6 +200,7 @@ function init()
   player = 0;
   title = "";
   diff = 0;
+  editID = 0;
 
   $("#svgMeas").empty();
   $("#svgSync").empty();
@@ -621,10 +622,48 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       isDirty = false;
     }, "json");
-    
+  });
+  /*
+   * Load the specific member edit.
+   */
+  $("#mem_load").click(function(){
+    $("#intro").text("Loading edit...");
+    $.getJSON("/create/loadSiteEdit/" + $("#mem_edit > option:selected").attr('id'), function(data) {
+      songID = data.id;
+      style = data.style;
+      diff = data.diff;
+      title = data.title;
+      steps = data.steps;
+      jumps = data.jumps;
+      holds = data.holds;
+      mines = data.mines;
+      trips = data.trips;
+      rolls = data.rolls;
+      fakes = data.fakes;
+      lifts = data.lifts;
+      updateStats();
+      $("#editDiff").val(diff);
+      $("#editName").val(title);
+      $("#fCont").val('');
+      $(".loadSite").hide();
+      $("li.edit").show();
+      done = editMode();
+      $("#intro").text("Loading chart...");
+      loadChart(data.notes);
+      $("#intro").text("All loaded up!");
+      if (title.length)
+      {
+        $("#editName").attr('disabled', true);
+      }
+      isDirty = false;
+    });
   });
   
-  $("#mem_nogo").click(function(){
+  $("#mem_edit").change(function(){
+    editID = $("#mem_edit > option:selected").attr('id');
+  });
+  
+  $("#mem_nogo").click(function(){ // On second thought, don't deal with choosing your edit.
     $("#fCont").val('');
     $(".loadSite").hide();
     $("li.edit").show();

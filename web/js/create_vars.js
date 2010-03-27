@@ -4,6 +4,7 @@ var columns; // How many columns are we working with?
 var width; // compliment to columns
 var height; // compliment to measures
 var tarea; // text area containing the notes.
+var editID; // the edit ID. Normally not used until submitting.
 var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
