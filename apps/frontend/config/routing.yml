@@ -34,6 +34,16 @@ edit_creator_loadFile:
   requirements:
     sf_method: [POST]
 
+# use ajaj to upload the file and report success.
+edit_creator_upload:
+  url: /create/upload
+  class: sfRequestRoute
+  param:
+    module: create
+    action: upload
+  requirements:
+    sf_method: [POST]
+
 # use ajaj to get the list of edits the user has.
 edit_creator_loadSite:
   url: /create/loadSite/:id
