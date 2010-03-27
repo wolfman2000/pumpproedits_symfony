@@ -152,6 +152,7 @@ function init()
   $("nav dt.edit").hide();
   $("nav dd.edit").hide();
   $("nav li.loadChoose").hide();
+  $("nav li.loadSite").hide();
   $("nav li.loadFile").hide();
   $("#notes > rect").hide();
   $("nav *.choose").show();
@@ -490,6 +491,7 @@ $(document).ready(function()
       if (authed === "in")
       {
         $("li.loadChoose").show();
+        $("#intro").text("Computer or account?");
       }
       else
       {
@@ -537,7 +539,28 @@ $(document).ready(function()
       alert(ouch);
     }
   });
-
+  
+  /*
+   * An authed user decides to load from a file after all.
+   */
+  $("#cho_file").click(function(){
+    $("#fCont").val('');
+    $(".loadChoose").hide();
+    $(".loadFile").show();
+    $("li.loadFile > *").removeAttr('disabled');
+    $("#but_file").attr('disabled', true);
+    $("#intro").text("You can load your edit now.");
+  });
+  
+  /*
+   * An authed user wants to load one of his edits.
+   */
+  $("#cho_site").flick(function(){
+    $(".loadChoose").hide();
+    $(".loadSite").show();
+    // have to do another AJAX call.
+  });
+  
   
   /*
    * This text area is where the edit will be loaded from.
