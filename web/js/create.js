@@ -557,7 +557,19 @@ $(document).ready(function()
   $("#cho_site").click(function(){
     $(".loadChoose").hide();
     $(".loadSite").show();
+    $("#intro").text("Loading your edits...");
+    $("#mem_edit").empty();
     // have to do another AJAX call.
+    $.ajax({ async: true, dataType: 'json', url: '/create/loadSite/' + authed, success: function(data)
+    {
+      for (var i = 0; i < data.length; i++)
+      {
+        var out = data[i].title + " (" + data[i].abbr + ") " + data[i].style.charAt(0).capitalize() + data[i].diff;
+        var html = '<option id="' + data[i].id + '">' + out + '</option>';
+        $("#mem_edit").append(html);
+      }
+      $("#intro").text("Choose your edit!");
+    }});
   });
   
   
@@ -610,6 +622,12 @@ $(document).ready(function()
       isDirty = false;
     }, "json");
     
+  });
+  
+  $("#mem_nogo").click(function(){
+    $("#fCont").val('');
+    $(".loadSite").hide();
+    $("li.edit").show();
   });
   
   $("#rem_file").click(function(){ // On second thought, don't deal with uploading.
