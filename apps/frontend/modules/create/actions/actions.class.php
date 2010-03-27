@@ -36,8 +36,18 @@ class createActions extends sfActions
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
     
-    $sEdit = Doctrine::getTable('PPE_Edit_Edit');
+    $sEdit = Doctrine::getTable('PPE_Edit_Edit')->getSVGEdits($id);
     
+    foreach ($sEdit as $s)
+    {
+      $row = array();
+      $row['id'] = $s->id;
+      $row['abbr'] = $s->sabbr;
+      $row['title'] = $s->title;
+      $row['style'] = $s->style;
+      $row['diff'] = $s->diff;
+      $ret[] = $row;
+    }
     
     return $this->renderText(json_encode($ret));
   }
