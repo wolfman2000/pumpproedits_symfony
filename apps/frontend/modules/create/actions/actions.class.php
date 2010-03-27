@@ -27,6 +27,22 @@ class createActions extends sfActions
   }
   
   /**
+   * Get the user's list of edits and other required data
+   * for the person to work on it. AJAJ to the rescue!
+   */
+  public function executeLoadSite(sfWebRequest $request)
+  {
+    $id = $request->getParameter('id');
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    $ret = array();
+    
+    $sEdit = Doctrine::getTable('PPE_Edit_Edit');
+    
+    
+    return $this->renderText(json_encode($ret));
+  }
+  
+  /**
    * Call this on AJAX requests to load the svg
    * properly.
    */

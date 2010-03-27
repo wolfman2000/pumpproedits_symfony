@@ -34,6 +34,15 @@ edit_creator_loadFile:
   requirements:
     sf_method: [POST]
 
+# use ajaj to get the list of edits the user has.
+edit_creator_loadSite:
+  url: /create/loadSite/:id
+  param:
+    module: create
+    action: loadSite
+  requirements:
+    id: \d+
+
 # download the file the user made.
 edit_creator_download:
   url: /create/download
