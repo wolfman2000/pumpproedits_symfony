@@ -143,7 +143,7 @@ function saveChart()
     LOOP_MEASURE:
     for (var iM = 0; iM < songData.measures; iM++)
     {
-      file += (iM ? "," : " ") + " // measure " + (iM + 1) + EOL;
+      file += (iM ? "," : " ") + "  // measure " + (iM + 1) + EOL;
       
       if (isEmpty(notes[iP][iM]))
       {
