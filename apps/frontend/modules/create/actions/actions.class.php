@@ -31,6 +31,10 @@ class createActions extends sfActions
    */
   public function executeLoadSiteEdit(sfWebRequest $request)
   {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
     $id = $request->getParameter('id');
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
@@ -75,6 +79,10 @@ class createActions extends sfActions
    */
   public function executeLoadSite(sfWebRequest $request)
   {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
     $id = $request->getParameter('id');
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
@@ -101,6 +109,10 @@ class createActions extends sfActions
    */
   public function executeAjax(sfWebRequest $request)
   {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
     $id = $request->getParameter('id');
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     
@@ -133,6 +145,10 @@ class createActions extends sfActions
   
   public function executeLoadInput(sfWebRequest $request)
   {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
     $file = base64_decode($request->getParameter('file'));
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
@@ -181,6 +197,10 @@ class createActions extends sfActions
    */
   public function executeUpload(sfWebRequest $request)
   {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
     $row = array();
     $eid = $request->getParameter('editID');
     $row['id'] = $request->getParameter('songID'); // must stay consistent.
