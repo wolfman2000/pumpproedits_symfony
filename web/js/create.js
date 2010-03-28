@@ -706,7 +706,7 @@ $(document).ready(function()
     $("#intro").text("Uploading edit...");
     $.post(window.location.href + "/upload", data, function(data, status)
     {
-      $("#intro").text("Success!");
+      $("#intro").text("Edit Uploaded");
     }, "json");
   });
   

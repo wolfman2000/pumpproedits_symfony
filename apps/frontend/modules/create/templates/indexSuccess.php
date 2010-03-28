@@ -14,6 +14,10 @@ left to place arrows below. Have fun!</p>
 </svg>
 
 <nav id="svg_nav">
+<?php if ($sf_user->isAuthenticated()): ?>
+<p id="authIntro"><?php echo
+link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id')); ?></p>
+<?php endif; ?>
 <p id="intro">Javascript required!</p>
 <form id="svg_nav_form" method="post" enctype="multipart/form-data" action="<?php echo url_for("@edit_creator_download"); ?>">
 <dl>

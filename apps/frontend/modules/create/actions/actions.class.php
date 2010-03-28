@@ -181,7 +181,6 @@ class createActions extends sfActions
    */
   public function executeUpload(sfWebRequest $request)
   {
-    $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $row = array();
     $eid = $request->getParameter('editID');
     $row['id'] = $request->getParameter('songID'); // must stay consistent.
@@ -189,15 +188,30 @@ class createActions extends sfActions
     $row['title'] = $request->getParameter('title');
     $row['style'] = "pump-" . $request->getParameter('style');
     $row['diff'] = $request->getParameter('diff');
-    
-    $row['steps'] = array($request->getParameter['steps1'], $request->getParameter['steps2']);
-    $row['jumps'] = array($request->getParameter['jumps1'], $request->getParameter['jumps2']);
-    $row['holds'] = array($request->getParameter['holds1'], $request->getParameter['holds2']);
-    $row['mines'] = array($request->getParameter['mines1'], $request->getParameter['mines2']);
-    $row['trips'] = array($request->getParameter['trips1'], $request->getParameter['trips2']);
-    $row['rolls'] = array($request->getParameter['rolls1'], $request->getParameter['rolls2']);
-    $row['lifts'] = array($request->getParameter['lifts1'], $request->getParameter['lifts2']);
-    $row['fakes'] = array($request->getParameter['fakes1'], $request->getParameter['fakes2']);
+    $row['steps'] = array();
+    $row['steps'][] = $request->getParameter('steps1');
+    $row['steps'][] = $request->getParameter('steps2');
+    $row['jumps'] = array();
+    $row['jumps'][] = $request->getParameter('jumps1');
+    $row['jumps'][] = $request->getParameter('jumps2');
+    $row['holds'] = array();
+    $row['holds'][] = $request->getParameter('holds1');
+    $row['holds'][] = $request->getParameter('holds2');
+    $row['mines'] = array();
+    $row['mines'][] = $request->getParameter('mines1');
+    $row['mines'][] = $request->getParameter('mines2');
+    $row['trips'] = array();
+    $row['trips'][] = $request->getParameter('trips1');
+    $row['trips'][] = $request->getParameter('trips2');
+    $row['rolls'] = array();
+    $row['rolls'][] = $request->getParameter('rolls1');
+    $row['rolls'][] = $request->getParameter('rolls2');
+    $row['lifts'] = array();
+    $row['lifts'][] = $request->getParameter('lifts1');
+    $row['lifts'][] = $request->getParameter('lifts2');
+    $row['fakes'] = array();
+    $row['fakes'][] = $request->getParameter('fakes1');
+    $row['fakes'][] = $request->getParameter('fakes2');
     
     $editT = Doctrine::getTable('PPE_Edit_Edit');
     # Can't use <= on the below: what if it's null?
@@ -207,7 +221,7 @@ class createActions extends sfActions
     }
     else
     {
-      $editT->updateRow($eid, $row);
+      $editT->updateEdit($eid, $row);
     }
     
     $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
@@ -217,7 +231,8 @@ class createActions extends sfActions
     
     $ret = array();
     $ret['result'] = "successful";
-    $ret['link'] = url_for("@edit_cuser&id=" . $this->getUser()->getAttribute('id'));
+    //$ret['link'] = url_for("@edit_cuser&id=" . $this->getUser()->getAttribute('id'));
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
   
