@@ -2,8 +2,11 @@ This is the repository for Pump Pro Edits V3: Player Power.
 It is called as such because the players can now directly
 contribute to how the website looks, feels, and behaves.
 
-There will be minor configuration required to play around
-with this on your own computer.
+This is a Symfony based project. More information can be
+found at http://www.symfony-project.org if you are interested.
+While this is designed to be a standard project, minor
+configuration and setup is required to play around
+with this website on your own computer.
 
 1) This project uses the Doctrine ORM plugin. If you
 are used to Propel, the switch shouldn't be that bad.
@@ -20,19 +23,21 @@ both of them. Windows users, you'll have to discover
 the equivalent commands on your own.
 
 4) Some of the core data files, such as the edits and
-stepcharts themselves, are not included. Those have to
+user information, are not included. Those have to
 be gotten separately.
 
 As far as coding standards go, keep it legible. Using
-unicode/utf-8 is alright if it's for a decent reason.
+unicode/utf-8 is recommended, as anyone from around the
+world will be able to read and edit this code.
 Tabs versus spaces, where braces go, etc, is not something
 I care deeply about. The only exception to that rule is
 when dealing with the YAML files (yml). Those cannot have
-tabs for any reason.
+tabs for any reason. http://www.yaml.org has more information.
 
 Try to use git's branching functionality when adding
 new features. The master branch should really only contain
-code that is guaranteed to run.
+code that is guaranteed to run. Of course, mistakes happen,
+but try to be careful.
 
 Don't be afraid to use many different technologies either.
 Presently, this website uses a more flexible SVG
@@ -44,3 +49,4 @@ definition of proper to you.
 If there are any questions, feel free to contact me.
 
 -- Jason "Wolfman2000" Felds
+
