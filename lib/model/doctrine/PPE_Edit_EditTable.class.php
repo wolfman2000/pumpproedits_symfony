@@ -59,6 +59,17 @@ class PPE_Edit_EditTable extends Doctrine_Table
     return true;
   }
   
+  // Get the user's edits...including problem ones.
+  public function getSVGEdits($id)
+  {
+    return $this->createQuery('a')
+      ->select('style, title, diff, s.abbr sabbr')
+      ->innerJoin('a.PPE_Song_Song s')
+      ->where('a.user_id = ?', $id)
+      ->orderBy('a.id')
+      ->execute();
+  }
+  
   public function getNonProblemEdits()
   {
     return $this->createQuery('a')

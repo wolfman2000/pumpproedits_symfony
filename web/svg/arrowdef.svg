@@ -2,15 +2,15 @@
 <?xml-stylesheet href="/css/_svg.css" type="text/css"?>
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
   <defs>
-    <radialGradient id="p1_004" cx="8" cy="8" fx="8" fy="8" r="6" gradientUnits="userSpaceOnUse">
+    <radialGradient id="p1_004" cx="8" cy="8" fx="8" fy="8" r="6.5625" gradientUnits="userSpaceOnUse">
       <stop offset="0" />
       <stop offset="1" />
     </radialGradient>
-    <radialGradient id="p2_004" cx="8" cy="8" fx="8" fy="8" r="6" gradientUnits="userSpaceOnUse">
+    <radialGradient id="p2_004" cx="8" cy="8" fx="8" fy="8" r="6.5625" gradientUnits="userSpaceOnUse">
       <stop offset="0" />
       <stop offset="1" />
     </radialGradient>
-    <radialGradient id="grad_004" cx="8" cy="8" fx="8" fy="8" r="6" gradientUnits="userSpaceOnUse">
+    <radialGradient id="grad_004" cx="8" cy="8" fx="8" fy="8" r="6.5625" gradientUnits="userSpaceOnUse">
       <stop offset="0" />
       <stop offset="1" />
     </radialGradient>
@@ -124,7 +124,6 @@
       <use x="0" y="32" xlink:href="#beat2" />
       <line x1="0.05" y1="0" x2="0.05" y2="64" />
       <line x1="15.95" y1="0" x2="15.95" y2="64" />
-      
     </g>
     <g id="DLarrow">
       <path d="m 1,2 v 12 c 0,0 0,1 1,1 h 12 c 0,0 1,0 1,-1 v -1 c 0,0 0,-1 -1,-1 H 7 L 15,4 V 2 C 15,2 15,1 14,1 H 12 L 4,9 V 2 C 4,2 4,1 3,1 H 2 C 2,1 1,1 1,2" />

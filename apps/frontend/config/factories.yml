@@ -28,6 +28,11 @@ dev:
     param:
       delivery_strategy: none
 
+user:
+  class: PPEUser
+  param:
+    timeout: 7200
+
 all:
   routing:
     class: sfPatternRouting

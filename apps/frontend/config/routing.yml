@@ -8,6 +8,70 @@ homepage:
     module: ppehome
     action: index
 
+# create an edit on the website.
+edit_creator:
+  url: /create
+  param:
+    module: create
+    action: index
+
+# use ajaj to get the needed data.
+edit_creator_song:
+  url: /create/song/:id
+  param:
+    module: create
+    action: ajax
+  requirements:
+    id: \d+
+
+# use ajaj to load the file.
+edit_creator_loadFile:
+  url: /create/loadFile
+  class: sfRequestRoute
+  param:
+    module: create
+    action: loadInput
+  requirements:
+    sf_method: [POST]
+
+# use ajaj to upload the file and report success.
+edit_creator_upload:
+  url: /create/upload
+  class: sfRequestRoute
+  param:
+    module: create
+    action: upload
+  requirements:
+    sf_method: [POST]
+
+# use ajaj to get the list of edits the user has.
+edit_creator_loadSite:
+  url: /create/loadSite/:id
+  param:
+    module: create
+    action: loadSite
+  requirements:
+    id: \d+
+
+# use ajaj to get the specific edit requested.
+edit_creator_loadSiteEdit:
+  url: /create/loadSiteEdit/:id
+  param:
+    module: create
+    action: loadSiteEdit
+  requirements:
+    id: \d+
+
+# download the file the user made.
+edit_creator_download:
+  url: /create/download
+  class: sfRequestRoute
+  param:
+    module: create
+    action: download
+  requirements:
+    sf_method: [POST]
+
 # Upload an edit
 upload_get:
   url: /upload

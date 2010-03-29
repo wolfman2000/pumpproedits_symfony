@@ -50,7 +50,7 @@ radialGradient > stop
 }
 #p1_032 > stop, #p2_032 > stop
 {
-  stop-color: brown;
+  stop-color: orange;
 }
 #p1_048 > stop, #p2_048 > stop
 {
@@ -229,7 +229,7 @@ g#hold_bdy > line, g#hold_end > path, g#roll_bdy > line, g#roll_end > path
 }
 .note_032
 {
-  fill: brown; /* url('/svg/arrowdef.svg#grad_032'); */
+  fill: orange; /* url('/svg/arrowdef.svg#grad_032'); */
 }
 .note_048
 {
@@ -251,6 +251,7 @@ text
 .bpm
 {
   font-size: 8px;
+  fill: blue;
 }
 line.bpm
 {
@@ -260,6 +261,7 @@ line.bpm
 .stop
 {
   font-size: 8px;
+  fill: red;
 }
 line.stop
 {
