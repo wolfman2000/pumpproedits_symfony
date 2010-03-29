@@ -77,7 +77,7 @@ function selectArrow(cX, rX, rY, css)
 function editMode()
 {
   $("#intro").text("Loading song data...");
-  $.ajax({ async: false, dataType: 'json', url: '/create/song/' + songID, success: function(data)
+  $.ajax({ async: false, dataType: 'json', url: baseURL + '/song/' + songID, success: function(data)
   {
     /*
      * Retrieve the number of columns we'll be using today.
@@ -560,7 +560,7 @@ $(document).ready(function()
     $("#intro").text("Loading your edits...");
     $("#mem_edit").empty();
     // have to do another AJAX call.
-    $.ajax({ async: true, dataType: 'json', url: '/create/loadSite/' + authed, success: function(data)
+    $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + authed, success: function(data)
     {
       for (var i = 0; i < data.length; i++)
       {
@@ -630,7 +630,7 @@ $(document).ready(function()
   $("#mem_load").click(function(){
     $("#intro").text("Loading edit...");
     editID = $("#mem_edit > option:selected").attr('id');
-    $.getJSON("/create/loadSiteEdit/" + editID, function(data) {
+    $.getJSON(baseURL + "/loadSiteEdit/" + editID, function(data) {
       songID = data.id;
       style = data.style;
       diff = data.diff;
