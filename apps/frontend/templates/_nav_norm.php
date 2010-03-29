@@ -19,7 +19,7 @@
 <li>
     <h4>Everyone</h4>
     <ul>
-    <li><a href="/news">Previous Updates</a></li>
+    <li><?php echo link_to("Edit Creator", '@edit_creator') ?></li>
     <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
