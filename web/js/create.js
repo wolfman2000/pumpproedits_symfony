@@ -229,9 +229,17 @@ function shadow(e)
   var pnt = $("#svgMeas > svg:first-child > rect:first-child")
   if (pnt.offset())
   {
+    // Use WebKit hack for now.
+    if (navigator.userAgent.indexOf("WebKit") >= 0)
+    {
+      mX = Math.floor(e.pageX - $("#svg").offset().left - ADJUST_SIZE);
+      mY = Math.floor(e.pageY - $("#svg").offset().top - ADJUST_SIZE);
+    }
+    else
+    {
     mX = e.pageX - pnt.offset().left;
     mY = e.pageY - pnt.offset().top;
-    
+    }
     var hnt = $("#svgMeas > svg:last-child");
     if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > hnt.attr('y')))
     {
