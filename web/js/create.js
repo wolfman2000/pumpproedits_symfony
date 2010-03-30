@@ -160,7 +160,7 @@ function init()
   $("#but_val").attr("disabled", true);
   $("#but_new").attr("disabled", true);
   $("#cho_file").removeAttr('disabled');
-  if (authed)
+  if (authed > 0)
   {
     $("#cho_site").removeAttr('disabled');
   }
@@ -487,7 +487,7 @@ $(document).ready(function()
     if (checking)
     {
       $("li.edit").hide();
-      if (authed)
+      if (authed > 0)
       {
         $("li.loadChoose").show();
         $("#intro").text("Computer or account?");
@@ -521,7 +521,7 @@ $(document).ready(function()
       $("#intro").text("You can save your work!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', true);
-      if (authed)
+      if (authed > 0)
       {
         $("#but_sub").removeAttr('disabled');
       }
