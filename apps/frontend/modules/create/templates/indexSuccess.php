@@ -86,6 +86,14 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <option value="L">Lift</option>
 <option value="F">Fake</option>
 </select></dd>
+<dt class="edit"><label for="scalelist">Adjust the chart size!</label></dt>
+<dd class="edit"><select id="scalelist">
+<option value="1">Tiny</option>
+<option value="2">Small</option>
+<option value="2.5" selected="selected">Normal</option>
+<option value="3">Big</option>
+<option value="4">Giant</option>
+</select></dd>
 <dt class="edit routine">Select your player!</dt>
 <dd class="edit routine"><label>Player 1 <input type="radio" name="player" id="p1" value="1" checked="checked" /></label>
 <label>Player 2 <input type="radio" name="player" id="p2" value="2" /></label></dd>
