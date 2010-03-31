@@ -18,58 +18,6 @@ function showRect(x, y)
   $("#yCheck").text(Math.round(y * MEASURE_RATIO) % BEATS_MAX);
 }
 
-/*
- * Determine the proper note classes to render based on sync.
- */
-function getNote(y, nt, pl)
-{
-  var k = "note";
-  if (pl == null) { pl = player; }
-  if (style == "routine") { k = "p" + player + " " + k; }
-  
-  if      (!(y % 48)) { k += "_004"; }
-  else if (!(y % 24)) { k += "_008"; }
-  else if (!(y % 16)) { k += "_012"; }
-  else if (!(y % 12)) { k += "_016"; }
-  else if (!(y % 8))  { k += "_024"; }
-  else if (!(y % 6))  { k += "_032"; }
-  else if (!(y % 4))  { k += "_048"; }
-  else if (!(y % 3))  { k += "_064"; }
-  else                { k += "_192"; }
-  
-  if (nt == null) { nt = note; }
-  var t; // note type.
-  if      (nt == "1") { t = "tap";  }
-  else if (nt == "2") { t = "hold"; }
-  else if (nt == "3") { t = "end";  }
-  else if (nt == "4") { t = "roll"; }
-  else if (nt == "M") { t = "mine"; }
-  else if (nt == "L") { t = "lift"; }
-  else if (nt == "F") { t = "fake"; }
-  else                { t = "FIX";  }
-  return k + " " + t;
-}
-
-/*
- * Determine which arrow to return to the user.
- */
-function selectArrow(cX, rX, rY, css)
-{
-  // Take care of the special shaped arrows first.
-  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
-  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
-  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
-  
-  switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
-  {
-    case 0: return genDLArrow(rX, rY, css);
-    case 1: return genULArrow(rX, rY, css);
-    case 2: return genCNArrow(rX, rY, css);
-    case 3: return genURArrow(rX, rY, css);
-    case 4: return genDRArrow(rX, rY, css);
-  }
-}
-
 /**
  * Trace the mouse to see where the shadow falls.
  */
@@ -236,6 +184,58 @@ function changeArrow()
   }
   // last note in the line: simple.
   coll.append(sA);
+}
+
+/*
+ * Determine the proper note classes to render based on sync.
+ */
+function getNote(y, nt, pl)
+{
+  var k = "note";
+  if (pl == null) { pl = player; }
+  if (style == "routine") { k = "p" + player + " " + k; }
+  
+  if      (!(y % 48)) { k += "_004"; }
+  else if (!(y % 24)) { k += "_008"; }
+  else if (!(y % 16)) { k += "_012"; }
+  else if (!(y % 12)) { k += "_016"; }
+  else if (!(y % 8))  { k += "_024"; }
+  else if (!(y % 6))  { k += "_032"; }
+  else if (!(y % 4))  { k += "_048"; }
+  else if (!(y % 3))  { k += "_064"; }
+  else                { k += "_192"; }
+  
+  if (nt == null) { nt = note; }
+  var t; // note type.
+  if      (nt == "1") { t = "tap";  }
+  else if (nt == "2") { t = "hold"; }
+  else if (nt == "3") { t = "end";  }
+  else if (nt == "4") { t = "roll"; }
+  else if (nt == "M") { t = "mine"; }
+  else if (nt == "L") { t = "lift"; }
+  else if (nt == "F") { t = "fake"; }
+  else                { t = "FIX";  }
+  return k + " " + t;
+}
+
+/*
+ * Determine which arrow to return to the user.
+ */
+function selectArrow(cX, rX, rY, css)
+{
+  // Take care of the special shaped arrows first.
+  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
+  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
+  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
+  
+  switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
+  {
+    case 0: return genDLArrow(rX, rY, css);
+    case 1: return genULArrow(rX, rY, css);
+    case 2: return genCNArrow(rX, rY, css);
+    case 3: return genURArrow(rX, rY, css);
+    case 4: return genDRArrow(rX, rY, css);
+  }
 }
 
 /*
