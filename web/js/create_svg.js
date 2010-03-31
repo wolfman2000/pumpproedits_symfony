@@ -204,17 +204,17 @@ function genMeasure(x, y, c)
   s.setAttribute("x", x);
   s.setAttribute("y", y);
   
-  s.appendChild(genRect(0, 0, columns * ADJUST_SIZE, ADJUST_SIZE));
-  s.appendChild(genRect(0, ADJUST_SIZE, columns * ADJUST_SIZE, ADJUST_SIZE));
-  s.appendChild(genRect(0, ADJUST_SIZE * 2, columns * ADJUST_SIZE, ADJUST_SIZE));
-  s.appendChild(genRect(0, ADJUST_SIZE * 3, columns * ADJUST_SIZE, ADJUST_SIZE));
+  s.appendChild(genRect(0, 0, columns * ARR_HEIGHT, ARR_HEIGHT));
+  s.appendChild(genRect(0, ARR_HEIGHT, columns * ARR_HEIGHT, ARR_HEIGHT));
+  s.appendChild(genRect(0, ARR_HEIGHT * 2, columns * ARR_HEIGHT, ARR_HEIGHT));
+  s.appendChild(genRect(0, ARR_HEIGHT * 3, columns * ARR_HEIGHT, ARR_HEIGHT));
   
-  s.appendChild(genText(BEATS_PER_MEASURE, ARR_HEIGHT, "" + c + ")"));
+  s.appendChild(genText(BEATS_PER_MEASURE, ARR_HEIGHT * .75, "" + c + ")"));
   
-  s.appendChild(genLine(0, 0.1, columns * ADJUST_SIZE, 0.1));
-  s.appendChild(genLine(0.05, 0, 0.05, MEASURE_HEIGHT));
-  var x = columns * ADJUST_SIZE - 0.05;
-  s.appendChild(genLine(x, 0, x, MEASURE_HEIGHT));
+  s.appendChild(genLine(0, 0.1, columns * ARR_HEIGHT, 0.1));
+  s.appendChild(genLine(0.05, 0, 0.05, ARR_HEIGHT * 4));
+  var x = columns * ARR_HEIGHT - 0.05;
+  s.appendChild(genLine(x, 0, x, ARR_HEIGHT * 4));
   
   return s;
 }
