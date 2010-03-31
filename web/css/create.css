@@ -9,6 +9,10 @@
 		background-color: #9999ff;
 		top: 3.6em;
 	}
+	.edit select
+	{
+		padding-right: 1em;
+	}
 	nav button
 	{
 		width: 100%;
