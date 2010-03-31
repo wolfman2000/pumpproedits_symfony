@@ -715,6 +715,7 @@ $(document).ready(function()
     $.post(window.location.href + "/upload", data, function(data, status)
     {
       $("#intro").text("Edit Uploaded");
+      $("#editName").attr("disabled", "disabled");
     }, "json");
   });
   
