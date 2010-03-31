@@ -30,7 +30,7 @@ var b64; // The encoded string for the end.
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
 const SCALE = 3; // scale everything by 2 for now.
-const ADJUST_SIZE = ARR_HEIGHT * SCALE; // 
+const ADJUST_SIZE = ARR_HEIGHT * SCALE; // common operation needed.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
 const BEATS_MAX = 192; // LCD of 48 and 64
 
