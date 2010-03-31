@@ -352,7 +352,8 @@ function editMode()
     $("nav dt.edit").show();
     $("nav dd.edit").show();
     $("nav *.choose").hide();
-    if (style != "routine") { $("nav .routine").hide(); }
+    if (style !== "routine") { $("nav .routine").hide(); }
+    else { $("nav .routine").show(); }
     var phrase = songData.name + " " + style.capitalize();
     $("h2").first().text(phrase);
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
@@ -420,6 +421,7 @@ function init()
   $("#scalelist").val(2.5);
   $("#quanlist").val(4);
   $("#typelist").val(1);
+  $("#playerlist").val(0);
   $("#editName").val('');
   $("#editDiff").val('');
   sync = 4;

@@ -318,6 +318,7 @@ $(document).ready(function()
   });
 
   // The author wishes to change which player's routine steps to place.
-  $("#p1").change(function() { player = 0; });
-  $("#p2").change(function() { player = 1; });
+  $("#playerlist").change(function(){
+    player = $("#playerlist").val();
+  });
 });
