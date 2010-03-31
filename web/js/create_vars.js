@@ -34,14 +34,15 @@ const ADJUST_SIZE = ARR_HEIGHT * SCALE; // common operation needed.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
 
 // These constants may change later, depending on how much spacing is wanted.
-const BUFF_TOP = ADJUST_SIZE;
-const BUFF_LFT = ADJUST_SIZE;
-const BUFF_RHT = ADJUST_SIZE;
-const BUFF_BOT = ADJUST_SIZE;
+const BUFF_TOP = ARR_HEIGHT;
+const BUFF_LFT = ARR_HEIGHT * 2;
+const BUFF_RHT = ARR_HEIGHT * 2;
+const BUFF_BOT = ARR_HEIGHT;
 
 const BEATS_MAX = 192; // LCD of 48 and 64
 const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
-const MEASURE_RATIO = BEATS_MAX / MEASURE_HEIGHT; // ratio adjuster.
+//const MEASURE_RATIO = BEATS_MAX / MEASURE_HEIGHT; // ratio adjuster.
+const MEASURE_RATIO = BEATS_MAX / (ARR_HEIGHT * BEATS_PER_MEASURE);
 
 const EOL = "\r\n"; // mainly for file parsing/saving.
 
