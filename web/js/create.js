@@ -321,4 +321,33 @@ $(document).ready(function()
   $("#playerlist").change(function(){
     player = $("#playerlist").val();
   });
+
+  $("input").focusin(function(){ captured = true; });
+  $("select").focusin(function(){ captured = true; });
+  $('input').focusout(function(){ captured = false; });
+  $('select').focusout(function(){ captured = false; });
+
+  // Keyboard shortcuts.
+  $("html").keydown(function(e){
+    if (captured) { return; }
+    switch (e.which)
+    {
+      case 49: { sync = 4; $("#quanlist").val(4); break; }
+      case 50: { sync = 8; $("#quanlist").val(8); break; }
+      case 51: { sync = 12; $("#quanlist").val(12); break; }
+      case 52: { sync = 16; $("#quanlist").val(16); break; }
+      case 53: { sync = 24; $("#quanlist").val(24); break; }
+      case 54: { sync = 32; $("#quanlist").val(32); break; }
+      case 55: { sync = 48; $("#quanlist").val(48); break; }
+      case 56: { sync = 64; $("#quanlist").val(64); break; }
+      case 57: { sync = 192; $("#quanlist").val(192); break; }
+      case 84: { note = "1"; $("#typelist").val("1"); break; }
+      case 72: { note = "2"; $("#typelist").val("2"); break; }
+      case 69: { note = "3"; $("#typelist").val("3"); break; }
+      case 82: { note = "4"; $("#typelist").val("4"); break; }
+      case 77: { note = "M"; $("#typelist").val("M"); break; }
+      case 76: { note = "L"; $("#typelist").val("L"); break; }
+      case 70: { note = "F"; $("#typelist").val("F"); break; }
+    }
+  });
 });

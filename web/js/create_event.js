@@ -321,6 +321,7 @@ function editMode()
     songData = data;
     measures = songData.measures;
     $("#scalelist").val(2.5);
+    captured = false;
     columns = getCols();
     fixScale(2.5);
     
@@ -370,6 +371,7 @@ function editMode()
  */
 function init()
 {
+  captured = false;
   measures = 4; // temp variable.
   columns = 5; // reasonable default.
   fixScale(2);

@@ -27,6 +27,7 @@ var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
 var b64; // The encoded string for the end.
+var captured; // Should input be captured instead of letting it go?
 
 var SCALE; // How much of a zoom factor is there?
 var ADJUST_SIZE; // common operation: size = ARR_HEIGHT * SCALE
