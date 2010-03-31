@@ -241,7 +241,7 @@ function shadow(e)
     mY = e.pageY - pnt.offset().top;
     }
     var hnt = $("#svgMeas > svg:last-child");
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > hnt.attr('y')))
+    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > Math.floor(hnt.attr('y')) + 3 * ADJUST_SIZE))
     {
       var nX = 0;
       var nY = 0;
@@ -274,10 +274,10 @@ function shadow(e)
 function changeArrow()
 {
   var r = $("#shadow");
+  if (!r.is(":visible")) return;
   var rX = r.attr('x');
   var rY = r.attr('y');
-  if (!(rX && rY)) return;
-  
+  if (!(rX && rY)) return; // Will this be called now?
   isDirty = true;
   $("#but_val").attr('disabled', true);
 
