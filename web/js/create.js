@@ -4,6 +4,7 @@ $(document).ready(function()
   
   $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
+  $("#svgNote").attr('transform', 'scale(' + SCALE + ')');
   
   // Don't show the rectangle when not in play.
   $("#svg").mouseout(function(){ hideRect(); });
