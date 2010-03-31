@@ -8,8 +8,8 @@ left to place arrows below. Have fun!</p>
 <g id="notes">
 <g id="svgMeas" />
 <g id="svgSync" />
-<g id="svgNote" transform="scale(3)" />
-<rect id="shadow" x="0" y="0" width="32" height="32" />
+<g id="svgNote" />
+<rect id="shadow" x="0" y="0" width="16" height="16" />
 </g>
 </svg>
 
@@ -60,12 +60,14 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <option value="halfdouble">pump-halfdouble</option>
 <option value="routine">pump-routine</option>
 </select></dd>
-<dt class="edit"><label for="editName">Name your edit!</label></dt>
-<dd class="edit"><input type="text" id="editName" maxlength="12" /></dd>
-<dt class="edit"><label for="editDiff">How hard is your edit?</label></dt>
-<dd class="edit"><input type="text" id="editDiff" maxlength="2" /></dd>
-<dt class="edit"><label for="quanlist">Select your sync!</label></dt>
-<dd class="edit"><select id="quanlist">
+<dt class="edit"></dt>
+<dd class="edit"><ul>
+<li><label for="editName">Edit Name:</label></li>
+<li><input type="text" id="editName" maxlength="12" /></li>
+<li><label for="editDiff">Diff. Rating:</label></li>
+<li><input type="text" id="editDiff" maxlength="2" /></li>
+<li><label for="quanlist">Note Sync:</label></li>
+<li><select id="quanlist">
 <option value="4" selected="selected">4th</option>
 <option value="8">8th</option>
 <option value="12">12th</option>
@@ -75,9 +77,9 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <option value="48">48th</option>
 <option value="64">64th</option>
 <option value="192">192nd</option>
-</select></dd>
-<dt class="edit"><label for="typelist">Select your note type!</label></dt>
-<dd class="edit"><select id="typelist">
+</select></li>
+<li><label for="typelist">Note Type:</label></li>
+<li><select id="typelist">
 <option value="1" selected="selected">Tap</option>
 <option value="2">Hold Head</option>
 <option value="3">Hold/Roll End</option>
@@ -85,10 +87,21 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <option value="M">Mine</option>
 <option value="L">Lift</option>
 <option value="F">Fake</option>
-</select></dd>
-<dt class="edit routine">Select your player!</dt>
-<dd class="edit routine"><label>Player 1 <input type="radio" name="player" id="p1" value="1" checked="checked" /></label>
-<label>Player 2 <input type="radio" name="player" id="p2" value="2" /></label></dd>
+</select></li>
+<li><label for="scalelist">Chart Zoom:</label></li>
+<li><select id="scalelist">
+<option value="1">Tiny</option>
+<option value="2">Small</option>
+<option value="2.5" selected="selected">Normal</option>
+<option value="3">Big</option>
+<option value="4">Giant</option>
+</select></li>
+<li class="routine"><label for="playerlist">Routine Player:</label></li>
+<li class="routine"><select id="playerlist">
+<option value="0" selected="selected">Player 1</option>
+<option value="1">Player 2</option>
+</select></li>
+</ul></dd>
 <dt class="edit">Present Location:</dt>
 <dd class="edit"><ul>
 <li>Measure <span id="mCheck">???</span></li>

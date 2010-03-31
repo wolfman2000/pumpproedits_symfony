@@ -9,6 +9,10 @@
 		background-color: #9999ff;
 		top: 3.6em;
 	}
+	.edit select
+	{
+		padding-right: 1em;
+	}
 	nav button
 	{
 		width: 100%;
@@ -48,7 +52,7 @@
 	}
 	#editName
 	{
-		width: 12em;
+		width: 10em;
 	}
 	#editDiff
 	{
@@ -90,22 +94,15 @@
 	{
 		fill: #bebebe;
 	}
-	#svgMeas text
+	text.stop, text.bpm, g text
 	{
-		fill: black;
-		font-size: 1em;
+		font-size: 6px;
 	}
-	text.stop, text.bpm
-	{
-		font-size: 0.8em;
-	}
-	
 	#shadow
 	{
 		fill: aqua;
 		opacity: 0.5;
 	}
-	
 	#svgNote > svg
 	{
 		  fill-opacity:1;

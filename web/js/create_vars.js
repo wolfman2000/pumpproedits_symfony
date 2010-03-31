@@ -2,6 +2,7 @@ var isDirty; // has the work changed? Should a prompt for saving take place?
 var notes; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
 var width; // compliment to columns
+var measures; // How many measures are in play?
 var height; // compliment to measures
 var tarea; // text area containing the notes.
 var editID; // the edit ID. Normally not used until submitting.
@@ -26,21 +27,24 @@ var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
 var b64; // The encoded string for the end.
+var captured; // Should input be captured instead of letting it go?
+
+var SCALE; // How much of a zoom factor is there?
+var ADJUST_SIZE; // common operation: size = ARR_HEIGHT * SCALE
+var MEASURE_HEIGHT; // height of measure = ADJUST_SIZE * BEATS_PER_MEASURE
 
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
-const SCALE = 3; // scale everything by 2 for now.
-const ADJUST_SIZE = ARR_HEIGHT * SCALE; // 
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
-const BEATS_MAX = 192; // LCD of 48 and 64
 
 // These constants may change later, depending on how much spacing is wanted.
-const BUFF_TOP = ADJUST_SIZE;
-const BUFF_LFT = ADJUST_SIZE;
-const BUFF_RHT = ADJUST_SIZE;
-const BUFF_BOT = ADJUST_SIZE;
+const BUFF_TOP = ARR_HEIGHT;
+const BUFF_LFT = ARR_HEIGHT * 2;
+const BUFF_RHT = ARR_HEIGHT * 2;
+const BUFF_BOT = ARR_HEIGHT;
 
-const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
+const BEATS_MAX = 192; // LCD of 48 and 64
+const MEASURE_RATIO = BEATS_MAX / (ARR_HEIGHT * BEATS_PER_MEASURE);
 
 const EOL = "\r\n"; // mainly for file parsing/saving.
 

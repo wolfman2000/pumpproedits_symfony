@@ -1,477 +1,24 @@
-/*
- * Hide the shadow rectangle from others.
- */
-function hideRect()
-{
-  $("#shadow").attr('x', 0).attr('y', 0).hide();
-  $("#yCheck").text("???");
-  $("#mCheck").text("???");
-}
-
-/*
- * Show where the rectangle gets placed.
- */
-function showRect(x, y)
-{
-  $("#shadow#").attr('x', x).attr('y', y).show();
-  y = y - ADJUST_SIZE;
-  $("#mCheck").text(Math.floor(y / BEATS_MAX) + 1);
-  $("#yCheck").text(y % BEATS_MAX);
-}
-
-/*
- * Determine the proper note classes to render based on sync.
- */
-function getNote(y, nt, pl)
-{
-  var k = "note";
-  if (pl == null) { pl = player; }
-  if (style == "routine") { k = "p" + player + " " + k; }
-  
-  if      (!(y % 48)) { k += "_004"; }
-  else if (!(y % 24)) { k += "_008"; }
-  else if (!(y % 16)) { k += "_012"; }
-  else if (!(y % 12)) { k += "_016"; }
-  else if (!(y % 8))  { k += "_024"; }
-  else if (!(y % 6))  { k += "_032"; }
-  else if (!(y % 4))  { k += "_048"; }
-  else if (!(y % 3))  { k += "_064"; }
-  else                { k += "_192"; }
-  
-  if (nt == null) { nt = note; }
-  var t; // note type.
-  if      (nt == "1") { t = "tap";  }
-  else if (nt == "2") { t = "hold"; }
-  else if (nt == "3") { t = "end";  }
-  else if (nt == "4") { t = "roll"; }
-  else if (nt == "M") { t = "mine"; }
-  else if (nt == "L") { t = "lift"; }
-  else if (nt == "F") { t = "fake"; }
-  else                { t = "FIX";  }
-  return k + " " + t;
-}
-
-/*
- * Determine which arrow to return to the user.
- */
-function selectArrow(cX, rX, rY, css)
-{
-  // Take care of the special shaped arrows first.
-  if (css.indexOf("mine") >= 0) { return genMine(rX, rY, css); }
-  if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
-  if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
-  
-  switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
-  {
-    case 0: return genDLArrow(rX, rY, css);
-    case 1: return genULArrow(rX, rY, css);
-    case 2: return genCNArrow(rX, rY, css);
-    case 3: return genURArrow(rX, rY, css);
-    case 4: return genDRArrow(rX, rY, css);
-  }
-}
-
-/**
- * Enter this mode upon choosing a song and difficulty.
- */
-function editMode()
-{
-  $("#intro").text("Loading song data...");
-  $.ajax({ async: false, dataType: 'json', url: baseURL + '/song/' + songID, success: function(data)
-  {
-    /*
-     * Retrieve the number of columns we'll be using today.
-     */
-    function getCols()
-    {
-      switch (style.substring(0, 1))
-      {
-        case "s": return 5;
-        case "h": return 6;
-        case "d": case "r": return 10;
-        default: return 0; // I wonder if an exception should be thrown here.
-      }
-    }
-    songData = data;
-    height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
-    $("#svg").attr("height", height);
-    $("article").css("height", height + 200);
-    columns = getCols();
-    width = BUFF_LFT + BUFF_RHT + columns * SCALE * ARR_HEIGHT;
-    $("#svg").attr("width", width);
-    
-    // append the measures.
-    for (var i = 0; i < songData.measures; i++)
-    {
-      $("g#svgMeas").append(genMeasure(ADJUST_SIZE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
-    }
-    
-    // place the BPM data.
-    var bpms = songData.bpms;
-    var x = width / 2;
-    var y;
-    for (var i = 0; i < bpms.length; i++)
-    {
-      y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
-      $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
-          y + 2 * SCALE, bpms[i].bpm, 'bpm'));
-      $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
-    }
-    
-    var stps = songData.stps;
-    for (var i = 0; i < stps.length; i++)
-    {
-      y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
-      $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
-      $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
-    }
-    $("nav dt.edit").show();
-    $("nav dd.edit").show();
-    $("nav *.choose").hide();
-    if (style != "routine") { $("nav .routine").hide(); }
-    var phrase = songData.name + " " + style.capitalize();
-    $("h2").first().text(phrase);
-    $("title").text("Editing " + phrase + " — Pump Pro Edits");
-    $("#but_new").removeAttr('disabled');
-    $("#editName").removeAttr('disabled');
-    return true;
-  }});
-  return false; // this is to ensure the asyncing is done right.
-}
-
-/**
- * Load up this data on new.
- */
-function init()
-{
-  $("title").text("Edit Creator — Pump Pro Edits");
-  $("h2").first().text("Edit Creator");
-  
-  $("nav dt.edit").hide();
-  $("nav dd.edit").hide();
-  $("nav li.loadChoose").hide();
-  $("nav li.loadSite").hide();
-  $("nav li.loadFile").hide();
-  $("#notes > rect").hide();
-  $("nav *.choose").show();
-  $("#stylelist").attr("disabled", true);
-  $("#but_sub").attr("disabled", true);
-  $("#but_save").attr("disabled", true);
-  $("#but_val").attr("disabled", true);
-  $("#but_new").attr("disabled", true);
-  $("#cho_file").removeAttr('disabled');
-  if (authed > 0)
-  {
-    $("#cho_site").removeAttr('disabled');
-  }
-  else
-  {
-    $("#cho_site").attr('disabled', true);
-  }
-  /**
-   * Round elements to the nearest 10 for easier calculations later.
-   */
-  function round10(n)
-  {
-    n = Math.round(n);
-    while (n % 10)
-    {
-      n = n + 1;
-    }
-    return n;
-  }
-  $("#svg").css('left', round10($("nav").first().width()) + 70);
-  $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
-  $("article").css('height', '50em');
-  $("#svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
-  $("#svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
-
-  // reset the drop downs (and corresponding variables) to default values.
-  $("#songlist").val('');
-  $("#stylelist").val('');
-  $("#quanlist").val(4);
-  $("#typelist").val(1);
-  $("#editName").val('');
-  $("#editDiff").val('');
-  sync = 4;
-  note = "1";
-  $("#p1").click();
-  player = 0;
-  title = "";
-  diff = 0;
-  editID = 0;
-
-  $("#svgMeas").empty();
-  $("#svgSync").empty();
-  $("#svgNote").empty();
-  
-  $("#intro").text("Select your action.");
-  
-  isDirty = false;
-  notes = new Array(Array(), Array()); // routine compatible.
-  columns = 5; // reasonable default.
-  steps = new Array(0, 0);
-  jumps = new Array(0, 0);
-  holds = new Array(0, 0);
-  mines = new Array(0, 0);
-  trips = new Array(0, 0);
-  rolls = new Array(0, 0);
-  lifts = new Array(0, 0);
-  fakes = new Array(0, 0);
-  badds = new Array();
-}
-
-/**
- * Trace the mouse to see where the shadow falls.
- */
-function shadow(e)
-{
-  var pnt = $("#svgMeas > svg:first-child > rect:first-child")
-  if (pnt.offset())
-  {
-    // Use WebKit hack for now.
-    if (navigator.userAgent.indexOf("WebKit") >= 0)
-    {
-      mX = Math.floor(e.pageX - $("#svg").offset().left - ADJUST_SIZE);
-      mY = Math.floor(e.pageY - $("#svg").offset().top - ADJUST_SIZE);
-    }
-    else
-    {
-    mX = e.pageX - pnt.offset().left;
-    mY = e.pageY - pnt.offset().top;
-    }
-    var hnt = $("#svgMeas > svg:last-child");
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > Math.floor(hnt.attr('y')) + 3 * ADJUST_SIZE))
-    {
-      var nX = 0;
-      var nY = 0;
-      
-      while (nX + ADJUST_SIZE < mX)
-      {
-        nX += ADJUST_SIZE;
-      }
-      
-      nY = MEASURE_HEIGHT * Math.floor(mY / MEASURE_HEIGHT);
-      var rY = mY % MEASURE_HEIGHT;
-      
-      var sY = BEATS_MAX / sync;
-      while (nY + sY < mY)
-      {
-        nY += sY;
-      }
-      showRect(nX + ADJUST_SIZE, nY + ADJUST_SIZE);
-    }
-    else
-    {
-      hideRect(); // Best to be safe and explicit.
-    }
-  }
-}
-
-/**
- * Add the arrow in the appropriate position.
- */
-function changeArrow()
-{
-  var r = $("#shadow");
-  if (!r.is(":visible")) return;
-  var rX = r.attr('x');
-  var rY = r.attr('y');
-  if (!(rX && rY)) return; // Will this be called now?
-  isDirty = true;
-  $("#but_val").attr('disabled', true);
-
-
-  var css = getNote((rY - ADJUST_SIZE) % BEATS_MAX);
-  var cX = rX / ADJUST_SIZE - 1; // which column are we using?
-  var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
-  var bY = (rY - ADJUST_SIZE) % BEATS_MAX; // which beat? (0'th based)
-  
-  function defineNote()
-  {
-    if (notes[player][mY] == null)
-    {
-      notes[player][mY] = Array();
-    }
-    if (notes[player][mY][bY] == null)
-    {
-      notes[player][mY][bY] = Array();
-    }
-  }
-  defineNote(); // unsure if this needs to be a function.
-  
-  rX /= SCALE;
-  rY /= SCALE;
-  
-  // see if a node exists in this area.
-  var coll = $("#svgNote");
-  
-  var n = coll.children().first();
-  var nX = n.attr('x');
-  var nY = n.attr('y');
-  
-  if (nX == rX && nY == rY)
-  {
-    var nStyle = n.attr('class');
-    nStyle = nStyle.substring(nStyle.charAt(' '));
-    n.remove();
-    if (nStyle == css.substring(css.charAt(' ')))
-    {
-      delete(notes[player][mY][bY][cX]);
-      if (isEmpty(notes[player][mY][bY]))
-      {
-        delete(notes[player][mY][bY]);
-        if (isEmpty(notes[player][mY]))
-        {
-          delete(notes[player][mY][bY]);
-          if (isEmpty(notes[player][mY]))
-          {
-            delete(notes[player][mY]);
-          }
-        }
-      }
-      return; // No point in adding the same note type again.
-    }
-  }
-  else while (n.length)
-  {
-    n = n.next();
-    nX = n.attr('x');
-    nY = n.attr('y');
-    
-    if (nX == rX && nY == rY)
-    {
-      var nStyle = n.attr('class');
-      nStyle = nStyle.substring(nStyle.charAt(' '));
-      n.remove();
-      if (nStyle == css.substring(css.charAt(' ')))
-      {
-        delete(notes[player][mY][bY][cX]);
-        if (isEmpty(notes[player][mY][bY]))
-        {
-          delete(notes[player][mY][bY]);
-          if (isEmpty(notes[player][mY]))
-          {
-            delete(notes[player][mY][bY]);
-            if (isEmpty(notes[player][mY]))
-            {
-              delete(notes[player][mY]);
-            }
-          }
-        }
-        return; // No point in adding the same note type again.
-      }
-      break; // replacing with a new note: start below.
-    }
-  }
-  
-  // add if empty
-  var sA = selectArrow(cX, rX, rY, css);
-  notes[player][mY][bY][cX] = note;
-  
-  n = coll.children().first();
-  nX = n.attr('x');
-  nY = n.attr('y');
-  
-  if (nY > rY || nY == rY && nX > rX)
-  {
-    n.before(sA);
-    return;
-  }
-  // insert the note somewhere in the middle.
-  while (n.length)
-  {
-    n = n.next();
-    nX = n.attr('x');
-    nY = n.attr('y');
-    
-    if (nY > rY || nY == rY && nX > rX)
-    {
-      n.before(sA);
-      return;
-    }
-  }
-  // last note in the line: simple.
-  coll.append(sA);
-}
-
-/*
- * This is meant to be an asyncronous function
- * to get the step stats as close to live as
- * possible without tying up the browser.
- */
-function updateStats()
-{
-  var S = steps[0];
-  var J = jumps[0];
-  var H = holds[0];
-  var M = mines[0];
-  var T = trips[0];
-  var R = rolls[0];
-  var L = lifts[0];
-  var F = fakes[0];
-  if (style == "routine")
-  {
-    S += "/" + steps[1];
-    J += "/" + jumps[1];
-    H += "/" + holds[1];
-    M += "/" + mines[1];
-    T += "/" + trips[1];
-    R += "/" + rolls[1];
-    L += "/" + lifts[1];
-    F += "/" + fakes[1];
-  }
-  $("#statS").text(S);
-  $("#statJ").text(J);
-  $("#statH").text(H);
-  $("#statM").text(M);
-  $("#statT").text(T);
-  $("#statR").text(R);
-  $("#statL").text(L);
-  $("#statF").text(F);
-
-  $("#but_save").attr('disabled', true);
-  $("#but_sub").attr('disabled', true);
-  if (title && diff > 0)
-  {
-    if (steps[0] || steps[1] || mines[0] || mines[1] || lifts[0] || lifts[1] || fakes[0] || fakes[1])
-    {
-      $("#but_val").removeAttr('disabled');
-      $("#intro").text("Validate your edit before saving.");
-    }
-    else
-    {
-      isDirty = false;
-      $("#intro").text("You can't save empty files.");
-    }
-  }
-  else
-  {
-    $("#intro").text("Provide an edit title and difficulty.");
-  }
-}
-
-/*
- * Load all of the following when the page is done loading.
- */
 $(document).ready(function()
 {
   init();
   
-  $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
+  $("#notes").attr('transform', 'scale(' + SCALE + ')');
   
-  /*
-   * The various action functions are set here.
-   */
+  // Don't show the rectangle when not in play.
   $("#svg").mouseout(function(){ hideRect(); });
+  // Show the rectangle if the mouse is over a measure.
   $("#svg").mouseover(function(e){ shadow(e); });
   $("#svg").mousemove(function(e){ shadow(e); });
-  $("#svg").click(function(){ changeArrow(); gatherStats(); updateStats(); });
+  // If the shadow rectangle is out, perform these.
+  $("#svg").click(function(){
+    if (!$("#shadow").is(":visible")) return;
+    changeArrow();
+    gatherStats(); // in parse
+    updateStats();
+  });
   
-  /*
-   * When you ant to work on a new file, make sure you saved recently.
-   */
+  // Work on a new file, but make sure it's saved/validated recently.
   $("#but_new").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
@@ -482,9 +29,7 @@ $(document).ready(function()
     if (checking) { init(); }
   });
   
-  /*
-   * Load a chart from either your hard drive (textarea) or your PPEdits account.
-   */
+  // Load a chart from your hard drive or your Pump Pro Edits Account.
   $("#but_load").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
@@ -511,17 +56,12 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * Provide help for those that require it.
-   */
+  // Provide help for those that need it (TODO: Get this done.)
   $("#but_help").click(function(){
     alert("Help will be available shortly.");
   });
   
-  /*
-   * All edits must be validated before the user can save their work.
-   * Allowing malformed edits would not be good.
-   */
+  // Force all edits to be validated before saving/uploading.
   $("#but_val").click(function(){
     if (!badds.length)
     {
@@ -547,9 +87,7 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * An authed user decides to load from a file after all.
-   */
+  // The account holder wishes to load from the hard drive.
   $("#cho_file").click(function(){
     $("#fCont").val('');
     $(".loadChoose").hide();
@@ -559,15 +97,12 @@ $(document).ready(function()
     $("#intro").text("You can load your edit now.");
   });
   
-  /*
-   * An authed user wants to load one of his edits.
-   */
+  // The account holder wishes to edit an account edit in place.
   $("#cho_site").click(function(){
     $(".loadChoose").hide();
     $(".loadSite").show();
     $("#intro").text("Loading your edits...");
     $("#mem_edit").empty();
-    // have to do another AJAX call.
     $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + authed, success: function(data)
     {
       for (var i = 0; i < data.length; i++)
@@ -580,10 +115,7 @@ $(document).ready(function()
     }});
   });
   
-  
-  /*
-   * This text area is where the edit will be loaded from.
-   */
+  // The edit contents have to be placed in here due to AJAX requirements.
   $("#fCont").keyup(function(){
     tarea = $("#fCont").val();
     if (tarea.length)
@@ -596,9 +128,7 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * Load the edit from the text area with this button.
-   */
+  // Load the edit from the...text area, not a pure file.
   $("#but_file").click(function(){
     
     tarea = $("#fCont").val();
@@ -632,9 +162,8 @@ $(document).ready(function()
       isDirty = false;
     }, "json");
   });
-  /*
-   * Load the specific member edit.
-   */
+  
+  // Load the account holder's specific edit.
   $("#mem_load").click(function(){
     $("#intro").text("Loading edit...");
     editID = $("#mem_edit > option:selected").attr('id');
@@ -669,23 +198,27 @@ $(document).ready(function()
     });
   });
   
-  $("#mem_nogo").click(function(){ // On second thought, don't deal with choosing your edit.
+  // The author decides not to load an account edit.
+  $("#mem_nogo").click(function(){
     $("#fCont").val('');
     $(".loadSite").hide();
     $("li.edit").show();
   });
   
-  $("#rem_file").click(function(){ // On second thought, don't deal with uploading.
+  // The author decides not to load an edit from the hard drive.
+  $("#rem_file").click(function(){
     $("#fCont").val('');
     $(".loadFile").hide();
     $("li.edit").show();
   });
   
-  $("#but_save").click(function(){ // save to your local hard drive
+  // save to your local hard drive
+  $("#but_save").click(function(){
     $("#intro").text("Here it comes!");
   });
   
-  $("#but_sub").click(function(){ // submit online directly
+  // The author uploads his edit directly to his account.
+  $("#but_sub").click(function(){
     var data = {};
     data['b64'] = b64;
     data['title'] = title;
@@ -719,21 +252,26 @@ $(document).ready(function()
     }, "json");
   });
   
-  $('#songlist').change(function(){ // choose the song you want
+  // The author wants to work on this song.
+  $('#songlist').change(function(){
     songID = $("#songlist").val();
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
-  $("#stylelist").change(function(){ // choose the style: single, double, etc
+
+  // The author wants to work with this style.
+  $("#stylelist").change(function(){
     style = $("#stylelist").val();
     editMode();
     $("#intro").text("Have fun editing!");
   });
   
+  // The author wishes to change the syncing and note type.
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
   
-  $("#editName").keyup(function(){ // what will the edit be called?
+  // The author wishes to change the edit title / name.
+  $("#editName").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
     var t = $("#editName").val();
@@ -752,7 +290,9 @@ $(document).ready(function()
       $("#intro").text("Provide an edit title and difficulty.");
     }
   });
-  $("#editDiff").keyup(function(){ // how hard is the edit?
+
+  // The author wishes to rate the edit.
+  $("#editDiff").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
     var t = parseInt($("#editDiff").val());
@@ -772,7 +312,42 @@ $(document).ready(function()
     }
   });
   
-  $("#p1").change(function() { player = 0; });
-  $("#p2").change(function() { player = 1; });
-  
+  // The author wishes to change how zoomed in the chart is.
+  $("#scalelist").change(function(){
+    fixScale($("#scalelist").val());
+  });
+
+  // The author wishes to change which player's routine steps to place.
+  $("#playerlist").change(function(){
+    player = $("#playerlist").val();
+  });
+
+  $("input").focusin(function(){ captured = true; });
+  $("select").focusin(function(){ captured = true; });
+  $('input').focusout(function(){ captured = false; });
+  $('select').focusout(function(){ captured = false; });
+
+  // Keyboard shortcuts.
+  $("html").keydown(function(e){
+    if (captured) { return; }
+    switch (e.which)
+    {
+      case 49: { sync = 4; $("#quanlist").val(4); break; }
+      case 50: { sync = 8; $("#quanlist").val(8); break; }
+      case 51: { sync = 12; $("#quanlist").val(12); break; }
+      case 52: { sync = 16; $("#quanlist").val(16); break; }
+      case 53: { sync = 24; $("#quanlist").val(24); break; }
+      case 54: { sync = 32; $("#quanlist").val(32); break; }
+      case 55: { sync = 48; $("#quanlist").val(48); break; }
+      case 56: { sync = 64; $("#quanlist").val(64); break; }
+      case 57: { sync = 192; $("#quanlist").val(192); break; }
+      case 84: { note = "1"; $("#typelist").val("1"); break; }
+      case 72: { note = "2"; $("#typelist").val("2"); break; }
+      case 69: { note = "3"; $("#typelist").val("3"); break; }
+      case 82: { note = "4"; $("#typelist").val("4"); break; }
+      case 77: { note = "M"; $("#typelist").val("M"); break; }
+      case 76: { note = "L"; $("#typelist").val("L"); break; }
+      case 70: { note = "F"; $("#typelist").val("F"); break; }
+    }
+  });
 });
