@@ -27,10 +27,12 @@ var mY; // mouse position at Y.
 
 var b64; // The encoded string for the end.
 
+var SCALE; // How much of a zoom factor is there?
+var ADJUST_SIZE; // common operation: size = ARR_HEIGHT * SCALE
+var MEASURE_HEIGHT; // height of measure = ADJUST_SIZE * BEATS_PER_MEASURE
+
 const SVG_NS = "http://www.w3.org/2000/svg"; // required for creating elements.
 const ARR_HEIGHT = 16; // initial arrow heights were 16px.
-const SCALE = 2; // scale everything by 2 for now.
-const ADJUST_SIZE = ARR_HEIGHT * SCALE; // common operation needed.
 const BEATS_PER_MEASURE = 4; // always 4 beats per measure (for our purposes)
 
 // These constants may change later, depending on how much spacing is wanted.
@@ -40,8 +42,6 @@ const BUFF_RHT = ARR_HEIGHT * 2;
 const BUFF_BOT = ARR_HEIGHT;
 
 const BEATS_MAX = 192; // LCD of 48 and 64
-const MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE; // the height of our measure.
-//const MEASURE_RATIO = BEATS_MAX / MEASURE_HEIGHT; // ratio adjuster.
 const MEASURE_RATIO = BEATS_MAX / (ARR_HEIGHT * BEATS_PER_MEASURE);
 
 const EOL = "\r\n"; // mainly for file parsing/saving.

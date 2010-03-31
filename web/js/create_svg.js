@@ -209,7 +209,7 @@ function genMeasure(x, y, c)
   s.appendChild(genRect(0, ARR_HEIGHT * 2, columns * ARR_HEIGHT, ARR_HEIGHT));
   s.appendChild(genRect(0, ARR_HEIGHT * 3, columns * ARR_HEIGHT, ARR_HEIGHT));
   
-  s.appendChild(genText(BEATS_PER_MEASURE, ARR_HEIGHT * .75, "" + c + ")"));
+  s.appendChild(genText(2, 8, "" + c + ")"));
   
   s.appendChild(genLine(0, 0.1, columns * ARR_HEIGHT, 0.1));
   s.appendChild(genLine(0.05, 0, 0.05, ARR_HEIGHT * 4));

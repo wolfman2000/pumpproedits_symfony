@@ -371,6 +371,7 @@ function editMode()
  */
 function init()
 {
+  fixScale(2);
   $("title").text("Edit Creator — Pump Pro Edits");
   $("h2").first().text("Edit Creator");
   
@@ -410,8 +411,8 @@ function init()
   $("#svg").css('left', round10($("nav").first().width()) + 70);
   $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
   $("article").css('height', '50em');
-  $("#svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
-  $("#svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
+  $("#svg").attr("width", 5 * ARR_HEIGHT * SCALE + BUFF_LFT + BUFF_RHT);
+  $("#svg").attr("height", ADJUST_SIZE * BEATS_PER_MEASURE * 2 + BUFF_TOP + BUFF_BOT);
 
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');
@@ -446,5 +447,14 @@ function init()
   lifts = new Array(0, 0);
   fakes = new Array(0, 0);
   badds = new Array();
+}
+
+// Dynamically adjust the scale as needed.
+function fixScale(num)
+{
+  SCALE = num;
+  ADJUST_SIZE = ARR_HEIGHT * SCALE;
+  MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE;
+  
 }
 
