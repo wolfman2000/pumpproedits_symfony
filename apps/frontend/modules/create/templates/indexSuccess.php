@@ -9,7 +9,7 @@ left to place arrows below. Have fun!</p>
 <g id="svgMeas" />
 <g id="svgSync" />
 <g id="svgNote" />
-<rect id="shadow" x="0" y="0" width="32" height="32" />
+<rect id="shadow" x="0" y="0" width="16" height="16" />
 </g>
 </svg>
 
