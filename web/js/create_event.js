@@ -15,8 +15,8 @@ function showRect(x, y)
 {
   $("#shadow#").attr('x', x).attr('y', y).show();
   y = y - ADJUST_SIZE;
-  $("#mCheck").text(Math.floor(y / BEATS_MAX) + 1);
-  $("#yCheck").text(y % BEATS_MAX);
+  $("#mCheck").text(Math.floor(y / BEATS_MAX * MEASURE_RATIO) + 1);
+  $("#yCheck").text(Math.round(y * MEASURE_RATIO) % BEATS_MAX);
 }
 
 /*
