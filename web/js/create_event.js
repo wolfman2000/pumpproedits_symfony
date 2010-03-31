@@ -39,7 +39,7 @@ function shadow(e)
     }
     var localY = mY;
     var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || localY < 0 || localY > maxY))
+    if (!(mX < 0 || mX > columns * ADJUST_SIZE || localY < 0 || localY > SCALE * maxY))
     {
       var nX = 0;
       var nY = 0;
@@ -319,7 +319,7 @@ function editMode()
       }
     }
     songData = data;
-    height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
+    height = SCALE * (ARR_HEIGHT * BEATS_PER_MEASURE * songData.measures + BUFF_TOP + BUFF_BOT);
     $("#svg").attr("height", height);
     $("article").css("height", height + 200);
     columns = getCols();
@@ -339,8 +339,8 @@ function editMode()
     for (var i = 0; i < bpms.length; i++)
     {
       y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
-      $("#svgSync").append(genText(width / SCALE - BUFF_RHT + 2 * SCALE,
-          y + 2 * SCALE, bpms[i].bpm, 'bpm'));
+      $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
+          y + SCALE, bpms[i].bpm, 'bpm'));
       $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
     }
     
@@ -348,7 +348,7 @@ function editMode()
     for (var i = 0; i < stps.length; i++)
     {
       y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
-      $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
+      $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
       $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
     }
     $("nav dt.edit").show();
