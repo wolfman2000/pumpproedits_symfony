@@ -37,27 +37,30 @@ function shadow(e)
       mX = e.pageX - pnt.offset().left;
       mY = e.pageY - pnt.offset().top;
     }
-
+    var localY = mY;
     var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > maxY))
+    if (!(mX < 0 || mX > columns * ADJUST_SIZE || localY < 0 || localY > maxY))
     {
       var nX = 0;
       var nY = 0;
       
       while (nX + ADJUST_SIZE < mX)
       {
-        nX += ADJUST_SIZE; //ARR_HEIGHT;
+        nX += ADJUST_SIZE;
       }
       nX = nX / SCALE;      
 
-      nY = ARR_HEIGHT * BEATS_PER_MEASURE * Math.floor(mY / (ARR_HEIGHT * BEATS_PER_MEASURE));
-      var rY = mY % (ARR_HEIGHT * BEATS_PER_MEASURE);
-      
-      var sY = ADJUST_SIZE * BEATS_PER_MEASURE / sync;
-      while (nY + sY < mY)
+      var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
+      var wholeM = Math.floor(localY / scaledM);
+      var beatM = localY % scaledM;
+
+      var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
+
+      while (nY + sY < beatM)
       {
         nY += sY;
       }
+      nY = wholeM * scaledM + nY;
       nY = nY / SCALE;
       showRect(nX + BUFF_LFT, nY);
     }
