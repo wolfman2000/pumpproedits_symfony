@@ -281,7 +281,7 @@ function changeArrow()
   $("#but_val").attr('disabled', true);
 
 
-  var css = getNote((rY - ADJUST_SIZE) % BEATS_MAX);
+  var css = getNote(((rY - ADJUST_SIZE) * BEATS_MAX / MEASURE_HEIGHT) % BEATS_MAX);
   var cX = rX / ADJUST_SIZE - 1; // which column are we using?
   var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
   var bY = (rY - ADJUST_SIZE) % BEATS_MAX; // which beat? (0'th based)
