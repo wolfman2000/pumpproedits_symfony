@@ -1,6 +1,3 @@
-/*
- * Load all of the following when the page is done loading.
- */
 $(document).ready(function()
 {
   init();
@@ -8,17 +5,20 @@ $(document).ready(function()
   $("#shadow").attr('width', ADJUST_SIZE).attr('height', ADJUST_SIZE);
   $("#songlist").val('');
   
-  /*
-   * The various action functions are set here.
-   */
+  // Don't show the rectangle when not in play.
   $("#svg").mouseout(function(){ hideRect(); });
+  // Show the rectangle if the mouse is over a measure.
   $("#svg").mouseover(function(e){ shadow(e); });
   $("#svg").mousemove(function(e){ shadow(e); });
-  $("#svg").click(function(){ changeArrow(); gatherStats(); updateStats(); });
+  // If the shadow rectangle is out, perform these.
+  $("#svg").click(function(){
+    if (!$("#shadow").is(":visible")) return;
+    changeArrow();
+    gatherStats(); // in parse
+    updateStats();
+  });
   
-  /*
-   * When you ant to work on a new file, make sure you saved recently.
-   */
+  // Work on a new file, but make sure it's saved/validated recently.
   $("#but_new").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
@@ -29,9 +29,7 @@ $(document).ready(function()
     if (checking) { init(); }
   });
   
-  /*
-   * Load a chart from either your hard drive (textarea) or your PPEdits account.
-   */
+  // Load a chart from your hard drive or your Pump Pro Edits Account.
   $("#but_load").click(function(){
     $("#intro").text("Working... Working...");
     var checking = true;
@@ -58,17 +56,12 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * Provide help for those that require it.
-   */
+  // Provide help for those that need it (TODO: Get this done.)
   $("#but_help").click(function(){
     alert("Help will be available shortly.");
   });
   
-  /*
-   * All edits must be validated before the user can save their work.
-   * Allowing malformed edits would not be good.
-   */
+  // Force all edits to be validated before saving/uploading.
   $("#but_val").click(function(){
     if (!badds.length)
     {
@@ -94,9 +87,7 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * An authed user decides to load from a file after all.
-   */
+  // The account holder wishes to load from the hard drive.
   $("#cho_file").click(function(){
     $("#fCont").val('');
     $(".loadChoose").hide();
@@ -106,15 +97,12 @@ $(document).ready(function()
     $("#intro").text("You can load your edit now.");
   });
   
-  /*
-   * An authed user wants to load one of his edits.
-   */
+  // The account holder wishes to edit an account edit in place.
   $("#cho_site").click(function(){
     $(".loadChoose").hide();
     $(".loadSite").show();
     $("#intro").text("Loading your edits...");
     $("#mem_edit").empty();
-    // have to do another AJAX call.
     $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + authed, success: function(data)
     {
       for (var i = 0; i < data.length; i++)
@@ -127,10 +115,7 @@ $(document).ready(function()
     }});
   });
   
-  
-  /*
-   * This text area is where the edit will be loaded from.
-   */
+  // The edit contents have to be placed in here due to AJAX requirements.
   $("#fCont").keyup(function(){
     tarea = $("#fCont").val();
     if (tarea.length)
@@ -143,9 +128,7 @@ $(document).ready(function()
     }
   });
   
-  /*
-   * Load the edit from the text area with this button.
-   */
+  // Load the edit from the...text area, not a pure file.
   $("#but_file").click(function(){
     
     tarea = $("#fCont").val();
@@ -179,9 +162,8 @@ $(document).ready(function()
       isDirty = false;
     }, "json");
   });
-  /*
-   * Load the specific member edit.
-   */
+  
+  // Load the account holder's specific edit.
   $("#mem_load").click(function(){
     $("#intro").text("Loading edit...");
     editID = $("#mem_edit > option:selected").attr('id');
@@ -216,23 +198,27 @@ $(document).ready(function()
     });
   });
   
-  $("#mem_nogo").click(function(){ // On second thought, don't deal with choosing your edit.
+  // The author decides not to load an account edit.
+  $("#mem_nogo").click(function(){
     $("#fCont").val('');
     $(".loadSite").hide();
     $("li.edit").show();
   });
   
-  $("#rem_file").click(function(){ // On second thought, don't deal with uploading.
+  // The author decides not to load an edit from the hard drive.
+  $("#rem_file").click(function(){
     $("#fCont").val('');
     $(".loadFile").hide();
     $("li.edit").show();
   });
   
-  $("#but_save").click(function(){ // save to your local hard drive
+  // save to your local hard drive
+  $("#but_save").click(function(){
     $("#intro").text("Here it comes!");
   });
   
-  $("#but_sub").click(function(){ // submit online directly
+  // The author uploads his edit directly to his account.
+  $("#but_sub").click(function(){
     var data = {};
     data['b64'] = b64;
     data['title'] = title;
@@ -266,21 +252,26 @@ $(document).ready(function()
     }, "json");
   });
   
-  $('#songlist').change(function(){ // choose the song you want
+  // The author wants to work on this song.
+  $('#songlist').change(function(){
     songID = $("#songlist").val();
     if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
-  $("#stylelist").change(function(){ // choose the style: single, double, etc
+
+  // The author wants to work with this style.
+  $("#stylelist").change(function(){
     style = $("#stylelist").val();
     editMode();
     $("#intro").text("Have fun editing!");
   });
   
+  // The author wishes to change the syncing and note type.
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
   
-  $("#editName").keyup(function(){ // what will the edit be called?
+  // The author wishes to change the edit title / name.
+  $("#editName").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
     var t = $("#editName").val();
@@ -299,7 +290,9 @@ $(document).ready(function()
       $("#intro").text("Provide an edit title and difficulty.");
     }
   });
-  $("#editDiff").keyup(function(){ // how hard is the edit?
+
+  // The author wishes to rate the edit.
+  $("#editDiff").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
     var t = parseInt($("#editDiff").val());
@@ -319,6 +312,7 @@ $(document).ready(function()
     }
   });
   
+  // The author wishes to change which player's routine steps to place.
   $("#p1").change(function() { player = 0; });
   $("#p2").change(function() { player = 1; });
   
