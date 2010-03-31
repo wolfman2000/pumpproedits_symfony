@@ -255,7 +255,7 @@ function shadow(e)
       nY = MEASURE_HEIGHT * Math.floor(mY / MEASURE_HEIGHT);
       var rY = mY % MEASURE_HEIGHT;
       
-      var sY = BEATS_MAX / sync;
+      var sY = MEASURE_HEIGHT / sync;
       while (nY + sY < mY)
       {
         nY += sY;
