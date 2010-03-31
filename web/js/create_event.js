@@ -13,8 +13,7 @@ function hideRect()
  */
 function showRect(x, y)
 {
-  $("#shadow#").attr('x', x).attr('y', y).show();
-  y = y - ADJUST_SIZE;
+  $("#shadow#").attr('x', x).attr('y', y + BUFF_TOP).show();
   $("#mCheck").text(Math.floor(y / BEATS_MAX * MEASURE_RATIO) + 1);
   $("#yCheck").text(Math.round(y * MEASURE_RATIO) % BEATS_MAX);
 }
@@ -72,156 +71,6 @@ function selectArrow(cX, rX, rY, css)
 }
 
 /**
- * Enter this mode upon choosing a song and difficulty.
- */
-function editMode()
-{
-  $("#intro").text("Loading song data...");
-  $.ajax({ async: false, dataType: 'json', url: baseURL + '/song/' + songID, success: function(data)
-  {
-    /*
-     * Retrieve the number of columns we'll be using today.
-     */
-    function getCols()
-    {
-      switch (style.substring(0, 1))
-      {
-        case "s": return 5;
-        case "h": return 6;
-        case "d": case "r": return 10;
-        default: return 0; // I wonder if an exception should be thrown here.
-      }
-    }
-    songData = data;
-    height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
-    $("#svg").attr("height", height);
-    $("article").css("height", height + 200);
-    columns = getCols();
-    width = BUFF_LFT + BUFF_RHT + columns * SCALE * ARR_HEIGHT;
-    $("#svg").attr("width", width);
-    
-    // append the measures.
-    for (var i = 0; i < songData.measures; i++)
-    {
-      $("g#svgMeas").append(genMeasure(ADJUST_SIZE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
-    }
-    
-    // place the BPM data.
-    var bpms = songData.bpms;
-    var x = width / 2;
-    var y;
-    for (var i = 0; i < bpms.length; i++)
-    {
-      y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
-      $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
-          y + 2 * SCALE, bpms[i].bpm, 'bpm'));
-      $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
-    }
-    
-    var stps = songData.stps;
-    for (var i = 0; i < stps.length; i++)
-    {
-      y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
-      $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
-      $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
-    }
-    $("nav dt.edit").show();
-    $("nav dd.edit").show();
-    $("nav *.choose").hide();
-    if (style != "routine") { $("nav .routine").hide(); }
-    var phrase = songData.name + " " + style.capitalize();
-    $("h2").first().text(phrase);
-    $("title").text("Editing " + phrase + " — Pump Pro Edits");
-    $("#but_new").removeAttr('disabled');
-    $("#editName").removeAttr('disabled');
-    return true;
-  }});
-  return false; // this is to ensure the asyncing is done right.
-}
-
-/**
- * Load up this data on new.
- */
-function init()
-{
-  $("title").text("Edit Creator — Pump Pro Edits");
-  $("h2").first().text("Edit Creator");
-  
-  $("nav dt.edit").hide();
-  $("nav dd.edit").hide();
-  $("nav li.loadChoose").hide();
-  $("nav li.loadSite").hide();
-  $("nav li.loadFile").hide();
-  $("#notes > rect").hide();
-  $("nav *.choose").show();
-  $("#stylelist").attr("disabled", true);
-  $("#but_sub").attr("disabled", true);
-  $("#but_save").attr("disabled", true);
-  $("#but_val").attr("disabled", true);
-  $("#but_new").attr("disabled", true);
-  $("#cho_file").removeAttr('disabled');
-  if (authed > 0)
-  {
-    $("#cho_site").removeAttr('disabled');
-  }
-  else
-  {
-    $("#cho_site").attr('disabled', true);
-  }
-  /**
-   * Round elements to the nearest 10 for easier calculations later.
-   */
-  function round10(n)
-  {
-    n = Math.round(n);
-    while (n % 10)
-    {
-      n = n + 1;
-    }
-    return n;
-  }
-  $("#svg").css('left', round10($("nav").first().width()) + 70);
-  $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
-  $("article").css('height', '50em');
-  $("#svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
-  $("#svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
-
-  // reset the drop downs (and corresponding variables) to default values.
-  $("#songlist").val('');
-  $("#stylelist").val('');
-  $("#quanlist").val(4);
-  $("#typelist").val(1);
-  $("#editName").val('');
-  $("#editDiff").val('');
-  sync = 4;
-  note = "1";
-  $("#p1").click();
-  player = 0;
-  title = "";
-  diff = 0;
-  editID = 0;
-
-  $("#svgMeas").empty();
-  $("#svgSync").empty();
-  $("#svgNote").empty();
-  
-  $("#intro").text("Select your action.");
-  
-  isDirty = false;
-  notes = new Array(Array(), Array()); // routine compatible.
-  columns = 5; // reasonable default.
-  steps = new Array(0, 0);
-  jumps = new Array(0, 0);
-  holds = new Array(0, 0);
-  mines = new Array(0, 0);
-  trips = new Array(0, 0);
-  rolls = new Array(0, 0);
-  lifts = new Array(0, 0);
-  fakes = new Array(0, 0);
-  badds = new Array();
-}
-
-/**
  * Trace the mouse to see where the shadow falls.
  */
 function shadow(e)
@@ -232,8 +81,8 @@ function shadow(e)
     // Use WebKit hack for now.
     if (navigator.userAgent.indexOf("WebKit") >= 0)
     {
-      mX = Math.floor(e.pageX - $("#svg").offset().left - ADJUST_SIZE);
-      mY = Math.floor(e.pageY - $("#svg").offset().top - ADJUST_SIZE);
+      mX = Math.floor(e.pageX - $("#svg").offset().left - BUFF_LFT);
+      mY = Math.floor(e.pageY - $("#svg").offset().top - BUFF_TOP);
     }
     else
     {
@@ -241,7 +90,7 @@ function shadow(e)
       mY = e.pageY - pnt.offset().top;
     }
 
-    var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ADJUST_SIZE;
+    var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
     if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > maxY))
     {
       var nX = 0;
@@ -249,18 +98,20 @@ function shadow(e)
       
       while (nX + ADJUST_SIZE < mX)
       {
-        nX += ADJUST_SIZE;
+        nX += ADJUST_SIZE; //ARR_HEIGHT;
       }
+      nX = nX / SCALE;      
+
+      nY = ARR_HEIGHT * BEATS_PER_MEASURE * Math.floor(mY / (ARR_HEIGHT * BEATS_PER_MEASURE));
+      var rY = mY % (ARR_HEIGHT * BEATS_PER_MEASURE);
       
-      nY = MEASURE_HEIGHT * Math.floor(mY / MEASURE_HEIGHT);
-      var rY = mY % MEASURE_HEIGHT;
-      
-      var sY = MEASURE_HEIGHT / sync;
+      var sY = ADJUST_SIZE * BEATS_PER_MEASURE / sync;
       while (nY + sY < mY)
       {
         nY += sY;
       }
-      showRect(nX + ADJUST_SIZE, nY + ADJUST_SIZE);
+      nY = nY / SCALE;
+      showRect(nX + ADJUST_SIZE, nY);
     }
     else
     {
@@ -282,8 +133,8 @@ function changeArrow()
 
   var bY = $("#yCheck").text() // which beat? (0'th based);
   var css = getNote(bY);
-  var cX = rX / ADJUST_SIZE - 1; // which column are we using?
-  var mY = Math.floor((rY - ADJUST_SIZE) / BEATS_MAX); // which measure? (0'th based)
+  var cX = (rX - BUFF_LFT) / ARR_HEIGHT; // which column are we using?
+  var mY = $("#mCheck").text() - 1; // which measure? (0'th based)
   
   function defineNote()
   {
@@ -298,8 +149,8 @@ function changeArrow()
   }
   defineNote(); // unsure if this needs to be a function.
   
-  rX /= SCALE;
-  rY /= SCALE;
+  //rX /= SCALE;
+  //rY /= SCALE;
   
   // Remove empty rows as required.
   function prune()
@@ -441,5 +292,156 @@ function updateStats()
   {
     $("#intro").text("Provide an edit title and difficulty.");
   }
+}
+
+/**
+ * Enter this mode upon choosing a song and difficulty.
+ */
+function editMode()
+{
+  $("#intro").text("Loading song data...");
+  $.ajax({ async: false, dataType: 'json', url: baseURL + '/song/' + songID, success: function(data)
+  {
+    /*
+     * Retrieve the number of columns we'll be using today.
+     */
+    function getCols()
+    {
+      switch (style.substring(0, 1))
+      {
+        case "s": return 5;
+        case "h": return 6;
+        case "d": case "r": return 10;
+        default: return 0; // I wonder if an exception should be thrown here.
+      }
+    }
+    songData = data;
+    height = MEASURE_HEIGHT * songData.measures + BUFF_TOP + BUFF_BOT;
+    $("#svg").attr("height", height);
+    $("article").css("height", height + 200);
+    columns = getCols();
+    width = (BUFF_LFT + BUFF_RHT) * 2 + columns * SCALE * ARR_HEIGHT;
+    $("#svg").attr("width", width);
+    
+    // append the measures.
+    for (var i = 0; i < songData.measures; i++)
+    {
+      $("g#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
+    }
+    
+    // place the BPM data.
+    var bpms = songData.bpms;
+    var x = width / 2 / SCALE;
+    var y;
+    for (var i = 0; i < bpms.length; i++)
+    {
+      y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
+      $("#svgSync").append(genText(width / SCALE - BUFF_RHT + 2 * SCALE,
+          y + 2 * SCALE, bpms[i].bpm, 'bpm'));
+      $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
+    }
+    
+    var stps = songData.stps;
+    for (var i = 0; i < stps.length; i++)
+    {
+      y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
+      $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
+      $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
+    }
+    $("nav dt.edit").show();
+    $("nav dd.edit").show();
+    $("nav *.choose").hide();
+    if (style != "routine") { $("nav .routine").hide(); }
+    var phrase = songData.name + " " + style.capitalize();
+    $("h2").first().text(phrase);
+    $("title").text("Editing " + phrase + " — Pump Pro Edits");
+    $("#but_new").removeAttr('disabled');
+    $("#editName").removeAttr('disabled');
+    return true;
+  }});
+  return false; // this is to ensure the asyncing is done right.
+}
+
+
+/**
+ * Load up this data on new.
+ */
+function init()
+{
+  $("title").text("Edit Creator — Pump Pro Edits");
+  $("h2").first().text("Edit Creator");
+  
+  $("nav dt.edit").hide();
+  $("nav dd.edit").hide();
+  $("nav li.loadChoose").hide();
+  $("nav li.loadSite").hide();
+  $("nav li.loadFile").hide();
+  $("#notes > rect").hide();
+  $("nav *.choose").show();
+  $("#stylelist").attr("disabled", true);
+  $("#but_sub").attr("disabled", true);
+  $("#but_save").attr("disabled", true);
+  $("#but_val").attr("disabled", true);
+  $("#but_new").attr("disabled", true);
+  $("#cho_file").removeAttr('disabled');
+  if (authed > 0)
+  {
+    $("#cho_site").removeAttr('disabled');
+  }
+  else
+  {
+    $("#cho_site").attr('disabled', true);
+  }
+  /**
+   * Round elements to the nearest 10 for easier calculations later.
+   */
+  function round10(n)
+  {
+    n = Math.round(n);
+    while (n % 10)
+    {
+      n = n + 1;
+    }
+    return n;
+  }
+  $("#svg").css('left', round10($("nav").first().width()) + 70);
+  $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
+  $("article").css('height', '50em');
+  $("#svg").attr("width", 5 * ADJUST_SIZE + BUFF_LFT + BUFF_RHT);
+  $("#svg").attr("height", MEASURE_HEIGHT * 2 + BUFF_TOP + BUFF_BOT);
+
+  // reset the drop downs (and corresponding variables) to default values.
+  $("#songlist").val('');
+  $("#stylelist").val('');
+  $("#quanlist").val(4);
+  $("#typelist").val(1);
+  $("#editName").val('');
+  $("#editDiff").val('');
+  sync = 4;
+  note = "1";
+  $("#p1").click();
+  player = 0;
+  title = "";
+  diff = 0;
+  editID = 0;
+
+  $("#svgMeas").empty();
+  $("#svgSync").empty();
+  $("#svgNote").empty();
+  
+  $("#intro").text("Select your action.");
+  
+  isDirty = false;
+  notes = new Array(Array(), Array()); // routine compatible.
+  columns = 5; // reasonable default.
+  steps = new Array(0, 0);
+  jumps = new Array(0, 0);
+  holds = new Array(0, 0);
+  mines = new Array(0, 0);
+  trips = new Array(0, 0);
+  rolls = new Array(0, 0);
+  lifts = new Array(0, 0);
+  fakes = new Array(0, 0);
+  badds = new Array();
 }
 
