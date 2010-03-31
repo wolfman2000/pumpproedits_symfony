@@ -111,7 +111,7 @@ function shadow(e)
         nY += sY;
       }
       nY = nY / SCALE;
-      showRect(nX + ADJUST_SIZE, nY);
+      showRect(nX + BUFF_LFT, nY);
     }
     else
     {
