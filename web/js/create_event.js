@@ -274,10 +274,8 @@ function shadow(e)
 function changeArrow()
 {
   var r = $("#shadow");
-  if (!r.is(":visible")) return;
   var rX = r.attr('x');
   var rY = r.attr('y');
-  if (!(rX && rY)) return; // Will this be called now?
   isDirty = true;
   $("#but_val").attr('disabled', true);
 
