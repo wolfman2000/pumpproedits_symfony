@@ -320,7 +320,7 @@ function editMode()
     $("#svg").attr("height", height);
     $("article").css("height", height + 200);
     columns = getCols();
-    width = (BUFF_LFT + BUFF_RHT) * 2 + columns * SCALE * ARR_HEIGHT;
+    width = SCALE * ((BUFF_LFT + BUFF_RHT) + columns * ARR_HEIGHT);
     $("#svg").attr("width", width);
     
     // append the measures.
