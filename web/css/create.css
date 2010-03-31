@@ -90,22 +90,15 @@
 	{
 		fill: #bebebe;
 	}
-	#svgMeas text
+	text.stop, text.bpm, g text
 	{
-		fill: black;
-		font-size: 1em;
+		font-size: 6px;
 	}
-	text.stop, text.bpm
-	{
-		font-size: xx-small;
-	}
-	
 	#shadow
 	{
 		fill: aqua;
 		opacity: 0.5;
 	}
-	
 	#svgNote > svg
 	{
 		  fill-opacity:1;
