@@ -319,12 +319,10 @@ function editMode()
       }
     }
     songData = data;
-    height = SCALE * (ARR_HEIGHT * BEATS_PER_MEASURE * songData.measures + BUFF_TOP + BUFF_BOT);
-    $("#svg").attr("height", height);
-    $("article").css("height", height + 200);
+    measures = songData.measures;
+    $("#scalelist").val(2.5);
     columns = getCols();
-    width = SCALE * ((BUFF_LFT + BUFF_RHT) + columns * ARR_HEIGHT);
-    $("#svg").attr("width", width);
+    fixScale(2.5);
     
     // append the measures.
     for (var i = 0; i < songData.measures; i++)
@@ -371,6 +369,8 @@ function editMode()
  */
 function init()
 {
+  measures = 4; // temp variable.
+  columns = 5; // reasonable default.
   fixScale(2);
   $("title").text("Edit Creator — Pump Pro Edits");
   $("h2").first().text("Edit Creator");
@@ -417,6 +417,7 @@ function init()
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');
   $("#stylelist").val('');
+  $("#scalelist").val(2.5);
   $("#quanlist").val(4);
   $("#typelist").val(1);
   $("#editName").val('');
@@ -437,7 +438,6 @@ function init()
   
   isDirty = false;
   notes = new Array(Array(), Array()); // routine compatible.
-  columns = 5; // reasonable default.
   steps = new Array(0, 0);
   jumps = new Array(0, 0);
   holds = new Array(0, 0);
@@ -455,6 +455,11 @@ function fixScale(num)
   SCALE = num;
   ADJUST_SIZE = ARR_HEIGHT * SCALE;
   MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE;
-  
+  height = SCALE * (ARR_HEIGHT * BEATS_PER_MEASURE * measures + BUFF_TOP + BUFF_BOT);
+  $("#svg").attr("height", height);
+  width = SCALE * ((BUFF_LFT + BUFF_RHT) + columns * ARR_HEIGHT);
+  $("#svg").attr("width", width);
+  $("#notes").attr("transform", "scale(" + SCALE + ")");
+  $("article").css("height", height + 200);
 }
 

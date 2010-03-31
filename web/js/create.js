@@ -312,6 +312,11 @@ $(document).ready(function()
     }
   });
   
+  // The author wishes to change how zoomed in the chart is.
+  $("#scalelist").change(function(){
+    fixScale($("#scalelist").val());
+  });
+
   // The author wishes to change which player's routine steps to place.
   $("#p1").change(function() { player = 0; });
   $("#p2").change(function() { player = 1; });
