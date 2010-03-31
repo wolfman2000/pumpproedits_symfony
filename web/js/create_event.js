@@ -237,11 +237,12 @@ function shadow(e)
     }
     else
     {
-    mX = e.pageX - pnt.offset().left;
-    mY = e.pageY - pnt.offset().top;
+      mX = e.pageX - pnt.offset().left;
+      mY = e.pageY - pnt.offset().top;
     }
-    var hnt = $("#svgMeas > svg:last-child");
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > Math.floor(hnt.attr('y')) + 3 * ADJUST_SIZE))
+
+    var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ADJUST_SIZE;
+    if (!(mX < 0 || mX > columns * ADJUST_SIZE || mY < 0 || mY > maxY))
     {
       var nX = 0;
       var nY = 0;
@@ -301,6 +302,24 @@ function changeArrow()
   rX /= SCALE;
   rY /= SCALE;
   
+  // Remove empty rows as required.
+  function prune()
+  {
+    delete(notes[player][mY][bY][cX]);
+    if (isEmpty(notes[player][mY][bY]))
+    {
+      delete(notes[player][mY][bY]);
+      if (isEmpty(notes[player][mY]))
+      {
+        delete(notes[player][mY][bY]);
+        if (isEmpty(notes[player][mY]))
+        {
+          delete(notes[player][mY]);
+        }
+      }
+    } 
+  }
+  
   // see if a node exists in this area.
   var coll = $("#svgNote");
   
@@ -315,19 +334,7 @@ function changeArrow()
     n.remove();
     if (nStyle == css.substring(css.charAt(' ')))
     {
-      delete(notes[player][mY][bY][cX]);
-      if (isEmpty(notes[player][mY][bY]))
-      {
-        delete(notes[player][mY][bY]);
-        if (isEmpty(notes[player][mY]))
-        {
-          delete(notes[player][mY][bY]);
-          if (isEmpty(notes[player][mY]))
-          {
-            delete(notes[player][mY]);
-          }
-        }
-      }
+      prune();
       return; // No point in adding the same note type again.
     }
   }
@@ -344,19 +351,7 @@ function changeArrow()
       n.remove();
       if (nStyle == css.substring(css.charAt(' ')))
       {
-        delete(notes[player][mY][bY][cX]);
-        if (isEmpty(notes[player][mY][bY]))
-        {
-          delete(notes[player][mY][bY]);
-          if (isEmpty(notes[player][mY]))
-          {
-            delete(notes[player][mY][bY]);
-            if (isEmpty(notes[player][mY]))
-            {
-              delete(notes[player][mY]);
-            }
-          }
-        }
+        prune();
         return; // No point in adding the same note type again.
       }
       break; // replacing with a new note: start below.
