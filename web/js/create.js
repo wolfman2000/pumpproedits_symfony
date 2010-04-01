@@ -58,7 +58,9 @@ $(document).ready(function()
   
   // Provide help for those that need it (TODO: Get this done.)
   $("#but_help").click(function(){
-    alert("Help will be available shortly.");
+    $("#intro").text("Loading help...");
+    window.open(baseURL + "/help", "helpWindow",
+      "status = 0, dependent = 1, resizable = 0, width = 400, height = 400, left = 100, top = 100");
   });
   
   // Force all edits to be validated before saving/uploading.

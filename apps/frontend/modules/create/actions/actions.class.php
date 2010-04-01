@@ -28,7 +28,8 @@ class createActions extends sfActions
   
   public function executeHelp(sfWebRequest $request)
   {
-    return $this->renderText(get_partial("create/help"));
+    sfConfig::set('sf_web_debug', false);
+    return $this->renderPartial("create/help");
   }
 
   /**
