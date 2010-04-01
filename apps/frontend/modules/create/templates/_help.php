@@ -128,6 +128,8 @@ $keys = array('1' => sprintf($sync, '4th'),
 'M' => sprintf($type, 'Mine'),
 'L' => sprintf($type, 'Lift'),
 'F' => sprintf($type, 'Fake'),
+'+' => "Enlarges the chart to the next available zoom.",
+'-' => "Shrinks the chart to the next available zoom.",
 'P' => "Change which player's notes to place (Routine only).",
 );
 foreach ($keys as $k => $v): ?>
