@@ -25,6 +25,11 @@ class createActions extends sfActions
     $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongs();
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
+  
+  public function executeHelp(sfWebRequest $request)
+  {
+    return $this->renderText(get_partial("create/help"));
+  }
 
   /**
    * Load the specific edit ID data for the user.

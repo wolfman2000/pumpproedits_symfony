@@ -15,6 +15,13 @@ edit_creator:
     module: create
     action: index
 
+# receive help at a moment's notice.
+edit_creator_help:
+  url: /create/help
+  param:
+    module: create
+    action: help
+
 # use ajaj to get the needed data.
 edit_creator_song:
   url: /create/song/:id
