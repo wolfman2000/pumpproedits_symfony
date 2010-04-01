@@ -368,6 +368,27 @@ $(document).ready(function()
       // F
       case 70: { note = "F"; $("#typelist").val("F"); break; }
       
+      // + or =
+      case 61: {
+        var tmp = $("#scalelist > option:selected").next().val();
+        if (!isEmpty(tmp))
+        {
+          fixScale(tmp);
+          $("#scalelist").val(tmp);
+        }
+        break;
+      }
+      // - or _
+      case 109: {
+        var tmp = $("#scalelist > option:selected").prev().val();
+        if (!isEmpty(tmp))
+        {
+          fixScale(tmp);
+          $("#scalelist").val(tmp);
+        }
+        break;
+      }
+      
       // P
       case 80: {
         player = (player ? 0 : 1);
