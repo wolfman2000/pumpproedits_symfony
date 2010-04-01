@@ -334,22 +334,46 @@ $(document).ready(function()
     if (captured) { return; }
     switch (e.which)
     {
+      // 1
       case 49: { sync = 4; $("#quanlist").val(4); break; }
+      // 2
       case 50: { sync = 8; $("#quanlist").val(8); break; }
+      // 3
       case 51: { sync = 12; $("#quanlist").val(12); break; }
+      // 4
       case 52: { sync = 16; $("#quanlist").val(16); break; }
+      // 5
       case 53: { sync = 24; $("#quanlist").val(24); break; }
+      // 6
       case 54: { sync = 32; $("#quanlist").val(32); break; }
+      // 7
       case 55: { sync = 48; $("#quanlist").val(48); break; }
+      // 8
       case 56: { sync = 64; $("#quanlist").val(64); break; }
+      // 9
       case 57: { sync = 192; $("#quanlist").val(192); break; }
+      
+      // T
       case 84: { note = "1"; $("#typelist").val("1"); break; }
+      // H
       case 72: { note = "2"; $("#typelist").val("2"); break; }
+      // E
       case 69: { note = "3"; $("#typelist").val("3"); break; }
+      // R
       case 82: { note = "4"; $("#typelist").val("4"); break; }
+      // M
       case 77: { note = "M"; $("#typelist").val("M"); break; }
+      // L
       case 76: { note = "L"; $("#typelist").val("L"); break; }
+      // F
       case 70: { note = "F"; $("#typelist").val("F"); break; }
+      
+      // P
+      case 80: {
+        player = (player ? 0 : 1);
+        $("#playerlist").val(player);
+        break;
+      }
     }
   });
 });
