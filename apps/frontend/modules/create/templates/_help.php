@@ -103,6 +103,16 @@ $keys = array('Measure' => "Indicates which measure your mouse is over. "
 <?php echo $back; ?>
 <section id="chrt">
 <h3>Chart Controls</h3>
+<p>The chart controls themselves are primarily mouse driven.
+When you move your mouse over the chart, a blue square hovers
+over where an arrow could be placed. As you move the mouse over
+the measures, the Measure and Beat numbers update accordingly.
+By default, the square only highlights over quarter notes (4th notes).
+To place other synced arrows, use the Note Sync drop down menu.</p>
+<p>To place an arrow, click on the measures. An arrow will be placed
+exactly where the blue square is located. You can click on the same
+space to remove the arrow. If you change note types and click on an
+occupied location, the new arrow replaces the old.</p>
 <?php echo $back; ?>
 <section id="keyb">
 <h2>Keyboard Shortcuts</h2>
