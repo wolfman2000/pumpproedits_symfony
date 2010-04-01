@@ -60,7 +60,7 @@ $(document).ready(function()
   $("#but_help").click(function(){
     $("#intro").text("Loading help...");
     window.open(baseURL + "/help", "helpWindow",
-      "status = 0, dependent = 1, resizable = 0, width = 400, height = 400, left = 100, top = 100");
+      "status = 1, scrollbars = yes, dependent = 1, width = 400, height = 400, left = 100, top = 100");
   });
   
   // Force all edits to be validated before saving/uploading.
