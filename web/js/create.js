@@ -331,8 +331,13 @@ $(document).ready(function()
     selMode = $("#modelist").val();
     if (selMode == 0)
     {
+      $("#intro").text("Resume placing arrows.");
       $("#selTop").hide();
       $("#selBot").hide();
+    }
+    else
+    {
+      $("#intro").text("Select the first row.");
     }
   });
 
