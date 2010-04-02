@@ -382,6 +382,23 @@ $(document).ready(function()
       // F
       case 70: { note = "F"; $("#typelist").val("F"); break; }
       
+      // A
+      case 65: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          rotateColumn(-1); // rotate left.
+        }
+        break;
+      }
+      // D
+      case 68: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          rotateColumn(1); // rotate right.
+        }
+        break;
+      }
+      
       // + or =
       case 61: {
         var tmp = $("#scalelist > option:selected").next().val();
