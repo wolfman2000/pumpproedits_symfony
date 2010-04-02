@@ -526,6 +526,12 @@ function rotateColumn(val)
     if (x < BUFF_LFT) { x += columns * ARR_HEIGHT; }
     else if (x >= BUFF_LFT + columns * ARR_HEIGHT) { x -= columns * ARR_HEIGHT; }
     
+    var c = (x - BUFF_LFT) / ARR_HEIGHT;
+    var y = Math.floor(notes[i].getAttribute('y'));
+    var a = selectArrow(c, x, y, notes[i].getAttribute('class'));
+    notes[i].appendChild(a.firstChild);
+    notes[i].removeChild(notes[i].firstChild);
+    
     notes[i].setAttribute('x', x);
   }
 }
