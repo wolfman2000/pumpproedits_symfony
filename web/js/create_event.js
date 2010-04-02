@@ -212,7 +212,7 @@ function selectRow()
 function getPlayer(pl)
 {
   if (style === "routine") { return "p" + player; }
-  return "p2";
+  return "pS";
 }
 
 // Determine which synced note is needed.
