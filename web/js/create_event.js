@@ -205,7 +205,7 @@ function selectRow()
   else
   {
     $("#selBot").attr('y', rY).show();
-    $("#intro").text("Transform the rows, or start again.");
+    $("#intro").text("Transform the rows with the keyboard, or start again.");
     
     if (rY < $("#selTop").attr('y'))
     {
@@ -510,4 +510,35 @@ function swapCursor()
   {
     $("#intro").text("Select the first row.");
   }
+}
+
+/*
+ * Rotate the selected arrows one way or another.
+ */
+function rotateColumn(val)
+{
+  if (!val || val < 0) { val = -ARR_HEIGHT; } else { val = ARR_HEIGHT; }
+  var notes = getSelectedArrows();
+  
+  for (var i = 0; i < notes.length; i++)
+  {
+    var x = Math.floor(notes[i].getAttribute('x')) + val;
+    if (x < BUFF_LFT) { x += columns * ARR_HEIGHT; }
+    else if (x >= BUFF_LFT + columns * ARR_HEIGHT) { x -= columns * ARR_HEIGHT; }
+    
+    notes[i].setAttribute('x', x);
+  }
+}
+
+// Retrieve the selected arrows in an easy to use function.
+function getSelectedArrows()
+{
+  return $("#svgNote > svg").filter(function(index){
+    if ($("#selBot").attr('style').indexOf('none') > -1)
+    {
+      return $(this).attr('y') == $("#selTop").attr('y');
+    }
+    return $(this).attr('y') >= $("#selTop").attr('y') &&
+        $(this).attr('y') <= $("#selBot").attr('y');
+  });
 }
