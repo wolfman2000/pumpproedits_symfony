@@ -640,11 +640,12 @@ function rotateColumn(val)
 function getSelectedArrows()
 {
   return $("#svgNote > svg").filter(function(index){
+    var y = parseFloat($(this).attr('y'));
     if ($("#selBot").attr('style').indexOf('none') > -1)
     {
-      return $(this).attr('y') == $("#selTop").attr('y');
+      return y == $("#selTop").attr('y');
     }
-    return $(this).attr('y') >= $("#selTop").attr('y') &&
-        $(this).attr('y') <= $("#selBot").attr('y');
+    return y >= parseFloat($("#selTop").attr('y')) &&
+        y <= parseFloat($("#selBot").attr('y'));
   });
 }
