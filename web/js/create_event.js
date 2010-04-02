@@ -580,7 +580,7 @@ function shiftDown()
   
   var val = Math.floor(sync);
   var notes = getSelectedArrows();
-  var oY = parseFloat($("#selTop").attr('y'));
+  var oY = parseFloat($("#selBot").attr('y'));
   var gap = BEATS_MAX / val / MEASURE_RATIO;
   var nY = oY + gap;
   removeDown(oY, nY);
@@ -596,7 +596,7 @@ function shiftDown()
   if (tY < mB)
   {
     var gY = tY + gap;
-    $("#selBot").attr('y', (gY < mB ? mB : gY));
+    $("#selBot").attr('y', (gY > mB ? mB : gY));
   }
   for (var i = 0; i < notes.length; i++)
   {
@@ -604,7 +604,7 @@ function shiftDown()
     var lOY = parseFloat(notes[i].getAttribute('y'));
     var nOY = lOY + gap;
     notes[i].setAttribute('y', nOY);
-    nOY -= BUFF_TOP;
+    nOY += BUFF_BOT;
     
     var beatM = Math.round((nOY % (ARR_HEIGHT * SCALE * BEATS_PER_MEASURE)) * MEASURE_RATIO);
     
