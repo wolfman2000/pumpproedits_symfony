@@ -158,16 +158,14 @@
 	}
 	svg.p0 > g > *:first-child
 	{
-		stroke-width: 1;
 		stroke: #483D8B;
 	}
 	svg.p1 > g > *:first-child
 	{
-		stroke-width: 1;
 		stroke: #b22222;
 	}
-	svg.pS > g > *:first-child
+	#svgNote > svg > g > *:first-child
 	{
-		stroke-width: 1;
+		stroke-width: 0.5;
 	}
 }
