@@ -533,12 +533,27 @@ function shiftVertical(val)
   val = Math.floor(val);
   var notes = getSelectedArrows();
   var oY = Math.floor($("#selTop").attr('y'));
-  var nY = oY + BEATS_MAX / val / MEASURE_RATIO;
+  var gap = BEATS_MAX / val / MEASURE_RATIO;
+  var nY = oY + gap;
   removeVertical(oY, nY);
+  $("#selTop").attr('y', parseFloat($("#selTop").attr('y')) + gap);
+  $("#selBot").attr('y', parseFloat($("#selBot").attr('y')) + gap);
   for (var i = 0; i < notes.length; i++)
   {
-    ;
+    var csses = notes[i].getAttribute('class').split(' ');
+    var lOY = parseFloat(notes[i].getAttribute('y'));
+    var nOY = lOY + gap;
+    notes[i].setAttribute('y', nOY);
+    nOY -= BUFF_TOP;
+    
+    var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
+    var wholeM = Math.floor(nOY / scaledM);
+    var beatM = (nOY % scaledM) * MEASURE_RATIO;
+    
+    notes[i].setAttribute('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
+    
   }
+  removeVertical(0, BUFF_TOP);
   
 }
 
