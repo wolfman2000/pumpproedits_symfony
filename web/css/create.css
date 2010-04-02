@@ -110,12 +110,14 @@
 	#selTop
 	{
 		fill: orange;
-		opacity: 0.75;
 	}
 	#selBot
 	{
 		fill: green;
-		opacity: 0.75;
+	}
+	#selBot, #selTop
+	{
+		opacity: 0.25;
 	}
 	#svgNote > svg
 	{
