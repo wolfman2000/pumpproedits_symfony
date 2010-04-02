@@ -611,7 +611,7 @@ function shiftDown()
     notes[i].setAttribute('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
     
   }
-  removeUp(mB, sH);
+  removeDown(mB, sH);
 }
 
 // Cycle the arrows horizontally, changing arrow orientation as needed.

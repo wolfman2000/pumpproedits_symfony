@@ -417,6 +417,7 @@ $(document).ready(function()
           gatherStats();
           updateStats();
         }
+        break;
       }
       
       // + or =
