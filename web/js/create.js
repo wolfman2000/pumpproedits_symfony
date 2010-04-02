@@ -13,9 +13,16 @@ $(document).ready(function()
   // If the shadow rectangle is out, perform these.
   $("#svg").click(function(){
     if (!$("#shadow").is(":visible")) return;
-    changeArrow();
-    gatherStats(); // in parse
-    updateStats();
+    if (selMode == 0) // insert mode
+    {
+      changeArrow();
+      gatherStats(); // in parse
+      updateStats();
+    }
+    else // select mode
+    {
+      // TODO: put in function to place rect.
+    }
   });
   
   // Work on a new file, but make sure it's saved/validated recently.
@@ -322,6 +329,11 @@ $(document).ready(function()
   // The author wishes to change the cursor mode to select rows of arrows.
   $("#modelist").change(function(){
     selMode = $("#modelist").val();
+    if (selMode == 0)
+    {
+      $("#selTop").hide();
+      $("#selBot").hide();
+    }
   });
 
   // The author wishes to change which player's routine steps to place.
