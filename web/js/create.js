@@ -92,7 +92,7 @@ $(document).ready(function()
       for (var i = 0; i < badds.length; i++)
       {
         ouch += "Player " + badds[i]['player'] + " Measure " + badds[i]['measure']
-          + " Beat " + badds[i]['beat'] + " Note " + badds[i]['note'] + "\n";
+          + " Beat " + badds[i]['beat'] + " Column " + badds[i]['note'] + "\n";
       }
       alert(ouch);
     }
