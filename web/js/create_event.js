@@ -215,6 +215,15 @@ function getPlayer(pl)
   return "pS";
 }
 
+// Determine the player number based on the player class.
+function getPlayerByClass(jQ)
+{
+  if (style !== "routine") { return 0; } // doesn't matter here.
+  if (jQ.indexOf("p0") >= 0) { return 0; }
+  if (jQ.indexOf("p1") >= 0) { return 1; }
+  return 0; // default.
+}
+
 // Determine which synced note is needed.
 function getSync(y)
 {
@@ -244,6 +253,19 @@ function getType(nt)
   else if (nt == "L") { t = "lift"; }
   else if (nt == "F") { t = "fake"; }
   return t;
+}
+
+// Determine the note type based on the class.
+function getTypeByClass(jQ)
+{
+  if (jQ.indexOf("tap") >= 0)  { return "1"; }
+  if (jQ.indexOf("hold") >= 0) { return "2"; }
+  if (jQ.indexOf("end") >= 0)  { return "3"; }
+  if (jQ.indexOf("roll") >= 0) { return "4"; }
+  if (jQ.indexOf("mine") >= 0) { return "M"; }
+  if (jQ.indexOf("lift") >= 0) { return "L"; }
+  if (jQ.indexOf("fake") >= 0) { return "F"; }
+  return "X"; // this should never happen.
 }
 
 // Determine the proper note classes to render based on sync.

@@ -189,7 +189,7 @@ function genObject(p, m, b, n)
 {
   var t = {};
   t['player'] = p + 1;
-  t['measure'] = m + 1;
+  t['measure'] = m;
   t['beat'] = b;
   t['note'] = n + 1;
   return t;  
@@ -215,138 +215,108 @@ function gatherStats()
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
-
-  LOOP_PLAYER:
-  for (var iP = 0; iP < 2; iP++) // for each player (routine)
+  
+  var oX = -1;
+  var oY = -1;
+  var numSteps = Array(0, 0);
+  var trueC = Array(0, 0);
+  
+  function checkBasics(sC, hC)
   {
-    if (isEmpty(notes[iP])) { continue; }
-    for (var i = 0; i < columns; i++)
+    for (var k = 0; k < columns; k++)
     {
-      holdCheck[i] = false;
+      if      (stepCheck[k]) { trueC[stepCheck[k]['player'] - 1]++; }
+      else if (holdCheck[k]) { trueC[holdCheck[k]['player'] - 1]++; }
     }
-    LOOP_MEASURE:
-    for (var iM in notes[iP]) // for each measure
+    for (var playa = 0; playa < 2; playa++)
     {
-      LOOP_BEAT:
-      for (var iB in notes[iP][iM]) // for each beat
+      if (numSteps[playa] > 0 && trueC[playa] >= 3) { trips[playa]++; }
+      if (numSteps[playa] >= 2)                     { jumps[playa]++; }
+      if (numSteps[playa] > 0)                      { steps[playa]++; }
+    }
+  }
+  
+  $("#svgNote").children().each(function(ind){
+    var p = getPlayerByClass($(this).attr('class'));
+    var y = parseFloat($(this).attr('y')) - BUFF_TOP;
+    var m = Math.round(y * MEASURE_RATIO / BEATS_MAX);
+    var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
+    var x = parseFloat($(this).attr('x'));
+    var c = (x - BUFF_LFT) / ARR_HEIGHT;
+    var t = getTypeByClass($(this).attr('class'));
+    
+    if (oY !== y) // new row
+    {
+      if (oY >= 0) // calculate all of the old stats first.
       {
-        var numSteps = 0;
-        var trueC = 0;
-        for (var i = 0; i < columns; i++)
-        {
-          stepCheck[i] = false;
-        }
+        checkBasics(stepCheck, holdCheck);
         
-        LOOP_NOTE:
-        for (var iN in notes[iP][iM][iB]) // for each note
-        {
-          // again, don't think switch works on strings in JS.
-          var n = notes[iP][iM][iB][iN];
-          if (n == '0') { continue LOOP_NOTE; }
-          if (n == '1')
-          {
-            if (holdCheck[iN]) // if tap follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-              badds.push(genObject(iP, iM, iB, iN));
-            }
-            holdCheck[iN] = false;
-            stepCheck[iN] = true;
-            numSteps++;
-            continue LOOP_NOTE;
-          }
-          if (n == '2')
-          {
-            if (holdCheck[iN]) // if hold head follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-            }
-            holdCheck[iN] = genObject(iP, iM, iB, iN);
-            stepCheck[iN] = true;
-            numSteps++;
-            holds[iP]++;
-            continue LOOP_NOTE;
-          }
-          if (n == '3')
-          {
-            if (!holdCheck[iN]) // if hold/roll end doesn't follow head
-            {
-              badds.push(genObject(iP, iM, iB, iN));
-            }
-            holdCheck[iN] = false;
-            stepCheck[iN] = true;
-            continue LOOP_NOTE;
-          }
-          if (n == '4')
-          {
-            if (holdCheck[iN]) // if roll head follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-            }
-            holdCheck[iN] = genObject(iP, iM, iB, iN);
-            stepCheck[iN] = true;
-            numSteps++;
-            rolls[iP]++;
-            continue LOOP_NOTE;
-          }
-          if (n == 'M')
-          {
-            if (holdCheck[iN]) // if mine follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-              badds.push(genObject(iP, iM, iB, iN));
-            }
-            holdCheck[iN] = false;
-            mines[iP]++;
-            continue LOOP_NOTE;
-          }
-          if (n == 'L')
-          {
-            if (holdCheck[iN]) // if lift follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-              badds.push(genObject(iP, iM, iB, iN));
-            }
-            holdCheck[iN] = false;
-            lifts[iP]++;
-            continue LOOP_NOTE;
-          }
-          if (n == 'F')
-          {
-            if (holdCheck[iN]) // if fake follows hold/roll head
-            {
-              badds.push(holdCheck[iN]);
-              badds.push(genObject(iP, iM, iB, iN));
-            }
-            holdCheck[iN] = false;
-            fakes[iP]++;
-            continue LOOP_NOTE;
-          }
-        }
-        for (var k = 0; k < columns; k++)
-        {
-          if ((stepCheck[k]) || (holdCheck[k]))
-          {
-            trueC++;
-          }
-        }
-        if (numSteps > 0 && trueC >= 3)
-        {
-          trips[iP]++;
-        }
-        if (numSteps >= 2)
-        {
-          jumps[iP]++;
-        }
-        if (numSteps > 0)
-        {
-          steps[iP]++;
-        }      
-      } 
+        stepCheck = Array(); // reset.
+        for (var i = 0; i < columns; i++) { stepCheck[i] = false; }
+        numSteps = Array(0, 0);
+        trueC = Array(0, 0);
+      }
+      oY = y;
     }
-    for (var i = 0; i < columns; i++) // if hold heads are still active
+    
+    if (t === "1") // tap
     {
-      if (holdCheck[i]) { badds.push(holdCheck[i]) }
+      // if tap follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      holdCheck[c] = false;
+      stepCheck[c] = genObject(p, m, b, c);
+      numSteps[p]++;
     }
+    else if (t === "2") // hold
+    {
+      // if hold head follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      holdCheck[c] = genObject(p, m, b, c);
+      stepCheck[c] = genObject(p, m, b, c);
+      numSteps[p]++;
+      holds[p]++;
+    }
+    else if (t === "3") // hold/roll end
+    {
+      // if hold/roll end doesn't follow head
+      if (!holdCheck[c]) { badds.push(genObject(p, m, b, c)); }
+      holdCheck[c] = false;
+      stepCheck[c] = genObject(p, m, b, c);
+    }
+    else if (t === "4") // roll
+    {
+      // if roll head follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      holdCheck[c] = genObject(p, m, b, c);
+      stepCheck[c] = genObject(p, m, b, c);
+      numSteps[p]++;
+      rolls[p]++;
+    }
+    else if (t === 'M') // mine
+    {
+      // if mine follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      holdCheck[c] = false;
+      mines[p]++;
+    }
+    else if (t === 'L') // lift
+    {
+      // if lift follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      holdCheck[c] = false;
+      lifts[p]++;
+    }
+    else if (t === 'F') // fake
+    {
+       // if fake follows hold/roll head
+      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      holdCheck[c] = false;
+      fakes[p]++;
+    }
+  });
+  checkBasics(stepCheck, holdCheck);
+  for (var i = 0; i < columns; i++) // if hold heads are still active
+  {
+    if (holdCheck[i]) { badds.push(holdCheck[i]) }
   }
 }
