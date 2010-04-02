@@ -74,74 +74,40 @@ function changeArrow()
   isDirty = true;
   $("#but_val").attr('disabled', true);
 
-  var bY = $("#yCheck").text() // which beat? (0'th based);
-  var css = getNote(bY);
+  var css = getNote($("#yCheck").text()); // get the class based on the beat.
   var cX = (rX - BUFF_LFT) / ARR_HEIGHT; // which column are we using?
-  var mY = $("#mCheck").text() - 1; // which measure? (0'th based)
   
   // see if a node exists in this area.
   var coll = $("#svgNote");
   
-  var n = coll.children().first();
-  var nX = parseInt(n.attr('x'));
-  var nY = parseFloat(n.attr('y'));
-  
-  if (nX == rX && nY == rY)
-  {
-    var nStyle = n.attr('class');
-    nStyle = nStyle.substring(nStyle.charAt(' '));
-    n.remove();
-    if (nStyle == css.substring(css.charAt(' ')))
-    {
-      return; // No point in adding the same note type again.
-    }
-  }
-  else while (n.length)
-  {
-    n = n.next();
-    nX = parseInt(n.attr('x'));
-    nY = parseFloat(n.attr('y'));
-    
-    if (nX == rX && nY == rY)
-    {
-      var nStyle = n.attr('class');
-      nStyle = nStyle.substring(nStyle.charAt(' '));
-      n.remove();
-      if (nStyle == css.substring(css.charAt(' ')))
-      {
-        return; // No point in adding the same note type again.
-      }
-      break; // replacing with a new note: start below.
-    }
-  }
-  
   // add if empty
   var sA = selectArrow(cX, rX, rY, css);
+  var fin = false;
   
-  n = coll.children().first();
-  nX = parseInt(n.attr('x'));
-  nY = parseFloat(n.attr('y'));
-  
-  if (nY > rY || nY == rY && nX > rX)
-  {
-    n.before(sA);
-    return;
-  }
-  // insert the note somewhere in the middle.
-  while (n.length)
-  {
-    n = n.next();
-    nX = parseInt(n.attr('x'));
-    nY = parseFloat(n.attr('y'));
+  coll.children().each(function(ind){
+    if (fin) { return; }
+    var nX = parseInt($(this).attr('x'));
+    var nY = parseFloat($(this).attr('y'));
     
-    if (nY > rY || nY == rY && nX > rX)
+    if (nX == rX && nY == rY) // exact same: remove old
     {
-      n.before(sA);
-      return;
+      var nStyle = $(this).attr('class');
+      $("#svgNote > svg:eq(" + ind + ")").remove();
+       // No point in adding the same note type again.
+      if (nStyle !== css)
+      {
+        if ($("#svgNote").children().length === 0) { coll.append(sA); }
+        else { $("#svgNote > svg:eq(" + (ind - 1) + ")").after(sA); }
+      }
+      fin = true;
     }
-  }
-  // last note in the line: simple.
-  coll.append(sA);
+    else if (nY > rY || nY == rY && nX > rX)
+    {
+      $(this).before(sA);
+      fin = true;
+    }
+  });
+  if (!fin) { coll.append(sA); }
 }
 
 // Place the selection row as required.
