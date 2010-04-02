@@ -510,7 +510,7 @@ function swapCursor()
 }
 
 // Shift the selected arrows up based on the note sync.
-function shiftUp(val)
+function shiftUp()
 {
   // remove all notes that are in the way of the shifting operation.
   function removeUp(top, bot)
@@ -527,7 +527,7 @@ function shiftUp(val)
     }).remove();
   }
   
-  val = Math.floor(-sync);
+  var val = Math.floor(-sync);
   var notes = getSelectedArrows();
   var oY = parseFloat($("#selTop").attr('y'));
   var gap = BEATS_MAX / val / MEASURE_RATIO;
@@ -559,7 +559,59 @@ function shiftUp(val)
     
   }
   removeUp(0, BUFF_TOP);
+}
+// Shift the selected arrows down based on the note sync.
+function shiftDown()
+{
+  // remove all notes that are in the way of the shifting operation.
+  function removeDown(top, bot)
+  {
+    if (top > bot)
+    {
+      var tmp = top;
+      top = bot;
+      bot = tmp;
+    }
+    $("#svgNote > svg").filter(function(index){
+      var y = $(this).attr('y');
+      return y > top && y <= bot;
+    }).remove();
+  }
   
+  var val = Math.floor(sync);
+  var notes = getSelectedArrows();
+  var oY = parseFloat($("#selTop").attr('y'));
+  var gap = BEATS_MAX / val / MEASURE_RATIO;
+  var nY = oY + gap;
+  removeDown(oY, nY);
+  var sH = Math.floor($("#svg").attr('height')) / SCALE;
+  var mB = sH - BUFF_BOT;
+  var tY = parseFloat($("#selTop").attr('y'));
+  if (tY < mB)
+  {
+    var gY = tY + gap;
+    $("#selTop").attr('y', (gY > mB ? mB : gY));
+  }
+  tY = parseFloat($("#selBot").attr('y'));
+  if (tY < mB)
+  {
+    var gY = tY + gap;
+    $("#selBot").attr('y', (gY < mB ? mB : gY));
+  }
+  for (var i = 0; i < notes.length; i++)
+  {
+    var csses = notes[i].getAttribute('class').split(' ');
+    var lOY = parseFloat(notes[i].getAttribute('y'));
+    var nOY = lOY + gap;
+    notes[i].setAttribute('y', nOY);
+    nOY -= BUFF_TOP;
+    
+    var beatM = Math.round((nOY % (ARR_HEIGHT * SCALE * BEATS_PER_MEASURE)) * MEASURE_RATIO);
+    
+    notes[i].setAttribute('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
+    
+  }
+  removeUp(mB, sH);
 }
 
 // Cycle the arrows horizontally, changing arrow orientation as needed.

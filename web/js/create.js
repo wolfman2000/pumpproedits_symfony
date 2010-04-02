@@ -399,6 +399,21 @@ $(document).ready(function()
         }
         break;
       }
+      // W
+      case 87: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          shiftUp();
+        }
+        break;
+      }
+      // S
+      case 83: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          shiftDown();
+        }
+      }
       
       // + or =
       case 61: {
