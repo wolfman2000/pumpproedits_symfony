@@ -526,9 +526,39 @@ function swapCursor()
   }
 }
 
-/*
- * Rotate the selected arrows one way or another.
- */
+// Shift the selected arrows up or down based on the note sync.
+function shiftVertical(val)
+{
+  if (!val || val < 0) { val = -sync; } else { val = sync; }
+  val = Math.floor(val);
+  var notes = getSelectedArrows();
+  var oY = Math.floor($("#selTop").attr('y'));
+  var nY = oY + BEATS_MAX / val / MEASURE_RATIO;
+  removeVertical(oY, nY);
+  for (var i = 0; i < notes.length; i++)
+  {
+    ;
+  }
+  
+}
+
+// remove all notes that are in the way of the shifting operation.
+function removeVertical(top, bot)
+{
+  if (top > bot)
+  {
+    var tmp = top;
+    top = bot;
+    bot = tmp;
+  }
+  $("#svgNote > svg").filter(function(index){
+    var y = $(this).attr('y');
+    return y >= top && y < bot; // <= or just <?
+  }).remove();
+  
+}
+
+// Cycle the arrows horizontally, changing arrow orientation as needed.
 function rotateColumn(val)
 {
   if (!val || val < 0) { val = -ARR_HEIGHT; } else { val = ARR_HEIGHT; }
