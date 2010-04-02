@@ -69,6 +69,7 @@ $(document).ready(function()
     $("#intro").text("Loading help...");
     window.open(baseURL + "/help", "helpWindow",
       "status = 1, scrollbars = yes, dependent = 1, width = 400, height = 400, left = 100, top = 100");
+    $("#intro").text("Help loaded!");
   });
   
   // Force all edits to be validated before saving/uploading.
