@@ -69,8 +69,8 @@ function shadow(e)
 function changeArrow()
 {
   var r = $("#shadow");
-  var rX = r.attr('x');
-  var rY = r.attr('y');
+  var rX = parseInt(r.attr('x'));
+  var rY = parseFloat(r.attr('y'));
   isDirty = true;
   $("#but_val").attr('disabled', true);
 
@@ -117,8 +117,8 @@ function changeArrow()
   var coll = $("#svgNote");
   
   var n = coll.children().first();
-  var nX = n.attr('x');
-  var nY = n.attr('y');
+  var nX = parseInt(n.attr('x'));
+  var nY = parseFloat(n.attr('y'));
   
   if (nX == rX && nY == rY)
   {
@@ -134,8 +134,8 @@ function changeArrow()
   else while (n.length)
   {
     n = n.next();
-    nX = n.attr('x');
-    nY = n.attr('y');
+    nX = parseInt(n.attr('x'));
+    nY = parseFloat(n.attr('y'));
     
     if (nX == rX && nY == rY)
     {
@@ -156,8 +156,8 @@ function changeArrow()
   notes[player][mY][bY][cX] = note;
   
   n = coll.children().first();
-  nX = n.attr('x');
-  nY = n.attr('y');
+  nX = parseInt(n.attr('x'));
+  nY = parseFloat(n.attr('y'));
   
   if (nY > rY || nY == rY && nX > rX)
   {
@@ -168,8 +168,8 @@ function changeArrow()
   while (n.length)
   {
     n = n.next();
-    nX = n.attr('x');
-    nY = n.attr('y');
+    nX = parseInt(n.attr('x'));
+    nY = parseFloat(n.attr('y'));
     
     if (nY > rY || nY == rY && nX > rX)
     {
