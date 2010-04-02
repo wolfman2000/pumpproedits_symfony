@@ -117,6 +117,11 @@ To place other synced arrows, use the Note Sync drop down menu.</p>
 exactly where the blue square is located. You can click on the same
 space to remove the arrow. If you change note types and click on an
 occupied location, the new arrow replaces the old.</p>
+<p>In selection mode, the controls work differently. Instead of placing
+arrows, you are selecting whole rows of arrows to transform as needed.
+At present, you can either shift arrows over to either column, bring the
+notes up, or bring the notes down. The keyboard is required for these operations:
+use WASD for this purpose.</p>
 <?php echo $back; ?>
 <section id="keyb">
 <h2>Keyboard Shortcuts</h2>
@@ -148,6 +153,8 @@ $keys = array('1' => sprintf($sync, '4th'),
 'P' => "Change which player's notes to place (Routine only).",
 'A' => "Rotate the selected rows of arrows one column to the left (selection mode only).",
 'D' => "Rotate the selected rows of arrows one column to the right (selection mode only).",
+'W' => "Move the selected rows of arrows up based on the selected Note Sync (selection mode only).",
+'S' => "Move the selected rows of arrows down based on the selected Note Sync (selection mode only).",
 );
 foreach ($keys as $k => $v): ?>
 <dt><?php echo $k; ?></dt>
