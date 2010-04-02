@@ -1,6 +1,4 @@
-/*
- * Hide the shadow rectangle from others.
- */
+// Hide the rectangle when not in use.
 function hideRect()
 {
   $("#shadow").attr('x', 0).attr('y', 0).hide();
@@ -8,9 +6,7 @@ function hideRect()
   $("#mCheck").text("???");
 }
 
-/*
- * Show where the rectangle gets placed.
- */
+// Indicate where the shadow square goes.
 function showRect(x, y)
 {
   $("#shadow#").attr('x', x).attr('y', y + BUFF_TOP).show();
@@ -18,9 +14,7 @@ function showRect(x, y)
   $("#yCheck").text(Math.round(y * MEASURE_RATIO) % BEATS_MAX);
 }
 
-/**
- * Trace the mouse to see where the shadow falls.
- */
+// Trace the mouse to see where the shadow falls.
 function shadow(e)
 {
   var pnt = $("#svgMeas > svg:first-child > rect:first-child")
@@ -71,9 +65,7 @@ function shadow(e)
   }
 }
 
-/**
- * Add the arrow in the appropriate position.
- */
+// Add the arrow in the appropriate position.
 function changeArrow()
 {
   var r = $("#shadow");
@@ -254,17 +246,13 @@ function getType(nt)
   return t;
 }
 
-/*
- * Determine the proper note classes to render based on sync.
- */
+// Determine the proper note classes to render based on sync.
 function getNote(y, nt, pl)
 {
   return getPlayer(pl) + " " + getSync(y) + " " + getType(nt);
 }
 
-/*
- * Determine which arrow to return to the user.
- */
+// Determine which arrow to return to the user.
 function selectArrow(cX, rX, rY, css)
 {
   // Take care of the special shaped arrows first.
@@ -337,10 +325,7 @@ function updateStats()
     $("#intro").text("Provide an edit title and difficulty.");
   }
 }
-
-/**
- * Enter this mode upon choosing a song and difficulty.
- */
+//Enter this mode upon choosing a song and difficulty.
 function editMode()
 {
   $("#intro").text("Loading song data...");
@@ -408,9 +393,7 @@ function editMode()
 }
 
 
-/**
- * Load up this data on new.
- */
+// Load up this data on new.
 function init()
 {
   captured = false;
@@ -526,16 +509,30 @@ function swapCursor()
   }
 }
 
-// Shift the selected arrows up or down based on the note sync.
-function shiftVertical(val)
+// Shift the selected arrows up based on the note sync.
+function shiftUp(val)
 {
-  if (!val || val < 0) { val = -sync; } else { val = sync; }
-  val = Math.floor(val);
+  // remove all notes that are in the way of the shifting operation.
+  function removeUp(top, bot)
+  {
+    if (top > bot)
+    {
+      var tmp = top;
+      top = bot;
+      bot = tmp;
+    }
+    $("#svgNote > svg").filter(function(index){
+      var y = $(this).attr('y');
+      return y >= top && y < bot; // <= or just <?
+    }).remove();
+  }
+  
+  val = Math.floor(-sync);
   var notes = getSelectedArrows();
-  var oY = Math.floor($("#selTop").attr('y'));
+  var oY = parseFloat($("#selTop").attr('y'));
   var gap = BEATS_MAX / val / MEASURE_RATIO;
   var nY = oY + gap;
-  removeVertical(oY, nY);
+  removeUp(oY, nY);
   $("#selTop").attr('y', parseFloat($("#selTop").attr('y')) + gap);
   $("#selBot").attr('y', parseFloat($("#selBot").attr('y')) + gap);
   for (var i = 0; i < notes.length; i++)
@@ -548,28 +545,12 @@ function shiftVertical(val)
     
     var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
     var wholeM = Math.floor(nOY / scaledM);
-    var beatM = (nOY % scaledM) * MEASURE_RATIO;
+    var beatM = Math.round((nOY % scaledM) * MEASURE_RATIO);
     
     notes[i].setAttribute('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
     
   }
-  removeVertical(0, BUFF_TOP);
-  
-}
-
-// remove all notes that are in the way of the shifting operation.
-function removeVertical(top, bot)
-{
-  if (top > bot)
-  {
-    var tmp = top;
-    top = bot;
-    bot = tmp;
-  }
-  $("#svgNote > svg").filter(function(index){
-    var y = $(this).attr('y');
-    return y >= top && y < bot; // <= or just <?
-  }).remove();
+  removeUp(0, BUFF_TOP);
   
 }
 
