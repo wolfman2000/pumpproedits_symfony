@@ -3,6 +3,7 @@ $(document).ready(function()
   init();
   
   $("#songlist").val('');
+  $("rect[id^=sel]").attr('x', BUFF_LFT);
   $("#notes").attr('transform', 'scale(' + SCALE + ')');
   
   // Don't show the rectangle when not in play.
@@ -21,7 +22,7 @@ $(document).ready(function()
     }
     else // select mode
     {
-      // TODO: put in function to place rect.
+      selectRow();
     }
   });
   

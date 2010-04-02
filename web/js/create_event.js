@@ -189,6 +189,24 @@ function changeArrow()
   coll.append(sA);
 }
 
+// Place the selection row as required.
+function selectRow()
+{
+  var rY = $("#shadow").attr('y');
+  if ($("#selBot").attr('style').indexOf('none') == -1)
+  {
+    $("rect[id^=sel]").hide();
+  }
+  if ($("#selTop").attr('style').indexOf('none') != -1)
+  {
+    $("#selTop").attr('y', rY).show();
+  }
+  else
+  {
+    $("#selBot").attr('y', rY).show();
+  }
+}
+
 /*
  * Determine the proper note classes to render based on sync.
  */
@@ -323,6 +341,7 @@ function editMode()
     $("#scalelist").val(2.5);
     captured = false;
     columns = getCols();
+    $("rect[id^=sel]").attr('width', columns * ARR_HEIGHT).hide();
     fixScale(2.5);
     
     // append the measures.
