@@ -67,6 +67,10 @@ place your arrows.</p>
   . 'More information about the types will be available later.',
 'Chart Zoom' => 'Decide how big or small the chart itself will look. '
   . 'It is recommended to user higher zooms when working with more exact notes.',
+'Cursor Mode' => 'Determine what happens when you click on the chart. '
+  . 'Insertion mode is the traditional "click-to-place-arrows" mode. '
+  . 'Selection mode is used to select rows of arrows and transform them. '
+  . 'More details about the transformations are covered later.',
 'Routine Player' => 'Decide which player\'s notes are in use. '
   . 'This is only available when creating/editing Routine style edits.',
 ); ?>
@@ -140,7 +144,10 @@ $keys = array('1' => sprintf($sync, '4th'),
 'F' => sprintf($type, 'Fake'),
 '+' => "Enlarges the chart to the next available zoom.",
 '-' => "Shrinks the chart to the next available zoom.",
+'O' => "Change the cursor mode from insertion mode to selection mode and vice~versa.",
 'P' => "Change which player's notes to place (Routine only).",
+'A' => "Rotate the selected rows of arrows one column to the left (selection mode only).",
+'D' => "Rotate the selected rows of arrows one column to the right (selection mode only).",
 );
 foreach ($keys as $k => $v): ?>
 <dt><?php echo $k; ?></dt>
