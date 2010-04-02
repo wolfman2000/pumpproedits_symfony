@@ -216,15 +216,17 @@ function selectRow()
   }
 }
 
-/*
- * Determine the proper note classes to render based on sync.
- */
-function getNote(y, nt, pl)
+// Determine which player class to retrieve.
+function getPlayer(pl)
+{
+  if (style === "routine") { return "p" + player; }
+  return "p2";
+}
+
+// Determine which synced note is needed.
+function getSync(y)
 {
   var k = "note";
-  if (pl == null) { pl = player; }
-  if (style == "routine") { k = "p" + player + " " + k; }
-  
   if      (!(y % 48)) { k += "_004"; }
   else if (!(y % 24)) { k += "_008"; }
   else if (!(y % 16)) { k += "_012"; }
@@ -234,9 +236,14 @@ function getNote(y, nt, pl)
   else if (!(y % 4))  { k += "_048"; }
   else if (!(y % 3))  { k += "_064"; }
   else                { k += "_192"; }
-  
+  return k;
+}
+
+// Determine which note type is requested.
+function getType(nt)
+{
   if (nt == null) { nt = note; }
-  var t; // note type.
+  var t = "FIX"; // note type.
   if      (nt == "1") { t = "tap";  }
   else if (nt == "2") { t = "hold"; }
   else if (nt == "3") { t = "end";  }
@@ -244,8 +251,15 @@ function getNote(y, nt, pl)
   else if (nt == "M") { t = "mine"; }
   else if (nt == "L") { t = "lift"; }
   else if (nt == "F") { t = "fake"; }
-  else                { t = "FIX";  }
-  return k + " " + t;
+  return t;
+}
+
+/*
+ * Determine the proper note classes to render based on sync.
+ */
+function getNote(y, nt, pl)
+{
+  return getPlayer(pl) + " " + getSync(y) + " " + getType(nt);
 }
 
 /*
