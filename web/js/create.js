@@ -404,6 +404,8 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftUp();
+          gatherStats();
+          updateStats();
         }
         break;
       }
@@ -412,6 +414,8 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftDown();
+          gatherStats();
+          updateStats();
         }
       }
       
