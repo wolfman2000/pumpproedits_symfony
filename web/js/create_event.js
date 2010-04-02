@@ -523,7 +523,7 @@ function shiftUp(val)
     }
     $("#svgNote > svg").filter(function(index){
       var y = $(this).attr('y');
-      return y >= top && y < bot; // <= or just <?
+      return y >= top && y < bot;
     }).remove();
   }
   
@@ -533,8 +533,18 @@ function shiftUp(val)
   var gap = BEATS_MAX / val / MEASURE_RATIO;
   var nY = oY + gap;
   removeUp(oY, nY);
-  $("#selTop").attr('y', parseFloat($("#selTop").attr('y')) + gap);
-  $("#selBot").attr('y', parseFloat($("#selBot").attr('y')) + gap);
+  var tY = parseFloat($("#selTop").attr('y'));
+  if (tY > BUFF_TOP)
+  {
+    var gY = tY + gap;
+    $("#selTop").attr('y', (gY < BUFF_TOP ? BUFF_TOP : gY));
+  }
+  tY = parseFloat($("#selBot").attr('y'));
+  if (tY > BUFF_TOP)
+  {
+    var gY = tY + gap;
+    $("#selBot").attr('y', (gY < BUFF_TOP ? BUFF_TOP : gY));
+  }
   for (var i = 0; i < notes.length; i++)
   {
     var csses = notes[i].getAttribute('class').split(' ');
@@ -543,9 +553,7 @@ function shiftUp(val)
     notes[i].setAttribute('y', nOY);
     nOY -= BUFF_TOP;
     
-    var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
-    var wholeM = Math.floor(nOY / scaledM);
-    var beatM = Math.round((nOY % scaledM) * MEASURE_RATIO);
+    var beatM = Math.round((nOY % (ARR_HEIGHT * SCALE * BEATS_PER_MEASURE)) * MEASURE_RATIO);
     
     notes[i].setAttribute('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
     
