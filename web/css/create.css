@@ -166,4 +166,8 @@
 		stroke-width: 1;
 		stroke: #b22222;
 	}
+	svg.pS > g > *:first-child
+	{
+		stroke-width: 1;
+	}
 }
