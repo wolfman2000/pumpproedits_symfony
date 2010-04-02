@@ -184,7 +184,7 @@ function changeArrow()
 // Place the selection row as required.
 function selectRow()
 {
-  var rY = $("#shadow").attr('y');
+  var rY = parseFloat($("#shadow").attr('y'));
   if ($("#selBot").attr('style').indexOf('none') == -1)
   {
     $("rect[id^=sel]").hide();
@@ -199,7 +199,7 @@ function selectRow()
     $("#selBot").attr('y', rY).show();
     $("#intro").text("Transform the rows with the keyboard, or start again.");
     
-    if (rY < $("#selTop").attr('y'))
+    if (rY < parseFloat($("#selTop").attr('y')))
     {
       $("#selBot").attr('y', $("#selTop").attr('y'));
       $("#selTop").attr('y', rY);
