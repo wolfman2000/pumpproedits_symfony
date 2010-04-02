@@ -391,8 +391,11 @@ $(document).ready(function()
       
       // P
       case 80: {
-        player = (player ? 0 : 1);
-        $("#playerlist").val(player);
+        if (style === "routine")
+        {
+          player = (player ? 0 : 1);
+          $("#playerlist").val(player);
+        }
         break;
       }
     }
