@@ -101,6 +101,30 @@ function getMultiplier(iP, iM)
   return BEATS_MAX; // just in case it doesn't catch it up there.
 }
 
+// Turn the SVG data structure into the 4 layered arrays.
+function SVGtoNOTES()
+{
+  var notes = Array();
+  notes[0] = Array();
+  if (style === "routine") { notes[1] = Array() };
+  
+  $("#svgNote").children().each(function(ind){
+    var p = getPlayerByClass($(this).attr('class'));
+    var y = parseFloat($(this).attr('y')) - BUFF_TOP;
+    var m = Math.floor(y * MEASURE_RATIO / BEATS_MAX);
+    var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
+    var x = parseFloat($(this).attr('x'));
+    var c = (x - BUFF_LFT) / ARR_HEIGHT;
+    var t = getTypeByClass($(this).attr('class'));
+    
+    if (isEmpty(notes[p][m]))     { notes[p][m]    = Array(); }
+    if (isEmpty(notes[p][m][b]))  { notes[p][m][b] = Array(); }
+    
+    notes[p][m][b][c] = t;
+  });
+  return notes;
+}
+
 /*
  * Call this function for when the user wants to save the chart.
  */
@@ -129,6 +153,8 @@ function saveChart()
     file += "0,0,0,0,0," + steps[1] + ',' + jumps[1] + ',' + holds[1] + ','
     + mines[1] + ',' + trips[1] + ',' + rolls[1] + ':' + EOL + EOL;
   }
+  
+  notes = SVGtoNOTES();
   
   // And now, we're at measure data.
   LOOP_PLAYER:
@@ -171,13 +197,11 @@ function saveChart()
         file += EOL;
       }
     }
-    file += ";"
   }
   
-  file += EOL + EOL;
+  file += ";" + EOL + EOL;
   
   b64 = Base64.encode(file);
-  //var href = "data:;base64," + b64;
   $("#b64").val(b64);
   $("#abbr").val(songData.abbr);
   $("#style").val(style);
@@ -239,7 +263,7 @@ function gatherStats()
   $("#svgNote").children().each(function(ind){
     var p = getPlayerByClass($(this).attr('class'));
     var y = parseFloat($(this).attr('y')) - BUFF_TOP;
-    var m = Math.round(y * MEASURE_RATIO / BEATS_MAX);
+    var m = Math.floor(y * MEASURE_RATIO / BEATS_MAX) + 1;
     var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
     var x = parseFloat($(this).attr('x'));
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
