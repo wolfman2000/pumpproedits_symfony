@@ -200,10 +200,19 @@ function selectRow()
   if ($("#selTop").attr('style').indexOf('none') != -1)
   {
     $("#selTop").attr('y', rY).show();
+    $("#intro").text("Select the second row, or transform the data now.");
   }
   else
   {
     $("#selBot").attr('y', rY).show();
+    $("#intro").text("Transform the rows, or start again.");
+    
+    if (rY < $("#selTop").attr('y'))
+    {
+      $("#selBot").attr('y', $("#selTop").attr('y'));
+      $("#selTop").attr('y', rY);
+    }
+    
   }
 }
 
@@ -488,3 +497,17 @@ function fixScale(num)
   $("article").css("height", height + 200);
 }
 
+// Swap the cursor mode as required.
+function swapCursor()
+{
+  if (selMode == 0)
+  {
+    $("#intro").text("Resume placing arrows.");
+    $("#selTop").hide();
+    $("#selBot").hide();
+  }
+    else
+  {
+    $("#intro").text("Select the first row.");
+  }
+}

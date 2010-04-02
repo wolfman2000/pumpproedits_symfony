@@ -23,7 +23,11 @@
 		margin: 0;
 		padding: 0 0 10px 0;
 	}
-	#intro, #authIntro
+	#intro
+	{
+		height: 3em;
+	}
+	article > nav > p
 	{
 		font-weight: bold;
 	}
@@ -106,12 +110,12 @@
 	#selTop
 	{
 		fill: orange;
-		opacity: 0.5;
+		opacity: 0.75;
 	}
 	#selBot
 	{
 		fill: green;
-		opacity: 0.5;
+		opacity: 0.75;
 	}
 	#svgNote > svg
 	{

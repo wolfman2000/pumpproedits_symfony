@@ -330,16 +330,7 @@ $(document).ready(function()
   // The author wishes to change the cursor mode to select rows of arrows.
   $("#modelist").change(function(){
     selMode = $("#modelist").val();
-    if (selMode == 0)
-    {
-      $("#intro").text("Resume placing arrows.");
-      $("#selTop").hide();
-      $("#selBot").hide();
-    }
-    else
-    {
-      $("#intro").text("Select the first row.");
-    }
+    swapCursor();
   });
 
   // The author wishes to change which player's routine steps to place.
@@ -383,7 +374,7 @@ $(document).ready(function()
       // E
       case 69: { note = "3"; $("#typelist").val("3"); break; }
       // R
-      case 82: { note = "4"; $("#typelist").val("4"); break; }
+      case 82: { if (!e.ctrlKey) { note = "4"; $("#typelist").val("4"); } break; }
       // M
       case 77: { note = "M"; $("#typelist").val("M"); break; }
       // L
@@ -409,6 +400,15 @@ $(document).ready(function()
           fixScale(tmp);
           $("#scalelist").val(tmp);
         }
+        break;
+      }
+      
+      // O
+      case 79:
+      {
+        selMode = (selMode ? 0 : 1);
+        $("#modelist").val(selMode);
+        swapCursor();
         break;
       }
       
