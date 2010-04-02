@@ -26,6 +26,8 @@ var badds; // Which are the problem notes?
 var mX; // mouse position at X.
 var mY; // mouse position at Y.
 
+var selMode; // is the user inserting arrows or selecting rows? Can't have both!
+
 var b64; // The encoded string for the end.
 var captured; // Should input be captured instead of letting it go?
 

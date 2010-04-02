@@ -103,12 +103,22 @@
 		fill: aqua;
 		opacity: 0.5;
 	}
+	#selTop
+	{
+		fill: orange;
+		opacity: 0.5;
+	}
+	#selBot
+	{
+		fill: green;
+		opacity: 0.5;
+	}
 	#svgNote > svg
 	{
-		  fill-opacity:1;
-		  stroke:black;
-		  stroke-width:0.1;
-		  stroke-opacity:1;
+		fill-opacity:1;
+		stroke:black;
+		stroke-width:0.1;
+		stroke-opacity:1;
 	}
 	
 	svg.hold > g > path:last-child

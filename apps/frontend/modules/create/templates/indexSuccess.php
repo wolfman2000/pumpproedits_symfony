@@ -10,6 +10,8 @@ left to place arrows below. Have fun!</p>
 <g id="svgSync" />
 <g id="svgNote" />
 <rect id="shadow" x="0" y="0" width="16" height="16" />
+<rect id="selTop" x="0" y="0" width="80" height="16" />
+<rect id="selBot" x="0" y="0" width="80" height="16" />
 </g>
 </svg>
 
@@ -95,6 +97,11 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <option value="2.5" selected="selected">Normal</option>
 <option value="3">Big</option>
 <option value="4">Giant</option>
+</select></li>
+<li><label for="modelist">Cursor Mode:</label></li>
+<li><select id="modelist">
+<option value="0" selected="selected">Insert</option>
+<option value="1">Select</option>
 </select></li>
 <li class="routine"><label for="playerlist">Routine Player:</label></li>
 <li class="routine"><select id="playerlist">
