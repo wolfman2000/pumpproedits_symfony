@@ -424,6 +424,7 @@ function init()
   $("#quanlist").val(4);
   $("#typelist").val(1);
   $("#playerlist").val(0);
+  $("#modelist").val(0);
   $("#editName").val('');
   $("#editDiff").val('');
   sync = 4;
@@ -433,6 +434,7 @@ function init()
   title = "";
   diff = 0;
   editID = 0;
+  selMode = 0;
 
   $("#svgMeas").empty();
   $("#svgSync").empty();

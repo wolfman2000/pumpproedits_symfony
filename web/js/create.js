@@ -319,6 +319,11 @@ $(document).ready(function()
     fixScale($("#scalelist").val());
   });
 
+  // The author wishes to change the cursor mode to select rows of arrows.
+  $("#modelist").change(function(){
+    selMode = $("#modelist").val();
+  });
+
   // The author wishes to change which player's routine steps to place.
   $("#playerlist").change(function(){
     player = $("#playerlist").val();
