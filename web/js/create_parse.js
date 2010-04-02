@@ -4,8 +4,6 @@
  */
 function loadChart(nd)
 {
-  notes = null; // clear out what's there.
-  notes = Array(Array(), Array());
   $("#svgNote").empty();
   $("#svg").attr('width', width);
   $("#svgMeas").empty();
@@ -15,27 +13,27 @@ function loadChart(nd)
   // append the measures.
   for (var i = 0; i < songData.measures; i++)
   {
-    $("#svgMeas").append(genMeasure(ADJUST_SIZE, BUFF_TOP + MEASURE_HEIGHT * i, i + 1));
+    $("#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
   }
   
   // place the BPM data.
   var bpms = songData.bpms;
-  var x = width / 2;
+  var x = width / 2 / SCALE;
   var y;
   for (var i = 0; i < bpms.length; i++)
   {
-    y = BUFF_TOP + bpms[i].beat * ADJUST_SIZE;
-    $("#svgSync").append(genText(width - BUFF_RHT + 2 * SCALE,
-        y + 2 * SCALE, bpms[i].bpm, 'bpm'));
-    $("#svgSync").append(genLine(x, y, x + columns * ADJUST_SIZE / 2, y, 'bpm'));
+    y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
+        y + SCALE, bpms[i].bpm, 'bpm'));
+    $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
   }
-  
+
   var stps = songData.stps;
   for (var i = 0; i < stps.length; i++)
   {
-    y = BUFF_TOP + stps[i].beat * ADJUST_SIZE;
-    $("#svgSync").append(genText(0, y + 2 * SCALE, stps[i].time, 'stop'));
-    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ADJUST_SIZE / 2, y, 'stop'));
+    y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
+    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
   }
   
   var eRow = stringMul("0", columns); // completely empty row.
@@ -56,26 +54,18 @@ function loadChart(nd)
       {
         if (nd[iP][iM][iB] === eRow) { continue LOOP_BEAT; }
         
-        var tmp = notes[iP][iM];
-        if (isEmpty(tmp))
-        {
-          notes[iP][iM] = Array();
-        }
         var mul = (BEATS_MAX / rows) * iB;
-        notes[iP][iM][mul] = Array(); // has to be something inside.
         LOOP_ROW:
         for (var iR = 0; iR < columns; iR++)
         {
           var ch = nd[iP][iM][iB].charAt(iR);
           if (ch === "0") { continue LOOP_ROW; }
-          notes[iP][iM][mul][iR] = ch;
           var note = getNote(mul, ch, iP);
-          var x = (iR + 1) * ARR_HEIGHT;
-          var y = ((iM * BEATS_MAX) + mul + ADJUST_SIZE) / SCALE;
+          var x = iR * ARR_HEIGHT + BUFF_LFT;
+          var y = ((iM * BEATS_MAX + mul) / MEASURE_RATIO) + BUFF_TOP;
           $("#svgNote").append(selectArrow(iR, x, y, note));
         }
       }
-      
     }
   }
 }

@@ -1,5 +1,4 @@
 var isDirty; // has the work changed? Should a prompt for saving take place?
-var notes; // What does the internal note structure look like?
 var columns; // How many columns are we working with?
 var width; // compliment to columns
 var measures; // How many measures are in play?

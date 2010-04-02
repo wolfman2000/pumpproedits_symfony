@@ -79,40 +79,6 @@ function changeArrow()
   var cX = (rX - BUFF_LFT) / ARR_HEIGHT; // which column are we using?
   var mY = $("#mCheck").text() - 1; // which measure? (0'th based)
   
-  function defineNote()
-  {
-    if (notes[player][mY] == null)
-    {
-      notes[player][mY] = Array();
-    }
-    if (notes[player][mY][bY] == null)
-    {
-      notes[player][mY][bY] = Array();
-    }
-  }
-  defineNote(); // unsure if this needs to be a function.
-  
-  //rX /= SCALE;
-  //rY /= SCALE;
-  
-  // Remove empty rows as required.
-  function prune()
-  {
-    delete(notes[player][mY][bY][cX]);
-    if (isEmpty(notes[player][mY][bY]))
-    {
-      delete(notes[player][mY][bY]);
-      if (isEmpty(notes[player][mY]))
-      {
-        delete(notes[player][mY][bY]);
-        if (isEmpty(notes[player][mY]))
-        {
-          delete(notes[player][mY]);
-        }
-      }
-    } 
-  }
-  
   // see if a node exists in this area.
   var coll = $("#svgNote");
   
@@ -127,7 +93,6 @@ function changeArrow()
     n.remove();
     if (nStyle == css.substring(css.charAt(' ')))
     {
-      prune();
       return; // No point in adding the same note type again.
     }
   }
@@ -144,7 +109,6 @@ function changeArrow()
       n.remove();
       if (nStyle == css.substring(css.charAt(' ')))
       {
-        prune();
         return; // No point in adding the same note type again.
       }
       break; // replacing with a new note: start below.
@@ -153,7 +117,6 @@ function changeArrow()
   
   // add if empty
   var sA = selectArrow(cX, rX, rY, css);
-  notes[player][mY][bY][cX] = note;
   
   n = coll.children().first();
   nX = parseInt(n.attr('x'));
@@ -391,7 +354,7 @@ function editMode()
           y + SCALE, bpms[i].bpm, 'bpm'));
       $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
     }
-    
+
     var stps = songData.stps;
     for (var i = 0; i < stps.length; i++)
     {
@@ -490,7 +453,6 @@ function init()
   $("#intro").text("Select your action.");
   
   isDirty = false;
-  notes = new Array(Array(), Array()); // routine compatible.
   steps = new Array(0, 0);
   jumps = new Array(0, 0);
   holds = new Array(0, 0);
