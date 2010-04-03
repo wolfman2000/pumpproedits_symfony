@@ -133,7 +133,6 @@ function selectRow()
       $("#selBot").attr('y', $("#selTop").attr('y'));
       $("#selTop").attr('y', rY);
     }
-    
   }
 }
 
@@ -570,20 +569,29 @@ function rotateColumn(val)
   if (!val || val < 0) { val = -ARR_HEIGHT; } else { val = ARR_HEIGHT; }
   var notes = getSelectedArrows();
   
-  for (var i = 0; i < notes.length; i++)
-  {
-    var x = Math.floor(notes[i].getAttribute('x')) + val;
-    if (x < BUFF_LFT) { x += columns * ARR_HEIGHT; }
+  notes.each(function(ind){
+    var x = Math.floor($(this).attr('x')) + val;
+    if (x < BUFF_LFT)                              { x += columns * ARR_HEIGHT; }
     else if (x >= BUFF_LFT + columns * ARR_HEIGHT) { x -= columns * ARR_HEIGHT; }
     
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
-    var y = Math.floor(notes[i].getAttribute('y'));
-    var a = selectArrow(c, x, y, notes[i].getAttribute('class'));
-    notes[i].appendChild(a.firstChild);
-    notes[i].removeChild(notes[i].firstChild);
-    
-    notes[i].setAttribute('x', x);
-  }
+    var y = Math.floor($(this).attr('y'));
+    var a = selectArrow(c, x, y, $(this).attr('class'));
+    $(this).attr('x', x).empty().append(a.firstChild);
+  });
+  
+  var sorted = notes.sort(function(a, b){
+    var aX = $(a).attr('x');
+    var aY = $(a).attr('y');
+    var bX = $(b).attr('x');
+    var bY = $(b).attr('y');
+    if (aY < bY) { return -1; }
+    if (aY > bY) { return  1; }
+    if (aX < bX) { return -1; }
+    if (aX > bX) { return  1; }
+    return 0; // This should NEVER happen.
+  });
+  $("#svgNote").empty().append(sorted);
 }
 
 // Retrieve the selected arrows in an easy to use function.
