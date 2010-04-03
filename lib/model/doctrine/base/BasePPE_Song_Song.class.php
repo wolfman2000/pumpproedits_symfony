@@ -81,7 +81,7 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
-        $this->hasMany('PPE_Song_Stop as PPE_Song_Songs', array(
+        $this->hasMany('PPE_Song_Game as PPE_Song_Songs', array(
              'local' => 'id',
              'foreign' => 'song_id'));
 
