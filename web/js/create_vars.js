@@ -49,9 +49,7 @@ const MEASURE_RATIO = BEATS_MAX / (ARR_HEIGHT * BEATS_PER_MEASURE);
 
 const EOL = "\r\n"; // mainly for file parsing/saving.
 
-/*
- * Test that an object is empty.
- */
+// Test that an object is empty.
 function isEmpty(obj)
 {
   for(var prop in obj)
@@ -61,9 +59,7 @@ function isEmpty(obj)
   return true;
 }
 
-/*
- * Add a capitalize function for the first letter.
- */
+// Add a capitalize function for the first letter.
 String.prototype.capitalize = function(){
    return this.replace( /(^|\s)([a-z])/g , function(m,p1,p2){ return p1+p2.toUpperCase(); } );
 };

@@ -1,6 +1,4 @@
-/*
- * Generate the line required. Apply the class if one exists.
- */
+// Generate the line required. Apply the class if one exists.
 function genLine(x1, y1, x2, y2, css)
 {
   var l = document.createElementNS(SVG_NS, "line");
@@ -12,9 +10,7 @@ function genLine(x1, y1, x2, y2, css)
   return l;
 }
 
-/*
- * Generate the rect required. Apply the class if one exists.
- */
+// Generate the rect required. Apply the class if one exists.
 function genRect(x, y, w, h, rx, ry, css)
 {
   var r = document.createElementNS(SVG_NS, "rect");
@@ -28,10 +24,7 @@ function genRect(x, y, w, h, rx, ry, css)
   return r;
 }
 
-/*
- * Create the base arrow dimenions. It goes inside
- * the SVG.
- */
+// Create the base arrow dimenions. It goes inside the SVG.
 function genArrow(x, y, css)
 {
   var s = document.createElementNS(SVG_NS, "svg");
@@ -45,10 +38,7 @@ function genArrow(x, y, css)
   return s;
 }
 
-/*
- * The "base" arrow is down left. This is required for almost
- * every other arrow. (the center arrow has different code)
- */
+// The "base" arrow is down left. Use this to generate almost all others.
 function genDLArrow(x, y, css)
 {
   var s = genArrow(x, y, css);
@@ -72,9 +62,7 @@ function genDLArrow(x, y, css)
   return s;
 }
 
-/*
- * Take the down left arrow, and rotate it to point up left.
- */
+// Take the down left arrow, and rotate it to point up left.
 function genULArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
@@ -82,10 +70,7 @@ function genULArrow(x, y, css)
   return s;
 }
 
-/*
- * The center arrow works differently from the other four.
- * It's more of a box with rectangles inside, almost like a face.
- */
+// Make the center arrow. It's different from the others.
 function genCNArrow(x, y, css)
 {
   var s = genArrow(x, y, css);
@@ -104,9 +89,7 @@ function genCNArrow(x, y, css)
   return s;
 }
 
-/*
- * Take the down left arrow, and rotate it to point up right.
- */
+// Take the down left arrow, and rotate it to point up right.
 function genURArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
@@ -114,9 +97,7 @@ function genURArrow(x, y, css)
   return s;
 }
 
-/*
- * Take the down left arrow, and rotate it to point down right.
- */
+// Take the down left arrow, and rotate it to point down right.
 function genDRArrow(x, y, css)
 {
   var s = genDLArrow(x, y, css);
@@ -125,9 +106,7 @@ function genDRArrow(x, y, css)
 }
 
 
-/*
- * Generate circular mines for the steps one shouldn't hit.
- */
+// Generate circular mines for the steps one shouldn't hit.
 function genMine(x, y, css)
 {
   var s = genArrow(x, y, css); // this still works surprisingly.
@@ -153,9 +132,7 @@ function genMine(x, y, css)
   return s;
 }
 
-/*
- * Fake arrows may or may not be in Pro 2. Prepare for them.
- */
+// Fake arrows may or may not be in Pro 2. Prepare for them.
 function genFake(x, y, css)
 {
   var s = genArrow(x, y, css);
@@ -165,9 +142,7 @@ function genFake(x, y, css)
   return s;
 }
 
-/*
- * Generate the end of the hold/roll.
- */
+// Generate the end of the hold/roll.
 function genEnd(x, y, css)
 {
   var s = genArrow(x, y, css);
@@ -182,9 +157,7 @@ function genEnd(x, y, css)
   return s;
 }
 
-/*
- * Generate the text that indicates the BPM or beat pause.
- */
+// Generate the text used either for measure counting or syncing.
 function genText(x, y, st, css)
 {
   var s = document.createElementNS(SVG_NS, "text");
@@ -195,9 +168,7 @@ function genText(x, y, st, css)
   return s;
 }
 
-/*
- * Generate the measures that will hold the arrows.
- */
+// Generate the measures that will hold the arrows.
 function genMeasure(x, y, c)
 {
   var s = document.createElementNS(SVG_NS, "svg");

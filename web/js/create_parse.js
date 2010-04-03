@@ -1,14 +1,10 @@
-/*
- * Replicate the data from JSON into both my JS format
- * and SVG.
- */
+// Load the data from JSON to JS/SVG.
 function loadChart(nd)
 {
   $("#svgNote").empty();
   $("#svg").attr('width', width);
   $("#svgMeas").empty();
   $("#svgSync").empty();
-  
   
   // append the measures.
   for (var i = 0; i < songData.measures; i++)
@@ -70,10 +66,9 @@ function loadChart(nd)
   }
 }
 
-/*
- * Determine how much to increment a loop in saveChart.
- */
-function getMultiplier(iP, iM)
+
+// Determine how much to increment a loop in saveChart.
+function getMultiplier(row)
 {
   var mul = Array(1, 2, 4, 6, 8, 12, 16, 24, 32, 48, 64, 192);
   
@@ -83,7 +78,7 @@ function getMultiplier(iP, iM)
     NOTE:
     for (var i = 0; i < BEATS_MAX; i++)
     {
-      if (isEmpty(notes[iP][iM][i])) { continue NOTE; }
+      if (isEmpty(row[i])) { continue NOTE; }
       if (i % (BEATS_MAX / mul[m]) > 0) { continue MULTIPLIER; }
     }
     return BEATS_MAX / mul[m];
@@ -167,7 +162,7 @@ function saveChart()
         continue LOOP_MEASURE;
       }
       
-      var mul = getMultiplier(iP, iM);
+      var mul = getMultiplier(notes[iP][iM]);
       LOOP_BEAT:
       for (var iB = 0; iB < BEATS_MAX; iB = iB + mul)
       {

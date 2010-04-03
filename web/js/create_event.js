@@ -42,7 +42,7 @@ function shadow(e)
       {
         nX += ADJUST_SIZE;
       }
-      nX = nX / SCALE;      
+      nX = nX / SCALE;
 
       var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
       var wholeM = Math.floor(localY / scaledM);
@@ -220,11 +220,7 @@ function selectArrow(cX, rX, rY, css)
   }
 }
 
-/*
- * This is meant to be an asyncronous function
- * to get the step stats as close to live as
- * possible without tying up the browser.
- */
+// Display the updated stats. Should this become asynchronous?
 function updateStats()
 {
   var S = steps[0];
