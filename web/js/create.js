@@ -13,7 +13,11 @@ $(document).ready(function()
   $("#svg").mousemove(function(e){ shadow(e); });
   // If the shadow rectangle is out, perform these.
   $("#svg").click(function(){
-    if (!$("#shadow").is(":visible")) return;
+    if (navigator.userAgent.indexOf("WebKit") >= 0)
+    {
+      if (Math.floor($("#shadow").attr('x')) <= 0) return;
+    }
+    else if (!$("#shadow").is(":visible")) return;
     if (selMode == 0) // insert mode
     {
       changeArrow();

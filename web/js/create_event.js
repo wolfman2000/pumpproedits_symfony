@@ -20,20 +20,33 @@ function shadow(e)
   var pnt = $("#svgMeas > svg:first-child > rect:first-child")
   if (pnt.offset())
   {
+    var mX = -1000;
+    var mY = -1000;
+  
     // Use WebKit hack for now.
     if (navigator.userAgent.indexOf("WebKit") >= 0)
     {
-      mX = Math.floor(e.pageX - $("#svg").offset().left - BUFF_LFT);
-      mY = Math.floor(e.pageY - $("#svg").offset().top - BUFF_TOP);
+      var curleft = curtop = 0;
+      pnt = pnt[0]; // force HTML mode.
+      do
+      {
+        curleft += pnt.offsetLeft;
+        curtop += pnt.offsetTop;
+      } while (pnt = pnt.offsetParent);
+    
+      var eX = e.pageX;
+      var eY = e.pageY;
+      mX = Math.floor(eX - curleft - BUFF_LFT * SCALE);
+      mY = Math.floor(eY - curtop - BUFF_TOP * SCALE);
     }
     else
     {
       mX = e.pageX - pnt.offset().left;
       mY = e.pageY - pnt.offset().top;
     }
-    var localY = mY;
     var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
-    if (!(mX < 0 || mX > columns * ADJUST_SIZE || localY < 0 || localY > SCALE * maxY))
+    var maxX = columns * ADJUST_SIZE;
+    if (!(mX < 0 || mX > maxX || mY < 0 || mY > SCALE * maxY))
     {
       var nX = 0;
       var nY = 0;
@@ -45,8 +58,8 @@ function shadow(e)
       nX = nX / SCALE;
 
       var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
-      var wholeM = Math.floor(localY / scaledM);
-      var beatM = localY % scaledM;
+      var wholeM = Math.floor(mY / scaledM);
+      var beatM = mY % scaledM;
 
       var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
 
@@ -576,7 +589,7 @@ function rotateColumn(val)
     $(this).attr('x', x).empty().append(a.firstChild);
   });
   
-  var sorted = notes.sort(function(a, b){
+  var sorted = $("#svgNote").children().sort(function(a, b){
     var aX = $(a).attr('x');
     var aY = $(a).attr('y');
     var bX = $(b).attr('x');
