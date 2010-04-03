@@ -3,7 +3,7 @@
 <head>
 <title>Editor Help</title>
 </head>
-<?php $back = "<h4><a href=\"#top\">Back to Top</a></h4>\r\n</section>"; ?>
+<?php $back = "<h4><a href=\"#top\">Back to Top</a></h4>"; ?>
 <body>
 <h1>Edit Creator Help</h1>
 <ul id="top">
@@ -15,6 +15,7 @@
 <li><a href="#chrt">Chart Controls</a></li>
 </ul></li>
 <li><a href="#keyb">Keyboard Shortcuts</a></li>
+<li><a href="#thnk">Thanks</a></li>
 </ul>
 <section id="core">
 <h2>Core Buttons</h2>
@@ -40,6 +41,7 @@ Submitting is only possible once an edit is validated and there are no errors.
 You have to be logged in presently in order to submit an edit.</dd>
 </dl>
 <?php echo $back; ?>
+</section>
 <section id="song">
 <h2>Song Mode</h2>
 <p>Song Mode is very simple. All that you have to do to start editing
@@ -48,12 +50,14 @@ You have to choose a song before you choose a style. Once you choose
 a style, it changes to Edit Mode. If you want to change the mode, you
 will have to either start a new edit or load an old edit.</p>
 <?php echo $back; ?>
+</section>
 <section id="edit">
 <h2>Edit Mode</h2>
 <p>Edit Mode is where you actually create your own edit. Use
 the menus, keyboard, and mouse to select your options and
 place your arrows.</p>
 <?php echo $back; ?>
+</section>
 <section id="menu">
 <h3>Menu Options</h3>
 <p>All of the options to control your edit are available here.</p>
@@ -105,6 +109,7 @@ $keys = array('Measure' => "Indicates which measure your mouse is over. "
 <?php endforeach; ?>
 </dl>
 <?php echo $back; ?>
+</section>
 <section id="chrt">
 <h3>Chart Controls</h3>
 <p>The chart controls themselves are primarily mouse driven.
@@ -123,6 +128,7 @@ At present, you can either shift arrows over to either column, bring the
 notes up, or bring the notes down. The keyboard is required for these operations:
 use WASD for this purpose.</p>
 <?php echo $back; ?>
+</section>
 <section id="keyb">
 <h2>Keyboard Shortcuts</h2>
 <p>This online editor works best when using both the keyboard and mouse.
@@ -162,5 +168,21 @@ foreach ($keys as $k => $v): ?>
 <?php endforeach; ?>
 </dl>
 <?php echo $back; ?>
+</section>
+<section id="thnk">
+<h2>Thanks</h2>
+<p>Many need to be thanked just for this editor alone. In random order, they are:</p>
+<dl>
+<dt>Andamiro</dt>
+<dd>They made the original Pump It Up series, and their famous StepEdit editor.
+Parts of the design of this editor was inspired by that editing program.</dd>
+<dt>Fun In Motion</dt>
+<dd>They made the present Pump It Up Pro line. Without that arcade game, this
+website and editor would not exist.</dd>
+<dt>StepMania</dt>
+<dd>This is the engine that powers Pump It Up Pro. Its inclusion here should be obvious.</dd>
+</dl>
+<?php echo $back; ?>
+</section>
 </body>
 </html>
