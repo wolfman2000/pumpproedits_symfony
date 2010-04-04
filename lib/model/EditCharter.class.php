@@ -129,11 +129,24 @@ class EditCharter
     $cont = 'type="text/css" href="/css/_svg.css"';
     $css = $this->xml->createProcessingInstruction('xml-stylesheet',$cont);
     $this->xml->appendChild($css);
-  
+    
+    // Place the surrounding HTML in first.
+    $html = $this->xml->createElement('html');
+    $html->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+    $head = $this->xml->createElement('head');
+    $title = $this->xml->createElement('title');
+    $title->appendChild($this->xml->createTextNode("The Chart"));
+    $head->appendChild($title);
+    $html->appendChild($head);
+    $body = $this->xml->createElement('body');
+    
     $svg = $this->xml->createElement('svg');
     $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     $svg->setAttribute('version', 1.1);
+    
+    $body->appendChild($svg);
+    $html->appendChild($body);
     
     // Calculate the width of the outer svg.
     $numcols = ceil($measures / $this->mpcol);
@@ -154,7 +167,7 @@ class EditCharter
       $svg->appendChild($this->genDefs());
     }
     
-    $this->xml->appendChild($svg);
+    $this->xml->appendChild($html);
     
     $g = $this->xml->createElement('g');
     $g->setAttribute('transform', "scale($this->scale)");

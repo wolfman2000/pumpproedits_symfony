@@ -254,7 +254,8 @@ class chartActions extends sfActions
       
       $response = $this->getResponse();
       $response->clearHttpHeaders();
-      $response->setHttpHeader('Content-Type', 'image/svg+xml');
+      $response->setHttpHeader('Content-Type', 'application/xhtml+xml');
+      sfConfig::set('sf_web_debug', false);
       $response->setContent($xml->saveXML());
       return sfView::NONE;
     }
