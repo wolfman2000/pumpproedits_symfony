@@ -203,13 +203,13 @@ class createActions extends sfActions
    */
   public function executeRoutine(sfWebRequest $request)
   {
-    if (!$reqeust->isXmlHttpRequest())
+    if (!$request->isXmlHttpRequest())
     {
       return sfView::NONE;
     }
-    $row = array();
-    $sid = $request->getParameter('songID');
-    $row['isRoutine'] = Doctrine::getTable('PPE_Song_Game')->getRoutineCompatible($sid);
+    $ret = array();
+    $sid = $request->getParameter('songid');
+    $ret['isRoutine'] = Doctrine::getTable('PPE_Song_Game')->getRoutineCompatible($sid);
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
