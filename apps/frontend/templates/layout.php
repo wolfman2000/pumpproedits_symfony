@@ -30,12 +30,12 @@ if (browser_detection(7) == "ie"): ?>
 <?php $authin = $sf_user->isAuthenticated() ? "in" : "out"; ?>
 const authed = <?php echo $authin === "out" ? 0 : $sf_user->getAttribute('id'); ?>;
 const baseURL = window.location.href;
-<?php # time for PHP/javascript based trickery.
+<?php if (strlen($xhtml)): # time for PHP/javascript based trickery.
 if ($authin === "out"): ?>
 const andamiro = 0;
 <?php else: ?>
 const andamiro = <?php include_slot('andy', 0); ?>;
-<?php endif; ?>
+<?php endif; endif; ?>
 //]]>
 </script>
 <?php include_javascripts(); ?>
