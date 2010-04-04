@@ -178,12 +178,12 @@ PPE_Song_Game:
     PPE_Song_Song:
       local: song_id
       foreign: id
-      foreignAlias: PPE_Song_Songs
+      foreignAlias: PPE_Song_Games
       foreignKeyName: game_song_fk
     PPE_Game_Game:
       local: game_id
       foreign: id
-      foreignAlias: PPE_Game_Games
+      foreignAlias: PPE_Song_Games
       foreignKeyName: game_game_fk
   indexes:
     songs_in_game_index:
