@@ -54,7 +54,7 @@
 	{
 		clear: both;
 	}
-	#songlist
+	#songlist, #mem_edit
 	{
 		max-width: 20em;
 	}
