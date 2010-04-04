@@ -69,9 +69,9 @@ if ($z->num_votes): ?>
 <?php if ($z->num_votes): ?>
 <li><?php echo link_to("View Ratings", "@ratings?eid=$z->id") ?></li>
 <?php endif;
-if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") === false)
-<li><?php echo link_to("Classic Chart", "@chart_quick?id={$z->id}&kind=classic") ?></li>
-<li><?php echo link_to("Rhythm Chart", "@chart_quick?id={$z->id}&kind=rhythm") ?></li>
+if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") === false): ?>
+<li><?php echo link_to("Classic Chart", "@chart_quick?id={$z->id}&kind=classic"); ?></li>
+<li><?php echo link_to("Rhythm Chart", "@chart_quick?id={$z->id}&kind=rhythm"); ?></li>
 <?php endif; ?>
 </ul></td>
 </tr>
