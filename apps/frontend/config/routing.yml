@@ -31,15 +31,6 @@ edit_creator_song:
   requirements:
     id: \d+
 
-# use ajaj to determine if the user can edit Andamiro edits.
-edit_creator_andamiro:
-  url: /create/andamiro/:userid
-  param:
-    module: create
-    action: andamiro
-  requirements:
-    id: \d+
-
 # use ajaj to determine if the song can have a routine chart.
 edit_creator_routine:
   url: /create/routine/:songid

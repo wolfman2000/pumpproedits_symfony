@@ -1,6 +1,7 @@
 <?php slot('xhtml', "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n<?xml-stylesheet href=\"/css/_svg.css\" type=\"text/css\"?>\r\n");
 slot('title', 'Edit Creator — Pump Pro Edits');
-slot('h2', "<h2>Edit Creator</h2>"); ?>
+slot('h2', "<h2>Edit Creator</h2>");
+slot('andy', $andy); ?>
 <p>Welcome to the edit creator. Use the options on the
 left to place arrows below. Have fun!</p>
 

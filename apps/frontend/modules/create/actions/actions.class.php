@@ -23,6 +23,11 @@ class createActions extends sfActions
       return sfView::ERROR;
     }
     $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithGame();
+    if ($this->getUser()->isAuthenticated())
+    {
+      $id = $this->getUser()->getAttribute('id');
+      $this->andy = Doctrine::getTable('PPE_User_Power')->canEditAndamiro($id);
+    }
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
   
@@ -195,22 +200,6 @@ class createActions extends sfActions
       $ret['exception'] = $e->getMessage();
     }
     @unlink($fn);
-    return $this->renderText(json_encode($ret));
-  }
-  
-  /**
-   * Determine if the chosen user can edit/create Andamiro's charts.
-   */
-  public function executeAndamiro(sfWebRequest $request)
-  {
-    if (!$request->isXmlHttpRequest())
-    {
-      return sfView::NONE;
-    }
-    $ret = array();
-    $uid = $request->getParameter('userid');
-    $ret['canAnd'] = 0;
-    $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
   
