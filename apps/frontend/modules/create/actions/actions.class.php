@@ -199,6 +199,22 @@ class createActions extends sfActions
   }
   
   /**
+   * Determine if the chosen user can edit/create Andamiro's charts.
+   */
+  public function executeAndamiro(sfWebRequest $request)
+  {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
+    $ret = array();
+    $uid = $request->getParameter('userid');
+    $ret['canAnd'] = 0;
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    return $this->renderText(json_encode($ret));
+  }
+  
+  /**
    * Determine if the chosen song can have a Routine style.
    */
   public function executeRoutine(sfWebRequest $request)
