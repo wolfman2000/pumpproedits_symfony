@@ -63,7 +63,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
   public function getSVGEdits($id)
   {
     return $this->createQuery('a')
-      ->select('style, title, diff, s.abbr sabbr')
+      ->select('style, title, diff, s.abbr sabbr, s.name sname')
       ->innerJoin('a.PPE_Song_Song s')
       ->where('a.user_id = ?', $id)
       ->orderBy('a.id')

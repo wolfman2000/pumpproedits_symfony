@@ -105,6 +105,7 @@ class createActions extends sfActions
       $row = array();
       $row['id'] = $s->id;
       $row['abbr'] = $s->sabbr;
+      $row['name'] = $s->sname;
       $row['title'] = $s->title;
       $row['style'] = $s->style;
       $row['diff'] = $s->diff;

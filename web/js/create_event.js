@@ -627,7 +627,7 @@ function loadWebEdits(user)
   {
     for (var i = 0; i < data.length; i++)
     {
-      var out = data[i].title + " (" + data[i].abbr + ") " + data[i].style.charAt(0).capitalize() + data[i].diff;
+      var out = data[i].title + " (" + data[i].name + ") " + data[i].style.charAt(0).capitalize() + data[i].diff;
       var html = '<option id="' + data[i].id + '">' + out + '</option>';
       $("#mem_edit").append(html);
     }
