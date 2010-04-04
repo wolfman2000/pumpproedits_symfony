@@ -19,7 +19,11 @@
 <li>
     <h4>Everyone</h4>
     <ul>
+    <?php if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== false): ?>
+    <li><a href="/java/PPEdits.zip">Edit Maker (Java)</a></li>
+    <?php else: ?>
     <li><?php echo link_to("Edit Creator", '@edit_creator') ?></li>
+    <?php endif; ?>
     <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
