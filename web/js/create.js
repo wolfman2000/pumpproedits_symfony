@@ -118,6 +118,16 @@ $(document).ready(function()
     if (andamiro > 0) { $(".loadWeb").show(); }
     else              { loadWebEdits(authed); }
   });
+  // The account holder wishes to edit one of his account edits.
+  $("#web_you").click(function(){
+    $(".loadWeb").hide();
+    loadWebEdits(authed);
+  });
+  // The account holder wishes to edit one of Andamiro's account edits.
+  $("#web_and").click(function(){
+    $(".loadWeb").hide();
+    loadWebEdits(2);
+  });
   
   // The edit contents have to be placed in here due to AJAX requirements.
   $("#fCont").keyup(function(){
