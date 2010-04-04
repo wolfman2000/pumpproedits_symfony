@@ -130,10 +130,11 @@ class EditCharter
 
   private function genXMLHeader($measures)
   {
+    /*
     $cont = 'type="text/css" href="/css/_svg.css"';
     $css = $this->xml->createProcessingInstruction('xml-stylesheet',$cont);
     $this->xml->appendChild($css);
-    
+    */
     // Place the surrounding HTML in first.
     $html = $this->xml->createElement('html');
     $html->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
@@ -143,8 +144,13 @@ class EditCharter
     $script = $this->xml->createElement('script');
     $script->setAttribute('type', 'text/javascript');
     $script->setAttribute('src', '/js/svg.js');
+    $link = $this->xml->createElement('link');
+    $link->setAttribute('type', 'text/css');
+    $link->setAttribute('rel', 'stylesheet');
+    $link->setAttribute('href', '/css/_svg.css');
     $head->appendChild($title);
     $head->appendChild($script);
+    $head->appendChild($link);
     $html->appendChild($head);
     $body = $this->xml->createElement('body');
     
@@ -155,11 +161,11 @@ class EditCharter
     
     // making a script tag for the purpose of SVG Web.
     $web = $this->xml->createElement('script');
-    $web->setAttribute('type', 'image/xvg+xml');
+    $web->setAttribute('type', 'image/svg+xml');
     $web->setAttribute('id', 'ieHelper');
     ///*
-    //$cdata = $this->xml->createCDATASection($svg);
-    //$cdata->appendChild($svg);
+    $cdata = $this->xml->createCDATASection("");
+    $cdata->appendChild($svg);
     $web->appendChild($svg);
     //*/
     /*
