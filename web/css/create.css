@@ -54,6 +54,10 @@
 	{
 		clear: both;
 	}
+	#songlist
+	{
+		max-width: 20em;
+	}
 	#editName
 	{
 		width: 10em;
