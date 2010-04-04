@@ -28,6 +28,10 @@ class createActions extends sfActions
       $id = $this->getUser()->getAttribute('id');
       $this->andy = Doctrine::getTable('PPE_User_Power')->canEditAndamiro($id);
     }
+    else
+    {
+      $this->andy = 0;
+    }
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
   
