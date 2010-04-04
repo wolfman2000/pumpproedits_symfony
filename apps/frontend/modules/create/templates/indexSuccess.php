@@ -37,6 +37,8 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <li><button id="but_val" type="button">Validate</button></li>
 <li class="loadChoose"><button id="cho_file" type="button">Hard Drive</button></li>
 <li class="loadChoose"><button id="cho_site" type="button">Web Site</button></li>
+<li class="loadWeb"><button id="web_you" type="button">Yours</button></li>
+<li class="loadWeb"><button id="web_and" type="button">Andamiro's</button></li>
 <li class="loadSite long">Select your edit below.</li>
 <li class="loadSite long"><select id="mem_edit"></select></li>
 <li class="loadSite reset"><button id="mem_load" type="button">Load Edit</button></li>

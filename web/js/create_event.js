@@ -365,6 +365,7 @@ function init()
   $("nav dt.edit").hide();
   $("nav dd.edit").hide();
   $("nav li.loadChoose").hide();
+  $("nav li.loadWeb").hide();
   $("nav li.loadSite").hide();
   $("nav li.loadFile").hide();
   $("#notes > rect").hide();
