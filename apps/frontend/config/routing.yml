@@ -31,6 +31,15 @@ edit_creator_song:
   requirements:
     id: \d+
 
+# use ajaj to determine if the song can have a routine chart.
+edit_creator_routine:
+  url: /create/routine/:songid
+  param:
+    module: create
+    action: routine
+  requirements:
+    id: \d+
+
 # use ajaj to load the file.
 edit_creator_loadFile:
   url: /create/loadFile

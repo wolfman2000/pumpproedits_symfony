@@ -199,6 +199,22 @@ class createActions extends sfActions
   }
   
   /**
+   * Determine if the chosen song can have a Routine style.
+   */
+  public function executeRoutine(sfWebRequest $request)
+  {
+    if (!$reqeust->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
+    $row = array();
+    $sid = $request->getParameter('songID');
+    $row['isRoutine'] = Doctrine::getTable('PPE_Song_Game')->getRoutineCompatible($sid);
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    return $this->renderText(json_encode($ret));
+  }
+  
+  /**
    * Upload the created edit. Respect new vs old.
    */
   public function executeUpload(sfWebRequest $request)
