@@ -50,7 +50,10 @@ class PPE_Song_SongTable extends Doctrine_Table
   }
   public function getBaseEdits()
   {
-    return $this->createQuery('a')->select('name, id, abbr')->orderBy('lc_name');
+    return $this->createQuery('a')
+      ->select('name, id, abbr, g.game_id tmp')
+      ->leftJoin('a.PPE_Song_Games g WITH g.game_id > 1')
+      ->orderBy('lc_name');
   }
   
   public function getSongsWithEdits()

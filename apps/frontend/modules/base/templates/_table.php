@@ -12,8 +12,10 @@
     <tr>
       <td><?php echo $b->getName() ?></td>
       <?php $s = '@download_base_edit?id=%d&type=%s'; ?>
-      <?php foreach ($style as $st): ?>
-      <td><a href="<?php echo url_for(sprintf($s, $b->getId(), $st)) ?>"><?php echo $b->getAbbr() . " " . ucfirst($st) ?></a></td>
+      <?php foreach ($style as $st):
+      $url = url_for(sprintf($s, $b->getId(), $st));
+      $txt = $b->getAbbr() . " " . ucfirst($st); ?>
+      <td><?php if ($st !== "routine" or $b->tmp): ?><a href="<?php echo $url; ?>"><?php echo $txt; ?></a><?php endif; ?></td>
       <?php endforeach; ?>
     </tr>
     <?php endforeach; ?>
