@@ -43,9 +43,16 @@ but try to be careful.
 Don't be afraid to use many different technologies either.
 Presently, this website uses a more flexible SVG
 chart generator than the previous PNG version. Take advantage
-of what the web has to offer. Just make sure it runs on
-as many proper web browsers as possible. I will leave the
-definition of proper to you.
+of what the web has to offer. If it is a standard technology
+implemented by many web browsers, go ahead.
+
+At this point, there is no hiding it: anyone that uses
+Internet Explorer just cannot get the proper experience
+at this time. The SVG technology is not guaranteed to work on
+IE whether by plugin or javascript or flash without a risk
+of breaking it for the other web browsers. Most of my pieces
+are presently left in the repository for anyone brave enough to
+make it work for IE and keep it working for the others.
 
 If there are any questions, feel free to contact me.
 
