@@ -68,7 +68,7 @@ $(document).ready(function()
     }
   });
   
-  // Provide help for those that need it (TODO: Get this done.)
+  // Provide help for those that need it.
   $("#but_help").click(function(){
     $("#intro").text("Loading help...");
     window.open(baseURL + "/help", "helpWindow",
