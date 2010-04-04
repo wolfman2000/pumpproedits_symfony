@@ -15,7 +15,7 @@
       <?php foreach ($style as $st):
       $url = url_for(sprintf($s, $b->getId(), $st));
       $txt = $b->getAbbr() . " " . ucfirst($st); ?>
-      <td><?php if ($st !== "routine" or $b->tmp): ?><a href="<?php echo $url; ?>"><?php echo $txt; ?></a><?php endif; ?></td>
+      <td><?php if ($st !== "routine" or $b->tmp) echo link_to($txt, $url); ?></td>
       <?php endforeach; ?>
     </tr>
     <?php endforeach; ?>
