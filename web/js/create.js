@@ -175,6 +175,7 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', 'disabled');
+      $("#authorlist").attr("disabled", "disabled");
       $(".author").hide();
       isDirty = false;
     }, "json");
@@ -207,6 +208,7 @@ $(document).ready(function()
       $("#intro").text("Loading chart...");
       loadChart(data.notes);
       $("#intro").text("All loaded up!");
+      $("#authorlist").attr("disabled", "disabled");
       $(".author").hide();
       if (title.length)
       {
@@ -235,7 +237,7 @@ $(document).ready(function()
     $("#intro").text("Here it comes!");
   });
   
-  // The author uploads his edit directly to his account.
+  // The author uploads the edit directly to the chosen account.
   $("#but_sub").click(function(){
     var data = {};
     data['b64'] = b64;
@@ -244,7 +246,7 @@ $(document).ready(function()
     data['style'] = style;
     data['editID'] = editID;
     data['songID'] = songID;
-    data['userID'] = authed;
+    data['userID'] = authID;
     data['steps1'] = steps[0];
     data['steps2'] = steps[1];
     data['jumps1'] = jumps[0];
@@ -267,6 +269,8 @@ $(document).ready(function()
     {
       $("#intro").text("Edit Uploaded");
       $("#editName").attr("disabled", "disabled");
+      $("#authorlist").attr("disabled", "disabled");
+      $(".author").hide();
     }, "json");
   });
   
