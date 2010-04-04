@@ -579,7 +579,7 @@ class EditCharter
     $point = 8.5;
     $radius = 6.5625;
     
-    foreach (array('grad_', 'p1_', 'p2_') as ($pl):
+    foreach (array('grad_', 'p1_', 'p2_') as $pl):
     
     foreach (array('004', '008', '012', '016', '024', '032', '048', '064', '192') as $rg)
     {
