@@ -623,7 +623,7 @@ function loadWebEdits(user)
   $(".loadSite").show();
   $("#intro").text("Loading " + (user == 2 ? "Andamiro's" : "your") + " edits...");
   $("#mem_edit").empty();
-  $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + user, success: function(data)
+  $.getJSON(baseURL + '/loadSite/' + user, function(data)
   {
     for (var i = 0; i < data.length; i++)
     {
@@ -632,5 +632,5 @@ function loadWebEdits(user)
       $("#mem_edit").append(html);
     }
     $("#intro").text("Choose your edit!");
-  }});
+  });
 }
