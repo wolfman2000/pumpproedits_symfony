@@ -136,7 +136,11 @@ class EditCharter
     $head = $this->xml->createElement('head');
     $title = $this->xml->createElement('title');
     $title->appendChild($this->xml->createTextNode("The Chart"));
+    $script = $this->xml->createElement('script');
+    $script->setAttribute('type', 'text/javascript');
+    $script->setAttribute('src', '/js/svg.js');
     $head->appendChild($title);
+    $head->appendChild($script);
     $html->appendChild($head);
     $body = $this->xml->createElement('body');
     
