@@ -33,6 +33,17 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->orderBy('lc_name')->execute();
   }
   
+  public function getSongsWithGame()
+  {
+    return $this->createQuery('a')
+      ->select('name, g.song_id sid, MIN(g.game_id) gid')
+      ->innerJoin('a.PPE_Song_Games g')
+      ->where('is_problem = ?', false)
+      ->groupBy('name, sid')
+      ->orderBy('gid, name')
+      ->execute();
+  }
+  
   public function getBaseEditsExecute()
   {
     return $this->getBaseEdits()->execute();

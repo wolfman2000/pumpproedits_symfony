@@ -22,7 +22,7 @@ class createActions extends sfActions
       $this->getResponse()->setStatusCode(415);
       return sfView::ERROR;
     }
-    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongs();
+    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithGame();
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
   
