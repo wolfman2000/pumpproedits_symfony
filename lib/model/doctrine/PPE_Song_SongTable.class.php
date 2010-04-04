@@ -33,13 +33,27 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->orderBy('lc_name')->execute();
   }
   
+  public function getSongsWithGame()
+  {
+    return $this->createQuery('a')
+      ->select('name, g.song_id sid, MIN(g.game_id) gid')
+      ->innerJoin('a.PPE_Song_Games g')
+      ->where('is_problem = ?', false)
+      ->groupBy('name, sid')
+      ->orderBy('gid, name')
+      ->execute();
+  }
+  
   public function getBaseEditsExecute()
   {
     return $this->getBaseEdits()->execute();
   }
   public function getBaseEdits()
   {
-    return $this->createQuery('a')->select('name, id, abbr')->orderBy('lc_name');
+    return $this->createQuery('a')
+      ->select('name, id, abbr, g.game_id tmp')
+      ->leftJoin('a.PPE_Song_Games g WITH g.game_id > 1')
+      ->orderBy('lc_name');
   }
   
   public function getSongsWithEdits()

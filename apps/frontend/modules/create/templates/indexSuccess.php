@@ -51,9 +51,15 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <dt class="choose"><label for="songlist">Select your song!</label></dt>
 <dd class="choose"><select id="songlist">
 <option value="" selected="selected">Choose</option>
-<?php foreach ($songs as $s): ?>
+<optgroup label="Pump it up Pro">
+<?php $ind = 1;
+foreach ($songs as $s):
+if ($s->gid != $ind): ?>
+</optgroup>
+<optgroup label="Pump it up Pro 2">
+<?php $ind = $s->gid; endif; ?>
 <option value="<?php echo $s->id ?>"><?php echo $s->name ?></option>
-<?php endforeach; ?></select></dd>
+<?php endforeach; ?></optgroup></select></dd>
 <dt class="choose"><label for="stylelist">Select your style!</label></dt>
 <dd class="choose"><select id="stylelist">
 <option value="" selected="selected">Choose</option>

@@ -150,6 +150,50 @@ PPE_Song_Song:
     collate: utf8_unicode_ci
     charset: utf8
 
+PPE_Game_Game:
+  columns:
+    game:
+      type: string
+      length: 32
+      notnull: true
+  indexes:
+    game_index:
+      fields: [game]
+      type: unique
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
+PPE_Song_Game:
+  columns:
+    song_id:
+      type: integer
+      notnull: true
+    game_id:
+      type: integer
+      notnull: true
+      default: 1
+  relations:
+    PPE_Song_Song:
+      local: song_id
+      foreign: id
+      foreignAlias: PPE_Song_Games
+      foreignKeyName: game_song_fk
+    PPE_Game_Game:
+      local: game_id
+      foreign: id
+      foreignAlias: PPE_Song_Games
+      foreignKeyName: game_game_fk
+  indexes:
+    songs_in_game_index:
+      fields: [song_id, game_id]
+      type: unique
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Song_Stop:
   actAs: { Timestampable: ~ }
   columns:

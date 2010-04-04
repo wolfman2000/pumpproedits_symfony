@@ -148,7 +148,7 @@ $(document).ready(function()
     
     tarea = $("#fCont").val();
     var done;
-    $.post(window.location.href + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
+    $.post(baseURL + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
     {
       songID = data.id;
       style = data.style;
@@ -260,7 +260,7 @@ $(document).ready(function()
     data['lifts2'] = lifts[1];
     
     $("#intro").text("Uploading edit...");
-    $.post(window.location.href + "/upload", data, function(data, status)
+    $.post(baseURL + "/upload", data, function(data, status)
     {
       $("#intro").text("Edit Uploaded");
       $("#editName").attr("disabled", "disabled");
@@ -270,7 +270,17 @@ $(document).ready(function()
   // The author wants to work on this song.
   $('#songlist').change(function(){
     songID = $("#songlist").val();
-    if (songID.length > 0) { $("#stylelist").removeAttr("disabled"); }
+    if (songID.length > 0)
+    {
+      $("#intro").text("Setting up styles...")
+      $.getJSON(baseURL + "/routine/" + songID, function(data, status)
+      {
+        $("#stylelist").removeAttr("disabled");
+        if (data.isRoutine > 0) { $("#stylelist > option:last-child").show(); }
+        else                    { $("#stylelist > option:last-child").hide(); }
+        $("#intro").text("What style for today?");
+      });
+    }
     else { $("#stylelist").attr("disabled", "disabled"); }
   });
 

@@ -54,6 +54,15 @@
 	{
 		clear: both;
 	}
+	#songlist
+	{
+		max-width: 20em;
+	}
+	#songlist > optgroup > option
+	{
+		padding-left: 1em;
+		padding-right: 1em;
+	}
 	#editName
 	{
 		width: 10em;

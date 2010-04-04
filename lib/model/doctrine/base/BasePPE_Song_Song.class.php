@@ -9,6 +9,7 @@
  * @property char $abbr
  * @property integer $measures
  * @property boolean $is_problem
+ * @property Doctrine_Collection $PPE_Song_Games
  * @property Doctrine_Collection $PPE_Song_Songs
  * @property Doctrine_Collection $PPE_Edit_Edits
  * 
@@ -16,12 +17,14 @@
  * @method char                getAbbr()           Returns the current record's "abbr" value
  * @method integer             getMeasures()       Returns the current record's "measures" value
  * @method boolean             getIsProblem()      Returns the current record's "is_problem" value
+ * @method Doctrine_Collection getPPESongGames()   Returns the current record's "PPE_Song_Games" collection
  * @method Doctrine_Collection getPPESongSongs()   Returns the current record's "PPE_Song_Songs" collection
  * @method Doctrine_Collection getPPEEditEdits()   Returns the current record's "PPE_Edit_Edits" collection
  * @method PPE_Song_Song       setName()           Sets the current record's "name" value
  * @method PPE_Song_Song       setAbbr()           Sets the current record's "abbr" value
  * @method PPE_Song_Song       setMeasures()       Sets the current record's "measures" value
  * @method PPE_Song_Song       setIsProblem()      Sets the current record's "is_problem" value
+ * @method PPE_Song_Song       setPPESongGames()   Sets the current record's "PPE_Song_Games" collection
  * @method PPE_Song_Song       setPPESongSongs()   Sets the current record's "PPE_Song_Songs" collection
  * @method PPE_Song_Song       setPPEEditEdits()   Sets the current record's "PPE_Edit_Edits" collection
  * 
@@ -81,6 +84,10 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
     public function setUp()
     {
         parent::setUp();
+        $this->hasMany('PPE_Song_Game as PPE_Song_Games', array(
+             'local' => 'id',
+             'foreign' => 'song_id'));
+
         $this->hasMany('PPE_Song_Stop as PPE_Song_Songs', array(
              'local' => 'id',
              'foreign' => 'song_id'));

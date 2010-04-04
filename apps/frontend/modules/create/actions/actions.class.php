@@ -22,7 +22,7 @@ class createActions extends sfActions
       $this->getResponse()->setStatusCode(415);
       return sfView::ERROR;
     }
-    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongs();
+    $this->songs = Doctrine::getTable('PPE_Song_Song')->getSongsWithGame();
     $this->getResponse()->setHttpHeader('Content-Type', 'application/xhtml+xml');
   }
   
@@ -195,6 +195,22 @@ class createActions extends sfActions
       $ret['exception'] = $e->getMessage();
     }
     @unlink($fn);
+    return $this->renderText(json_encode($ret));
+  }
+  
+  /**
+   * Determine if the chosen song can have a Routine style.
+   */
+  public function executeRoutine(sfWebRequest $request)
+  {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
+    $ret = array();
+    $sid = $request->getParameter('songid');
+    $ret['isRoutine'] = Doctrine::getTable('PPE_Song_Game')->getRoutineCompatible($sid);
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
   
