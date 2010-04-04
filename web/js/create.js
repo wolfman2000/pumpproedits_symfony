@@ -301,7 +301,7 @@ $(document).ready(function()
   // The author wishes to indicate whose work this really is.
   $("#authorlist").change(function(){
     var val = $("#authorlist").val();
-    authID = (val ? 2 : authed);
+    authID = (val == 0 ? authed : 2);
   });
   
   // The author wishes to change the edit title / name.
