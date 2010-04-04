@@ -89,7 +89,11 @@ class EditCharter
     $this->cols = $params['cols'];
     $this->cw = $this->cols * $this->aw;
     
-    $this->xml = new DomDocument("1.0", "UTF-8");
+    $tmp = new DomImplementation;
+    $dtd = $tmp->createDocumentType("html");
+    $this->xml = $tmp->createDocument("", "", $dtd);
+    $this->xml->encoding = "UTF-8";
+    //$this->xml = new DomDocument("1.0", "UTF-8");
     $this->xml->preserveWhiteSpace = false;
     $this->xml->formatOutput = true; # May change this.
   }
@@ -149,6 +153,20 @@ class EditCharter
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     $svg->setAttribute('version', 1.1);
     
+    // making a script tag for the purpose of SVG Web.
+    $web = $this->xml->createElement('script');
+    $web->setAttribute('type', 'image/xvg+xml');
+    $web->setAttribute('id', 'ieHelper');
+    ///*
+    //$cdata = $this->xml->createCDATASection($svg);
+    //$cdata->appendChild($svg);
+    $web->appendChild($svg);
+    //*/
+    /*
+    $web->appendChild($this->xml->createTextNode('//<![CDATA['));
+    $web->appendChild($svg);
+    $web->appendChild($this->xml->createTextNode('//]]>'));
+    */
     $body->appendChild($svg);
     $html->appendChild($body);
     
