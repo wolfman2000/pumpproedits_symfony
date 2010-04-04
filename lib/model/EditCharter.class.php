@@ -89,7 +89,11 @@ class EditCharter
     $this->cols = $params['cols'];
     $this->cw = $this->cols * $this->aw;
     
-    $this->xml = new DomDocument("1.0", "UTF-8");
+    $tmp = new DomImplementation;
+    $dtd = $tmp->createDocumentType("html");
+    $this->xml = $tmp->createDocument("", "", $dtd);
+    $this->xml->encoding = "UTF-8";
+    //$this->xml = new DomDocument("1.0", "UTF-8");
     $this->xml->preserveWhiteSpace = false;
     $this->xml->formatOutput = true; # May change this.
   }
@@ -126,14 +130,51 @@ class EditCharter
 
   private function genXMLHeader($measures)
   {
+    /*
     $cont = 'type="text/css" href="/css/_svg.css"';
     $css = $this->xml->createProcessingInstruction('xml-stylesheet',$cont);
     $this->xml->appendChild($css);
-  
+    */
+    // Place the surrounding HTML in first.
+    $html = $this->xml->createElement('html');
+    $html->setAttribute('xmlns', 'http://www.w3.org/1999/xhtml');
+    $head = $this->xml->createElement('head');
+    $title = $this->xml->createElement('title');
+    $title->appendChild($this->xml->createTextNode("The Chart"));
+    $script = $this->xml->createElement('script');
+    $script->setAttribute('type', 'text/javascript');
+    $script->setAttribute('src', '/js/svg.js');
+    $link = $this->xml->createElement('link');
+    $link->setAttribute('type', 'text/css');
+    $link->setAttribute('rel', 'stylesheet');
+    $link->setAttribute('href', '/css/_svg.css');
+    $head->appendChild($title);
+    $head->appendChild($script);
+    $head->appendChild($link);
+    $html->appendChild($head);
+    $body = $this->xml->createElement('body');
+    
     $svg = $this->xml->createElement('svg');
     $svg->setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     $svg->setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
     $svg->setAttribute('version', 1.1);
+    
+    // making a script tag for the purpose of SVG Web.
+    $web = $this->xml->createElement('script');
+    $web->setAttribute('type', 'image/svg+xml');
+    $web->setAttribute('id', 'ieHelper');
+    ///*
+    $cdata = $this->xml->createCDATASection("");
+    $cdata->appendChild($svg);
+    $web->appendChild($svg);
+    //*/
+    /*
+    $web->appendChild($this->xml->createTextNode('//<![CDATA['));
+    $web->appendChild($svg);
+    $web->appendChild($this->xml->createTextNode('//]]>'));
+    */
+    $body->appendChild($svg);
+    $html->appendChild($body);
     
     // Calculate the width of the outer svg.
     $numcols = ceil($measures / $this->mpcol);
@@ -154,7 +195,7 @@ class EditCharter
       $svg->appendChild($this->genDefs());
     }
     
-    $this->xml->appendChild($svg);
+    $this->xml->appendChild($html);
     
     $g = $this->xml->createElement('g');
     $g->setAttribute('transform', "scale($this->scale)");
