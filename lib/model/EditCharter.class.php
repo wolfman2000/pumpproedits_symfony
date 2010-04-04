@@ -579,10 +579,12 @@ class EditCharter
     $point = 8.5;
     $radius = 6.5625;
     
+    foreach (array('grad_', 'p1_', 'p2_') as ($pl):
+    
     foreach (array('004', '008', '012', '016', '024', '032', '048', '064', '192') as $rg)
     {
       $node = $this->xml->createElement('radialGradient');
-      $node->setAttribute('id', 'grad_' . $rg);
+      $node->setAttribute('id', $pl . $rg);
       
       foreach (array('cx', 'cy', 'fx', 'fy') as $at)
       {
@@ -598,6 +600,8 @@ class EditCharter
       }
       $def->appendChild($node);
     }
+    
+    endforeach;
     
     foreach (array(1, 2) as $num)
     {
