@@ -115,19 +115,8 @@ $(document).ready(function()
   // The account holder wishes to edit an account edit in place.
   $("#cho_site").click(function(){
     $(".loadChoose").hide();
-    $(".loadSite").show();
-    $("#intro").text("Loading your edits...");
-    $("#mem_edit").empty();
-    $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + authed, success: function(data)
-    {
-      for (var i = 0; i < data.length; i++)
-      {
-        var out = data[i].title + " (" + data[i].abbr + ") " + data[i].style.charAt(0).capitalize() + data[i].diff;
-        var html = '<option id="' + data[i].id + '">' + out + '</option>';
-        $("#mem_edit").append(html);
-      }
-      $("#intro").text("Choose your edit!");
-    }});
+    if (andamiro > 0) { $(".loadWeb").show(); }
+    else              { loadWebEdits(authed); }
   });
   
   // The edit contents have to be placed in here due to AJAX requirements.

@@ -617,3 +617,20 @@ function getSelectedArrows()
         y <= parseFloat($("#selBot").attr('y'));
   });
 }
+// Load up the chosen user's songs.
+function loadWebEdits(user)
+{
+  $(".loadSite").show();
+  $("#intro").text("Loading " + (user == 2 ? "Andamiro's" : "your") + " edits...");
+  $("#mem_edit").empty();
+  $.ajax({ async: true, dataType: 'json', url: baseURL + '/loadSite/' + user, success: function(data)
+  {
+    for (var i = 0; i < data.length; i++)
+    {
+      var out = data[i].title + " (" + data[i].abbr + ") " + data[i].style.charAt(0).capitalize() + data[i].diff;
+      var html = '<option id="' + data[i].id + '">' + out + '</option>';
+      $("#mem_edit").append(html);
+    }
+    $("#intro").text("Choose your edit!");
+  }});
+}
