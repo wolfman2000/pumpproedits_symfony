@@ -346,6 +346,18 @@ function editMode()
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
     $("#editName").removeAttr('disabled');
+    
+    if (!authed)
+    {
+      $(".author").hide();
+    }
+    else
+    {
+      $(".author").show();
+      $("#authorlist").val(0);
+      authID = authed;
+    }
+    
     return true;
   }});
   return false; // this is to ensure the asyncing is done right.

@@ -121,12 +121,14 @@ $(document).ready(function()
   // The account holder wishes to edit one of his account edits.
   $("#web_you").click(function(){
     $(".loadWeb").hide();
-    loadWebEdits(authed);
+    authID = authed;
+    loadWebEdits(authID);
   });
   // The account holder wishes to edit one of Andamiro's account edits.
   $("#web_and").click(function(){
     $(".loadWeb").hide();
-    loadWebEdits(2);
+    authID = 2;
+    loadWebEdits(authID);
   });
   
   // The edit contents have to be placed in here due to AJAX requirements.
@@ -173,6 +175,7 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', 'disabled');
+      $(".author").hide();
       isDirty = false;
     }, "json");
   });
@@ -204,6 +207,7 @@ $(document).ready(function()
       $("#intro").text("Loading chart...");
       loadChart(data.notes);
       $("#intro").text("All loaded up!");
+      $(".author").hide();
       if (title.length)
       {
         $("#editName").attr('disabled', true);
@@ -293,6 +297,12 @@ $(document).ready(function()
   // The author wishes to change the syncing and note type.
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
   $("#typelist").change(function() { note = $("#typelist").val();});
+  
+  // The author wishes to indicate whose work this really is.
+  $("#authorlist").change(function(){
+    var val = $("#authorlist").val();
+    authID = (val ? 2 : authed);
+  });
   
   // The author wishes to change the edit title / name.
   $("#editName").keyup(function(){

@@ -73,6 +73,11 @@ if ($s->gid != $ind): ?>
 </select></dd>
 <dt class="edit"></dt>
 <dd class="edit"><ul>
+<li class="author"><label for="authorlist">Edit Author:</label></li>
+<li class="author"><select id="authorlist">
+<option value="0" selected="selected">Yourself</option>
+<option value="1">Andamiro</option>
+</select></li>
 <li><label for="editName">Edit Name:</label></li>
 <li><input type="text" id="editName" maxlength="12" /></li>
 <li><label for="editDiff">Diff. Rating:</label></li>
