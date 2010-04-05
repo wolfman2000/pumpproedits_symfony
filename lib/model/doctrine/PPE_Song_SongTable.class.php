@@ -52,6 +52,7 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->leftJoin('a.PPE_Song_Difficulties d')
       ->where('is_problem = ?', false)
       ->groupBy('name, sid')
+      ->having("did > 0")
       ->orderBy('gid, name')
       ->execute();
   }

@@ -239,7 +239,7 @@ chart_off_get:
 
 # Use ajaj to get the difficulty lists for each individual song.
 chart_off_diff:
-  url: /chart/diff/:songid
+  url: /chart/official/diff/:songid
   param:
     module: chart
     action: ajajDifficulty
