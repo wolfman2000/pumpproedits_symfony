@@ -173,13 +173,12 @@ class chartActions extends sfActions
   {
     if (!$request->isXmlHttpRequest())
     {
-      //return sfView::NONE;
+      return sfView::NONE;
     }
-    $ret = array();
     $sid = $request->getParameter('songid');
-    $ret['isRoutine'] = Doctrine::getTable('PPE_Song_Song')->getDifficulties($sid);
+    $ret = Doctrine::getTable('PPE_Song_Song')->getDifficulties($sid);
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
-    return $this->renderText(json_encode($ret));
+    return $this->renderText(json_encode($ret[0]));
   }
   
   public function executeOffProcess(sfWebRequest $request)
