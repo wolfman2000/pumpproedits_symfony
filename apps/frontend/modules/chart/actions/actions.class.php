@@ -173,11 +173,11 @@ class chartActions extends sfActions
   {
     if (!$request->isXmlHttpRequest())
     {
-      return sfView::NONE;
+      //return sfView::NONE;
     }
     $ret = array();
     $sid = $request->getParameter('songid');
-    $ret['isRoutine'] = Doctrine::getTable('PPE_Song_Game')->getRoutineCompatible($sid);
+    $ret['isRoutine'] = Doctrine::getTable('PPE_Song_Song')->getDifficulties($sid);
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
