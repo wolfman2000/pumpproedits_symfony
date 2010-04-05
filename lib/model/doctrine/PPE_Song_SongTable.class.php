@@ -44,6 +44,18 @@ class PPE_Song_SongTable extends Doctrine_Table
       ->execute();
   }
   
+  public function getSongsWithGameAndDiff()
+  {
+    return $this->createQuery('a')
+      ->select('name, g.song_id sid, MIN(g.game_id) gid, COUNT(d.diff_id) did')
+      ->leftJoin('a.PPE_Song_Games g')
+      ->leftJoin('a.PPE_Song_Difficulties d')
+      ->where('is_problem = ?', false)
+      ->groupBy('name, sid')
+      ->orderBy('gid, name')
+      ->execute();
+  }
+  
   public function getBaseEditsExecute()
   {
     return $this->getBaseEdits()->execute();
