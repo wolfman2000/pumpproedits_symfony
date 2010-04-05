@@ -25,7 +25,8 @@ the equivalent commands on your own.
 
 4) Some of the core data files, such as the edits and
 user information, are not included. Those have to
-be gotten separately.
+be gotten separately. I do not know when, if ever, some
+of this data will be made public in the repository.
 
 As far as coding standards go, keep it legible. Using
 unicode/utf-8 is recommended, as anyone from around the
