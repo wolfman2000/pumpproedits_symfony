@@ -10,6 +10,11 @@
   {
 	font-family: "DejaVu Sans Mono", "Courier New", Courier, monospace;
   }
+  #validate_edits
+  {
+	  max-width: 24em;
+  }
+  
   /* Note to self: this seems backwards. Test in other browsers. */
   #edit
   {
