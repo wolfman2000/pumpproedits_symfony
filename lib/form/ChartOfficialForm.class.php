@@ -22,7 +22,7 @@ class ChartOfficialForm extends sfForm
     $val['edits'] = new sfValidatorChoice($tmp1, array());
     
     $choices = array('ez' => 'Easy', 'nr' => 'Normal', 'hr' => 'Hard', 'cz' => 'Crazy',
-      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare');
+      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare', 'rt' => 'Routine');
     $pieces['diff'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Difficulty'));
     $this->setDefault('diff', 'cz');
     
