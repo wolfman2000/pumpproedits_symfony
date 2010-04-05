@@ -150,6 +150,50 @@ PPE_Song_Song:
     collate: utf8_unicode_ci
     charset: utf8
 
+PPE_Game_Difficulty:
+  columns:
+    diff:
+      type: string
+      length: 10
+      notnull: true
+  indexes:
+    difficulty_index:
+      fields: [diff]
+      type: unique
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
+PPE_Song_Difficulty:
+  columns:
+    song_id:
+      type: integer
+      notnull: true
+    diff_id:
+      type: integer
+      notnull: true
+      default: 1
+  relations:
+    PPE_Song_Song:
+      local: song_id
+      foreign: id
+      foreignAlias: PPE_Song_Difficulties
+      foreignKeyName: song_diff_fk
+    PPE_Game_Difficulty:
+      local: diff_id
+      foreign: id
+      foreignAlias: PPE_Song_Difficulties
+      foreignKeyName: game_diff_fk
+  indexes:
+    songs_in_game_index:
+      fields: [song_id, diff_id]
+      type: unique
+  options:
+    type: INNODB
+    collate: utf8_unicode_ci
+    charset: utf8
+
 PPE_Game_Game:
   columns:
     game:
