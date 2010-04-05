@@ -7,8 +7,34 @@ class ChartOfficialForm extends sfForm
     parent::configure();
     
     $songT = Doctrine::getTable('PPE_Song_Song');
-    $rows = $songT->getSongs();
+    $rows = $songT->getSongsWithGameAndDiff();
     
+    $choices = array();
+    $choices[0] = 'Select a song.';
+    
+    $possible[] = 0;
+    
+    $oid = "無"; // Start with no match.
+    $game = "Tmp";
+    foreach ($rows as $r):
+      $nid = $r->gid;
+      if ($oid !== $nid)
+      {
+        $game = "Pump it up Pro" . ($nid == 1 ? "" : " 2");
+        $choices[$game] = array();
+        $oid = $nid;
+      }
+      $choices[$game][$r->id] = $r->name;
+      $possible[] = $r->id;
+    endforeach;
+    
+    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose a song'), array('size' => 20));
+
+    $tmp1['required'] = false;
+    $tmp1['choices'] = $possible;
+    $val['edits'] = new sfValidatorChoice($tmp1, array());
+    
+/*    
     $choices = array();
     
     foreach ($rows as $r):
@@ -20,9 +46,9 @@ class ChartOfficialForm extends sfForm
     $tmp1['required'] = true;
     $tmp1['choices'] = array_keys($choices);
     $val['edits'] = new sfValidatorChoice($tmp1, array());
-    
+*/    
     $choices = array('ez' => 'Easy', 'nr' => 'Normal', 'hr' => 'Hard', 'cz' => 'Crazy',
-      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare');
+      'hd' => 'Halfdouble', 'fs' => 'Freestyle', 'nm' => 'Nightmare', 'rt' => 'Routine');
     $pieces['diff'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Difficulty'));
     $this->setDefault('diff', 'cz');
     

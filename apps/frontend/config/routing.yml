@@ -237,6 +237,15 @@ chart_off_get:
   requirements:
     sf_method: [GET]
 
+# Use ajaj to get the difficulty lists for each individual song.
+chart_off_diff:
+  url: /chart/official/diff/:songid
+  param:
+    module: chart
+    action: ajajDifficulty
+  requirements:
+    sf_method: [GET]
+
 # Generate the chosen chart.
 chart_off_post:
   url: /chart/official

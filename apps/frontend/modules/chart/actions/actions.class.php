@@ -166,6 +166,21 @@ class chartActions extends sfActions
     $this->form = new ChartOfficialForm();
   }
   
+  /**
+   * Get the difficulties available for each song (that I have a chart for).
+   */
+  public function executeAjajDifficulty(sfWebRequest $request)
+  {
+    if (!$request->isXmlHttpRequest())
+    {
+      return sfView::NONE;
+    }
+    $sid = $request->getParameter('songid');
+    $ret = Doctrine::getTable('PPE_Song_Song')->getDifficulties($sid);
+    $this->getResponse()->setHttpHeader("Content-type", "application/json");
+    return $this->renderText(json_encode($ret[0]));
+  }
+  
   public function executeOffProcess(sfWebRequest $request)
   {
     $this->form = new ChartOfficialForm();
