@@ -247,8 +247,6 @@ function init()
   $("#editDiff").val('');
   sync = 4;
   note = "1";
-  $("#p1").click();
-  player = 0;
   editID = 0;
   selMode = 0;
 

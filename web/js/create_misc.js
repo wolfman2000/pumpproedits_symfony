@@ -62,8 +62,8 @@ function shadow(pX, pY, pnt)
 // Determine which player class to retrieve.
 function getPlayer(pl)
 {
-  if ($("#stylelist").val() === "routine") { return "p" + player; }
-  return "pS";
+  if ($("#stylelist").val() !== "routine") { return "pS"; }
+  return "p" + $("#playerlist").val();
 }
 
 // Determine the player number based on the player class.

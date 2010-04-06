@@ -340,11 +340,6 @@ $(document).ready(function()
     swapCursor();
   });
 
-  // The author wishes to change which player's routine steps to place.
-  $("#playerlist").change(function(){
-    player = $("#playerlist").val();
-  });
-
   $("input").focusin(function(){ captured = true; });
   $("select").focusin(function(){ captured = true; });
   $('input').focusout(function(){ captured = false; });
@@ -458,8 +453,7 @@ $(document).ready(function()
       case 80: {
         if ($("#stylelist").val() === "routine")
         {
-          player = (player ? 0 : 1);
-          $("#playerlist").val(player);
+          $("#playerlist").val(parseInt($("#playerlist").val()) ? 0 : 1);
         }
         break;
       }
