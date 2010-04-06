@@ -122,9 +122,10 @@ function updateStats(data)
   $("#but_save").attr('disabled', true);
   $("#but_sub").attr('disabled', true);
   var t = $("#editName").val().length;
-  if (t > 0 && t <= 12 && diff > 0)
+  if (t > 0 && t <= 12 && parseInt($("#editDiff").val()) > 0)
   {
-    if (steps[0] || steps[1] || mines[0] || mines[1] || lifts[0] || lifts[1] || fakes[0] || fakes[1])
+    if (data.steps[0] || data.steps[1] || data.mines[0] || data.mines[1] ||
+        data.lifts[0] || data.lifts[1] || data.fakes[0] || data.fakes[1])
     {
       $("#but_val").removeAttr('disabled');
       $("#intro").text("Validate your edit before saving.");
@@ -248,7 +249,6 @@ function init()
   note = "1";
   $("#p1").click();
   player = 0;
-  diff = 0;
   editID = 0;
   selMode = 0;
 

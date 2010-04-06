@@ -154,10 +154,9 @@ $(document).ready(function()
     {
       songID = data.id;
       $("#stylelist").val(data.style);
-      diff = data.diff;
+      $("#editDiff").val(data.diff);
       $("#editName").val(data.title);
       updateStats(data);
-      $("#editDiff").val(diff);
       $("#fCont").val('');
       $(".loadFile").hide();
       $("li.edit").show();
@@ -180,10 +179,9 @@ $(document).ready(function()
     $.getJSON(baseURL + "/loadSiteEdit/" + editID, function(data) {
       songID = data.id;
       $("#stylelist").val(data.style);
-      diff = data.diff;
+      $("#editDiff").val(data.diff);
       $("#editName").val(data.title);
       updateStats(data);
-      $("#editDiff").val(diff);
       $("#fCont").val('');
       $(".loadSite").hide();
       $("li.edit").show();
@@ -225,7 +223,7 @@ $(document).ready(function()
     var data = {};
     data['b64'] = $("#b64").val();
     data['title'] = $("#editName").val();
-    data['diff'] = diff;
+    data['diff'] = $("#editDiff").val();
     data['style'] = $("#stylelist").val();
     data['editID'] = editID;
     data['songID'] = songID;
@@ -297,7 +295,7 @@ $(document).ready(function()
     var t = $("#editName").val().length;
     if (t > 0 && t <= 12)
     {
-      if (diff > 0)
+      if (Math.floor($("#editDiff").val()) > 0)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");
@@ -317,7 +315,6 @@ $(document).ready(function()
     var t = parseInt($("#editDiff").val());
     if (t > 0 && t < 100)
     {
-      diff = t;
       t = $("#editName").val().length;
       if (t > 0 && t <= 12)
       {

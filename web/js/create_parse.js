@@ -125,6 +125,7 @@ function saveChart()
 {
   var style = $("#stylelist").val();
   var title = $("#editName").val();
+  var diff = $("#editDiff").val();
   var file = "#SONG:" + songData.name + ";" + EOL;
   file += "#NOTES:" + EOL;
   file += "   pump-" + style + ":" + EOL;
