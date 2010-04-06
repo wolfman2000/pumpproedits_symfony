@@ -10,31 +10,7 @@ function loadChart(nd)
   $("#svgMeas").empty();
   $("#svgSync").empty();
   
-  // append the measures.
-  for (var i = 0; i < songData.measures; i++)
-  {
-    $("#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
-  }
-  
-  // place the BPM data.
-  var bpms = songData.bpms;
-  var x = width / 2 / SCALE;
-  var y;
-  for (var i = 0; i < bpms.length; i++)
-  {
-    y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
-    $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
-        y + SCALE, bpms[i].bpm, 'bpm'));
-    $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
-  }
-
-  var stps = songData.stps;
-  for (var i = 0; i < stps.length; i++)
-  {
-    y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
-    $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
-    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
-  }
+  loadSVGMeasures();
   
   var eRow = stringMul("0", columns); // completely empty row.
   
@@ -70,6 +46,34 @@ function loadChart(nd)
   }
 }
 
+// Load the measures and other related data for the SVG chart.
+function loadSVGMeasures()
+{
+  // append the measures.
+  for (var i = 0; i < songData.measures; i++)
+  {
+    $("#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
+  }
+  // place the BPM data.
+  var bpms = songData.bpms;
+  var x = width / 2 / SCALE;
+  var y;
+  for (var i = 0; i < bpms.length; i++)
+  {
+    y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
+        y + SCALE, bpms[i].bpm, 'bpm'));
+    $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
+  }
+  // place the Stop data.
+  var stps = songData.stps;
+  for (var i = 0; i < stps.length; i++)
+  {
+    y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
+    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
+  }
+}
 
 // Determine how much to increment a loop in saveChart.
 function getMultiplier(row)
