@@ -2,6 +2,8 @@ This is the repository for Pump Pro Edits V3: Player Power.
 The website is at http://beta.pumpproedits.com for now.
 It is called as such because the players can now directly
 contribute to how the website looks, feels, and behaves.
+You can now follow the source contributions to the website
+via Twitter: just follow "pumpproedits".
 
 This is a Symfony based project. More information can be
 found at http://www.symfony-project.org if you are interested.
