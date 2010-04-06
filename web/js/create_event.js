@@ -21,64 +21,61 @@ function showRect(x, y)
 // Trace the mouse to see where the shadow falls.
 function shadow(e)
 {
-  var pnt = $("#svgMeas > svg:first-child > rect:first-child")
-  if (pnt.offset())
+  var mX = -1000;
+  var mY = -1000;
+
+  // Use WebKit hack for now.
+  if (navigator.userAgent.indexOf("WebKit") >= 0)
   {
-    var mX = -1000;
-    var mY = -1000;
+    var curleft = curtop = 0;
+    pnt = pnt[0]; // force HTML mode.
+    do
+    {
+      curleft += pnt.offsetLeft;
+      curtop += pnt.offsetTop;
+    } while (pnt = pnt.offsetParent);
   
-    // Use WebKit hack for now.
-    if (navigator.userAgent.indexOf("WebKit") >= 0)
-    {
-      var curleft = curtop = 0;
-      pnt = pnt[0]; // force HTML mode.
-      do
-      {
-        curleft += pnt.offsetLeft;
-        curtop += pnt.offsetTop;
-      } while (pnt = pnt.offsetParent);
+    var eX = e.pageX;
+    var eY = e.pageY;
+    mX = Math.floor(eX - curleft - BUFF_LFT * SCALE);
+    mY = Math.floor(eY - curtop - BUFF_TOP * SCALE);
+  }
+  else
+  {
+    var pnt = $("#svgMeas > svg:first-child > rect:first-child");
+    mX = e.pageX - pnt.offset().left;
+    mY = e.pageY - pnt.offset().top;
+  }
+  var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
+  var maxX = columns * ADJUST_SIZE;
+  if (!(mX < 0 || mX > maxX || mY < 0 || mY > SCALE * maxY))
+  {
+    var nX = 0;
+    var nY = 0;
     
-      var eX = e.pageX;
-      var eY = e.pageY;
-      mX = Math.floor(eX - curleft - BUFF_LFT * SCALE);
-      mY = Math.floor(eY - curtop - BUFF_TOP * SCALE);
-    }
-    else
+    while (nX + ADJUST_SIZE < mX)
     {
-      mX = e.pageX - pnt.offset().left;
-      mY = e.pageY - pnt.offset().top;
+      nX += ADJUST_SIZE;
     }
-    var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
-    var maxX = columns * ADJUST_SIZE;
-    if (!(mX < 0 || mX > maxX || mY < 0 || mY > SCALE * maxY))
+    nX = nX / SCALE;
+
+    var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
+    var wholeM = Math.floor(mY / scaledM);
+    var beatM = mY % scaledM;
+
+    var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
+
+    while (nY + sY < beatM)
     {
-      var nX = 0;
-      var nY = 0;
-      
-      while (nX + ADJUST_SIZE < mX)
-      {
-        nX += ADJUST_SIZE;
-      }
-      nX = nX / SCALE;
-
-      var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
-      var wholeM = Math.floor(mY / scaledM);
-      var beatM = mY % scaledM;
-
-      var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
-
-      while (nY + sY < beatM)
-      {
-        nY += sY;
-      }
-      nY = wholeM * scaledM + nY;
-      nY = nY / SCALE;
-      showRect(nX + BUFF_LFT, nY);
+      nY += sY;
     }
-    else
-    {
-      hideRect(); // Best to be safe and explicit.
-    }
+    nY = wholeM * scaledM + nY;
+    nY = nY / SCALE;
+    showRect(nX + BUFF_LFT, nY);
+  }
+  else
+  {
+    hideRect(); // Best to be safe and explicit.
   }
 }
 
