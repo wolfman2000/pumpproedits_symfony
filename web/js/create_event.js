@@ -406,7 +406,7 @@ function cutArrows()
 // Copy the arrows, and place onto the clipboard.
 function copyArrows()
 {
-
+  clipboard = getSelectedArrows();
 }
 
 // Cycle the arrows horizontally, changing arrow orientation as needed.
