@@ -422,6 +422,22 @@ $(document).ready(function()
         }
         break;
       }
+      // X
+      case 88: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          
+        }
+        break;
+      }
+      // C
+      case 67: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          
+        }
+        break;
+      }
       
       // + or =
       case 61: {

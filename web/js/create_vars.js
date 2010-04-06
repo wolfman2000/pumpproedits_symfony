@@ -16,6 +16,7 @@ var songData; // the song data in JSON format.
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 
 var captured; // Should input be captured instead of letting it go?
+var clipboard; // needed for copying/pasting
 
 var SCALE; // How much of a zoom factor is there?
 var ADJUST_SIZE; // common operation: size = ARR_HEIGHT * SCALE

@@ -179,7 +179,7 @@ function editMode()
       $("#authorlist").val(0);
       authID = authed;
     }
-    
+    clipboard = null;
     return true;
   }});
   return false; // this is to ensure the asyncing is done right.
@@ -190,6 +190,7 @@ function editMode()
 function init()
 {
   captured = false;
+  clipboard = null;
   measures = 4; // temp variable.
   columns = 5; // reasonable default.
   fixScale(2);
@@ -280,6 +281,7 @@ function swapCursor()
     $("#intro").text("Resume placing arrows.");
     $("#selTop").hide();
     $("#selBot").hide();
+    clipboard = null;
   }
     else
   {
