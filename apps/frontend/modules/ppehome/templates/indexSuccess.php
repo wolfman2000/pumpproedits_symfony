@@ -14,5 +14,9 @@ available for you to use. As an added bonus, if you
 <?php echo link_to("Log In", "@login_get"); ?> before visiting,
 you will be able to upload your work directly to your account!</p>
 <?php endif; ?>
+<p>If you want instant access on when edits are contributed or
+when there is an internal website update,
+<a href="http://www.twitter.com/pumpproedits">follow pumpproedits
+on Twitter</a>.</p>
 <p>Please pardon any mess inside: Pump it up Pro 2 is coming, and
 I'm getting everything ready as soon as possible.</p>
