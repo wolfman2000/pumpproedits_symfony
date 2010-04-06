@@ -153,7 +153,7 @@ $(document).ready(function()
     $.post(baseURL + "/loadFile", { file: Base64.encode($("#fCont").val())}, function(data, status)
     {
       songID = data.id;
-      style = data.style;
+      $("#stylelist").val(data.style);
       diff = data.diff;
       title = data.title;
       updateStats(data);
@@ -180,7 +180,7 @@ $(document).ready(function()
     editID = $("#mem_edit > option:selected").attr('id');
     $.getJSON(baseURL + "/loadSiteEdit/" + editID, function(data) {
       songID = data.id;
-      style = data.style;
+      $("#stylelist").val(data.style);
       diff = data.diff;
       title = data.title;
       updateStats(data);
@@ -228,7 +228,7 @@ $(document).ready(function()
     data['b64'] = b64;
     data['title'] = title;
     data['diff'] = diff;
-    data['style'] = style;
+    data['style'] = $("#stylelist").val();
     data['editID'] = editID;
     data['songID'] = songID;
     data['userID'] = authID;
@@ -278,7 +278,6 @@ $(document).ready(function()
 
   // The author wants to work with this style.
   $("#stylelist").change(function(){
-    style = $("#stylelist").val();
     editMode();
     $("#intro").text("Have fun editing!");
   });
@@ -462,7 +461,7 @@ $(document).ready(function()
       
       // P
       case 80: {
-        if (style === "routine")
+        if ($("#stylelist").val() === "routine")
         {
           player = (player ? 0 : 1);
           $("#playerlist").val(player);

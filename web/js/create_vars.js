@@ -14,7 +14,6 @@ var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
 var note; // which note are we using right now?
-var style; // which style are we playing with? single, double, halfdouble, routine
 var player; // Which player are we dealing with for routine steps?
 var title; // what's the name of the edit?
 var diff; // What's the difficulty rating of this edit?

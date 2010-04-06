@@ -62,14 +62,14 @@ function shadow(pX, pY, pnt)
 // Determine which player class to retrieve.
 function getPlayer(pl)
 {
-  if (style === "routine") { return "p" + player; }
+  if ($("#stylelist").val() === "routine") { return "p" + player; }
   return "pS";
 }
 
 // Determine the player number based on the player class.
 function getPlayerByClass(jQ)
 {
-  if (style !== "routine") { return 0; } // doesn't matter here.
+  if ($("#stylelist").val() !== "routine") { return 0; } // doesn't matter here.
   if (jQ.indexOf("p0") >= 0) { return 0; }
   if (jQ.indexOf("p1") >= 0) { return 1; }
   return 0; // default.
@@ -134,7 +134,7 @@ function selectArrow(cX, rX, rY, css)
   if (css.indexOf("end")  >= 0) { return  genEnd(rX, rY, css); }
   if (css.indexOf("fake") >= 0) { return genFake(rX, rY, css); }
   
-  switch ((style == "halfdouble" ? cX + 2 : cX) % 5)
+  switch (($("#stylelist").val() === "halfdouble" ? cX + 2 : cX) % 5)
   {
     case 0: return genDLArrow(rX, rY, css);
     case 1: return genULArrow(rX, rY, css);
@@ -147,7 +147,7 @@ function selectArrow(cX, rX, rY, css)
 // Retrieve the number of columns we'll be using today.
 function getCols()
 {
-  switch (style.substring(0, 1))
+  switch ($("#stylelist").val().charAt(0))
   {
     case "s": return 5;
     case "h": return 6;

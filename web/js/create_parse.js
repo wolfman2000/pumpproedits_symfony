@@ -17,7 +17,7 @@ function loadChart(nd)
   LOOP_PLAYER:
   for (var iP = 0; iP < 2; iP++)
   {
-    if (iP && style !== "routine") { break LOOP_PLAYER; }
+    if (iP && $("#stylelist").val() !== "routine") { break LOOP_PLAYER; }
     
     LOOP_MEASURE:
     for (var iM = 0; iM < songData.measures; iM++)
@@ -99,7 +99,7 @@ function SVGtoNOTES()
 {
   var notes = Array();
   notes[0] = Array();
-  if (style === "routine") { notes[1] = Array() };
+  if ($("#stylelist").val() === "routine") { notes[1] = Array() };
   
   $("#svgNote").children().each(function(ind){
     var p = getPlayerByClass($(this).attr('class'));
@@ -123,6 +123,7 @@ function SVGtoNOTES()
  */
 function saveChart()
 {
+  var style = $("#stylelist").val();
   var file = "#SONG:" + songData.name + ";" + EOL;
   file += "#NOTES:" + EOL;
   file += "   pump-" + style + ":" + EOL;

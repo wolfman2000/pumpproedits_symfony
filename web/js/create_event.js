@@ -99,7 +99,7 @@ function updateStats(data)
   var R = data.rolls[0];
   var L = data.lifts[0];
   var F = data.fakes[0];
-  if (style === "routine")
+  if ($("#stylelist").val() === "routine")
   {
     S += "/" + data.steps[1];
     J += "/" + data.jumps[1];
@@ -158,9 +158,9 @@ function editMode()
     $("nav dt.edit").show();
     $("nav dd.edit").show();
     $("nav *.choose").hide();
-    if (style !== "routine") { $("nav .routine").hide(); }
+    if ($("#stylelist").val() !== "routine") { $("nav .routine").hide(); }
     else { $("nav .routine").show(); }
-    var phrase = songData.name + " " + style.capitalize();
+    var phrase = songData.name + " " + $("#stylelist").val().capitalize();
     $("h2").first().text(phrase);
     $("title").text("Editing " + phrase + " — Pump Pro Edits");
     $("#but_new").removeAttr('disabled');
