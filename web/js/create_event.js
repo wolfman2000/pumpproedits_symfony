@@ -174,7 +174,8 @@ function editMode()
     }
     else
     {
-      $(".author").show();
+      if (andamiro) { $(".author").show(); $("#authorlist").removeAttr('disabled'); }
+      else          { $(".author").hide(); $("#authorlist").attr('disabled', true); }
       $("#authorlist").val(0);
       authID = authed;
     }
@@ -255,15 +256,6 @@ function init()
   $("#intro").text("Select your action.");
   
   isDirty = false;
-  steps = new Array(0, 0);
-  jumps = new Array(0, 0);
-  holds = new Array(0, 0);
-  mines = new Array(0, 0);
-  trips = new Array(0, 0);
-  rolls = new Array(0, 0);
-  lifts = new Array(0, 0);
-  fakes = new Array(0, 0);
-  badds = new Array();
 }
 
 // Dynamically adjust the scale as needed.
