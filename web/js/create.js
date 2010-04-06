@@ -427,6 +427,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           cutArrows();
+          $("#intro").text("Click a row to paste the notes, or swap cursor mode to delete.");
         }
         break;
       }
@@ -435,6 +436,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           copyArrows();
+          $("#intro").text("Click a row to paste the notes, or swap cursor mode to cancel.");
         }
         break;
       }
