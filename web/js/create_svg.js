@@ -110,30 +110,26 @@ function genDRArrow(x, y, css)
   return s;
 }
 
+// Generate a circle, mainly used for mines.
+function genCircle(cx, cy, r, css)
+{
+  var s = document.createElementNS(SVG_NS, "circle");
+  s.setAttribute("cx", cx);
+  s.setAttribute("cy", cy);
+  s.setAttribute("r", r);
+  if (css) { s.setAttribute("class", css); }
+  return s;
+}
+
 
 // Generate circular mines for the steps one shouldn't hit.
 function genMine(x, y, css)
 {
   var s = genArrow(x, y, css); // this still works surprisingly.
-  
-  var c1 = document.createElementNS(SVG_NS, "circle");
-  c1.setAttribute("cx", 8);
-  c1.setAttribute("cy", 8);
-  c1.setAttribute("r", 7);
-  s.firstChild.appendChild(c1);
-  
-  var c2 = document.createElementNS(SVG_NS, "circle");
-  c2.setAttribute("cx", 8);
-  c2.setAttribute("cy", 8);
-  c2.setAttribute("r", 5);
-  s.firstChild.appendChild(c2);
-  
-  var c3 = document.createElementNS(SVG_NS, "circle");
-  c3.setAttribute("cx", 8);
-  c3.setAttribute("cy", 8);
-  c3.setAttribute("r", 3);
-  s.firstChild.appendChild(c3);
-  
+  for (var i = 7; i > 2; i -= 2)
+  {
+    s.firstChild.appendChild(genCircle(8, 8, i));
+  }
   return s;
 }
 
