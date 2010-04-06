@@ -7,6 +7,7 @@ data/fixtures/votes.yml
 data/sql/schema.sql
 data/official
 data/*.db
+lib/Twitter*
 dbreload.sh
 .DS_Store
 cache/*
