@@ -324,7 +324,7 @@ function gatherStats()
       // if lift follows hold/roll head
       if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      lifts[p]++;
+      data.lifts[p]++;
     }
     else if (t === 'F') // fake
     {
