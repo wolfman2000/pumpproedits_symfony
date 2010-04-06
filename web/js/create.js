@@ -414,6 +414,14 @@ $(document).ready(function()
         }
         break;
       }
+      // I
+      case 73: {
+        if ($("#selTop").attr('style').indexOf('none') == -1)
+        {
+          
+        }
+        break;
+      }
       
       // + or =
       case 61: {
