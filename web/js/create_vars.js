@@ -18,15 +18,6 @@ var style; // which style are we playing with? single, double, halfdouble, routi
 var player; // Which player are we dealing with for routine steps?
 var title; // what's the name of the edit?
 var diff; // What's the difficulty rating of this edit?
-var steps; // How many steps?
-var jumps; // How many jumps?
-var holds; // How many holds?
-var mines; // How many mines?
-var trips; // How many trips? (or hands)
-var rolls; // How many rolls?
-var lifts; // How many lifts?
-var fakes; // How many fakes?
-var badds; // Which are the problem notes?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 

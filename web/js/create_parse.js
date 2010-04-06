@@ -214,21 +214,22 @@ function genObject(p, m, b, n)
 
 /*
  * Update the chart details to show what's going on.
- * Return whatever points are considered invalid for
- * the chart.
+ * Return the data gathered, including the points
+ * that are considered invalid for the chart.
  */
 function gatherStats()
 {
-  steps = Array(0, 0);
-  jumps = Array(0, 0);
-  holds = Array(0, 0);
-  mines = Array(0, 0);
-  trips = Array(0, 0);
-  rolls = Array(0, 0);
-  lifts = Array(0, 0);
-  fakes = Array(0, 0);
+  var data = {};
+  data.steps = Array(0, 0);
+  data.jumps = Array(0, 0);
+  data.holds = Array(0, 0);
+  data.mines = Array(0, 0);
+  data.trips = Array(0, 0);
+  data.rolls = Array(0, 0);
+  data.lifts = Array(0, 0);
+  data.fakes = Array(0, 0);
 
-  badds = Array(); // make a note of where the bad points are.
+  data.badds = Array(); // make a note of where the bad points are.
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
@@ -247,9 +248,9 @@ function gatherStats()
     }
     for (var playa = 0; playa < 2; playa++)
     {
-      if (numSteps[playa] > 0 && trueC[playa] >= 3) { trips[playa]++; }
-      if (numSteps[playa] >= 2)                     { jumps[playa]++; }
-      if (numSteps[playa] > 0)                      { steps[playa]++; }
+      if (numSteps[playa] > 0 && trueC[playa] >= 3) { data.trips[playa]++; }
+      if (numSteps[playa] >= 2)                     { data.jumps[playa]++; }
+      if (numSteps[playa] > 0)                      { data.steps[playa]++; }
     }
   }
   
@@ -279,7 +280,7 @@ function gatherStats()
     if (t === "1") // tap
     {
       // if tap follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
@@ -287,34 +288,34 @@ function gatherStats()
     else if (t === "2") // hold
     {
       // if hold head follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c]); }
       holdCheck[c] = genObject(p, m, b, c);
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
-      holds[p]++;
+      data.holds[p]++;
     }
     else if (t === "3") // hold/roll end
     {
       // if hold/roll end doesn't follow head
-      if (!holdCheck[c]) { badds.push(genObject(p, m, b, c)); }
+      if (!holdCheck[c]) { data.badds.push(genObject(p, m, b, c)); }
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
     }
     else if (t === "4") // roll
     {
       // if roll head follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c]); }
       holdCheck[c] = genObject(p, m, b, c);
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
-      rolls[p]++;
+      data.rolls[p]++;
     }
     else if (t === 'M') // mine
     {
       // if mine follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      mines[p]++;
+      data.mines[p]++;
     }
     else if (t === 'L') // lift
     {
@@ -326,14 +327,15 @@ function gatherStats()
     else if (t === 'F') // fake
     {
        // if fake follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      fakes[p]++;
+      data.fakes[p]++;
     }
   });
   checkBasics(stepCheck, holdCheck);
   for (var i = 0; i < columns; i++) // if hold heads are still active
   {
-    if (holdCheck[i]) { badds.push(holdCheck[i]) }
+    if (holdCheck[i]) { data.badds.push(holdCheck[i]) }
   }
+  return data;
 }

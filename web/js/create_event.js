@@ -89,26 +89,26 @@ function selectRow()
 }
 
 // Display the updated stats. Should this become asynchronous?
-function updateStats()
+function updateStats(data)
 {
-  var S = steps[0];
-  var J = jumps[0];
-  var H = holds[0];
-  var M = mines[0];
-  var T = trips[0];
-  var R = rolls[0];
-  var L = lifts[0];
-  var F = fakes[0];
-  if (style == "routine")
+  var S = data.steps[0];
+  var J = data.jumps[0];
+  var H = data.holds[0];
+  var M = data.mines[0];
+  var T = data.trips[0];
+  var R = data.rolls[0];
+  var L = data.lifts[0];
+  var F = data.fakes[0];
+  if (style === "routine")
   {
-    S += "/" + steps[1];
-    J += "/" + jumps[1];
-    H += "/" + holds[1];
-    M += "/" + mines[1];
-    T += "/" + trips[1];
-    R += "/" + rolls[1];
-    L += "/" + lifts[1];
-    F += "/" + fakes[1];
+    S += "/" + data.steps[1];
+    J += "/" + data.jumps[1];
+    H += "/" + data.holds[1];
+    M += "/" + data.mines[1];
+    T += "/" + data.trips[1];
+    R += "/" + data.rolls[1];
+    L += "/" + data.lifts[1];
+    F += "/" + data.fakes[1];
   }
   $("#statS").text(S);
   $("#statJ").text(J);

@@ -25,8 +25,7 @@ $(document).ready(function()
     if (selMode == 0) // insert mode
     {
       changeArrow();
-      gatherStats(); // in parse
-      updateStats();
+      updateStats(gatherStats());
     }
     else // select mode
     {
@@ -82,7 +81,8 @@ $(document).ready(function()
   
   // Force all edits to be validated before saving/uploading.
   $("#but_val").click(function(){
-    if (!badds.length)
+    var data = gatherStats();
+    if (!data.badds.length)
     {
       saveChart();
       $("#intro").text("You can save your work!");
@@ -97,10 +97,10 @@ $(document).ready(function()
     {
       $("#intro").text("Please fix your errors.");
       var ouch = "Errors were found here:\n\n";
-      for (var i = 0; i < badds.length; i++)
+      for (var i = 0; i < data.badds.length; i++)
       {
-        ouch += "Player " + badds[i]['player'] + " Measure " + badds[i]['measure']
-          + " Beat " + badds[i]['beat'] + " Column " + badds[i]['note'] + "\n";
+        ouch += "Player " + data.badds[i]['player'] + " Measure " + data.badds[i]['measure']
+          + " Beat " + data.badds[i]['beat'] + " Column " + data.badds[i]['note'] + "\n";
       }
       alert(ouch);
     }
@@ -156,15 +156,7 @@ $(document).ready(function()
       style = data.style;
       diff = data.diff;
       title = data.title;
-      steps = data.steps;
-      jumps = data.jumps;
-      holds = data.holds;
-      mines = data.mines;
-      trips = data.trips;
-      rolls = data.rolls;
-      fakes = data.fakes;
-      lifts = data.lifts;
-      updateStats();
+      updateStats(data);
       $("#editDiff").val(diff);
       $("#editName").val(title);
       $("#fCont").val('');
@@ -191,15 +183,7 @@ $(document).ready(function()
       style = data.style;
       diff = data.diff;
       title = data.title;
-      steps = data.steps;
-      jumps = data.jumps;
-      holds = data.holds;
-      mines = data.mines;
-      trips = data.trips;
-      rolls = data.rolls;
-      fakes = data.fakes;
-      lifts = data.lifts;
-      updateStats();
+      updateStats(data);
       $("#editDiff").val(diff);
       $("#editName").val(title);
       $("#fCont").val('');
@@ -248,22 +232,22 @@ $(document).ready(function()
     data['editID'] = editID;
     data['songID'] = songID;
     data['userID'] = authID;
-    data['steps1'] = steps[0];
-    data['steps2'] = steps[1];
-    data['jumps1'] = jumps[0];
-    data['jumps2'] = jumps[1];
-    data['holds1'] = holds[0];
-    data['holds2'] = holds[1];
-    data['mines1'] = mines[0];
-    data['mines2'] = mines[1];
-    data['rolls1'] = rolls[0];
-    data['rolls2'] = rolls[1];
-    data['trips1'] = trips[0];
-    data['trips2'] = trips[1];
-    data['fakes1'] = fakes[0];
-    data['fakes2'] = fakes[1];
-    data['lifts1'] = lifts[0];
-    data['lifts2'] = lifts[1];
+    data['steps1'] = $("#statS").split("/")[0];
+    data['steps2'] = $("#statS").split("/")[1];
+    data['jumps1'] = $("#statJ").split("/")[0];
+    data['jumps2'] = $("#statJ").split("/")[1];
+    data['holds1'] = $("#statH").split("/")[0];
+    data['holds2'] = $("#statH").split("/")[1];
+    data['mines1'] = $("#statM").split("/")[0];
+    data['mines2'] = $("#statM").split("/")[1];
+    data['rolls1'] = $("#statR").split("/")[0];
+    data['rolls2'] = $("#statR").split("/")[1];
+    data['trips1'] = $("#statT").split("/")[0];
+    data['trips2'] = $("#statT").split("/")[1];
+    data['fakes1'] = $("#statF").split("/")[0];
+    data['fakes2'] = $("#statF").split("/")[1];
+    data['lifts1'] = $("#statL").split("/")[0];
+    data['lifts2'] = $("#statL").split("/")[1];
     
     $("#intro").text("Uploading edit...");
     $.post(baseURL + "/upload", data, function(data, status)
@@ -432,8 +416,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftUp();
-          gatherStats();
-          updateStats();
+          updateStats(gatherStats());
         }
         break;
       }
@@ -442,8 +425,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftDown();
-          gatherStats();
-          updateStats();
+          updateStats(gatherStats());
         }
         break;
       }
