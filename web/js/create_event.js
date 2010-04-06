@@ -10,16 +10,15 @@ function hideRect()
   $("#mCheck").text("???");
 }
 
-// Indicate where the shadow square goes.
-function showRect(x, y)
+// Determine if a shadow square can be shown.
+function checkShadow(e)
 {
-  $("#shadow#").attr('x', x).attr('y', y + BUFF_TOP).show();
-  $("#mCheck").text(Math.floor(y / BEATS_MAX * MEASURE_RATIO) + 1);
-  $("#yCheck").text(Math.round(y * MEASURE_RATIO) % BEATS_MAX);
+  var pnt = $("#svgMeas > svg:first-child > rect:first-child");
+  if (pnt.offset()) { shadow(e, pnt); }
 }
 
 // Trace the mouse to see where the shadow falls.
-function shadow(e)
+function shadow(e, pnt)
 {
   var mX = -1000;
   var mY = -1000;
@@ -42,7 +41,6 @@ function shadow(e)
   }
   else
   {
-    var pnt = $("#svgMeas > svg:first-child > rect:first-child");
     mX = e.pageX - pnt.offset().left;
     mY = e.pageY - pnt.offset().top;
   }
