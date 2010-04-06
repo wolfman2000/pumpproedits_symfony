@@ -124,9 +124,13 @@ space to remove the arrow. If you change note types and click on an
 occupied location, the new arrow replaces the old.</p>
 <p>In selection mode, the controls work differently. Instead of placing
 arrows, you are selecting whole rows of arrows to transform as needed.
-At present, you can either shift arrows over to either column, bring the
-notes up, or bring the notes down. The keyboard is required for these operations:
-use WASD for this purpose.</p>
+The keyboard is required for most of these transformations at this time.
+The transformations are as follows:</p>
+<ul>
+<li>Cycle the arrows a column to the left or right: use A or D.</li>
+<li>Move the arrows up or down based on Note Sync: use W or S.</li>
+<li>Mirror the arrows across the center of the chart: use I.</li>
+</ul>
 <?php echo $back; ?>
 </section>
 <section id="keyb">
@@ -161,6 +165,7 @@ $keys = array('1' => sprintf($sync, '4th'),
 'D' => "Rotate the selected rows of arrows one column to the right (selection mode only).",
 'W' => "Move the selected rows of arrows up based on the selected Note Sync (selection mode only).",
 'S' => "Move the selected rows of arrows down based on the selected Note Sync (selection mode only).",
+'I' => "Mirror the selected rows of arrows across the middle of the chart (selection mode only).",
 );
 foreach ($keys as $k => $v): ?>
 <dt><?php echo $k; ?></dt>
