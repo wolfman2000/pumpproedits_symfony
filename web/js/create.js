@@ -137,8 +137,7 @@ $(document).ready(function()
   
   // The edit contents have to be placed in here due to AJAX requirements.
   $("#fCont").keyup(function(){
-    tarea = $("#fCont").val();
-    if (tarea.length)
+    if ($("#fCont").val().length)
     {
       $("#but_file").removeAttr('disabled');
     }
@@ -150,10 +149,8 @@ $(document).ready(function()
   
   // Load the edit from the...text area, not a pure file.
   $("#but_file").click(function(){
-    
-    tarea = $("#fCont").val();
     var done;
-    $.post(baseURL + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
+    $.post(baseURL + "/loadFile", { file: Base64.encode($("#fCont").val())}, function(data, status)
     {
       songID = data.id;
       style = data.style;

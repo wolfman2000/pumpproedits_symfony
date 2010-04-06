@@ -8,7 +8,6 @@ var columns; // How many columns are we working with?
 var width; // compliment to columns
 var measures; // How many measures are in play?
 var height; // compliment to measures
-var tarea; // text area containing the notes.
 var authID; // the edit author's ID. Once uploaded, it can't be changed.
 var editID; // the edit ID. Normally not used until submitting.
 var songID; // the song ID.
