@@ -55,7 +55,9 @@ at this time. The SVG technology is not guaranteed to work on
 IE whether by plugin or javascript or flash without a risk
 of breaking it for the other web browsers. Most of my pieces
 are presently left in the repository for anyone brave enough to
-make it work for IE and keep it working for the others.
+make it work for IE and keep it working for the others. When
+IE 9 comes out of preview, I will have to find a way to give
+that a test on the website.
 
 If there are any questions, feel free to contact me.
 
