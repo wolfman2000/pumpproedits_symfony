@@ -1,3 +1,8 @@
+/*
+ * This file is meant primarily for generating any SVG
+ * structure as required. Any other calculations that
+ * need to be done should be handled elsewhere.
+ */
 // Generate the line required. Apply the class if one exists.
 function genLine(x1, y1, x2, y2, css)
 {
@@ -11,7 +16,7 @@ function genLine(x1, y1, x2, y2, css)
 }
 
 // Generate the rect required. Apply the class if one exists.
-function genRect(x, y, w, h, rx, ry, css)
+function genRect(x, y, w, h, rx, ry, css, id)
 {
   var r = document.createElementNS(SVG_NS, "rect");
   r.setAttribute("x", x);
@@ -21,6 +26,7 @@ function genRect(x, y, w, h, rx, ry, css)
   if (rx) { r.setAttribute("rx", rx); }
   if (ry) { r.setAttribute("ry", ry); }
   if (css) { r.setAttribute("class", css); }
+  if (id) { r.setAttribute("id", id); }
   return r;
 }
 
@@ -105,30 +111,26 @@ function genDRArrow(x, y, css)
   return s;
 }
 
+// Generate a circle, mainly used for mines.
+function genCircle(cx, cy, r, css)
+{
+  var s = document.createElementNS(SVG_NS, "circle");
+  s.setAttribute("cx", cx);
+  s.setAttribute("cy", cy);
+  s.setAttribute("r", r);
+  if (css) { s.setAttribute("class", css); }
+  return s;
+}
+
 
 // Generate circular mines for the steps one shouldn't hit.
 function genMine(x, y, css)
 {
   var s = genArrow(x, y, css); // this still works surprisingly.
-  
-  var c1 = document.createElementNS(SVG_NS, "circle");
-  c1.setAttribute("cx", 8);
-  c1.setAttribute("cy", 8);
-  c1.setAttribute("r", 7);
-  s.firstChild.appendChild(c1);
-  
-  var c2 = document.createElementNS(SVG_NS, "circle");
-  c2.setAttribute("cx", 8);
-  c2.setAttribute("cy", 8);
-  c2.setAttribute("r", 5);
-  s.firstChild.appendChild(c2);
-  
-  var c3 = document.createElementNS(SVG_NS, "circle");
-  c3.setAttribute("cx", 8);
-  c3.setAttribute("cy", 8);
-  c3.setAttribute("r", 3);
-  s.firstChild.appendChild(c3);
-  
+  for (var i = 7; i > 2; i -= 2)
+  {
+    s.firstChild.appendChild(genCircle(8, 8, i));
+  }
   return s;
 }
 
@@ -174,13 +176,14 @@ function genMeasure(x, y, c)
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
   s.setAttribute("y", y);
+  s.setAttribute("id", "measureNum" + c);
   
-  s.appendChild(genRect(0, 0, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT * 2, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT * 3, columns * ARR_HEIGHT, ARR_HEIGHT));
-  
-  s.appendChild(genText(2, 8, "" + c + ")"));
+  for (var i = 0; i < BEATS_PER_MEASURE; i++)
+  {
+    s.appendChild(genRect(0, ARR_HEIGHT * i, columns * ARR_HEIGHT, ARR_HEIGHT,
+      null, null, null, "m" + c + "r" + i));
+  }
+    s.appendChild(genText(2, 8, "" + c + ")"));
   
   s.appendChild(genLine(0, 0.1, columns * ARR_HEIGHT, 0.1));
   s.appendChild(genLine(0.05, 0, 0.05, ARR_HEIGHT * 4));

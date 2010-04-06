@@ -1,3 +1,7 @@
+/*
+ * This file deals with parsing the SVG file to gather stats,
+ * load charts, and save/upload charts.
+ */
 // Load the data from JSON to JS/SVG.
 function loadChart(nd)
 {
@@ -6,38 +10,14 @@ function loadChart(nd)
   $("#svgMeas").empty();
   $("#svgSync").empty();
   
-  // append the measures.
-  for (var i = 0; i < songData.measures; i++)
-  {
-    $("#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
-  }
-  
-  // place the BPM data.
-  var bpms = songData.bpms;
-  var x = width / 2 / SCALE;
-  var y;
-  for (var i = 0; i < bpms.length; i++)
-  {
-    y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
-    $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
-        y + SCALE, bpms[i].bpm, 'bpm'));
-    $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
-  }
-
-  var stps = songData.stps;
-  for (var i = 0; i < stps.length; i++)
-  {
-    y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
-    $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
-    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
-  }
+  loadSVGMeasures();
   
   var eRow = stringMul("0", columns); // completely empty row.
   
   LOOP_PLAYER:
   for (var iP = 0; iP < 2; iP++)
   {
-    if (iP && style !== "routine") { break LOOP_PLAYER; }
+    if (iP && $("#stylelist").val() !== "routine") { break LOOP_PLAYER; }
     
     LOOP_MEASURE:
     for (var iM = 0; iM < songData.measures; iM++)
@@ -66,6 +46,34 @@ function loadChart(nd)
   }
 }
 
+// Load the measures and other related data for the SVG chart.
+function loadSVGMeasures()
+{
+  // append the measures.
+  for (var i = 0; i < songData.measures; i++)
+  {
+    $("#svgMeas").append(genMeasure(BUFF_LFT, BUFF_TOP + ARR_HEIGHT * BEATS_PER_MEASURE * i, i + 1));
+  }
+  // place the BPM data.
+  var bpms = songData.bpms;
+  var x = width / 2 / SCALE;
+  var y;
+  for (var i = 0; i < bpms.length; i++)
+  {
+    y = BUFF_TOP + bpms[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(BUFF_LFT + columns * ARR_HEIGHT + 2 * SCALE,
+        y + SCALE, bpms[i].bpm, 'bpm'));
+    $("#svgSync").append(genLine(x, y, x + columns * ARR_HEIGHT / 2, y, 'bpm'));
+  }
+  // place the Stop data.
+  var stps = songData.stps;
+  for (var i = 0; i < stps.length; i++)
+  {
+    y = BUFF_TOP + stps[i].beat * ARR_HEIGHT;
+    $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
+    $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
+  }
+}
 
 // Determine how much to increment a loop in saveChart.
 function getMultiplier(row)
@@ -91,7 +99,7 @@ function SVGtoNOTES()
 {
   var notes = Array();
   notes[0] = Array();
-  if (style === "routine") { notes[1] = Array() };
+  if ($("#stylelist").val() === "routine") { notes[1] = Array() };
   
   $("#svgNote").children().each(function(ind){
     var p = getPlayerByClass($(this).attr('class'));
@@ -115,6 +123,9 @@ function SVGtoNOTES()
  */
 function saveChart()
 {
+  var style = $("#stylelist").val();
+  var title = $("#editName").val();
+  var diff = $("#editDiff").val();
   var file = "#SONG:" + songData.name + ";" + EOL;
   file += "#NOTES:" + EOL;
   file += "   pump-" + style + ":" + EOL;
@@ -186,8 +197,7 @@ function saveChart()
   
   file += ";" + EOL + EOL;
   
-  b64 = Base64.encode(file);
-  $("#b64").val(b64);
+  $("#b64").val(Base64.encode(file));
   $("#abbr").val(songData.abbr);
   $("#style").val(style);
   $("#diff").val(diff);
@@ -206,21 +216,22 @@ function genObject(p, m, b, n)
 
 /*
  * Update the chart details to show what's going on.
- * Return whatever points are considered invalid for
- * the chart.
+ * Return the data gathered, including the points
+ * that are considered invalid for the chart.
  */
 function gatherStats()
 {
-  steps = Array(0, 0);
-  jumps = Array(0, 0);
-  holds = Array(0, 0);
-  mines = Array(0, 0);
-  trips = Array(0, 0);
-  rolls = Array(0, 0);
-  lifts = Array(0, 0);
-  fakes = Array(0, 0);
+  var data = {};
+  data.steps = Array(0, 0);
+  data.jumps = Array(0, 0);
+  data.holds = Array(0, 0);
+  data.mines = Array(0, 0);
+  data.trips = Array(0, 0);
+  data.rolls = Array(0, 0);
+  data.lifts = Array(0, 0);
+  data.fakes = Array(0, 0);
 
-  badds = Array(); // make a note of where the bad points are.
+  data.badds = Array(); // make a note of where the bad points are.
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
@@ -239,9 +250,9 @@ function gatherStats()
     }
     for (var playa = 0; playa < 2; playa++)
     {
-      if (numSteps[playa] > 0 && trueC[playa] >= 3) { trips[playa]++; }
-      if (numSteps[playa] >= 2)                     { jumps[playa]++; }
-      if (numSteps[playa] > 0)                      { steps[playa]++; }
+      if (numSteps[playa] > 0 && trueC[playa] >= 3) { data.trips[playa]++; }
+      if (numSteps[playa] >= 2)                     { data.jumps[playa]++; }
+      if (numSteps[playa] > 0)                      { data.steps[playa]++; }
     }
   }
   
@@ -271,7 +282,7 @@ function gatherStats()
     if (t === "1") // tap
     {
       // if tap follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
@@ -279,53 +290,54 @@ function gatherStats()
     else if (t === "2") // hold
     {
       // if hold head follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c]); }
       holdCheck[c] = genObject(p, m, b, c);
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
-      holds[p]++;
+      data.holds[p]++;
     }
     else if (t === "3") // hold/roll end
     {
       // if hold/roll end doesn't follow head
-      if (!holdCheck[c]) { badds.push(genObject(p, m, b, c)); }
+      if (!holdCheck[c]) { data.badds.push(genObject(p, m, b, c)); }
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
     }
     else if (t === "4") // roll
     {
       // if roll head follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c]); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c]); }
       holdCheck[c] = genObject(p, m, b, c);
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
-      rolls[p]++;
+      data.rolls[p]++;
     }
     else if (t === 'M') // mine
     {
       // if mine follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      mines[p]++;
+      data.mines[p]++;
     }
     else if (t === 'L') // lift
     {
       // if lift follows hold/roll head
       if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      lifts[p]++;
+      data.lifts[p]++;
     }
     else if (t === 'F') // fake
     {
        // if fake follows hold/roll head
-      if (holdCheck[c]) { badds.push(holdCheck[c], genObject(p, m, b, c)); }
+      if (holdCheck[c]) { data.badds.push(holdCheck[c], genObject(p, m, b, c)); }
       holdCheck[c] = false;
-      fakes[p]++;
+      data.fakes[p]++;
     }
   });
   checkBasics(stepCheck, holdCheck);
   for (var i = 0; i < columns; i++) // if hold heads are still active
   {
-    if (holdCheck[i]) { badds.push(holdCheck[i]) }
+    if (holdCheck[i]) { data.badds.push(holdCheck[i]) }
   }
+  return data;
 }

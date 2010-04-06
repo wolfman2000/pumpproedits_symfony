@@ -1,32 +1,20 @@
+/*
+ * This file is meant for introducing global variables and functions
+ * that are used by the other files. Do whatever is possible to keep
+ * the number of global variables low.
+ */
 var isDirty; // has the work changed? Should a prompt for saving take place?
 var columns; // How many columns are we working with?
 var width; // compliment to columns
 var measures; // How many measures are in play?
 var height; // compliment to measures
-var tarea; // text area containing the notes.
 var authID; // the edit author's ID. Once uploaded, it can't be changed.
 var editID; // the edit ID. Normally not used until submitting.
 var songID; // the song ID.
 var songData; // the song data in JSON format.
-var sync; // how much syncing are we dealing with?
-var note; // which note are we using right now?
-var style; // which style are we playing with? single, double, halfdouble, routine
-var player; // Which player are we dealing with for routine steps?
-var title; // what's the name of the edit?
-var diff; // What's the difficulty rating of this edit?
-var steps; // How many steps?
-var jumps; // How many jumps?
-var holds; // How many holds?
-var mines; // How many mines?
-var trips; // How many trips? (or hands)
-var rolls; // How many rolls?
-var lifts; // How many lifts?
-var fakes; // How many fakes?
-var badds; // Which are the problem notes?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 
-var b64; // The encoded string for the end.
 var captured; // Should input be captured instead of letting it go?
 
 var SCALE; // How much of a zoom factor is there?

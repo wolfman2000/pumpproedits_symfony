@@ -1,3 +1,7 @@
+/*
+ * This file deals strictly with setting up the javascript
+ * actions that will be called (mostly) in create_event.js.
+ */
 $(document).ready(function()
 {
   init();
@@ -9,8 +13,8 @@ $(document).ready(function()
   // Don't show the rectangle when not in play.
   $("#svg").mouseout(function(){ hideRect(); });
   // Show the rectangle if the mouse is over a measure.
-  $("#svg").mouseover(function(e){ shadow(e); });
-  $("#svg").mousemove(function(e){ shadow(e); });
+  $("#svg").mouseover(function(e){ checkShadow(e); });
+  $("#svg").mousemove(function(e){ checkShadow(e); });
   // If the shadow rectangle is out, perform these.
   $("#svg").click(function(){
     if (navigator.userAgent.indexOf("WebKit") >= 0)
@@ -21,8 +25,7 @@ $(document).ready(function()
     if (selMode == 0) // insert mode
     {
       changeArrow();
-      gatherStats(); // in parse
-      updateStats();
+      updateStats(gatherStats());
     }
     else // select mode
     {
@@ -78,7 +81,8 @@ $(document).ready(function()
   
   // Force all edits to be validated before saving/uploading.
   $("#but_val").click(function(){
-    if (!badds.length)
+    var data = gatherStats();
+    if (!data.badds.length)
     {
       saveChart();
       $("#intro").text("You can save your work!");
@@ -93,10 +97,10 @@ $(document).ready(function()
     {
       $("#intro").text("Please fix your errors.");
       var ouch = "Errors were found here:\n\n";
-      for (var i = 0; i < badds.length; i++)
+      for (var i = 0; i < data.badds.length; i++)
       {
-        ouch += "Player " + badds[i]['player'] + " Measure " + badds[i]['measure']
-          + " Beat " + badds[i]['beat'] + " Column " + badds[i]['note'] + "\n";
+        ouch += "Player " + data.badds[i]['player'] + " Measure " + data.badds[i]['measure']
+          + " Beat " + data.badds[i]['beat'] + " Column " + data.badds[i]['note'] + "\n";
       }
       alert(ouch);
     }
@@ -133,8 +137,7 @@ $(document).ready(function()
   
   // The edit contents have to be placed in here due to AJAX requirements.
   $("#fCont").keyup(function(){
-    tarea = $("#fCont").val();
-    if (tarea.length)
+    if ($("#fCont").val().length)
     {
       $("#but_file").removeAttr('disabled');
     }
@@ -146,26 +149,14 @@ $(document).ready(function()
   
   // Load the edit from the...text area, not a pure file.
   $("#but_file").click(function(){
-    
-    tarea = $("#fCont").val();
     var done;
-    $.post(baseURL + "/loadFile", { file: Base64.encode(tarea)}, function(data, status)
+    $.post(baseURL + "/loadFile", { file: Base64.encode($("#fCont").val())}, function(data, status)
     {
       songID = data.id;
-      style = data.style;
-      diff = data.diff;
-      title = data.title;
-      steps = data.steps;
-      jumps = data.jumps;
-      holds = data.holds;
-      mines = data.mines;
-      trips = data.trips;
-      rolls = data.rolls;
-      fakes = data.fakes;
-      lifts = data.lifts;
-      updateStats();
-      $("#editDiff").val(diff);
-      $("#editName").val(title);
+      $("#stylelist").val(data.style);
+      $("#editDiff").val(data.diff);
+      $("#editName").val(data.title);
+      updateStats(data);
       $("#fCont").val('');
       $(".loadFile").hide();
       $("li.edit").show();
@@ -187,20 +178,10 @@ $(document).ready(function()
     editID = $("#mem_edit > option:selected").attr('id');
     $.getJSON(baseURL + "/loadSiteEdit/" + editID, function(data) {
       songID = data.id;
-      style = data.style;
-      diff = data.diff;
-      title = data.title;
-      steps = data.steps;
-      jumps = data.jumps;
-      holds = data.holds;
-      mines = data.mines;
-      trips = data.trips;
-      rolls = data.rolls;
-      fakes = data.fakes;
-      lifts = data.lifts;
-      updateStats();
-      $("#editDiff").val(diff);
-      $("#editName").val(title);
+      $("#stylelist").val(data.style);
+      $("#editDiff").val(data.diff);
+      $("#editName").val(data.title);
+      updateStats(data);
       $("#fCont").val('');
       $(".loadSite").hide();
       $("li.edit").show();
@@ -210,7 +191,7 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       $("#authorlist").attr("disabled", "disabled");
       $(".author").hide();
-      if (title.length)
+      if (data.title.length)
       {
         $("#editName").attr('disabled', true);
       }
@@ -240,29 +221,29 @@ $(document).ready(function()
   // The author uploads the edit directly to the chosen account.
   $("#but_sub").click(function(){
     var data = {};
-    data['b64'] = b64;
-    data['title'] = title;
-    data['diff'] = diff;
-    data['style'] = style;
+    data['b64'] = $("#b64").val();
+    data['title'] = $("#editName").val();
+    data['diff'] = $("#editDiff").val();
+    data['style'] = $("#stylelist").val();
     data['editID'] = editID;
     data['songID'] = songID;
     data['userID'] = authID;
-    data['steps1'] = steps[0];
-    data['steps2'] = steps[1];
-    data['jumps1'] = jumps[0];
-    data['jumps2'] = jumps[1];
-    data['holds1'] = holds[0];
-    data['holds2'] = holds[1];
-    data['mines1'] = mines[0];
-    data['mines2'] = mines[1];
-    data['rolls1'] = rolls[0];
-    data['rolls2'] = rolls[1];
-    data['trips1'] = trips[0];
-    data['trips2'] = trips[1];
-    data['fakes1'] = fakes[0];
-    data['fakes2'] = fakes[1];
-    data['lifts1'] = lifts[0];
-    data['lifts2'] = lifts[1];
+    data['steps1'] = $("#statS").split("/")[0];
+    data['steps2'] = $("#statS").split("/")[1];
+    data['jumps1'] = $("#statJ").split("/")[0];
+    data['jumps2'] = $("#statJ").split("/")[1];
+    data['holds1'] = $("#statH").split("/")[0];
+    data['holds2'] = $("#statH").split("/")[1];
+    data['mines1'] = $("#statM").split("/")[0];
+    data['mines2'] = $("#statM").split("/")[1];
+    data['rolls1'] = $("#statR").split("/")[0];
+    data['rolls2'] = $("#statR").split("/")[1];
+    data['trips1'] = $("#statT").split("/")[0];
+    data['trips2'] = $("#statT").split("/")[1];
+    data['fakes1'] = $("#statF").split("/")[0];
+    data['fakes2'] = $("#statF").split("/")[1];
+    data['lifts1'] = $("#statL").split("/")[0];
+    data['lifts2'] = $("#statL").split("/")[1];
     
     $("#intro").text("Uploading edit...");
     $.post(baseURL + "/upload", data, function(data, status)
@@ -293,14 +274,9 @@ $(document).ready(function()
 
   // The author wants to work with this style.
   $("#stylelist").change(function(){
-    style = $("#stylelist").val();
     editMode();
     $("#intro").text("Have fun editing!");
   });
-  
-  // The author wishes to change the syncing and note type.
-  $("#quanlist").change(function() { sync = $("#quanlist").val();});
-  $("#typelist").change(function() { note = $("#typelist").val();});
   
   // The author wishes to indicate whose work this really is.
   $("#authorlist").change(function(){
@@ -312,11 +288,10 @@ $(document).ready(function()
   $("#editName").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
-    var t = $("#editName").val();
-    if (t.length > 0 && t.length <= 12)
+    var t = $("#editName").val().length;
+    if (t > 0 && t <= 12)
     {
-      title = t;
-      if (diff > 0)
+      if (Math.floor($("#editDiff").val()) > 0)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");
@@ -336,8 +311,8 @@ $(document).ready(function()
     var t = parseInt($("#editDiff").val());
     if (t > 0 && t < 100)
     {
-      diff = t;
-      if (title)
+      t = $("#editName").val().length;
+      if (t > 0 && t <= 12)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");
@@ -361,11 +336,6 @@ $(document).ready(function()
     swapCursor();
   });
 
-  // The author wishes to change which player's routine steps to place.
-  $("#playerlist").change(function(){
-    player = $("#playerlist").val();
-  });
-
   $("input").focusin(function(){ captured = true; });
   $("select").focusin(function(){ captured = true; });
   $('input').focusout(function(){ captured = false; });
@@ -377,38 +347,38 @@ $(document).ready(function()
     switch (e.which)
     {
       // 1
-      case 49: { sync = 4; $("#quanlist").val(4); break; }
+      case 49: { $("#quanlist").val(4); break; }
       // 2
-      case 50: { sync = 8; $("#quanlist").val(8); break; }
+      case 50: { $("#quanlist").val(8); break; }
       // 3
-      case 51: { sync = 12; $("#quanlist").val(12); break; }
+      case 51: { $("#quanlist").val(12); break; }
       // 4
-      case 52: { sync = 16; $("#quanlist").val(16); break; }
+      case 52: { $("#quanlist").val(16); break; }
       // 5
-      case 53: { sync = 24; $("#quanlist").val(24); break; }
+      case 53: { $("#quanlist").val(24); break; }
       // 6
-      case 54: { sync = 32; $("#quanlist").val(32); break; }
+      case 54: { $("#quanlist").val(32); break; }
       // 7
-      case 55: { sync = 48; $("#quanlist").val(48); break; }
+      case 55: { $("#quanlist").val(48); break; }
       // 8
-      case 56: { sync = 64; $("#quanlist").val(64); break; }
+      case 56: { $("#quanlist").val(64); break; }
       // 9
-      case 57: { sync = 192; $("#quanlist").val(192); break; }
+      case 57: { $("#quanlist").val(192); break; }
       
       // T
-      case 84: { note = "1"; $("#typelist").val("1"); break; }
+      case 84: { $("#typelist").val("1"); break; }
       // H
-      case 72: { note = "2"; $("#typelist").val("2"); break; }
+      case 72: { $("#typelist").val("2"); break; }
       // E
-      case 69: { note = "3"; $("#typelist").val("3"); break; }
+      case 69: { $("#typelist").val("3"); break; }
       // R
-      case 82: { if (!e.ctrlKey) { note = "4"; $("#typelist").val("4"); } break; }
+      case 82: { if (!e.ctrlKey) { $("#typelist").val("4"); } break; }
       // M
-      case 77: { note = "M"; $("#typelist").val("M"); break; }
+      case 77: { $("#typelist").val("M"); break; }
       // L
-      case 76: { note = "L"; $("#typelist").val("L"); break; }
+      case 76: { $("#typelist").val("L"); break; }
       // F
-      case 70: { note = "F"; $("#typelist").val("F"); break; }
+      case 70: { $("#typelist").val("F"); break; }
       
       // A
       case 65: {
@@ -431,8 +401,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftUp();
-          gatherStats();
-          updateStats();
+          updateStats(gatherStats());
         }
         break;
       }
@@ -441,8 +410,7 @@ $(document).ready(function()
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
           shiftDown();
-          gatherStats();
-          updateStats();
+          updateStats(gatherStats());
         }
         break;
       }
@@ -479,10 +447,9 @@ $(document).ready(function()
       
       // P
       case 80: {
-        if (style === "routine")
+        if ($("#stylelist").val() === "routine")
         {
-          player = (player ? 0 : 1);
-          $("#playerlist").val(player);
+          $("#playerlist").val(parseInt($("#playerlist").val()) ? 0 : 1);
         }
         break;
       }
