@@ -412,6 +412,65 @@ function rotateColumn(val)
   sortArrows();
 }
 
+// Mirror the arrows across the middle point of the chart.
+function mirrorRows()
+{
+  var m = (BUFF_LFT + BUFF_RHT + columns * ARR_HEIGHT) / 2;
+  getSelectedArrows().each(function(ind){
+    var x = Math.floor($(this).attr('x'));
+    var y = Math.floor($(this).attr('y'));
+    
+    // Note to code improvers: find a way to NOT hardcode this as bad.
+    FIX_X:
+    switch (columns)
+    {
+      case 5:
+      {
+        switch (x)
+        {
+          case 32: { x = 96; break FIX_X; }
+          case 48: { x = 80; break FIX_X; }
+          case 80: { x = 48; break FIX_X; }
+          case 96: { x = 32; break FIX_X; }
+        }
+      }
+      case 6:
+      {
+        switch (x)
+        {
+          case 32:  { x = 112; break FIX_X; }
+          case 48:  { x = 96;  break FIX_X; }
+          case 64:  { x = 80;  break FIX_X; }
+          case 80:  { x = 64;  break FIX_X; }
+          case 96:  { x = 48;  break FIX_X; }
+          case 112: { x = 32;  break FIX_X; }
+        }
+      }
+      case 10:
+      {
+        switch (x)
+        {
+          case 32:  { x = 176; break FIX_X; }
+          case 48:  { x = 160; break FIX_X; }
+          case 64:  { x = 144; break FIX_X; }
+          case 80:  { x = 128; break FIX_X; }
+          case 96:  { x = 112; break FIX_X; }
+          case 112: { x = 96;  break FIX_X; }
+          case 128: { x = 80;  break FIX_X; }
+          case 144: { x = 64;  break FIX_X; }
+          case 160: { x = 48;  break FIX_X; }
+          case 176: { x = 32;  break FIX_X; }
+        }
+      }
+    }
+    
+    var c = (x - BUFF_LFT) / ARR_HEIGHT;
+    var a = selectArrow(c, x, y, $(this).attr('class'));
+    $(this).attr('x', x).empty().append(a.firstChild);
+  });
+  sortArrows();
+}
+
 // Load up the chosen user's songs.
 function loadWebEdits(user)
 {

@@ -418,7 +418,7 @@ $(document).ready(function()
       case 73: {
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
-          
+          mirrorRows();
         }
         break;
       }
