@@ -175,6 +175,6 @@
 	}
 	#svgNote > svg > g > *:first-child
 	{
-		stroke-width: 0.5;
+		stroke-width: 1;
 	}
 }
