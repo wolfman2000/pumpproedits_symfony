@@ -13,68 +13,8 @@ function hideRect()
 // Determine if a shadow square can be shown.
 function checkShadow(e)
 {
-  var pnt = $("#measureNum1");
-  if (pnt.offset()) { shadow(e, pnt); }
-}
-
-// Trace the mouse to see where the shadow falls.
-function shadow(e, pnt)
-{
-  var mX = -1000;
-  var mY = -1000;
-
-  // Use WebKit hack for now.
-  if (navigator.userAgent.indexOf("WebKit") >= 0)
-  {
-    var curleft = curtop = 0;
-    pnt = pnt[0]; // force HTML mode.
-    do
-    {
-      curleft += pnt.offsetLeft;
-      curtop += pnt.offsetTop;
-    } while (pnt = pnt.offsetParent);
-  
-    var eX = e.pageX;
-    var eY = e.pageY;
-    mX = Math.floor(eX - curleft - BUFF_LFT * SCALE);
-    mY = Math.floor(eY - curtop - BUFF_TOP * SCALE);
-  }
-  else
-  {
-    mX = e.pageX - pnt.offset().left;
-    mY = e.pageY - pnt.offset().top;
-  }
-  var maxY = Math.floor($("#svgMeas > svg:last-child").attr('y')) + 3 * ARR_HEIGHT;
-  var maxX = columns * ADJUST_SIZE;
-  if (!(mX < 0 || mX > maxX || mY < 0 || mY > SCALE * maxY))
-  {
-    var nX = 0;
-    var nY = 0;
-    
-    while (nX + ADJUST_SIZE < mX)
-    {
-      nX += ADJUST_SIZE;
-    }
-    nX = nX / SCALE;
-
-    var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
-    var wholeM = Math.floor(mY / scaledM);
-    var beatM = mY % scaledM;
-
-    var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
-
-    while (nY + sY < beatM)
-    {
-      nY += sY;
-    }
-    nY = wholeM * scaledM + nY;
-    nY = nY / SCALE;
-    showRect(nX + BUFF_LFT, nY);
-  }
-  else
-  {
-    hideRect(); // Best to be safe and explicit.
-  }
+  var pnt = $("#m1r0");
+  if (pnt.offset()) { shadow(e.pageX, e.pageY, pnt); }
 }
 
 // Add the arrow in the appropriate position.

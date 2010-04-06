@@ -16,7 +16,7 @@ function genLine(x1, y1, x2, y2, css)
 }
 
 // Generate the rect required. Apply the class if one exists.
-function genRect(x, y, w, h, rx, ry, css)
+function genRect(x, y, w, h, rx, ry, css, id)
 {
   var r = document.createElementNS(SVG_NS, "rect");
   r.setAttribute("x", x);
@@ -26,6 +26,7 @@ function genRect(x, y, w, h, rx, ry, css)
   if (rx) { r.setAttribute("rx", rx); }
   if (ry) { r.setAttribute("ry", ry); }
   if (css) { r.setAttribute("class", css); }
+  if (id) { r.setAttribute("id", id); }
   return r;
 }
 
@@ -179,7 +180,8 @@ function genMeasure(x, y, c)
   
   for (var i = 0; i < BEATS_PER_MEASURE; i++)
   {
-    s.appendChild(genRect(0, ARR_HEIGHT * i, columns * ARR_HEIGHT, ARR_HEIGHT));
+    s.appendChild(genRect(0, ARR_HEIGHT * i, columns * ARR_HEIGHT, ARR_HEIGHT,
+      null, null, null, "m" + c + "r" + i));
   }
     s.appendChild(genText(2, 8, "" + c + ")"));
   
