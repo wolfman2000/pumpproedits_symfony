@@ -225,7 +225,7 @@ $(document).ready(function()
   // The author uploads the edit directly to the chosen account.
   $("#but_sub").click(function(){
     var data = {};
-    data['b64'] = b64;
+    data['b64'] = $("#b64").val();
     data['title'] = title;
     data['diff'] = diff;
     data['style'] = $("#stylelist").val();

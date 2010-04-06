@@ -195,8 +195,7 @@ function saveChart()
   
   file += ";" + EOL + EOL;
   
-  b64 = Base64.encode(file);
-  $("#b64").val(b64);
+  $("#b64").val(Base64.encode(file));
   $("#abbr").val(songData.abbr);
   $("#style").val(style);
   $("#diff").val(diff);

@@ -20,7 +20,6 @@ var diff; // What's the difficulty rating of this edit?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 
-var b64; // The encoded string for the end.
 var captured; // Should input be captured instead of letting it go?
 
 var SCALE; // How much of a zoom factor is there?
