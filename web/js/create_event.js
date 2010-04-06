@@ -394,6 +394,21 @@ function shiftDown()
   removeDown(mB, sH);
 }
 
+// Cut the arrows, and place onto the clipboard.
+function cutArrows()
+{
+  copyArrows();
+  getSelectedArrows().each(function(){
+    $(this).remove();
+  });
+}
+
+// Copy the arrows, and place onto the clipboard.
+function copyArrows()
+{
+
+}
+
 // Cycle the arrows horizontally, changing arrow orientation as needed.
 function rotateColumn(val)
 {
