@@ -409,6 +409,29 @@ function copyArrows()
   clipboard = getSelectedArrows();
 }
 
+// Paste the arrows in the clipboard.
+function pasteArrows()
+{
+  var tY = parseFloat($("#selTop").attr('y'));
+  if ($("#selBot").attr('style').indexOf('none') != -1)
+  {
+    $("#selBot").attr('y', tY).attr('x', BUFF_LFT).show();
+  }
+  var bY = parseFloat($"(#selBot").attr('y'));
+  var range = bY - tY; // How big is the range for copy/pasting?
+  var rY = parseFloat($("#shadow").attr('y'));
+  var shift = tY - rY; // How much are we changing each note?
+  
+  // Move the selection rectangles to their new location.
+  $("#selTop").attr('y', rY);
+  $("#selBot").attr('y', rY + range);
+  
+  // Remove what's inside the pasting location.
+  getSelectedArrows().each(function(){
+    $(this).remove();
+  });
+}
+
 // Cycle the arrows horizontally, changing arrow orientation as needed.
 function rotateColumn(val)
 {
