@@ -426,7 +426,7 @@ $(document).ready(function()
       case 88: {
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
-          
+          cutArrows();
         }
         break;
       }
@@ -434,7 +434,7 @@ $(document).ready(function()
       case 67: {
         if ($("#selTop").attr('style').indexOf('none') == -1)
         {
-          
+          copyArrows();
         }
         break;
       }
