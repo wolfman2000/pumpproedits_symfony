@@ -179,6 +179,7 @@ function genMeasure(x, y, c)
   var s = document.createElementNS(SVG_NS, "svg");
   s.setAttribute("x", x);
   s.setAttribute("y", y);
+  s.setAttribute("id", "measureNum" + c);
   
   s.appendChild(genRect(0, 0, columns * ARR_HEIGHT, ARR_HEIGHT));
   s.appendChild(genRect(0, ARR_HEIGHT, columns * ARR_HEIGHT, ARR_HEIGHT));

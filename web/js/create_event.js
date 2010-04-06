@@ -13,7 +13,7 @@ function hideRect()
 // Determine if a shadow square can be shown.
 function checkShadow(e)
 {
-  var pnt = $("#svgMeas > svg:first-child > rect:first-child");
+  var pnt = $("#measureNum1");
   if (pnt.offset()) { shadow(e, pnt); }
 }
 
