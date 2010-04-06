@@ -270,11 +270,16 @@ class createActions extends sfActions
     if (!($eid > 0)) # New edit
     {
       $eid = $editT->addEdit($row);
+      $status = "New";
     }
     else
     {
       $editT->updateEdit($eid, $row);
+      $status = "Updated";
     }
+    $twit = new Twitter();
+    $twit->genEditMessage($row['uid'],
+      Doctrine::getTable('PPE_User_User')->getNameByID($row['uid']), $status);
     
     $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
     $fp = fopen($file, "w");

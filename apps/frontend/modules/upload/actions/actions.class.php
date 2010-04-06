@@ -82,11 +82,17 @@ class uploadActions extends sfActions
       {
         $eid = $eid->id;
         $editT->updateEdit($eid, $row);
+        $status = "Updated";
       }
       else
       {
         $eid = $editT->addEdit($row);
+        $status = "New";
       }
+      
+      $twit = new Twitter();
+      $twit->genEditMessage($row['uid'],
+        Doctrine::getTable('PPE_User_User')->getNameByID($row['uid']), $status);
       
       $path = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
       $file->save($path);
