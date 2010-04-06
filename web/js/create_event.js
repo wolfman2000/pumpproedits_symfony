@@ -1,3 +1,7 @@
+/*
+ * This file deals with all of the functions directly
+ * called by the different XHTML elements.
+ */
 // Hide the rectangle when not in use.
 function hideRect()
 {

@@ -1,3 +1,8 @@
+/*
+ * This file is meant primarily for generating any SVG
+ * structure as required. Any other calculations that
+ * need to be done should be handled elsewhere.
+ */
 // Generate the line required. Apply the class if one exists.
 function genLine(x1, y1, x2, y2, css)
 {

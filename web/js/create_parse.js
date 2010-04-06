@@ -1,3 +1,7 @@
+/*
+ * This file deals with parsing the SVG file to gather stats,
+ * load charts, and save/upload charts.
+ */
 // Load the data from JSON to JS/SVG.
 function loadChart(nd)
 {
