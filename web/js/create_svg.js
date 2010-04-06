@@ -181,12 +181,11 @@ function genMeasure(x, y, c)
   s.setAttribute("y", y);
   s.setAttribute("id", "measureNum" + c);
   
-  s.appendChild(genRect(0, 0, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT * 2, columns * ARR_HEIGHT, ARR_HEIGHT));
-  s.appendChild(genRect(0, ARR_HEIGHT * 3, columns * ARR_HEIGHT, ARR_HEIGHT));
-  
-  s.appendChild(genText(2, 8, "" + c + ")"));
+  for (var i = 0; i < BEATS_PER_MEASURE; i++)
+  {
+    s.appendChild(genRect(0, ARR_HEIGHT * i, columns * ARR_HEIGHT, ARR_HEIGHT));
+  }
+    s.appendChild(genText(2, 8, "" + c + ")"));
   
   s.appendChild(genLine(0, 0.1, columns * ARR_HEIGHT, 0.1));
   s.appendChild(genLine(0.05, 0, 0.05, ARR_HEIGHT * 4));
