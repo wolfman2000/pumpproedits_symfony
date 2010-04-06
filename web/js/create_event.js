@@ -121,7 +121,8 @@ function updateStats(data)
 
   $("#but_save").attr('disabled', true);
   $("#but_sub").attr('disabled', true);
-  if (title && diff > 0)
+  var t = $("#editName").val().length;
+  if (t > 0 && t <= 12 && diff > 0)
   {
     if (steps[0] || steps[1] || mines[0] || mines[1] || lifts[0] || lifts[1] || fakes[0] || fakes[1])
     {
@@ -247,7 +248,6 @@ function init()
   note = "1";
   $("#p1").click();
   player = 0;
-  title = "";
   diff = 0;
   editID = 0;
   selMode = 0;

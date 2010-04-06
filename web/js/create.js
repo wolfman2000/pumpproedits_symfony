@@ -155,10 +155,9 @@ $(document).ready(function()
       songID = data.id;
       $("#stylelist").val(data.style);
       diff = data.diff;
-      title = data.title;
+      $("#editName").val(data.title);
       updateStats(data);
       $("#editDiff").val(diff);
-      $("#editName").val(title);
       $("#fCont").val('');
       $(".loadFile").hide();
       $("li.edit").show();
@@ -182,10 +181,9 @@ $(document).ready(function()
       songID = data.id;
       $("#stylelist").val(data.style);
       diff = data.diff;
-      title = data.title;
+      $("#editName").val(data.title);
       updateStats(data);
       $("#editDiff").val(diff);
-      $("#editName").val(title);
       $("#fCont").val('');
       $(".loadSite").hide();
       $("li.edit").show();
@@ -195,7 +193,7 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       $("#authorlist").attr("disabled", "disabled");
       $(".author").hide();
-      if (title.length)
+      if (data.title.length)
       {
         $("#editName").attr('disabled', true);
       }
@@ -226,7 +224,7 @@ $(document).ready(function()
   $("#but_sub").click(function(){
     var data = {};
     data['b64'] = $("#b64").val();
-    data['title'] = title;
+    data['title'] = $("#editName").val();
     data['diff'] = diff;
     data['style'] = $("#stylelist").val();
     data['editID'] = editID;
@@ -296,10 +294,9 @@ $(document).ready(function()
   $("#editName").keyup(function(){
     $("#but_save").attr('disabled', true);
     $("#but_sub").attr('disabled', true);
-    var t = $("#editName").val();
-    if (t.length > 0 && t.length <= 12)
+    var t = $("#editName").val().length;
+    if (t > 0 && t <= 12)
     {
-      title = t;
       if (diff > 0)
       {
         $("#but_val").removeAttr('disabled');
@@ -321,7 +318,8 @@ $(document).ready(function()
     if (t > 0 && t < 100)
     {
       diff = t;
-      if (title)
+      t = $("#editName").val().length;
+      if (t > 0 && t <= 12)
       {
         $("#but_val").removeAttr('disabled');
         $("#intro").text("Validate your edit before saving.");

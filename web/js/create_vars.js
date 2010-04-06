@@ -15,7 +15,6 @@ var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
 var note; // which note are we using right now?
 var player; // Which player are we dealing with for routine steps?
-var title; // what's the name of the edit?
 var diff; // What's the difficulty rating of this edit?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
