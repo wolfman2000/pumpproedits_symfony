@@ -49,7 +49,7 @@ function shadow(pX, pY, pnt)
     var scaledM = ARR_HEIGHT * SCALE * BEATS_PER_MEASURE;
     var wholeM = Math.floor(mY / scaledM);
     var beatM = mY % scaledM;
-    var sY = BEATS_MAX / sync / MEASURE_RATIO * SCALE; // get the current note.
+    var sY = BEATS_MAX / parseInt($("#quanlist").val()) / MEASURE_RATIO * SCALE; // get the current note.
 
     while (nY + sY < beatM) { nY += sY; }
     nY = wholeM * scaledM + nY;

@@ -12,7 +12,6 @@ var authID; // the edit author's ID. Once uploaded, it can't be changed.
 var editID; // the edit ID. Normally not used until submitting.
 var songID; // the song ID.
 var songData; // the song data in JSON format.
-var sync; // how much syncing are we dealing with?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 

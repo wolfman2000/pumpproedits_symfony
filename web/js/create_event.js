@@ -245,7 +245,6 @@ function init()
   $("#modelist").val(0);
   $("#editName").val('');
   $("#editDiff").val('');
-  sync = 4;
   editID = 0;
   selMode = 0;
 
@@ -314,7 +313,7 @@ function shiftUp()
     }).remove();
   }
   
-  var val = Math.floor(-sync);
+  var val = Math.floor(-parseInt($("#quanlist").val()));
   var notes = getSelectedArrows();
   var oY = parseFloat($("#selTop").attr('y'));
   var gap = BEATS_MAX / val / MEASURE_RATIO;
@@ -365,7 +364,7 @@ function shiftDown()
     }).remove();
   }
   
-  var val = Math.floor(sync);
+  var val = Math.floor(parseInt($("#quanlist").val()));
   var notes = getSelectedArrows();
   var oY = parseFloat($("#selBot").attr('y'));
   var gap = BEATS_MAX / val / MEASURE_RATIO;
