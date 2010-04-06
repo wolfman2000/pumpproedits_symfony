@@ -246,7 +246,6 @@ function init()
   $("#editName").val('');
   $("#editDiff").val('');
   sync = 4;
-  note = "1";
   editID = 0;
   selMode = 0;
 

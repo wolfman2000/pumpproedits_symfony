@@ -280,7 +280,6 @@ $(document).ready(function()
   
   // The author wishes to change the syncing and note type.
   $("#quanlist").change(function() { sync = $("#quanlist").val();});
-  $("#typelist").change(function() { note = $("#typelist").val();});
   
   // The author wishes to indicate whose work this really is.
   $("#authorlist").change(function(){
@@ -370,19 +369,19 @@ $(document).ready(function()
       case 57: { sync = 192; $("#quanlist").val(192); break; }
       
       // T
-      case 84: { note = "1"; $("#typelist").val("1"); break; }
+      case 84: { $("#typelist").val("1"); break; }
       // H
-      case 72: { note = "2"; $("#typelist").val("2"); break; }
+      case 72: { $("#typelist").val("2"); break; }
       // E
-      case 69: { note = "3"; $("#typelist").val("3"); break; }
+      case 69: { $("#typelist").val("3"); break; }
       // R
-      case 82: { if (!e.ctrlKey) { note = "4"; $("#typelist").val("4"); } break; }
+      case 82: { if (!e.ctrlKey) { $("#typelist").val("4"); } break; }
       // M
-      case 77: { note = "M"; $("#typelist").val("M"); break; }
+      case 77: { $("#typelist").val("M"); break; }
       // L
-      case 76: { note = "L"; $("#typelist").val("L"); break; }
+      case 76: { $("#typelist").val("L"); break; }
       // F
-      case 70: { note = "F"; $("#typelist").val("F"); break; }
+      case 70: { $("#typelist").val("F"); break; }
       
       // A
       case 65: {

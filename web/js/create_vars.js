@@ -13,7 +13,6 @@ var editID; // the edit ID. Normally not used until submitting.
 var songID; // the song ID.
 var songData; // the song data in JSON format.
 var sync; // how much syncing are we dealing with?
-var note; // which note are we using right now?
 
 var selMode; // is the user inserting arrows or selecting rows? Can't have both!
 

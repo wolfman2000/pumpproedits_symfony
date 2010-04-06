@@ -94,7 +94,7 @@ function getSync(y)
 // Determine which note type is requested.
 function getType(nt)
 {
-  if (nt == null) { nt = note; }
+  if (nt == null) { nt = $("#typelist").val(); }
   var t = "FIX"; // note type.
   if      (nt == "1") { t = "tap";  }
   else if (nt == "2") { t = "hold"; }
