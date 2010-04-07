@@ -398,6 +398,12 @@ function shiftDown()
 function cutArrows()
 {
   copyArrows();
+  if (!clipboard.length)
+  {
+    clipboard = null;
+    $("#intro").text("You didn't cut or copy anything.");
+    return;
+  }
   getSelectedArrows().each(function(){
     $(this).remove();
   });
@@ -407,6 +413,11 @@ function cutArrows()
 function copyArrows()
 {
   clipboard = getSelectedArrows();
+  if (!clipboard.length)
+  {
+    clipboard = null;
+    $("#intro").text("You didn't cut or copy anything.");
+  }
 }
 
 // Paste the arrows in the clipboard.
@@ -417,10 +428,10 @@ function pasteArrows()
   {
     $("#selBot").attr('y', tY).attr('x', BUFF_LFT).show();
   }
-  var bY = parseFloat($"(#selBot").attr('y'));
+  var bY = parseFloat($("#selBot").attr('y'));
   var range = bY - tY; // How big is the range for copy/pasting?
   var rY = parseFloat($("#shadow").attr('y'));
-  var shift = tY - rY; // How much are we changing each note?
+  var shift = rY - tY; // How much are we changing each note?
   
   // Move the selection rectangles to their new location.
   $("#selTop").attr('y', rY);
@@ -430,6 +441,21 @@ function pasteArrows()
   getSelectedArrows().each(function(){
     $(this).remove();
   });
+  
+  clipboard.each(function(){
+    var csses = $(this).attr('class').split(' ');
+    var oY = parseFloat($(this).attr('y'));
+    var nY = oY + shift;
+    $(this).attr('y', nY);
+    nY += BUFF_BOT;
+    
+    var beatM = Math.round((nY % (ARR_HEIGHT * SCALE * BEATS_PER_MEASURE)) * MEASURE_RATIO);
+    
+    $(this).attr('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
+  });
+  $("#svgNote").append(clipboard);
+  sortArrows();
+  clipboard = null;
 }
 
 // Cycle the arrows horizontally, changing arrow orientation as needed.
