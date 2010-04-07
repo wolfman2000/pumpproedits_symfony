@@ -447,6 +447,16 @@ $(document).ready(function()
         }
         break;
       }
+      // V
+      case 86: {
+        if (clipboard && Math.floor($("#shadow").attr('x')) >= BUFF_LFT)
+        {
+          pasteArrows();
+          updateStats(gatherStats());
+          $("#intro").text("Arrows pasted. Clipboard wiped.");
+        }
+        break;
+      }
       
       // + or =
       case 61: {
