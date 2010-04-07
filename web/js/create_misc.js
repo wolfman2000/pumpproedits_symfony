@@ -174,10 +174,10 @@ function getSelectedArrows()
 function sortArrows()
 {
   var sorted = $("#svgNote").children().sort(function(a, b){
-    var aX = $(a).attr('x');
-    var aY = $(a).attr('y');
-    var bX = $(b).attr('x');
-    var bY = $(b).attr('y');
+    var aX = parseFloat($(a).attr('x'));
+    var aY = parseFloat($(a).attr('y'));
+    var bX = parseFloat($(b).attr('x'));
+    var bY = parseFloat($(b).attr('y'));
     if (aY < bY) { return -1; }
     if (aY > bY) { return  1; }
     if (aX < bX) { return -1; }
