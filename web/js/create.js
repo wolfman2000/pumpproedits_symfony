@@ -234,22 +234,22 @@ $(document).ready(function()
     data['editID'] = editID;
     data['songID'] = songID;
     data['userID'] = authID;
-    data['steps1'] = $("#statS").split("/")[0];
-    data['steps2'] = $("#statS").split("/")[1];
-    data['jumps1'] = $("#statJ").split("/")[0];
-    data['jumps2'] = $("#statJ").split("/")[1];
-    data['holds1'] = $("#statH").split("/")[0];
-    data['holds2'] = $("#statH").split("/")[1];
-    data['mines1'] = $("#statM").split("/")[0];
-    data['mines2'] = $("#statM").split("/")[1];
-    data['rolls1'] = $("#statR").split("/")[0];
-    data['rolls2'] = $("#statR").split("/")[1];
-    data['trips1'] = $("#statT").split("/")[0];
-    data['trips2'] = $("#statT").split("/")[1];
-    data['fakes1'] = $("#statF").split("/")[0];
-    data['fakes2'] = $("#statF").split("/")[1];
-    data['lifts1'] = $("#statL").split("/")[0];
-    data['lifts2'] = $("#statL").split("/")[1];
+    data['steps1'] = $("#statS").text().split("/")[0];
+    data['steps2'] = $("#statS").text().split("/")[1];
+    data['jumps1'] = $("#statJ").text().split("/")[0];
+    data['jumps2'] = $("#statJ").text().split("/")[1];
+    data['holds1'] = $("#statH").text().split("/")[0];
+    data['holds2'] = $("#statH").text().split("/")[1];
+    data['mines1'] = $("#statM").text().split("/")[0];
+    data['mines2'] = $("#statM").text().split("/")[1];
+    data['rolls1'] = $("#statR").text().split("/")[0];
+    data['rolls2'] = $("#statR").text().split("/")[1];
+    data['trips1'] = $("#statT").text().split("/")[0];
+    data['trips2'] = $("#statT").text().split("/")[1];
+    data['fakes1'] = $("#statF").text().split("/")[0];
+    data['fakes2'] = $("#statF").text().split("/")[1];
+    data['lifts1'] = $("#statL").text().split("/")[0];
+    data['lifts2'] = $("#statL").text().split("/")[1];
     
     $("#intro").text("Uploading edit...");
     $.post(baseURL + "/upload", data, function(data, status)
