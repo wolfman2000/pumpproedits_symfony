@@ -132,22 +132,18 @@ function saveChart()
   file += "   " + title + ":" + EOL;
   file += "   Edit:" + EOL;
   file += "   " + diff + ":" + EOL;
-  /*
-   * I'm sure the radar line will not be exactly right for Pro 2.
-   * Still, until someone actually can let me know what the radar line
-   * LOOKS like for a Pro 2 file, I have to stick with the old fashioned way.
-   */
+  // pretty sure this is the style of the new radar line.
   file += "   0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
-    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',';
+    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',0,0,';
   if (style !== "routine")
   {
     file += "0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
-    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ':' + EOL + EOL;
+    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',0,0:' + EOL + EOL;
   }
   else
   {
     file += "0,0,0,0,0," + steps[1] + ',' + jumps[1] + ',' + holds[1] + ','
-    + mines[1] + ',' + trips[1] + ',' + rolls[1] + ':' + EOL + EOL;
+    + mines[1] + ',' + trips[1] + ',' + rolls[1] + ',0,0:' + EOL + EOL;
   }
   
   notes = SVGtoNOTES();

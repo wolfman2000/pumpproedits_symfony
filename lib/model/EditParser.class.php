@@ -26,8 +26,8 @@ class EditParser
     fwrite($fh, sprintf("     pump-%s:%s", $kind, $eol));
     fwrite($fh, sprintf("     NameEditHere:%s", $eol));
     fwrite($fh, sprintf("     Edit:%s     10:%s     ", $eol, $eol));
-    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, ", $measures - 1));
-    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0:%s%s", $measures - 1, $eol, $eol));
+    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, 0, 0, ", $measures - 1));
+    fwrite($fh, sprintf("0, 0, 0, 0, 0, %d, 0, 0, 0, 0, 0, 0, 0:%s%s", $measures - 1, $eol, $eol));
 
     $cols = $this->getCols("pump-" . $kind);
     
