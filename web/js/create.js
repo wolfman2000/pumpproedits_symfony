@@ -27,6 +27,11 @@ $(document).ready(function()
       changeArrow();
       updateStats(gatherStats());
     }
+    else if (clipboard) // paste mode
+    {
+      pasteArrows();
+      $("#intro").text("Arrows pasted.");
+    }
     else // select mode
     {
       selectRow();
