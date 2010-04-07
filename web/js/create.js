@@ -30,7 +30,8 @@ $(document).ready(function()
     else if (clipboard) // paste mode
     {
       pasteArrows();
-      $("#intro").text("Arrows pasted.");
+      updateStats(gatherStats());
+      $("#intro").text("Arrows pasted. Clipboard wiped.");
     }
     else // select mode
     {
@@ -433,6 +434,7 @@ $(document).ready(function()
         {
           cutArrows();
           $("#intro").text("Click a row to paste the notes, or swap cursor mode to delete.");
+          updateStats(gatherStats());
         }
         break;
       }

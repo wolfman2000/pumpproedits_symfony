@@ -340,10 +340,7 @@ function shiftUp()
   }
   removeUp(0, BUFF_TOP);
 }
-// Shift the selected arrows down based on the note sync.
-function shiftDown()
-{
-  // remove all notes that are in the way of the shifting operation.
+// remove all notes that are in the way of the shifting operation.
   function removeDown(top, bot)
   {
     if (top > bot)
@@ -357,7 +354,10 @@ function shiftDown()
       return y > top && y <= bot;
     }).remove();
   }
-  
+
+// Shift the selected arrows down based on the note sync.
+function shiftDown()
+{
   var val = Math.floor(parseInt($("#quanlist").val()));
   var notes = getSelectedArrows();
   var oY = parseFloat($("#selBot").attr('y'));
@@ -412,7 +412,7 @@ function cutArrows()
 // Copy the arrows, and place onto the clipboard.
 function copyArrows()
 {
-  clipboard = getSelectedArrows();
+  clipboard = getSelectedArrows().clone();
   if (!clipboard.length)
   {
     clipboard = null;
@@ -454,6 +454,8 @@ function pasteArrows()
     $(this).attr('class', csses[0] + " " + getSync(beatM) + " " + csses[2]);
   });
   $("#svgNote").append(clipboard);
+  var sH = Math.floor($("#svg").attr('height')) / SCALE;
+  removeDown(sH - BUFF_BOT - 0.1, sH * 2 * SCALE); // ensure nothing went BELOW the measures.
   sortArrows();
   clipboard = null;
 }
