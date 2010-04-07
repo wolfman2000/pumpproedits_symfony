@@ -121,7 +121,7 @@ function SVGtoNOTES()
 /*
  * Call this function for when the user wants to save the chart.
  */
-function saveChart()
+function saveChart(data)
 {
   var style = $("#stylelist").val();
   var title = $("#editName").val();
@@ -133,17 +133,17 @@ function saveChart()
   file += "   Edit:" + EOL;
   file += "   " + diff + ":" + EOL;
   // pretty sure this is the style of the new radar line.
-  file += "   0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
-    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',0,0,';
+  file += "   0,0,0,0,0," + data.steps[0] + ',' + data.jumps[0] + ',' + data.holds[0] + ','
+    + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0] + ',0,0,';
   if (style !== "routine")
   {
-    file += "0,0,0,0,0," + steps[0] + ',' + jumps[0] + ',' + holds[0] + ','
-    + mines[0] + ',' + trips[0] + ',' + rolls[0] + ',0,0:' + EOL + EOL;
+    file += "0,0,0,0,0," + data.steps[0] + ',' + data.jumps[0] + ',' + data.holds[0] + ','
+    + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0] + ',0,0:' + EOL + EOL;
   }
   else
   {
-    file += "0,0,0,0,0," + steps[1] + ',' + jumps[1] + ',' + holds[1] + ','
-    + mines[1] + ',' + trips[1] + ',' + rolls[1] + ',0,0:' + EOL + EOL;
+    file += "0,0,0,0,0," + data.steps[1] + ',' + data.jumps[1] + ',' + data.holds[1] + ','
+    + data.mines[1] + ',' + data.trips[1] + ',' + data.rolls[1] + ',0,0:' + EOL + EOL;
   }
   
   notes = SVGtoNOTES();

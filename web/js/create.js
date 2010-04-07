@@ -90,7 +90,7 @@ $(document).ready(function()
     var data = gatherStats();
     if (!data.badds.length)
     {
-      saveChart();
+      saveChart(data);
       $("#intro").text("You can save your work!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', true);
