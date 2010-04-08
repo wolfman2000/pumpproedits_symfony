@@ -13,7 +13,7 @@ class EditParser
     return $measure;
   }
 
-  protected function gen_edit_file($kind, $name, $abbr, $measures)
+  protected function gen_edit_file($kind, $name, $abbr, $measures, $duration)
   {
     $fname = sprintf("base_%06d_%s.edit", $abbr, ucfirst($kind));
     $eol = "\r\n";
@@ -60,7 +60,7 @@ class EditParser
     $base = Doctrine::getTable('PPE_Song_Song')->getSongRow($songid);
     foreach (array("single", "double", "halfdouble", "routine") as $kind)
     {
-      $this->gen_edit_file($kind, $base->getName(), $base->getID(), $base->getMeasures());
+      $this->gen_edit_file($kind, $base->getName(), $base->getID(), $base->getMeasures(), $base->duration);
     }
 
   }

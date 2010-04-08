@@ -136,6 +136,12 @@ PPE_Song_Song:
       type: boolean
       notnull: true
       default: 0
+    duration:
+      type: decimal
+      notnull: true
+      default: 90
+      size: 6
+      scale: 3
   indexes:
     song_index:
       fields: [name]

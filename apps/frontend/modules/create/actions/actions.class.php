@@ -139,6 +139,7 @@ class createActions extends sfActions
     $ret['name'] = $sRow->name;
     $ret['abbr'] = $sRow->abbr;
     $ret['measures'] = $sRow->measures;
+    $ret['duration'] = $sRow->duration;
     
     $bpms = Doctrine::getTable('PPE_Song_BPM')->getBPMsBySongID($id);
     $bArr = array();

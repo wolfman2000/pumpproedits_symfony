@@ -133,18 +133,17 @@ function saveChart(data)
   file += "   Edit:" + EOL;
   file += "   " + diff + ":" + EOL;
   // pretty sure this is the style of the new radar line.
-  file += "   0,0,0,0,0," + data.steps[0] + ',' + data.jumps[0] + ',' + data.holds[0] + ','
-    + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0] + ',0,0,';
-  if (style !== "routine")
-  {
-    file += "0,0,0,0,0," + data.steps[0] + ',' + data.jumps[0] + ',' + data.holds[0] + ','
-    + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0] + ',0,0:' + EOL + EOL;
-  }
-  else
-  {
-    file += "0,0,0,0,0," + data.steps[1] + ',' + data.jumps[1] + ',' + data.holds[1] + ','
-    + data.mines[1] + ',' + data.trips[1] + ',' + data.rolls[1] + ',0,0:' + EOL + EOL;
-  }
+  file += "   " + data.stream[0].toFixed(3) + "," + data.voltage[0].toFixed(3) + ","
+    + data.air[0].toFixed(3) + "," + data.freeze[0].toFixed(3) + ","
+    + data.chaos[0].toFixed(3) + "," + data.steps[0] + ',' + data.jumps[0]
+    + ',' + data.holds[0] + ',' + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0]
+    + ',0,0,';
+  var i = (style !== "routine" ? 0 : 1);
+  file += data.stream[i].toFixed(3) + "," + data.voltage[i].toFixed(3) + ","
+    + data.air[i].toFixed(3) + "," + data.freeze[i].toFixed(3) + ","
+    + data.chaos[i].toFixed(3) + "," + data.steps[i] + ',' + data.jumps[i]
+    + ',' + data.holds[i] + ',' + data.mines[i] + ',' + data.trips[i] + ',' + data.rolls[i]
+    + ',0,0:' + EOL + EOL;
   
   notes = SVGtoNOTES();
   
@@ -226,8 +225,27 @@ function gatherStats()
   data.rolls = Array(0, 0);
   data.lifts = Array(0, 0);
   data.fakes = Array(0, 0);
+  // radar values aren't used in Pro 2, but they may eventually.
+  data.stream = Array(0, 0);
+  data.voltage = Array(0, 0);
+  data.air = Array(0, 0);
+  data.freeze = Array(0, 0);
+  data.chaos = Array(0, 0);
+  // These are used to help calculate the radar values.
+  data.allT = Array(0, 0);
+  data.allC = Array(0, 0);
+  var notes = $("#svgNote").children();
+  const len = songData.duration;
 
+  const lastBeat = notes.last().attr('y');
+  const avgBPS = lastBeat / len;
+  var maxDensity = 0; // peak density of steps
+  
+  const range = ARR_HEIGHT * BEATS_PER_MEASURE * 2;
+  
   data.badds = Array(); // make a note of where the bad points are.
+  
+  
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
@@ -252,14 +270,39 @@ function gatherStats()
     }
   }
   
-  $("#svgNote").children().each(function(ind){
-    var p = getPlayerByClass($(this).attr('class'));
-    var y = parseFloat($(this).attr('y')) - BUFF_TOP;
+  notes.each(function(ind){
+    var cur = $(this); // store the current node for later use.
+    var css = cur.attr('class');
+    var p = getPlayerByClass(css);
+    var y = parseFloat(cur.attr('y')) - BUFF_TOP;
     var m = Math.floor(y * MEASURE_RATIO / BEATS_MAX) + 1;
     var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
-    var x = parseFloat($(this).attr('x'));
+    var x = parseFloat(cur.attr('x'));
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
-    var t = getTypeByClass($(this).attr('class'));
+    var t = getTypeByClass(css);
+    
+    // chaotic note: doesn't matter the type, include it.
+    if (css.indexOf('004') == -1 && css.indexOf('008') == -1)
+    {
+      data.allC[p]++;
+    }
+    var curDensity = 0;
+    var present = cur; // Ensure a separate copy.
+    var pY = parseFloat(present.attr('y'));
+    while (present.length && pY < parseFloat(cur.attr('y')) + range)
+    {
+      pC = present.attr('class');
+      pP = getPlayerByClass(pC);
+      if (pP == p)
+      {
+        pT = getTypeByClass(pC);
+        if (pT === "1" || pT === "2") { curDensity++; }
+      }
+      present = present.next();
+      pY = parseFloat(present.attr('y'));
+    }
+    
+    maxDensity = Math.max(maxDensity, curDensity / 8);
     
     if (oY !== y) // new row
     {
@@ -282,6 +325,7 @@ function gatherStats()
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
+      data.allT[p]++;
     }
     else if (t === "2") // hold
     {
@@ -291,6 +335,7 @@ function gatherStats()
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
       data.holds[p]++;
+      data.allT[p]++;
     }
     else if (t === "3") // hold/roll end
     {
@@ -335,5 +380,16 @@ function gatherStats()
   {
     if (holdCheck[i]) { data.badds.push(holdCheck[i]) }
   }
+  
+  // Wrap up all of the radar data here before returning it.
+  for (var i = 0; i < 2; i++)
+  {
+    data.stream[i] = Math.min(data.allT[i] / len / 7, 1);
+    data.voltage[i] = Math.min(maxDensity * avgBPS / 10, 1);
+    data.air[i] = Math.min(data.jumps[i] / len, 1);
+    data.freeze[i] = Math.min(data.holds[i] / len, 1);
+    data.chaos[i] = Math.min(data.allC[i] / len * .5, 1);
+  }
+  
   return data;
 }

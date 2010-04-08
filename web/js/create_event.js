@@ -398,7 +398,7 @@ function shiftDown()
 function cutArrows()
 {
   copyArrows();
-  if (!clipboard.length)
+  if (clipboard == null || !clipboard.length)
   {
     clipboard = null;
     $("#intro").text("You didn't cut or copy anything.");
@@ -413,7 +413,7 @@ function cutArrows()
 function copyArrows()
 {
   clipboard = getSelectedArrows().clone();
-  if (!clipboard.length)
+  if (clipboard == null || !clipboard.length)
   {
     clipboard = null;
     $("#intro").text("You didn't cut or copy anything.");

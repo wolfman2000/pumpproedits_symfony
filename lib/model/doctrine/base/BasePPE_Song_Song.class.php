@@ -9,6 +9,7 @@
  * @property char $abbr
  * @property integer $measures
  * @property boolean $is_problem
+ * @property decimal $duration
  * @property Doctrine_Collection $PPE_Song_Difficulties
  * @property Doctrine_Collection $PPE_Song_Games
  * @property Doctrine_Collection $PPE_Song_Songs
@@ -18,6 +19,7 @@
  * @method char                getAbbr()                  Returns the current record's "abbr" value
  * @method integer             getMeasures()              Returns the current record's "measures" value
  * @method boolean             getIsProblem()             Returns the current record's "is_problem" value
+ * @method decimal             getDuration()              Returns the current record's "duration" value
  * @method Doctrine_Collection getPPESongDifficulties()   Returns the current record's "PPE_Song_Difficulties" collection
  * @method Doctrine_Collection getPPESongGames()          Returns the current record's "PPE_Song_Games" collection
  * @method Doctrine_Collection getPPESongSongs()          Returns the current record's "PPE_Song_Songs" collection
@@ -26,6 +28,7 @@
  * @method PPE_Song_Song       setAbbr()                  Sets the current record's "abbr" value
  * @method PPE_Song_Song       setMeasures()              Sets the current record's "measures" value
  * @method PPE_Song_Song       setIsProblem()             Sets the current record's "is_problem" value
+ * @method PPE_Song_Song       setDuration()              Sets the current record's "duration" value
  * @method PPE_Song_Song       setPPESongDifficulties()   Sets the current record's "PPE_Song_Difficulties" collection
  * @method PPE_Song_Song       setPPESongGames()          Sets the current record's "PPE_Song_Games" collection
  * @method PPE_Song_Song       setPPESongSongs()          Sets the current record's "PPE_Song_Songs" collection
@@ -60,6 +63,14 @@ abstract class BasePPE_Song_Song extends sfDoctrineRecord
              'type' => 'boolean',
              'notnull' => true,
              'default' => 0,
+             ));
+        $this->hasColumn('duration', 'decimal', 6, array(
+             'type' => 'decimal',
+             'notnull' => true,
+             'default' => 90,
+             'size' => 6,
+             'scale' => 3,
+             'length' => 6,
              ));
 
 
