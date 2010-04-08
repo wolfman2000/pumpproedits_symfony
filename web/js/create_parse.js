@@ -294,9 +294,10 @@ function gatherStats()
       var tY = parseFloat($(this).attr('y'));
       if (tY < cY) { return false; }
       if (tY >= cY + window) { return false; }
-      var tP = getPlayerByClass($(this).attr('class'));
+      var tS = $(this).attr('class');
+      var tP = getPlayerByClass(tS);
       if (tP !== p) { return false; }
-      var tT = getTypeByClass($(this).attr('class'));
+      var tT = getTypeByClass(tS);
       if (tT === "1" || tT === "2") { return true; }
       return false;
     }).length / 8);
