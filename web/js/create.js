@@ -173,8 +173,8 @@ $(document).ready(function()
       $("#intro").text("All loaded up!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', 'disabled');
-      $("#authorlist").attr("disabled", "disabled");
-      $(".author").hide();
+      if (andamiro) { $(".author").show(); $("#authorlist").removeAttr('disabled'); }
+      else          { $(".author").hide(); $("#authorlist").attr("disabled", true); }
       isDirty = false;
     }, "json");
   });
