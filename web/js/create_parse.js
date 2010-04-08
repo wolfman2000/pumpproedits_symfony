@@ -235,12 +235,21 @@ function gatherStats()
   // These are used to help calculate the radar values.
   data.allT = Array(0, 0);
   data.allC = Array(0, 0);
+  var notes = $("#svgNote").children();
+  const len = songData.duration;
 
+  const lastBeat = notes.last().attr('y');
+  const avgBPS = lastBeat / len;
+  var maxDensity = 0; // peak density of steps
+  
+  const range = ARR_HEIGHT * BEATS_PER_MEASURE * 2;
+  
   data.badds = Array(); // make a note of where the bad points are.
+  
+  
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
-  var len = songData.duration;
   
   var oX = -1;
   var oY = -1;
@@ -262,13 +271,14 @@ function gatherStats()
     }
   }
   
-  $("#svgNote").children().each(function(ind){
-    var css = $(this).attr('class');
+  notes.each(function(ind){
+    var cur = $(this); // store the current node for later use.
+    var css = cur.attr('class');
     var p = getPlayerByClass(css);
-    var y = parseFloat($(this).attr('y')) - BUFF_TOP;
+    var y = parseFloat(cur.attr('y')) - BUFF_TOP;
     var m = Math.floor(y * MEASURE_RATIO / BEATS_MAX) + 1;
     var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
-    var x = parseFloat($(this).attr('x'));
+    var x = parseFloat(cur.attr('x'));
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
     var t = getTypeByClass(css);
     
@@ -277,6 +287,20 @@ function gatherStats()
     {
       data.allC[p]++;
     }
+    
+    // Check two beats ahead for taps and holds. Used for voltage.
+    maxDensity = Math.max(maxDensity, notes.filter(function(){
+      var cY = parseFloat(cur.attr('y');
+      var tY = parseFloat($(this).attr('y');
+      if (tY < cY) { return false; }
+      if (tY >= cY + window) { return false; }
+      var tP = getPlayerByClass($(this).attr('class'));
+      if (tP !== p) { return false; }
+      var tT = getTypeByClass($(this).attr('class'));
+      if (tT === "1" || tT === "2") { return true; }
+      return false;
+    }).length / 8);
+    
     
     if (oY !== y) // new row
     {
@@ -355,13 +379,14 @@ function gatherStats()
     if (holdCheck[i]) { data.badds.push(holdCheck[i]) }
   }
   
-  // Wrap all all of the radar data here before returning it.
+  // Wrap up all of the radar data here before returning it.
   for (var i = 0; i < 2; i++)
   {
-    data.stream[i] = Math.min(data.allT[i] / duration / 7, 1);
-    data.air[i] = Math.min(data.jumps[i] / duration, 1);
-    data.freeze[i] = Math.min(data.holds[i] / duration, 1);
-    data.chaos[i] = Math.min(data.allC[i] / duration * .5, 1);
+    data.stream[i] = Math.min(data.allT[i] / len / 7, 1);
+    data.voltage[i] = Math.min(maxDensity * avgBPS / 10, 1);
+    data.air[i] = Math.min(data.jumps[i] / len, 1);
+    data.freeze[i] = Math.min(data.holds[i] / len, 1);
+    data.chaos[i] = Math.min(data.allC[i] / len * .5, 1);
   }
   
   return data;
