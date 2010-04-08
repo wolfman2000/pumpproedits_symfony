@@ -287,21 +287,22 @@ function gatherStats()
     {
       data.allC[p]++;
     }
+    var curDensity = 0;
+    var present = cur.clone(); // Ensure a separate copy.
+    var pY = parseFloat(present.attr('y'));
+    while (present.length && pY < parseFloat(cur.attr('y')) + window)
+    {
+      pC = present.attr('class');
+      pP = getPlayerByClass(pC);
+      if (pP == p)
+      {
+        pT = getTypeByClass(pC);
+        if (pT === "1" || pT === "2") { curDensity++; }
+      }
+      present = present.next();
+    }
     
-    // Check two beats ahead for taps and holds. Used for voltage.
-    maxDensity = Math.max(maxDensity, notes.filter(function(){
-      var cY = parseFloat(cur.attr('y'));
-      var tY = parseFloat($(this).attr('y'));
-      if (tY < cY) { return false; }
-      if (tY >= cY + window) { return false; }
-      var tS = $(this).attr('class');
-      var tP = getPlayerByClass(tS);
-      if (tP !== p) { return false; }
-      var tT = getTypeByClass(tS);
-      if (tT === "1" || tT === "2") { return true; }
-      return false;
-    }).length / 8);
-    
+    maxDensity = Math.max(maxDensity, curDensity / 8);
     
     if (oY !== y) // new row
     {
