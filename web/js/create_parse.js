@@ -290,8 +290,8 @@ function gatherStats()
     
     // Check two beats ahead for taps and holds. Used for voltage.
     maxDensity = Math.max(maxDensity, notes.filter(function(){
-      var cY = parseFloat(cur.attr('y');
-      var tY = parseFloat($(this).attr('y');
+      var cY = parseFloat(cur.attr('y'));
+      var tY = parseFloat($(this).attr('y'));
       if (tY < cY) { return false; }
       if (tY >= cY + window) { return false; }
       var tP = getPlayerByClass($(this).attr('class'));
