@@ -88,7 +88,7 @@ function selectRow()
   }
 }
 
-// Display the updated stats. Should this become asynchronous?
+// Display the updated stats. Primarily asynchronous.
 function updateStats(data)
 {
   var S = data.steps[0];

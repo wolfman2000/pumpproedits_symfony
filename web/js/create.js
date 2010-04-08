@@ -30,8 +30,9 @@ $(document).ready(function()
     else if (clipboard) // paste mode
     {
       pasteArrows();
-      updateStats(gatherStats());
       $("#intro").text("Arrows pasted. Clipboard wiped.");
+      updateStats(gatherStats());
+      
     }
     else // select mode
     {
@@ -87,7 +88,7 @@ $(document).ready(function()
   
   // Force all edits to be validated before saving/uploading.
   $("#but_val").click(function(){
-    var data = gatherStats();
+    var data = gatherStats(1);
     if (!data.badds.length)
     {
       saveChart(data);

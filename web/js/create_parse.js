@@ -214,7 +214,7 @@ function genObject(p, m, b, n)
  * Return the data gathered, including the points
  * that are considered invalid for the chart.
  */
-function gatherStats()
+function gatherStats(useRadar)
 {
   var data = {};
   data.steps = Array(0, 0);
@@ -240,7 +240,6 @@ function gatherStats()
   const lastBeat = notes.last().attr('y');
   const avgBPS = lastBeat / len;
   var maxDensity = 0; // peak density of steps
-  
   const range = ARR_HEIGHT * BEATS_PER_MEASURE * 2;
   
   data.badds = Array(); // make a note of where the bad points are.
@@ -281,28 +280,31 @@ function gatherStats()
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
     var t = getTypeByClass(css);
     
-    // chaotic note: doesn't matter the type, include it.
-    if (css.indexOf('004') == -1 && css.indexOf('008') == -1)
+    if (useRadar)
     {
-      data.allC[p]++;
-    }
-    var curDensity = 0;
-    var present = cur; // Ensure a separate copy.
-    var pY = parseFloat(present.attr('y'));
-    while (present.length && pY < parseFloat(cur.attr('y')) + range)
-    {
-      pC = present.attr('class');
-      pP = getPlayerByClass(pC);
-      if (pP == p)
+      // chaotic note: doesn't matter the type, include it.
+      if (css.indexOf('004') == -1 && css.indexOf('008') == -1)
       {
-        pT = getTypeByClass(pC);
-        if (pT === "1" || pT === "2") { curDensity++; }
+        data.allC[p]++;
       }
-      present = present.next();
-      pY = parseFloat(present.attr('y'));
+      var curDensity = 0;
+      var present = cur; // Ensure a separate copy.
+      var pY = parseFloat(present.attr('y'));
+      while (present.length && pY < parseFloat(cur.attr('y')) + range)
+      {
+        pC = present.attr('class');
+        pP = getPlayerByClass(pC);
+        if (pP == p)
+        {
+          pT = getTypeByClass(pC);
+          if (pT === "1" || pT === "2") { curDensity++; }
+        }
+        present = present.next();
+        pY = parseFloat(present.attr('y'));
+      }
+      
+      maxDensity = Math.max(maxDensity, curDensity / 8);
     }
-    
-    maxDensity = Math.max(maxDensity, curDensity / 8);
     
     if (oY !== y) // new row
     {
@@ -382,13 +384,16 @@ function gatherStats()
   }
   
   // Wrap up all of the radar data here before returning it.
-  for (var i = 0; i < 2; i++)
+  if (useRadar)
   {
-    data.stream[i] = Math.min(data.allT[i] / len / 7, 1);
-    data.voltage[i] = Math.min(maxDensity * avgBPS / 10, 1);
-    data.air[i] = Math.min(data.jumps[i] / len, 1);
-    data.freeze[i] = Math.min(data.holds[i] / len, 1);
-    data.chaos[i] = Math.min(data.allC[i] / len * .5, 1);
+    for (var i = 0; i < 2; i++)
+    {
+      data.stream[i] = Math.min(data.allT[i] / len / 7, 1);
+      data.voltage[i] = Math.min(maxDensity * avgBPS / 10, 1);
+      data.air[i] = Math.min(data.jumps[i] / len, 1);
+      data.freeze[i] = Math.min(data.holds[i] / len, 1);
+      data.chaos[i] = Math.min(data.allC[i] / len * .5, 1);
+    }
   }
   
   return data;
