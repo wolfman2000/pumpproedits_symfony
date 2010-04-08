@@ -263,13 +263,20 @@ function gatherStats()
   }
   
   $("#svgNote").children().each(function(ind){
-    var p = getPlayerByClass($(this).attr('class'));
+    var css = $(this).attr('class');
+    var p = getPlayerByClass(css);
     var y = parseFloat($(this).attr('y')) - BUFF_TOP;
     var m = Math.floor(y * MEASURE_RATIO / BEATS_MAX) + 1;
     var b = Math.round(y * MEASURE_RATIO % BEATS_MAX);
     var x = parseFloat($(this).attr('x'));
     var c = (x - BUFF_LFT) / ARR_HEIGHT;
-    var t = getTypeByClass($(this).attr('class'));
+    var t = getTypeByClass(css);
+    
+    // chaotic note: doesn't matter the type, include it.
+    if (css.indexOf('004') == -1 && css.indexOf('008') == -1)
+    {
+      data.allC[p]++;
+    }
     
     if (oY !== y) // new row
     {
@@ -354,6 +361,7 @@ function gatherStats()
     data.stream[i] = Math.min(data.allT[i] / duration / 7, 1);
     data.air[i] = Math.min(data.jumps[i] / duration, 1);
     data.freeze[i] = Math.min(data.holds[i] / duration, 1);
+    data.chaos[i] = Math.min(data.allC[i] / duration * .5, 1);
   }
   
   return data;
