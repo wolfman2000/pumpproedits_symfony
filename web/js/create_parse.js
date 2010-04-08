@@ -133,13 +133,15 @@ function saveChart(data)
   file += "   Edit:" + EOL;
   file += "   " + diff + ":" + EOL;
   // pretty sure this is the style of the new radar line.
-  file += "   " + data.stream[0] + "," + data.voltage[0] + "," + data.air[0] + ","
-    + data.freeze[0] + "," + data.chaos[0] + "," + data.steps[0] + ',' + data.jumps[0]
+  file += "   " + data.stream[0].toFixed(3) + "," + data.voltage[0].toFixed(3) + ","
+    + data.air[0].toFixed(3) + "," + data.freeze[0].toFixed(3) + ","
+    + data.chaos[0].toFixed(3) + "," + data.steps[0] + ',' + data.jumps[0]
     + ',' + data.holds[0] + ',' + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0]
     + ',0,0,';
   var i = (style !== "routine" ? 0 : 1);
-  file += data.stream[i] + "," + data.voltage[i] + "," + data.air[i] + ","
-    + data.freeze[i] + "," + data.chaos[i] + "," + data.steps[i] + ',' + data.jumps[i]
+  file += data.stream[i].toFixed(3) + "," + data.voltage[i].toFixed(3) + ","
+    + data.air[i].toFixed(3) + "," + data.freeze[i].toFixed(3) + ","
+    + data.chaos[i].toFixed(3) + "," + data.steps[i] + ',' + data.jumps[i]
     + ',' + data.holds[i] + ',' + data.mines[i] + ',' + data.trips[i] + ',' + data.rolls[i]
     + ',0,0:' + EOL + EOL;
   
@@ -285,9 +287,9 @@ function gatherStats()
       data.allC[p]++;
     }
     var curDensity = 0;
-    var present = cur.clone(); // Ensure a separate copy.
+    var present = cur; // Ensure a separate copy.
     var pY = parseFloat(present.attr('y'));
-    while (present.length && pY < parseFloat(cur.attr('y')) + window)
+    while (present.length && pY < parseFloat(cur.attr('y')) + range)
     {
       pC = present.attr('class');
       pP = getPlayerByClass(pC);
@@ -297,6 +299,7 @@ function gatherStats()
         if (pT === "1" || pT === "2") { curDensity++; }
       }
       present = present.next();
+      pY = parseFloat(present.attr('y'));
     }
     
     maxDensity = Math.max(maxDensity, curDensity / 8);
