@@ -133,11 +133,15 @@ function saveChart(data)
   file += "   Edit:" + EOL;
   file += "   " + diff + ":" + EOL;
   // pretty sure this is the style of the new radar line.
-  file += "   0,0,0,0,0," + data.steps[0] + ',' + data.jumps[0] + ',' + data.holds[0] + ','
-    + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0] + ',0,0,';
+  file += "   " + data.stream[0] + "," + data.voltage[0] + "," + data.air[0] + ","
+    + data.freeze[0] + "," + data.chaos[0] + "," + data.steps[0] + ',' + data.jumps[0]
+    + ',' + data.holds[0] + ',' + data.mines[0] + ',' + data.trips[0] + ',' + data.rolls[0]
+    + ',0,0,';
   var i = (style !== "routine" ? 0 : 1);
-  file += "0,0,0,0,0," + data.steps[i] + ',' + data.jumps[i] + ',' + data.holds[i] + ','
-    + data.mines[i] + ',' + data.trips[i] + ',' + data.rolls[i] + ',0,0:' + EOL + EOL;
+  file += data.stream[i] + "," + data.voltage[i] + "," + data.air[i] + ","
+    + data.freeze[i] + "," + data.chaos[i] + "," + data.steps[i] + ',' + data.jumps[i]
+    + ',' + data.holds[i] + ',' + data.mines[i] + ',' + data.trips[i] + ',' + data.rolls[i]
+    + ',0,0:' + EOL + EOL;
   
   notes = SVGtoNOTES();
   
