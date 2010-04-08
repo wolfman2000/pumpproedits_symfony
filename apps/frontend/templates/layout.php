@@ -20,7 +20,7 @@ $naked = 9;
 include(sfConfig::get('sf_lib_dir') . "/browser_detect.php"); ?>
 <title><?php include_slot('title', 'Pump Pro Edits') ?></title>
 <link rel="shortcut icon" href="/favicon.ico" />
-<?php if (!is_naked_day($naked)) { include_stylesheets(); }
+<?php if (strlen($xhtml) || !is_naked_day($naked)) { include_stylesheets(); }
 if (browser_detection(7) == "ie"): ?>
 <script type="text/javascript" src="js/IE8.js"></script>
 <script type="text/javascript" src="js/ie_html5.js"></script>
