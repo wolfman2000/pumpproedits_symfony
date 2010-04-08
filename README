@@ -44,8 +44,8 @@ code that is guaranteed to run. Of course, mistakes happen,
 but try to be careful.
 
 Don't be afraid to use many different technologies either.
-Presently, this website uses a more flexible SVG
-chart generator than the previous PNG version. Take advantage
+Presently, this website uses an SVG based Edit Creator
+with hooks for AJAX, JSON, jQuery, and Twitter. Take advantage
 of what the web has to offer. If it is a standard technology
 implemented by many web browsers, go ahead.
 
