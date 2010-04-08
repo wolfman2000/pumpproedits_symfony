@@ -232,6 +232,9 @@ function gatherStats()
   data.air = Array(0, 0);
   data.freeze = Array(0, 0);
   data.chaos = Array(0, 0);
+  // These are used to help calculate the radar values.
+  data.allT = Array(0, 0);
+  data.allC = Array(0, 0);
 
   data.badds = Array(); // make a note of where the bad points are.
   var holdCheck = Array();
@@ -289,6 +292,7 @@ function gatherStats()
       holdCheck[c] = false;
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
+      data.allT[p]++;
     }
     else if (t === "2") // hold
     {
@@ -298,6 +302,7 @@ function gatherStats()
       stepCheck[c] = genObject(p, m, b, c);
       numSteps[p]++;
       data.holds[p]++;
+      data.allT[p]++;
     }
     else if (t === "3") // hold/roll end
     {
@@ -344,6 +349,12 @@ function gatherStats()
   }
   
   // Wrap all all of the radar data here before returning it.
+  for (var i = 0; i < 2; i++)
+  {
+    data.stream[i] = Math.min(data.allT[i] / duration / 7, 1);
+    data.air[i] = Math.min(data.jumps[i] / duration, 1);
+    data.freeze[i] = Math.min(data.holds[i] / duration, 1);
+  }
   
   return data;
 }
