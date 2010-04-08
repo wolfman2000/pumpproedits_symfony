@@ -226,11 +226,18 @@ function gatherStats()
   data.rolls = Array(0, 0);
   data.lifts = Array(0, 0);
   data.fakes = Array(0, 0);
+  // radar values aren't used in Pro 2, but they may eventually.
+  data.stream = Array(0, 0);
+  data.voltage = Array(0, 0);
+  data.air = Array(0, 0);
+  data.freeze = Array(0, 0);
+  data.chaos = Array(0, 0);
 
   data.badds = Array(); // make a note of where the bad points are.
   var holdCheck = Array();
   var stepCheck = Array();
   var numMeasures = songData.measures;
+  var len = songData.duration;
   
   var oX = -1;
   var oY = -1;
@@ -335,5 +342,8 @@ function gatherStats()
   {
     if (holdCheck[i]) { data.badds.push(holdCheck[i]) }
   }
+  
+  // Wrap all all of the radar data here before returning it.
+  
   return data;
 }
