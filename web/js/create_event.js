@@ -191,9 +191,12 @@ function init()
 {
   captured = false;
   clipboard = null;
-  measures = 4; // temp variable.
+  measures = 3; // temp variable.
   columns = 5; // reasonable default.
-  fixScale(2);
+  $("article").css('height', '50em');
+  fixScale(2, 1000,
+    5 * ARR_HEIGHT * SCALE + BUFF_LFT + BUFF_RHT,
+    ADJUST_SIZE * BEATS_PER_MEASURE * 3 + BUFF_TOP + BUFF_BOT);
   $("title").text("Edit Creator — Pump Pro Edits");
   $("h2").first().text("Edit Creator");
   
@@ -211,32 +214,9 @@ function init()
   $("#but_val").attr("disabled", true);
   $("#but_new").attr("disabled", true);
   $("#cho_file").removeAttr('disabled');
-  if (authed > 0)
-  {
-    $("#cho_site").removeAttr('disabled');
-  }
-  else
-  {
-    $("#cho_site").attr('disabled', true);
-  }
-  /**
-   * Round elements to the nearest 10 for easier calculations later.
-   */
-  function round10(n)
-  {
-    n = Math.round(n);
-    while (n % 10)
-    {
-      n = n + 1;
-    }
-    return n;
-  }
-  $("#svg").css('left', round10($("nav").first().width()) + 70);
-  $("#svg").css('top', round10($("header").first().height()) * 8 + 20);
-  $("article").css('height', '50em');
-  $("#svg").attr("width", 5 * ARR_HEIGHT * SCALE + BUFF_LFT + BUFF_RHT);
-  $("#svg").attr("height", ADJUST_SIZE * BEATS_PER_MEASURE * 2 + BUFF_TOP + BUFF_BOT);
-
+  if (authed > 0) { $("#cho_site").removeAttr('disabled'); }
+  else            { $("#cho_site").attr('disabled', true); }
+  
   // reset the drop downs (and corresponding variables) to default values.
   $("#songlist").val('');
   $("#stylelist").val('');
@@ -260,17 +240,36 @@ function init()
 }
 
 // Dynamically adjust the scale as needed.
-function fixScale(num)
+function fixScale(num, len, w, h)
 {
+  /*
+   * Round elements to the nearest 10 for easier calculations later.
+   */
+  function round10(n)
+  {
+    n = Math.round(n);
+    while (n % 10)
+    {
+      n = n + 1;
+    }
+    return n;
+  }
+  if (!len) { var len = 1000; }
   SCALE = num;
   ADJUST_SIZE = ARR_HEIGHT * SCALE;
   MEASURE_HEIGHT = ADJUST_SIZE * BEATS_PER_MEASURE;
-  height = SCALE * (ARR_HEIGHT * BEATS_PER_MEASURE * measures + BUFF_TOP + BUFF_BOT);
-  $("#svg").attr("height", height);
-  width = SCALE * ((BUFF_LFT + BUFF_RHT) + columns * ARR_HEIGHT);
-  $("#svg").attr("width", width);
+  if (!h) { var h = SCALE * (ARR_HEIGHT * BEATS_PER_MEASURE * measures + BUFF_TOP + BUFF_BOT); }
+  if (!w) { var w = SCALE * ((BUFF_LFT + BUFF_RHT) + columns * ARR_HEIGHT); }
+  
+  $("#svg").animate({
+    left: round10($("nav").first().width()) + 70,
+    top: round10($("header").first().height()) * 8 + 20,
+    width: w,
+    height: h,
+  }, len).attr("width", w).attr("height", h);
+  
   $("#notes").attr("transform", "scale(" + SCALE + ")");
-  $("article").css("height", height + 200);
+  $("article").css("height", h + 150);
 }
 
 // Swap the cursor mode as required.
