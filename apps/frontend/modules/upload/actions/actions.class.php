@@ -22,12 +22,13 @@ class uploadActions extends sfActions
       $this->forward('login', 'index');
       return;
     }
-    $this->form = new UploadEditForm();
+    $this->form = new UploadEditForm(array(), array('user' => $this->getUser()->getAttribute('id')));
   }
   
   public function executeValidate(sfWebRequest $request)
   {
-    $this->form = new UploadEditForm();
+    $submitterID = $this->getUser()->getAttribute('id');
+    $this->form = new UploadEditForm(array(), array('user' => $submitterID));
     $this->form->bind($request->getParameter('validate'), $request->getFiles('validate'));
     if ($this->form->isValid())
     {
@@ -40,7 +41,7 @@ class uploadActions extends sfActions
       $owner = $this->form->getValue('owner');
       if ($owner == "me")
       {
-        $uid = $this->getUser()->getAttribute('id');
+        $uid = $submitterID;
       }
       elseif ($owner == "piu")
       {
@@ -71,6 +72,7 @@ class uploadActions extends sfActions
       $editT = Doctrine::getTable('PPE_Edit_Edit');
       $row['uid'] = $uid;
       $eid = $editT->getIDByUpload($row);
+      $canAM = Doctrine::getTable('PPE_User_Power')->canEditAndamiro($submitterID);
       
       if ($eid and $owner != "me")
       {

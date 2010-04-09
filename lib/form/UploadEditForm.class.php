@@ -11,7 +11,13 @@ class UploadEditForm extends sfForm
     $pieces['file'] = new sfWidgetFormInputFile();
 
     $choices = array('me' => "Me", 'piu' => "Andamiro", 'other' => "Someone else");
-    $pieces['owner'] = new sfWidgetFormChoice(array('choices' => $choices));
+    $userid = $this->getOption('user');
+    $real = $choices;
+    if (!Doctrine::getTable('PPE_User_Power')->canEditAndamiro($userid))
+    {
+      unset($real['piu']);
+    }
+    $pieces['owner'] = new sfWidgetFormChoice(array('choices' => $real));
 
     $this->setWidgets($pieces);
 
