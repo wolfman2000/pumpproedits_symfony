@@ -13,6 +13,8 @@ function hideRect()
 // Determine if a shadow square can be shown.
 function checkShadow(e)
 {
+  // No placing arrows while loading stuff.
+  if ($(".buttons li[class^=load]:visible").length) { return; }
   var pnt = $("#m1r0");
   if (pnt.offset()) { shadow(e.pageX, e.pageY, pnt); }
 }
