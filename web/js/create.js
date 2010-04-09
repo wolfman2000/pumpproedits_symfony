@@ -67,16 +67,10 @@ $(document).ready(function()
         if (authed > 0)
         {
           $("li.loadChoose").show();
+          $("li[class^=load]:not(.loadChoose)").hide();
           $("#intro").text("Computer or account?");
         }
-        else
-        {
-          $("#fCont").val('');
-          $("li.loadFile").show();
-          $("li.loadFile > *").removeAttr('disabled');
-          $("#but_file").attr('disabled', true);
-          $("#intro").text("You can load your edit now.");
-        }
+        else { loadHardDrive(); }
       }
       
       if ($("#stylelist").val().length)
@@ -85,7 +79,7 @@ $(document).ready(function()
       }
       else
       {
-        $(".choose").slideToggle(200, function(){ loadButtons(); });
+        $(".choose").slideUp(200, function(){ loadButtons(); });
       }
     }
   });
@@ -126,15 +120,7 @@ $(document).ready(function()
   });
   
   // The account holder wishes to load from the hard drive.
-  $("#cho_file").click(function(){
-    $("#fCont").val('');
-    $(".loadChoose").hide();
-    $(".loadFile").show();
-    $("li.loadFile > *").removeAttr('disabled');
-    $("#but_file").attr('disabled', true);
-    $("#intro").text("You can load your edit now.");
-  });
-  
+  $("#cho_file").click(function(){ loadHardDrive(); });  
   // The account holder wishes to edit an account edit in place.
   $("#cho_site").click(function(){
     $(".loadChoose").hide();
@@ -218,21 +204,9 @@ $(document).ready(function()
     });
   });
   
-  // The author decides not to load an account edit.
-  $("#mem_nogo").click(function(){
-    $("#fCont").val('');
-    $(".loadSite").hide();
-    $("li.edit").show();
-    if (!$("#stylelist").val().length) { $(".choose").show(); }
-  });
-  
-  // The author decides not to load an edit from the hard drive.
-  $("#rem_file").click(function(){
-    $("#fCont").val('');
-    $(".loadFile").hide();
-    $("li.edit").show();
-    if (!$("#stylelist").val().length) { $(".choose").show(); }
-  });
+  // The author decides not to load an edit at all.
+  $("#mem_nogo").click(function(){ cancelLoad(); });
+  $("#rem_file").click(function(){ cancelLoad(); });
   
   // save to your local hard drive
   $("#but_save").click(function(){

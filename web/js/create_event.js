@@ -141,6 +141,27 @@ function updateStats(data)
     $("#intro").text("Provide an edit title and difficulty.");
   }
 }
+// The author will load an edit from the hard drive.
+function loadHardDrive()
+{
+  $("#fCont").val('');
+  $(".loadChoose").hide();
+  $(".loadFile").show();
+  $("li.loadFile > *").removeAttr('disabled');
+  $("#but_file").attr('disabled', true);
+  $("#intro").text("You can load your edit now.");
+}
+
+// Cancel the edit loading process, restoring the normal buttons.
+function cancelLoad()
+{
+  $("#fCont").val('');
+  $(".loadSite").hide();
+  $(".loadFile").hide();
+  $("li.edit").show();
+  if (!$("#stylelist").val().length) { $(".choose").show(); }
+}
+
 //Enter this mode upon choosing a song and difficulty.
 function editMode()
 {
