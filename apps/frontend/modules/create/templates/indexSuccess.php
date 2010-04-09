@@ -5,7 +5,8 @@ slot('andy', $andy); ?>
 <p>Welcome to the edit creator. Use the options on the
 left to place arrows below. Have fun!</p>
 
-<svg id="svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
+<svg id="svg" width="200" height="200"
+  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1">
 <g id="notes">
 <g id="svgMeas" />
 <g id="svgSync" />
