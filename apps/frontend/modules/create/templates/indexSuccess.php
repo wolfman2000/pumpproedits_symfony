@@ -127,15 +127,11 @@ if ($s->gid != $ind): ?>
 <option value="0" selected="selected">Player 1</option>
 <option value="1">Player 2</option>
 </select></li>
-</ul></dd>
-<dt class="edit">Present Location:</dt>
-<dd class="edit"><ul>
-<li>Measure <span id="mCheck">???</span></li>
+<li>Present Location:</li>
+<li class="reset">Measure <span id="mCheck">???</span></li>
 <li>Beat <span id="yCheck">???</span> / 192</li>
-</ul></dd>
-<dt class="edit">Step Stats</dt>
-<dd class="edit"><ul>
-<li>Steps: <span id="statS">0</span></li>
+<li>Step Stats:</li>
+<li class="reset">Steps: <span id="statS">0</span></li>
 <li>Jumps: <span id="statJ">0</span></li>
 <li>Holds: <span id="statH">0</span></li>
 <li>Mines: <span id="statM">0</span></li>
