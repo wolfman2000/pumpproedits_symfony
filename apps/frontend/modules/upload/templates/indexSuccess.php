@@ -2,9 +2,9 @@
 slot('h2', "<h2>Upload an Edit</h2>"); ?>
 
 <p>
-  Uploading an edit is relatively simple. Just select
-  the file and say who owns the chart. Please only upload
-  charts that either you made or Andamiro created.
+  Uploading an edit is relatively simple. Just find the file
+  on your hard drive and hit the submit button. Please, only
+  submit edits that you made.
 </p>
 <p>
   This same form is used for uploading new and updated edits.
