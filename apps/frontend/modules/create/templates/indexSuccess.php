@@ -25,14 +25,14 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <p id="intro">Javascript required!</p>
 <form id="svg_nav_form" method="post" enctype="multipart/form-data" action="<?php echo url_for("@edit_creator_download"); ?>">
 <dl>
-<dt>
+<dt class="buttons">
 <input type="hidden" id="abbr" name="abbr" value="BOGUS" />
 <input type="hidden" id="b64" name="b64" value="longvalue" />
 <input type="hidden" id="style" name="style" value="none" />
 <input type="hidden" id="diff" name="diff" value="π" />
 <input type="hidden" id="title" name="title" value="not empty" />
 </dt>
-<dd><ul>
+<dd class="buttons"><ul>
 <li><button id="but_new" type="button">New</button></li>
 <li><button id="but_help" type="button">Help</button></li>
 <li><button id="but_load" type="button">Load</button></li>
@@ -52,8 +52,10 @@ link_to('View your edits here!', '@edit_cuser?id=' . $sf_user->getAttribute('id'
 <li class="edit"><button id="but_save" type="submit">Save</button></li>
 <li class="edit"><button id="but_sub" type="button">Submit</button></li>
 </ul></dd>
-<dt class="choose"><label for="songlist">Select your song!</label></dt>
-<dd class="choose"><select id="songlist">
+<dt class="choose"></dt>
+<dd class="choose"><ul>
+<li><label for="songlist">Select your song!</label></li>
+<li class="reset"><select id="songlist">
 <option value="" selected="selected">Choose</option>
 <optgroup label="Pump it up Pro">
 <?php $ind = 1;
@@ -63,15 +65,17 @@ if ($s->gid != $ind): ?>
 <optgroup label="Pump it up Pro 2">
 <?php $ind = $s->gid; endif; ?>
 <option value="<?php echo $s->id ?>"><?php echo $s->name ?></option>
-<?php endforeach; ?></optgroup></select></dd>
-<dt class="choose"><label for="stylelist">Select your style!</label></dt>
-<dd class="choose"><select id="stylelist">
+<?php endforeach; ?></optgroup></select></li>
+</ul>
+<li><label for="stylelist">Select your style!</label></li>
+<li class="reset"><select id="stylelist">
 <option value="" selected="selected">Choose</option>
 <option value="single">pump-single</option>
 <option value="double">pump-double</option>
 <option value="halfdouble">pump-halfdouble</option>
 <option value="routine">pump-routine</option>
-</select></dd>
+</select></li>
+</dd>
 <dt class="edit"></dt>
 <dd class="edit"><ul>
 <li class="author"><label for="authorlist">Edit Author:</label></li>
