@@ -153,6 +153,24 @@ function loadHardDrive()
   $("#but_file").attr('disabled', true);
   $("#intro").text("You can load your edit now.");
 }
+// Load the chosen edit...or at least, load the common stuff here.
+function loadEdit(data)
+{
+  $(".edit").hide();
+  songID = data.id;
+  $("#stylelist").val(data.style);
+  $("#editDiff").val(data.diff);
+  $("#editName").val(data.title);
+  updateStats(data);
+  $("#fCont").val('');
+  $(".loadFile").hide();
+  $(".loadSite").hide();
+  $("li.edit").show();
+  editMode();
+  $("#intro").text("Loading chart...");
+  loadChart(data.notes);
+      
+}
 
 // Cancel the edit loading process, restoring the normal buttons.
 function cancelLoad()

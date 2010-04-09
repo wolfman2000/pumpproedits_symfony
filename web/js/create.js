@@ -154,20 +154,10 @@ $(document).ready(function()
   
   // Load the edit from the...text area, not a pure file.
   $("#but_file").click(function(){
-    var done;
+    $("#intro").text("Loading edit...");
     $.post(baseURL + "/loadFile", { file: Base64.encode($("#fCont").val())}, function(data, status)
     {
-      songID = data.id;
-      $("#stylelist").val(data.style);
-      $("#editDiff").val(data.diff);
-      $("#editName").val(data.title);
-      updateStats(data);
-      $("#fCont").val('');
-      $(".loadFile").hide();
-      $("li.edit").show();
-      done = editMode();
-      $("#intro").text("Loading chart...");
-      loadChart(data.notes);
+      loadEdit(data);
       $("#intro").text("All loaded up!");
       $("#but_save").removeAttr('disabled');
       $("#but_val").attr('disabled', 'disabled');
@@ -182,17 +172,7 @@ $(document).ready(function()
     $("#intro").text("Loading edit...");
     editID = $("#mem_edit > option:selected").attr('id');
     $.getJSON(baseURL + "/loadSiteEdit/" + editID, function(data) {
-      songID = data.id;
-      $("#stylelist").val(data.style);
-      $("#editDiff").val(data.diff);
-      $("#editName").val(data.title);
-      updateStats(data);
-      $("#fCont").val('');
-      $(".loadSite").hide();
-      $("li.edit").show();
-      done = editMode();
-      $("#intro").text("Loading chart...");
-      loadChart(data.notes);
+      loadEdit(data);
       $("#intro").text("All loaded up!");
       $("#authorlist").attr("disabled", "disabled");
       $(".author").hide();
