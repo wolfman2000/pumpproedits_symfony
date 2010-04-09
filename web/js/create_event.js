@@ -153,7 +153,7 @@ function editMode()
     captured = false;
     columns = getCols();
     $("rect[id^=sel]").attr('width', columns * ARR_HEIGHT).hide();
-    fixScale(2.5);
+    fixScale(2.5, 600);
     
     loadSVGMeasures();
     

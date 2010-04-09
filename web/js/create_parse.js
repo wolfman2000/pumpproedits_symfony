@@ -49,6 +49,7 @@ function loadChart(nd)
 // Load the measures and other related data for the SVG chart.
 function loadSVGMeasures()
 {
+  $("#svgMeas").next().andSelf().hide();
   // append the measures.
   for (var i = 0; i < songData.measures; i++)
   {
@@ -56,7 +57,7 @@ function loadSVGMeasures()
   }
   // place the BPM data.
   var bpms = songData.bpms;
-  var x = width / 2 / SCALE;
+  var x = parseInt($("#svg").attr('width')) / 2 / SCALE;
   var y;
   for (var i = 0; i < bpms.length; i++)
   {
@@ -73,6 +74,7 @@ function loadSVGMeasures()
     $("#svgSync").append(genText(SCALE * 3, y + SCALE, stps[i].time, 'stop'));
     $("#svgSync").append(genLine(BUFF_LFT, y, BUFF_LFT + columns * ARR_HEIGHT / 2, y, 'stop'));
   }
+  $("#svgMeas").next().andSelf().fadeIn(2000);
 }
 
 // Determine how much to increment a loop in saveChart.
