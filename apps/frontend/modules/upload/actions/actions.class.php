@@ -48,10 +48,6 @@ class uploadActions extends sfActions
       {
         $uid = 2;
       }
-      elseif ($owner == "other")
-      {
-        $uid = 95;
-      }
       
       /* File validation takes place here. */
       $tmp = new EditParser();
@@ -75,18 +71,23 @@ class uploadActions extends sfActions
       $eid = $editT->getIDByUpload($row);
       $canAM = Doctrine::getTable('PPE_User_Power')->canEditAndamiro($submitterID);
       
+      // the edit exists in the system, AND it's an andamiro edit.
+      // Send them to the Edit Creator.
       if ($eid and $owner != "me")
       {
-        $this->data = array("You are not allowed to override edits you do not own.");
+        $this->data = array("Please use the Edit Creator to make changes to this edit.");
         $this->getResponse()->setStatusCode(409);
         return sfView::ERROR;
       }
+      // the edit exists in the system, and it's the user's edit.
+      // let them edit it in place.
       elseif ($eid)
       {
         $eid = $eid->id;
         $editT->updateEdit($eid, $row);
         $status = "Updated";
       }
+      // the edit does NOT exist in the system. Add it.
       else
       {
         $eid = $editT->addEdit($row);

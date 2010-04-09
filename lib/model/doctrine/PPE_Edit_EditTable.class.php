@@ -86,7 +86,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
     return $this->createQuery('a')->select('id')
       ->where('title = ?', $row['title'])
       ->andWhere('style = ?', substr($row['style'], 5))
-      ->andWhere('user_id = ?', $row['uid'])->fetchOne();
+      ->andWhere('user_id = ?', $row['uid'])->fetchOne()->id;
   }
 
   public function getEditsBySong($songid)
