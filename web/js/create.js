@@ -61,19 +61,31 @@ $(document).ready(function()
     }
     if (checking)
     {
-      $("li.edit").hide();
-      if (authed > 0)
+      function loadButtons()
       {
-        $("li.loadChoose").show();
-        $("#intro").text("Computer or account?");
+        $("li.edit").hide();
+        if (authed > 0)
+        {
+          $("li.loadChoose").show();
+          $("#intro").text("Computer or account?");
+        }
+        else
+        {
+          $("#fCont").val('');
+          $("li.loadFile").show();
+          $("li.loadFile > *").removeAttr('disabled');
+          $("#but_file").attr('disabled', true);
+          $("#intro").text("You can load your edit now.");
+        }
+      }
+      
+      if ($("#stylelist").val().length)
+      {
+        loadButtons();
       }
       else
       {
-        $("#fCont").val('');
-        $("li.loadFile").show();
-        $("li.loadFile > *").removeAttr('disabled');
-        $("#but_file").attr('disabled', true);
-        $("#intro").text("You can load your edit now.");
+        $(".choose").slideToggle(200, function(){ loadButtons(); });
       }
     }
   });
@@ -211,6 +223,7 @@ $(document).ready(function()
     $("#fCont").val('');
     $(".loadSite").hide();
     $("li.edit").show();
+    if (!$("#stylelist").val().length) { $(".choose").show(); }
   });
   
   // The author decides not to load an edit from the hard drive.
@@ -218,6 +231,7 @@ $(document).ready(function()
     $("#fCont").val('');
     $(".loadFile").hide();
     $("li.edit").show();
+    if (!$("#stylelist").val().length) { $(".choose").show(); }
   });
   
   // save to your local hard drive
