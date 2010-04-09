@@ -498,6 +498,7 @@ function mirrorRows()
         {
           case 32: { x = 96; break FIX_X; }
           case 48: { x = 80; break FIX_X; }
+          case 64: { x = 64; break FIX_X; }
           case 80: { x = 48; break FIX_X; }
           case 96: { x = 32; break FIX_X; }
         }
