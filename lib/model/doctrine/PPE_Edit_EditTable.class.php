@@ -66,7 +66,7 @@ class PPE_Edit_EditTable extends Doctrine_Table
       ->select('style, title, diff, s.abbr sabbr, s.name sname')
       ->innerJoin('a.PPE_Song_Song s')
       ->where('a.user_id = ?', $id)
-      ->orderBy('a.id')
+      ->orderBy('s.lc_name, title, style')
       ->execute();
   }
   
