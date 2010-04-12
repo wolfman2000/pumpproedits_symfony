@@ -13,7 +13,6 @@
     <?php else: ?>
     <li><?php echo link_to("Edit Creator", '@edit_creator') ?></li>
     <li><?php echo link_to('Edit Charter', '@chart_adv_get') ?></li>
-    <li><?php echo link_to('Official Stepcharts', '@chart_off_get') ?></li>
     <?php endif; ?>
 <?php /*
     <li><?php echo link_to("Base Edit Files", '@base_edit') ?></li>
@@ -28,6 +27,9 @@
 <li>
     <h4>Everyone</h4>
     <ul>
+    <?php if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") === false): ?>
+    <li><?php echo link_to('Official Stepcharts', '@chart_off_get') ?></li>
+    <?php endif; ?>
     <li><?php echo link_to("Contact", '@contact_get') ?></li>
     <li><?php echo link_to("Credits/Thanks", '@thanks') ?></li>
     </ul>
