@@ -12,6 +12,8 @@
     <li><?php echo link_to("Base Edit Files", '@base_edit') ?></li>
     <?php else: ?>
     <li><?php echo link_to("Edit Creator", '@edit_creator') ?></li>
+    <li><?php echo link_to('Edit Charter', '@chart_adv_get') ?></li>
+    <li><?php echo link_to('Official Stepcharts', '@chart_off_get') ?></li>
     <?php endif; ?>
 <?php /*
     <li><?php echo link_to("Base Edit Files", '@base_edit') ?></li>
