@@ -75,8 +75,8 @@ class chartActions extends sfActions
   {
     if (!$this->getUser()->isAuthenticated())
     {
-      $this->forward('login', 'index');
-      return;
+      #$this->forward('login', 'index');
+      #return;
     }
     $this->form = new ChartGeneratorForm(array('edits' => 0));
     $this->part = 'chart/chart';
@@ -160,8 +160,8 @@ class chartActions extends sfActions
   {
     if (!$this->getUser()->isAuthenticated())
     {
-      $this->forward('login', 'index');
-      return;
+      #$this->forward('login', 'index');
+      #return;
     }
     $this->form = new ChartOfficialForm();
   }
