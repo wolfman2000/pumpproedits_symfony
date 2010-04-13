@@ -6,12 +6,3 @@ default:
   with_layout: false
   lifetime:    86400
 
-_nav_norm:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-_nav_chrt:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
