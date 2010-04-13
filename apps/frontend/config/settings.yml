@@ -10,6 +10,11 @@ prod:
     etag:                   true
     compressed:             on
 
+staging:
+  .settings:
+    web_debug:              true
+    cache:                  true
+
 dev:
   .settings:
     error_reporting:        <?php echo (E_ALL | E_STRICT)."\n" ?>
@@ -37,3 +42,6 @@ all:
 
     # Enable the database manager
     use_database:           true
+
+    # Use compression when possible.
+    
