@@ -1,0 +1,29 @@
+unknown:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
+
+user:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
+
+chosenUser:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
+
+song:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
+
+chosenSong:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
+
+official:
+  enabled:     true
+  with_layout: false
+  lifetime:    1209600
