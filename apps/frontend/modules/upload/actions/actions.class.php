@@ -92,6 +92,8 @@ class uploadActions extends sfActions
       {
         $eid = $editT->addEdit($row);
         $status = "New";
+        $this->dispatcher->notify(new sfEvent($this, 'edits.cache_fix',
+          array('userid' => $row['uid'], 'songid' => $row['id'])));
       }
       
       $twit = new Twitter();

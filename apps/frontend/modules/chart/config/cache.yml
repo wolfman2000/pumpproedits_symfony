@@ -1,0 +1,9 @@
+official:
+  enabled: true
+  with_layout: false
+  lifetime: 1209600
+
+advanced:
+  enabled: true
+  with_layout: false
+  lifetime: 1209600
