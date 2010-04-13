@@ -38,6 +38,11 @@ I care deeply about. The only exception to that rule is
 when dealing with the YAML files (yml). Those cannot have
 tabs for any reason. http://www.yaml.org has more information.
 
+For the purposes of saving bandwidth, look into compressing
+the files you use. CSS has a compressor and decompressor at
+http://www.cssdrive.com/index.php/main/csscompressor/ and
+http://mrcoles.com/blog/css-unminify/ respectively.
+
 Try to use git's branching functionality when adding
 new features. The master branch should really only contain
 code that is guaranteed to run. Of course, mistakes happen,
