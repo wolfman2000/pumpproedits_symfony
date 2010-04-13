@@ -272,6 +272,13 @@ class createActions extends sfActions
     {
       $eid = $editT->addEdit($row);
       $status = "New";
+      $cM = $this->getContext()->getViewCacheManager();
+      $cM->remove('edits/song');
+      $cM->remove('edits/chosenSong?id=' .  $row['id'] . "&page=1");
+      $cM->remove('edits/user');
+      $cM->remove('edits/chosenUser?id=' . $row['uid'] . "&page=1");
+      $cM->remove('edits/official?page=1');
+      $cM->remove('create/loadSite?id='  . $row['uid'] . "&page=1");
     }
     else
     {
