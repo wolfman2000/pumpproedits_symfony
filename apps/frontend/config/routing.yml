@@ -428,7 +428,7 @@ edit_song:
 
 # The chosen song (unsure if I'll use the pager)
 edit_csong:
-  url: /songs/:id/:page
+  url: /song/:id/:page
   param:
     module: edits
     action: chosenSong
@@ -465,7 +465,7 @@ edit_unknown:
 
 # The chosen user (unsure if I'll use the pager)
 edit_cuser:
-  url: /users/:id/:page
+  url: /user/:id/:page
   param:
     module: edits
     action: chosenUser
