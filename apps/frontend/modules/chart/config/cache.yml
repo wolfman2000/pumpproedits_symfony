@@ -1,24 +1,9 @@
-index:
-  enabled:     true
+official:
+  enabled: true
   with_layout: false
-  lifetime:    1209600
+  lifetime: 1209600
 
-loadSite:
-  enabled:     true
+advanced:
+  enabled: true
   with_layout: false
-  lifetime:    1209600
-
-loadSiteEdit:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-ajax:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-routine:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
+  lifetime: 1209600
