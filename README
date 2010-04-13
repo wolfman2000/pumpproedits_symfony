@@ -41,7 +41,10 @@ tabs for any reason. http://www.yaml.org has more information.
 For the purposes of saving bandwidth, look into compressing
 the files you use. CSS has a compressor and decompressor at
 http://www.cssdrive.com/index.php/main/csscompressor/ and
-http://mrcoles.com/blog/css-unminify/ respectively.
+http://mrcoles.com/blog/css-unminify/ respectively. Some
+limited caching has also been implemented on the page to
+try to cut down on bandwidth cost. If there is any other
+caching that can be implemented, please look into it.
 
 Try to use git's branching functionality when adding
 new features. The master branch should really only contain
