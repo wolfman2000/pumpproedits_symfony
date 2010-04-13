@@ -8,6 +8,7 @@ prod:
     cache:                  true
     web_debug:              false
     etag:                   true
+    compressed:             on
 
 dev:
   .settings:

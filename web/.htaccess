@@ -20,3 +20,5 @@ Options +FollowSymLinks +ExecCGI
   # no, so we redirect to our front web controller
   RewriteRule ^(.*)$ index.php [QSA,L]
 </IfModule>
+ExpiresByType text/css "access plus 5 days"
+ExpiresByType image/vnd.microsoft.icon "access plus 1 week"
