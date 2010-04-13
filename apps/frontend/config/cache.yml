@@ -15,23 +15,3 @@ _nav_chrt:
   enabled:     true
   with_layout: false
   lifetime:    1209600
-
-_memb_in:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-_memb_out:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-_mess_in:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
-
-_mess_out:
-  enabled:     true
-  with_layout: false
-  lifetime:    1209600
