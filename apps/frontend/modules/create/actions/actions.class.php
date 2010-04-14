@@ -55,14 +55,13 @@ class createActions extends sfActions
     $ret = array();
     
     $fp = null;
-    $fn = sprintf("%s/user_edits/edit_%06d.edit", sfConfig::get('sf_data_dir'), $id);
+    $fn = sprintf("%s/user_edits/edit_%06d.edit.gz", sfConfig::get('sf_data_dir'), $id);
     
     try
     {
-      $fp = fopen($fn, "r");
       $tmp = new EditParser();
       
-      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $st = $tmp->get_stats(gzopen($fn, "r"), array('notes' => 1));
       $ret['id'] = $st['id'];
       $ret['diff'] = $st['diff'];
       $ret['style'] = substr($st['style'], 5);
