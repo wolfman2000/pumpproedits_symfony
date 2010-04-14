@@ -251,7 +251,7 @@ class chartActions extends sfActions
     
     $id = sprintf("%06d", $id);
     $root = sfConfig::get('sf_root_dir');
-    $name = sprintf("edit_%s.edit", $id);
+    $name = sprintf("edit_%s.edit.gz", $id);
     $path = sprintf("%s/data/user_edits/%s", $root, $name);
     
     if (!file_exists($path))
@@ -265,7 +265,7 @@ class chartActions extends sfActions
     $tmp = new EditParser();
     try
     {
-      $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1, 'strict_edit' => 0));
+      $notedata = $tmp->get_stats(gzopen($path, "r"), array('notes' => 1, 'strict_edit' => 0));
       $p = array('cols' => $notedata['cols'], 'kind' => $kind);
       $tmp = new EditCharter($p);
       $xml = $tmp->genChart($notedata);
