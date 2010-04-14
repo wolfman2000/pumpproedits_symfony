@@ -97,7 +97,7 @@ class chartActions extends sfActions
       $eid = $this->form->getValue('edits');
       if ($eid > 0)
       {
-        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit", $eid);
+        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/edit_%06d.edit.gz", $eid);
         $author = Doctrine::getTable('PPE_User_User')->getUserByEditID($eid);
       }
       else
@@ -117,7 +117,7 @@ class chartActions extends sfActions
         $p['notes'] = 1;
         $p['strict_song'] = 0;
         $p['strict_edit'] = 0;
-        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
+        $notedata = $tmp->get_stats(gzopen($path, "r"), $p);
         if (isset($file))
         {
           @unlink($path);
