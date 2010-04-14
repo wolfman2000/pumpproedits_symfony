@@ -10,11 +10,6 @@ echo form_tag($route, "multipart=true"); ?>
     <section id="edit">
       <p><?php echo $form['edits']->renderLabel() ?></p>
       <p><?php echo $form['edits'] ?></p>
-      <p><?php echo $form['file']->renderLabel() ?></p>
-      <p>
-        <?php echo $form['file'] ?>
-        <button id="validate_rm_file" value="Nevermind" name="validate[rm_file]" type="button">Nevermind</button>
-      </p>
     </section>
     <section>
     <p><?php echo $form['kind']->renderLabel() ?></p>

@@ -102,12 +102,7 @@ class chartActions extends sfActions
       }
       else
       {
-        $file = $this->form->getValue('file');
-        $filename = 'uploaded'.sha1($file->getOriginalName());
-        $extension = $file->getExtension($file->getOriginalExtension());
-        $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
-        $file->save($path);
-        $author = "Unknown Author";
+       
       }
       
       /* File validation takes place here. */
