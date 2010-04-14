@@ -171,17 +171,17 @@ class createActions extends sfActions
     
     $fp = null;
     $time = date('YmdHis');
-    $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit";
+    $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit.gz";
     
     try
     {
-      $fp = fopen($fn, "w+");
-      fwrite($fp, $file);
-      fseek($fp, 0);
+      $fp = gzopen($fn, "w");
+      gzwrite($fp, $file);
+      gzclose($fp);
       
       $tmp = new EditParser();
       
-      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $st = $tmp->get_stats(gzopen($fn, "r"), array('notes' => 1));
       $ret['id'] = $st['id'];
       $ret['diff'] = $st['diff'];
       $ret['style'] = substr($st['style'], 5);
