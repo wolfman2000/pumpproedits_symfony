@@ -283,10 +283,10 @@ class createActions extends sfActions
     $twit->genEditMessage($row['uid'],
       Doctrine::getTable('PPE_User_User')->getNameByID($row['uid']), $status);
     
-    $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
-    $fp = fopen($file, "w");
-    fwrite($fp, $request->getParameter('b64'));
-    fclose($fp);
+    $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit.gz', $eid);
+    $fp = gzopen($file, "w");
+    gzwrite($fp, $request->getParameter('b64'));
+    gzclose($fp);
     
     $ret = array();
     $ret['result'] = "successful";
