@@ -73,7 +73,7 @@ class editsActions extends sfActions
     $gz = $name . '.gz';
     $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $gz);
     $file = gzopen($path, 'r');
-    $data = fread($file, sfConfig::get('app_max_edit_file_size'));
+    $data = gzread($file, sfConfig::get('app_max_edit_file_size'));
     gzclose($file);
     
     $response = $this->getResponse();
