@@ -271,8 +271,9 @@ class createActions extends sfActions
     {
       $eid = $editT->addEdit($row);
       $status = "New";
+      $manager = $this->getContext()->getViewCacheManager();
       $this->dispatcher->notify(new sfEvent($this, 'edits.cache_fix',
-        array('userid' => $row['uid'], 'songid' => $row['id'])));
+        array('userid' => $row['uid'], 'songid' => $row['id'], 'cache' => $manager)));
     }
     else
     {
@@ -287,7 +288,6 @@ class createActions extends sfActions
     $fp = gzopen($file, "w");
     gzwrite($fp, $request->getParameter('b64'));
     gzclose($fp);
-    
     $ret = array();
     $ret['result'] = "successful";
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
