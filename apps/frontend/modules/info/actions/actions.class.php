@@ -17,6 +17,7 @@ class infoActions extends sfActions
   */
   public function executeIndex(sfWebRequest $request)
   {
-    $this->forward('default', 'module');
+    sfConfig::set('sf_web_debug', false);
+    return $this->renderPartial('info/info');
   }
 }
