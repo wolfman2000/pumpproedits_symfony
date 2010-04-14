@@ -8,6 +8,13 @@ homepage:
     module: ppehome
     action: index
 
+# PHPInfo
+info:
+  url: /info
+  param:
+    module: info
+    action: index
+
 # create an edit on the website.
 edit_creator:
   url: /create
