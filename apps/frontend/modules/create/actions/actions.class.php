@@ -165,7 +165,7 @@ class createActions extends sfActions
     {
       return sfView::NONE;
     }
-    $file = base64_decode($request->getParameter('file'));
+    $file = $request->getParameter('file');
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
     
@@ -285,12 +285,11 @@ class createActions extends sfActions
     
     $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
     $fp = fopen($file, "w");
-    fwrite($fp, base64_decode($request->getParameter('b64')));
+    fwrite($fp, $request->getParameter('b64'));
     fclose($fp);
     
     $ret = array();
     $ret['result'] = "successful";
-    //$ret['link'] = url_for("@edit_cuser&id=" . $this->getUser()->getAttribute('id'));
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
@@ -307,14 +306,13 @@ class createActions extends sfActions
     $title = $request->getParameter('title');
     $name = sprintf("svg_%s_%s%d_%s.edit", $abbr, strtoupper(substr($style, 0, 1)), $diff, $title);
     
-    $d64 = base64_decode($b64);
     $response = $this->getResponse();
     $response->clearHttpHeaders();
     $response->setHttpHeader('Content-Disposition', 'attachment; filename='.urlencode($name));
-    $response->setHttpHeader('Content-Length', strlen($d64));
+    $response->setHttpHeader('Content-Length', strlen($b64));
     $response->setHttpHeader('Content-Type', 'application/edit');
     $response->sendHttpHeaders();
-    $response->setContent($d64);
+    $response->setContent($b64);
 
     return sfView::NONE;
   }
