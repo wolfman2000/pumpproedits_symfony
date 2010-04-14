@@ -13,8 +13,6 @@ class ChartGeneratorForm extends sfForm
     $choices = array();
     $choices[0] = 'Select an edit.';
     
-    $possible[] = 0;
-    
     $oname = "無"; // Start with no match.
     
     foreach ($rows as $r):
@@ -28,13 +26,12 @@ class ChartGeneratorForm extends sfForm
       $possible[] = $r->id;
     endforeach;
     
-    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'), array('size' => 20));
+    $pieces['edits'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Choose an edit'),
+      array('size' => 20));
 
-    $tmp1['required'] = false;
+    $tmp1['required'] = true;
     $tmp1['choices'] = $possible;
-    $val['edits'] = new sfValidatorChoice($tmp1, array());
-    
-    $pieces['file'] = new sfWidgetFormInputFile(array('label' => '…or provide your own.'));
+    $val['edits'] = new sfValidatorChoice($tmp1, array('required' => 'An edit must be chosen.'));
     
     $choices = array('classic' => 'classic', 'rhythm' => 'rhythm');
     $pieces['kind'] = new sfWidgetFormChoice(array('choices' => $choices, 'label' => 'Noteskin'));
@@ -80,28 +77,11 @@ class ChartGeneratorForm extends sfForm
 
     $this->widgetSchema->setNameFormat('validate[%s]');
     
-    unset($tmp1);
-    $tmp1['max_size'] = $size;
-    $tmp1['path'] = sfConfig::get('sf_upload_dir');
-    $tmp1['required'] = false;
-    $messages['max_size'] = sprintf("The edit must be less than %d bytes!", $size);
-    $val['file'] = new sfValidatorFile($tmp1, $messages);
-    
     $this->setValidators($val);
     
-    $one = new sfValidatorCallback(array('callback' => array($this, 'ensureOne')));
     $rhy = new sfValidatorCallback(array('callback' => array($this, 'ensureRhythm')));
     
-    $this->validatorSchema->setPostValidator(new sfValidatorAnd(array($one, $rhy)));
-  }
-  
-  public function ensureOne($validator, $values)
-  {
-    if ($values['edits'] xor $values['file'])
-    {
-      return $values;
-    }
-    throw new sfValidatorError($validator, "Select either an author's edit or your own file.");
+    $this->validatorSchema->setPostValidator($rhy);
   }
   
   public function ensureRhythm($validator, $values)

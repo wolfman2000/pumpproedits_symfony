@@ -22,3 +22,6 @@ Options +FollowSymLinks +ExecCGI
 </IfModule>
 ExpiresByType text/css "access plus 5 days"
 ExpiresByType image/vnd.microsoft.icon "access plus 1 week"
+
+php_flag zlib.output_compression On
+php_value zlib.output_compression_level 5

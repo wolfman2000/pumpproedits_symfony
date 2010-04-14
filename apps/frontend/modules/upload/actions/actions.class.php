@@ -38,6 +38,7 @@ class uploadActions extends sfActions
       $extension = $file->getExtension($file->getOriginalExtension());
       $path = sfConfig::get('sf_upload_dir').'/'.$filename.$extension;
       $file->save($path);
+      $data = file_get_contents($path);
       
       $owner = $this->form->getValue('owner');
       if ($owner == "me")
@@ -54,7 +55,7 @@ class uploadActions extends sfActions
       try
       {
         $this->page = "parseyay";
-        $row = $tmp->get_stats(fopen($path, "r"));
+        $row = $tmp->get_stats(gzopen($path, "r"));
         @unlink($path);
       }
       catch (sfParseException $e)
@@ -92,16 +93,20 @@ class uploadActions extends sfActions
       {
         $eid = $editT->addEdit($row);
         $status = "New";
+        $manager = $this->getContext()->getViewCacheManager();
         $this->dispatcher->notify(new sfEvent($this, 'edits.cache_fix',
-          array('userid' => $row['uid'], 'songid' => $row['id'])));
+          array('userid' => $row['uid'], 'songid' => $row['id'], 'cache' => $manager)));
       }
       
       $twit = new Twitter();
       $twit->genEditMessage($row['uid'],
         Doctrine::getTable('PPE_User_User')->getNameByID($row['uid']), $status);
       
-      $path = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
-      $file->save($path);
+      $path = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit.gz', $eid);
+      $fp = gzopen($path, "w");
+      gzwrite($fp, $data);
+      gzclose($fp);
+      //$file->save($path);
       
     }
     else

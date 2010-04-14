@@ -191,10 +191,9 @@ function saveChart(data)
       }
     }
   }
-  
   file += ";" + EOL + EOL;
   
-  $("#b64").val(Base64.encode(file));
+  $("#b64").val(file);
   $("#abbr").val(songData.abbr);
   $("#style").val(style);
   $("#diff").val(diff);

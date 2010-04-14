@@ -58,18 +58,12 @@ if ($z->ylifts or $z->mlifts): ?>
 <?php endif;
 if ($z->yfakes or $z->mfakes): ?>
 <dt>Fakes</dt><dd><?php echo $z->yfakes . ($l === "R" ? "/$z->mfakes" : "") ?></dd>
-<?php endif;
-if ($z->num_votes): ?>
-<dt>Avg Score</dt><dd><?php echo $z->tot_votes / $z->num_votes ?></dd>
 <?php endif; ?>
 </dl>
 </td>
 <td><ul>
 <li><?php echo link_to("Download", "@edit_download?id=$z->id") ?></li>
-<?php if ($z->num_votes): ?>
-<li><?php echo link_to("View Ratings", "@ratings?eid=$z->id") ?></li>
-<?php endif;
-if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") === false): ?>
+<?php if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") === false): ?>
 <li><?php echo link_to("Classic Chart", "@chart_quick?id={$z->id}&kind=classic"); ?></li>
 <li><?php echo link_to("Rhythm Chart", "@chart_quick?id={$z->id}&kind=rhythm"); ?></li>
 <?php endif; ?>

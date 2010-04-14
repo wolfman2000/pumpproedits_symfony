@@ -55,14 +55,13 @@ class createActions extends sfActions
     $ret = array();
     
     $fp = null;
-    $fn = sprintf("%s/user_edits/edit_%06d.edit", sfConfig::get('sf_data_dir'), $id);
+    $fn = sprintf("%s/user_edits/edit_%06d.edit.gz", sfConfig::get('sf_data_dir'), $id);
     
     try
     {
-      $fp = fopen($fn, "r");
       $tmp = new EditParser();
       
-      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $st = $tmp->get_stats(gzopen($fn, "r"), array('notes' => 1));
       $ret['id'] = $st['id'];
       $ret['diff'] = $st['diff'];
       $ret['style'] = substr($st['style'], 5);
@@ -166,23 +165,23 @@ class createActions extends sfActions
     {
       return sfView::NONE;
     }
-    $file = base64_decode($request->getParameter('file'));
+    $file = $request->getParameter('file');
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     $ret = array();
     
     $fp = null;
     $time = date('YmdHis');
-    $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit";
+    $fn = sfConfig::get('sf_upload_dir') . "/" . $time . ".edit.gz";
     
     try
     {
-      $fp = fopen($fn, "w+");
-      fwrite($fp, $file);
-      fseek($fp, 0);
+      $fp = gzopen($fn, "w");
+      gzwrite($fp, $file);
+      gzclose($fp);
       
       $tmp = new EditParser();
       
-      $st = $tmp->get_stats($fp, array('notes' => 1));
+      $st = $tmp->get_stats(gzopen($fn, "r"), array('notes' => 1));
       $ret['id'] = $st['id'];
       $ret['diff'] = $st['diff'];
       $ret['style'] = substr($st['style'], 5);
@@ -272,8 +271,9 @@ class createActions extends sfActions
     {
       $eid = $editT->addEdit($row);
       $status = "New";
+      $manager = $this->getContext()->getViewCacheManager();
       $this->dispatcher->notify(new sfEvent($this, 'edits.cache_fix',
-        array('userid' => $row['uid'], 'songid' => $row['id'])));
+        array('userid' => $row['uid'], 'songid' => $row['id'], 'cache' => $manager)));
     }
     else
     {
@@ -284,14 +284,12 @@ class createActions extends sfActions
     $twit->genEditMessage($row['uid'],
       Doctrine::getTable('PPE_User_User')->getNameByID($row['uid']), $status);
     
-    $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit', $eid);
-    $fp = fopen($file, "w");
-    fwrite($fp, base64_decode($request->getParameter('b64')));
-    fclose($fp);
-    
+    $file = sfConfig::get('sf_data_dir').sprintf('/user_edits/edit_%06d.edit.gz', $eid);
+    $fp = gzopen($file, "w");
+    gzwrite($fp, $request->getParameter('b64'));
+    gzclose($fp);
     $ret = array();
     $ret['result'] = "successful";
-    //$ret['link'] = url_for("@edit_cuser&id=" . $this->getUser()->getAttribute('id'));
     $this->getResponse()->setHttpHeader("Content-type", "application/json");
     return $this->renderText(json_encode($ret));
   }
@@ -308,14 +306,13 @@ class createActions extends sfActions
     $title = $request->getParameter('title');
     $name = sprintf("svg_%s_%s%d_%s.edit", $abbr, strtoupper(substr($style, 0, 1)), $diff, $title);
     
-    $d64 = base64_decode($b64);
     $response = $this->getResponse();
     $response->clearHttpHeaders();
     $response->setHttpHeader('Content-Disposition', 'attachment; filename='.urlencode($name));
-    $response->setHttpHeader('Content-Length', strlen($d64));
+    $response->setHttpHeader('Content-Length', strlen($b64));
     $response->setHttpHeader('Content-Type', 'application/edit');
     $response->sendHttpHeaders();
-    $response->setContent($d64);
+    $response->setContent($b64);
 
     return sfView::NONE;
   }

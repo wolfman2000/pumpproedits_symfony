@@ -70,16 +70,19 @@ class editsActions extends sfActions
     }
     $id = sprintf("%06d", $id);
     $name = sprintf("edit_%s.edit", $id);
-    $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $name);
-    $file = file_get_contents($path);
-
+    $gz = $name . '.gz';
+    $path = sprintf("%s/data/user_edits/%s", sfConfig::get('sf_root_dir'), $gz);
+    $file = gzopen($path, 'r');
+    $data = gzread($file, sfConfig::get('app_max_edit_file_size'));
+    gzclose($file);
+    
     $response = $this->getResponse();
     $response->clearHttpHeaders();
     $response->setHttpHeader('Content-Disposition', 'attachment; filename='.$name);
-    $response->setHttpHeader('Content-Length', strlen($file));
+    $response->setHttpHeader('Content-Length', strlen($data));
     $response->setHttpHeader('Content-Type', 'application/edit');
     $response->sendHttpHeaders();
-    $response->setContent($file);
+    $response->setContent($data);
 
     return sfView::NONE;
   }

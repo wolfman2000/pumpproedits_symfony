@@ -162,10 +162,10 @@ class EditParser
     if (!array_key_exists('arcade', $params)) { $params['arcade'] = false; }
 
     $numl = 0;
-    while(!feof($fh)):
+    while(!gzeof($fh)):
 
     $numl++;
-    $line = rtrim(fgets($fh));
+    $line = rtrim(gzgets($fh, 1000)); // force newline.
 
     switch ($state):
 
