@@ -42,7 +42,7 @@ class chartActions extends sfActions
       $tmp = new EditParser();
       try
       {
-        $notedata = $tmp->get_stats(fopen($path, "r"), 1);
+        $notedata = $tmp->get_stats(gzopen($path, "r"), 1);
         @unlink($path);
         // The others can be gotten later.
         $p = array('cols' => $notedata['cols']);
@@ -91,7 +91,7 @@ class chartActions extends sfActions
       $eid = $this->form->getValue('edits');
       if ($eid > 0)
       {
-        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/itg_%06d.edit", $eid);
+        $path = sfConfig::get('sf_data_dir').sprintf("/user_edits/itg_%06d.edit.gz", $eid);
         $author = Doctrine::getTable('ITG_User_User')->getNameByOldEditID($eid);
       }
       else
@@ -111,7 +111,7 @@ class chartActions extends sfActions
         $p['notes'] = 1;
         $p['strict_song'] = 0;
         $p['strict_edit'] = 0;
-        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
+        $notedata = $tmp->get_stats(gzopen($path, "r"), $p);
         if (isset($file))
         {
           @unlink($path);
@@ -179,7 +179,7 @@ class chartActions extends sfActions
         $p['strict_song'] = 1;
         $p['arcade'] = $dif;
         $p['style'] = $sty;
-        $notedata = $tmp->get_stats(fopen($path, "r"), $p);
+        $notedata = $tmp->get_stats(gzopen($path, "r"), $p);
 
         $p = array('cols' => $notedata['cols'],
         'red4' => 1, 'speed_mod' => $this->form->getValue('speed'),
@@ -223,7 +223,7 @@ class chartActions extends sfActions
     $author = Doctrine::getTable('ITG_User_User')->getNameByOldEditID($id);
     $id = sprintf("%06d", $id);
     $root = sfConfig::get('sf_root_dir');
-    $name = sprintf("itg_%s.edit", $id);
+    $name = sprintf("itg_%s.edit.gz", $id);
     $path = sprintf("%s/data/user_edits/%s", $root, $name);
     
     if (!file_exists($path))
@@ -237,7 +237,7 @@ class chartActions extends sfActions
     $tmp = new EditParser();
     try
     {
-      $notedata = $tmp->get_stats(fopen($path, "r"), array('notes' => 1));
+      $notedata = $tmp->get_stats(gzopen($path, "r"), array('notes' => 1));
       $notedata['author'] = $author;
       $p = array('cols' => $notedata['cols']);
       

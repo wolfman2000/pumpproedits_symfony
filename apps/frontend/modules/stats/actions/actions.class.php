@@ -42,7 +42,7 @@ class statsActions extends sfActions
       try
       {
         $this->page = "parseyay";
-        $this->result = $tmp->get_stats(fopen($path, "r"));
+        $this->result = $tmp->get_stats(gzopen($path, "r"));
       }
       catch (sfParseException $e)
       {
